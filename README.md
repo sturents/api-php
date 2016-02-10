@@ -22,7 +22,7 @@ Install using composer:
     
 ## Retrieve data from StuRents
 
-    $fetch_houses = new FetchHouses(LANDLORD_ID, PUBLIC_KEY);
+    $fetch_houses = new \Sturents\Api\FetchHouses(LANDLORD_ID, PUBLIC_KEY);
     try {
         $fetch_houses->fetchAll();
         $properties = $fetch_houses->getProperties();
