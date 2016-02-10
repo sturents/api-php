@@ -15,7 +15,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Sturents\\": "src/"
+			"Sturents\\Api\\": "src/"
 		}
 	}
 }
