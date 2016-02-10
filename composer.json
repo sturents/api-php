@@ -1,5 +1,6 @@
 {
 	"name": "sturents/api",
+    "license": "MIT",
 	"authors": [
 		{
 			"name": "m1ke",
