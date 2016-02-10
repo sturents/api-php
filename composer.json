@@ -1,0 +1,21 @@
+{
+	"name": "sturents",
+	"authors": [
+		{
+			"name": "m1ke",
+			"email": "mike@m1ke.me"
+		}
+	],
+	"require": {
+		"php": ">=5.5.0",
+		"guzzlehttp/guzzle": "~6.0"
+	},
+	"require-dev": {
+		"m1ke/git-php-lint": "1.0.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Sturents\\": "src/"
+		}
+	}
+}
