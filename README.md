@@ -29,7 +29,7 @@ Composer is the de-facto package manager for PHP projects. If you haven't used i
     
     echo $send_houses->responseJson()->success; // echoes "true"
     
-## Retrieve data from StuRents
+## Fetch data from StuRents
 
     $fetch_houses = new \Sturents\Api\FetchHouses(LANDLORD_ID, PUBLIC_KEY);
     try {
