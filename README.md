@@ -4,7 +4,7 @@ Install using composer:
 
     php composer.phar require sturents/api
 
-### What is Composer?
+#### Wait, what's Composer?
 
 Composer is the de-facto package manager for PHP projects. If you haven't used it before it is very simple to set up.
 
