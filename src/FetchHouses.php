@@ -71,7 +71,7 @@ class FetchHouses {
 	public function getProperties(){
 		$data = $this->getResult();
 
-		return $data['branches'][0]['properties'];
+		return $data->branches[0]->properties;
 	}
 
 	/**
@@ -83,7 +83,7 @@ class FetchHouses {
 		$properties = $this->getProperties();
 
 		foreach ($properties as $property){
-			if ((string) $property['reference']===(string) $reference){
+			if ((string) $property->reference===(string) $reference){
 				return $property;
 			}
 		}
@@ -98,7 +98,7 @@ class FetchHouses {
 	public function getDate(){
 		$data = $this->getResult();
 
-		return $data['date'];
+		return $data->date;
 	}
 
 	/**

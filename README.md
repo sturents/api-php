@@ -17,7 +17,7 @@ To use Composer dependencies inside a PHP file is simple - just the following to
 
     require_once __DIR__.'/vendor/autoload.php';
 
-Now you can create or use any object without having to worry about requiring it's files - Composer and PHP's autoloader will handle that for you.
+Now you can create or use any object without having to worry about requiring its files - Composer and PHP's autoloader will handle that for you.
      
 ## Send data to StuRents
 
