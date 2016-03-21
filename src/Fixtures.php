@@ -11,5 +11,5 @@ namespace Sturents\Api;
 
 class Fixtures {
 	const URI = "https://sturents.com/api";
-	const URI_HOUSES = self::URI."/houses";
+	const URI_HOUSES = "https://sturents.com/api/houses";
 }

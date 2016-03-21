@@ -121,16 +121,34 @@ class FetchHouses {
 		}
 		catch (ClientException $e) {
 			$this->request_exception = $e;
-			if ($e->hasResponse()){
-				$output = (string)$e->getResponse()->getBody();
-				$output = json_decode($output, true);
-				throw new Exception($output['Message']);
-			}
+
+			$this->exceptionHasResponse($e);
+			
 			throw new Exception('The StuRents API could not be reached.', self::EX_CODE_RESPONSE);
 		}
 		catch (GuzzleException $e) {
 			$this->request_exception = $e;
 			throw new Exception('The StuRents API could not be reached.', self::EX_CODE_RESPONSE);
+		}
+	}
+
+	/**
+	 * @param ClientException $e
+	 * @throws Exception
+	 */
+	private function exceptionHasResponse(ClientException $e){
+		if ($e->hasResponse()){
+			$json = (string)$e->getResponse()->getBody();
+			$output = json_decode($json, true);
+			if (empty($output['error'])){
+				throw new Exception("An error response was returned but the content could not be parsed: $json");
+			}
+			
+			$exception_message = [];
+			foreach ($output['error'] as $field => $error_message){
+				$exception_message[] = "For field '$field' the API reported: $error_message";
+			}
+			throw new Exception(implode("\n", $exception_message));
 		}
 	}
 
