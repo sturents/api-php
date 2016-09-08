@@ -76,11 +76,11 @@ class SendHouses {
 				$output = json_decode($output, true);
 				throw new Exception($output['Message']);
 			}
-			throw new Exception('The StuRents API could not be reached.', self::EX_CODE_RESPONSE);
+			throw new Exception("The StuRents API could not be reached. The client reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
 		}
 		catch (GuzzleException $e) {
 			$this->request_exception = $e;
-			throw new Exception('The StuRents API could not be reached.', self::EX_CODE_RESPONSE);
+			throw new Exception("The StuRents API could not be reached. The connection reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
 		}
 	}
 
