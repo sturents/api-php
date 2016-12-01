@@ -33,23 +33,28 @@ Now you can create or use any object without having to worry about requiring its
        echo "A problem happened: ".$e->getMessage();
     }
     
-    var_dump($send_houses->responseJson()->isSuccess());
+    var_dump($send_houses->responseJson()->isSuccess()); // true if request succeeded
+    
+    $inserted = $send_houses->responseCountInserted(); // outputs number inserted
+    $updated = $send_houses->responseCountUpdated(); // outputs number updated
     
 ## Send one property to StuRents
 
     $data = [
         ... // see https://sturents.com/software/developer/house-create
     ];
-    $send_houses = new \Sturents\Api\CreateOrUpdateHouses(LANDLORD_ID, API_KEY);
-    $send_houses->setJson($data);
+    $create_house = new \Sturents\Api\CreateOrUpdateHouses(LANDLORD_ID, API_KEY);
+    $create_house->setJson($data);
     try {
-        $send_houses->send();
+        $create_house->send();
     }
     catch (\Exception $e){
        echo "A problem happened: ".$e->getMessage();
     }
     
-    var_dump($send_houses->responseJson()->isSuccess());
+    var_dump($create_house->responseJson()->isSuccess()); // true if request succeeded
+    
+    $affected_id = $create_house->responseAffectedProperty(); // outputs an integer
     
 ## Fetch data from StuRents
 

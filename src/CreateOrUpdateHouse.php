@@ -8,7 +8,7 @@ namespace Sturents\Api;
  * Class CreateOrUpdateHouse
  * @package Sturents\Api
  */
-class CreateOrUpdateHouse extends Send {
+class CreateOrUpdateHouse extends SingleHouse {
 
 	public function send(){
 		$this->sendInternal(Fixtures::URI_HOUSE, Fixtures::METHOD_POST);
