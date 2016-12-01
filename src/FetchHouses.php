@@ -14,6 +14,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 
 class FetchHouses {
+
 	const EX_CODE_NO_DATA = 10;
 	const EX_CODE_JSON = 12;
 	const EX_CODE_RESPONSE = 11;
@@ -110,7 +111,7 @@ class FetchHouses {
 		try {
 			$client = new Client();
 			$url =  Fixtures::URI_HOUSES.($house_id ? '/'.$house_id : '');
-			$response = $client->request('GET', $url, [
+			$response = $client->request(Fixtures::METHOD_GET, $url, [
 				'query' => [
 					'landlord' => $this->landlord_id,
 					'public' => $this->public_key,

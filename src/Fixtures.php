@@ -12,4 +12,9 @@ namespace Sturents\Api;
 class Fixtures {
 	const URI = "https://sturents.com/api";
 	const URI_HOUSES = "https://sturents.com/api/houses";
+	const URI_HOUSE = "https://sturents.com/api/house";
+
+	const METHOD_GET = 'GET';
+	const METHOD_POST = 'POST';
+	const METHOD_PUT = 'PUT';
 }
