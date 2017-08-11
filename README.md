@@ -24,7 +24,7 @@ Now you can create or use any object without having to worry about requiring its
     $data = [
         ... // see https://sturents.com/software/developer/house-create
     ];
-    $create_house = new \Sturents\Api\CreateOrUpdateHouses(LANDLORD_ID, API_KEY);
+    $create_house = new \Sturents\Api\CreateOrUpdateHouse(LANDLORD_ID, API_KEY);
     $create_house->setJson($data);
     try {
         $create_house->send();

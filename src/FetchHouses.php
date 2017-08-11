@@ -54,6 +54,7 @@ class FetchHouses {
 
 	/**
 	 * @param int $house_id
+	 *
 	 * @return $this
 	 * @throws Exception
 	 */
@@ -77,6 +78,7 @@ class FetchHouses {
 
 	/**
 	 * @param string $reference
+	 *
 	 * @return array
 	 * @throws Exception
 	 */
@@ -104,6 +106,7 @@ class FetchHouses {
 
 	/**
 	 * @param int $house_id
+	 *
 	 * @return string
 	 * @throws Exception
 	 */

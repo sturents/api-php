@@ -175,4 +175,13 @@ abstract class Send {
 
 		return $json->error ?: [];
 	}
+
+	/**
+	 * @return int
+	 */
+	public function responseAffectedProperty(){
+		$json = $this->responseJson();
+
+		return (int) $json->sturents_id;
+	}
 }

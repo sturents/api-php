@@ -9,7 +9,7 @@ namespace Sturents\Api;
  * Class UpdateHouse
  * @package Sturents\Api
  */
-class UpdateHouse extends SingleHouse {
+class UpdateHouse extends Send {
 
 	public function send(){
 		$this->sendInternal(Fixtures::URI_HOUSE, Fixtures::METHOD_PUT);

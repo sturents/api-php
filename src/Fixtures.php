@@ -10,7 +10,7 @@ namespace Sturents\Api;
 
 
 class Fixtures {
-	const VERSION = 1.2
+	const VERSION = 1.2;
 
 	const URI = "https://sturents.com/api";
 	const URI_HOUSES = self::URI."/houses";
