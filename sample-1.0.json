@@ -1,0 +1,85 @@
+{
+    "provider": "PROVIDER",
+    "branches": {
+        "branch": {
+            "agent_id": "AGENT_ID",
+            "name": "NAME",
+            "website": "WEBSITE",
+            "properties": [{
+                "reference": "UNIQUE_PROPERTY_REFERENCE",
+                "available_from": "2017-09-01",
+                "beds": "1",
+                "rooms_let_individually": "false",
+                "quantity": "",
+                "property_type": "Residential",
+                "description": "DESCRIPTION",
+                "facilities": ["LCD TV", "Microwave", "Parking", "Complimentary Broadband & WiFi"],
+                "address": {
+                    "property_name": "",
+                    "property_number": "1",
+                    "road_name": "Hilton Road",
+                    "city": "London",
+                    "postcode": "EC2 7AF",
+                    "uprn": ""
+                },
+                "coordinates": {
+                    "lat": "",
+                    "lng": ""
+                },
+                "contract": {
+                    "price": {
+                        "amount": 80,
+                        "amount_per": "person",
+                        "time_period": "person",
+                        "utilities": {
+                            "water": true,
+                            "gas": true,
+                            "electricity": true,
+                            "broadband": false,
+                            "phone": false,
+                            "contents_insurance": false
+                        }
+                    },
+                    "min_contract_weeks": "",
+                    "deposit": {
+                        "amount": 250,
+                        "amount_per": "person"
+                    }
+                },
+                "media": {
+                    "photos": [{
+                        "photo": "http:\/\/images.website.com\/4eb81da2a4b33a0635f752749529f0fb\/large\/1185.jpg",
+                        "thumb": "http:\/\/images.website.com\/4eb81da2a4b33a0635f752749529f0fb\/thumbnails\/1185.jpg",
+                        "type": "url"
+                    },
+                    {
+                        "photo": "http:\/\/images.website.com\/4eb81da2a4b33a0635f752749529f0fb\/large\/1185.jpg",
+                        "thumb": "http:\/\/images.website.com\/4eb81da2a4b33a0635f752749529f0fb\/thumbnails\/1185.jpg",
+                        "type": "url"
+                    }],
+                    "videos": [],
+                    "floorplans": []
+                },
+                "energy_performance": {
+                    "epc_reference": "1000109120102012",
+                    "epc_certificate": "http:\/\/epc.website.com\/4eb81\/epc\/1185.pdf",
+                    "eef_current": 1,
+                    "eef_potential": 1,
+                    "co2_current": 1,
+                    "co2_potential": 1
+                },
+                "accreditations": [],
+                "incomplete": "0",
+                "eligibility": {
+                    "undergraduate_student": true,
+                    "postgraduate_student": true,
+                    "professional": false,
+                    "trainee": true,
+                    "dss": false,
+                    "pets_permitted": false,
+                    "smoking_permitted": false
+                }
+            }]
+        }
+    }
+}
