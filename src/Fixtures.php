@@ -10,9 +10,11 @@ namespace Sturents\Api;
 
 
 class Fixtures {
+	const VERSION = 1.2
+
 	const URI = "https://sturents.com/api";
-	const URI_HOUSES = "https://sturents.com/api/houses";
-	const URI_HOUSE = "https://sturents.com/api/house";
+	const URI_HOUSES = self::URI."/houses";
+	const URI_HOUSE = self::URI."/house";
 
 	const METHOD_GET = 'GET';
 	const METHOD_POST = 'POST';

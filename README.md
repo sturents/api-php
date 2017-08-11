@@ -18,27 +18,8 @@ To use Composer dependencies inside a PHP file is simple - just the following to
     require_once __DIR__.'/vendor/autoload.php';
 
 Now you can create or use any object without having to worry about requiring its files - Composer and PHP's autoloader will handle that for you.
-     
-## Send multiple properties to StuRents
 
-    $data = [
-        ... // see https://sturents.com/software/developer/houses-create
-    ];
-    $send_houses = new \Sturents\Api\SendHouses(LANDLORD_ID, API_KEY);
-    $send_houses->setJson($data);
-    try {
-        $send_houses->send();
-    }
-    catch (\Exception $e){
-       echo "A problem happened: ".$e->getMessage();
-    }
-    
-    var_dump($send_houses->responseJson()->isSuccess()); // true if request succeeded
-    
-    $inserted = $send_houses->responseCountInserted(); // outputs number inserted
-    $updated = $send_houses->responseCountUpdated(); // outputs number updated
-    
-## Send one property to StuRents
+## Send a property to StuRents
 
     $data = [
         ... // see https://sturents.com/software/developer/house-create

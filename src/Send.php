@@ -17,6 +17,7 @@ abstract class Send {
 	private $api_key;
 	private $body;
 	private $auth;
+
 	/**
 	 * @var GuzzleException
 	 */
@@ -27,7 +28,8 @@ abstract class Send {
 	private $response;
 
 	/**
-	 * SendHouses constructor.
+	 * SendHouses constructor
+	 *
 	 * @param int $landlord_id
 	 * @param string $api_key
 	 */
@@ -36,10 +38,14 @@ abstract class Send {
 		$this->api_key = $api_key;
 	}
 
+	/**
+	 * Sends properties to StuRents
+	 */
 	abstract function send();
 
 	/**
-	 * @param $json
+	 * @param string $json
+	 *
 	 * @return Send
 	 */
 	public function setBody($json){
@@ -53,6 +59,7 @@ abstract class Send {
 
 	/**
 	 * @param array $data
+	 *
 	 * @return Send
 	 */
 	public function setJson(array $data){
@@ -62,8 +69,9 @@ abstract class Send {
 	}
 
 	/**
-	 * @param $url
-	 * @param $method
+	 * @param string $url
+	 * @param string $method
+	 *
 	 * @return Send
 	 * @throws Exception
 	 */
@@ -78,6 +86,7 @@ abstract class Send {
 				'query' => [
 					'landlord' => $this->landlord_id,
 					'auth' => $this->auth,
+					'version' => Fixtures::VERSION
 				],
 				'body' => $this->body,
 			]);

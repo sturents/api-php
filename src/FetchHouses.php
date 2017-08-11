@@ -115,6 +115,7 @@ class FetchHouses {
 				'query' => [
 					'landlord' => $this->landlord_id,
 					'public' => $this->public_key,
+					'version' => Fixtures::VERSION,
 				],
 			]);
 
