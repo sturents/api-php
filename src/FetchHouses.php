@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: m1ke
- * Date: 10/02/16
- * Time: 17:21
- */
 
 namespace Sturents\Api;
 

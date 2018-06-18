@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: m1ke
- * Date: 10/02/16
- * Time: 17:22
- */
 
 namespace Sturents\Api;
 
 
 class Fixtures {
-	const VERSION = 1.2;
+	const VERSION = 1.3;
 
 	const URI = "https://sturents.com/api";
 	const URI_HOUSES = self::URI."/houses";
