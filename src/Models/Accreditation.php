@@ -2,7 +2,9 @@
 
 namespace Sturents\Api\Models;
 
-class Accreditation {
+use Sturents\Api\Model;
+
+class Accreditation extends Model {
 	/**
 	 * @var string
 	 * @required

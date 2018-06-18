@@ -2,7 +2,9 @@
 
 namespace Sturents\Api\Models;
 
-class Photo {
+use Sturents\Api\Model;
+
+class Photo extends Model {
 	/**
 	 * @var string
 	 * @required

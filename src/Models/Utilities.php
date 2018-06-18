@@ -2,7 +2,9 @@
 
 namespace Sturents\Api\Models;
 
-class Utilities {
+use Sturents\Api\Model;
+
+class Utilities extends Model {
 	/**
 	 * @var bool
 	 * @required

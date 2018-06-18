@@ -2,7 +2,9 @@
 
 namespace Sturents\Api\Models;
 
-class Available {
+use Sturents\Api\Model;
+
+class Available extends Model {
 	/**
 	 * @var string
 	 * @required

@@ -2,7 +2,9 @@
 
 namespace Sturents\Api\Models;
 
-class Contract {
+use Sturents\Api\Model;
+
+class Contract extends Model {
 	/**
 	 * @var Price
 	 * @required

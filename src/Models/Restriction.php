@@ -2,7 +2,9 @@
 
 namespace Sturents\Api\Models;
 
-class Restriction {
+use Sturents\Api\Model;
+
+class Restriction extends Model {
 	/**
 	 * @var string
 	 * @required

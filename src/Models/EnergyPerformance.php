@@ -2,7 +2,7 @@
 
 namespace Sturents\Api\Models;
 
-class EnergyPerformance {
+class EnergyPerformance extends Model {
 	/**
 	 * @var string
 	 * @required

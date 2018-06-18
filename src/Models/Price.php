@@ -2,7 +2,9 @@
 
 namespace Sturents\Api\Models;
 
-class Price {
+use Sturents\Api\Model;
+
+class Price extends Model {
 	/**
 	 * @var float
 	 * @required

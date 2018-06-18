@@ -1,5 +1,6 @@
 <?php
 namespace Sturents\Api;
+use Sturents\Api\Models\Property;
 
 /**
  * Allows you to update a single existing property on property manager's portfolio
@@ -11,7 +12,7 @@ namespace Sturents\Api;
  */
 class UpdateHouse extends Send {
 
-	public function send(){
+	public function send(Property $property){
 		$this->sendInternal(Fixtures::URI_HOUSE, Fixtures::METHOD_PUT);
 	}
 }

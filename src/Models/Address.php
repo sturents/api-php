@@ -2,7 +2,9 @@
 
 namespace Sturents\Api\Models;
 
-class Address {
+use Sturents\Api\Model;
+
+class Address extends Model {
 	/**
 	 * @var string
 	 */

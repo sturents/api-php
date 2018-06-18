@@ -2,7 +2,7 @@
 
 namespace Sturents\Api\Models;
 
-class Media {
+class Media extends Model {
 	/**
 	 * @var Photo[]
 	 * @required

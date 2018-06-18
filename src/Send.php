@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\MessageInterface;
+use Sturents\Api\Models\Property;
 
 abstract class Send {
 
@@ -15,8 +16,6 @@ abstract class Send {
 
 	private $landlord_id;
 	private $api_key;
-	private $body;
-	private $auth;
 
 	/**
 	 * @var GuzzleException
@@ -39,56 +38,35 @@ abstract class Send {
 	}
 
 	/**
-	 * Sends properties to StuRents
+	 * Sends a property to StuRents
 	 */
-	abstract function send();
+	abstract function send(Property $property);
 
 	/**
-	 * @param string $json
-	 *
-	 * @return Send
-	 */
-	public function setBody($json){
-		$this->body = $json;
-
-		$auth_string = $json.$this->api_key;
-		$this->auth = md5($auth_string);
-
-		return $this;
-	}
-
-	/**
-	 * @param array $data
-	 *
-	 * @return Send
-	 */
-	public function setJson(array $data){
-		$json = json_encode($data);
-
-		return $this->setBody($json);
-	}
-
-	/**
+	 * @param Property $property
 	 * @param string $url
 	 * @param string $method
-	 *
 	 * @return Send
 	 * @throws Exception
 	 */
-	protected function sendInternal($url, $method){
+	protected function sendInternal(Property $property, $url, $method){
 		if (empty($this->body)){
 			throw new Exception("You must set a valid request body", self::EX_CODE_BODY);
 		}
 
 		try {
 			$client = new Client();
+			$json = $property->asJson();
+
+			$auth = $this->generateAuth($json);
+
 			$this->response = $client->request($method, $url, [
 				'query' => [
 					'landlord' => $this->landlord_id,
-					'auth' => $this->auth,
-					'version' => Fixtures::VERSION
+					'auth' => $auth,
+					'version' => Fixtures::VERSION,
 				],
-				'body' => $this->body,
+				'body' => $json,
 			]);
 
 			return $this;
@@ -123,7 +101,7 @@ abstract class Send {
 	 * @throws Exception
 	 */
 	public function responseString(){
-		$body = (string) $this->response()->getBody();
+		$body = (string)$this->response()->getBody();
 
 		return $body;
 	}
@@ -182,6 +160,18 @@ abstract class Send {
 	public function responseAffectedProperty(){
 		$json = $this->responseJson();
 
-		return (int) $json->sturents_id;
+		return (int)$json->sturents_id;
+	}
+
+	/**
+	 * @param string $json
+	 * @return string
+	 */
+	private function generateAuth($json){
+		return hash_hmac('sha256', (string) $json, (string) $this->api_key);
+	}
+
+	private function asJson(Property $property){
+
 	}
 }

@@ -2,7 +2,9 @@
 
 namespace Sturents\Api\Models;
 
-class Deposit {
+use Sturents\Api\Model;
+
+class Deposit extends Model {
 	/**
 	 * @var float
 	 * @required

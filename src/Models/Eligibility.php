@@ -3,7 +3,9 @@
 namespace Sturents\Api\Models;
 
 
-class Eligibility {
+use Sturents\Api\Model;
+
+class Eligibility extends Model {
 	/**
 	 * @var bool
 	 * @required

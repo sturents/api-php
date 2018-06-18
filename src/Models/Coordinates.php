@@ -2,7 +2,9 @@
 
 namespace Sturents\Api\Models;
 
-class Coordinates {
+use Sturents\Api\Model;
+
+class Coordinates extends Model {
 	/**
 	 * @var float
 	 * @required
