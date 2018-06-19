@@ -2,22 +2,24 @@
 
 namespace Sturents\Api\Models;
 
+use Sturents\Api\Model;
+
 class Media extends Model {
 	/**
 	 * @var Photo[]
 	 * @required
 	 */
-	private $photos = [];
+	protected $photos = [];
 	/**
 	 * @var string[]
 	 * @required
 	 */
-	public $videos = [];
+	protected $videos = [];
 	/**
 	 * @var string[]
 	 * @required
 	 */
-	public $floorplans = [];
+	protected $floorplans = [];
 
 	/**
 	 * @return Photo[]
@@ -30,7 +32,6 @@ class Media extends Model {
 	 * @param Photo[] $photos
 	 *
 	 * @return $this
-	 * @internal
 	 */
 	public function setPhotos(array $photos){
 		$this->photos = $photos;
@@ -45,6 +46,60 @@ class Media extends Model {
 	 */
 	public function addPhoto(Photo $photo){
 		$this->photos[] = $photo;
+
+		return $this;
+	}
+
+	/**
+	 * @return \string[]
+	 */
+	public function getVideos(){
+		return $this->videos;
+	}
+
+	/**
+	 * @param \string[] $videos
+	 * @return Media
+	 */
+	public function setVideos(array $videos){
+		$this->videos = $videos;
+
+		return $this;
+	}
+
+	/**
+	 * @param string $video
+	 * @return Media
+	 */
+	public function addVideo($video){
+		$this->videos[] = $video;
+
+		return $this;
+	}
+
+	/**
+	 * @return \string[]
+	 */
+	public function getFloorplans(){
+		return $this->floorplans;
+	}
+
+	/**
+	 * @param \string[] $floorplans
+	 * @return Media
+	 */
+	public function setFloorplans(array $floorplans){
+		$this->floorplans = $floorplans;
+
+		return $this;
+	}
+
+	/**
+	 * @param string $floorplan
+	 * @return Media
+	 */
+	public function addFloorplan($floorplan){
+		$this->floorplans[] = $floorplan;
 
 		return $this;
 	}

@@ -9,22 +9,22 @@ class Contract extends Model {
 	 * @var Price
 	 * @required
 	 */
-	private $price;
+	protected $price;
 	/**
 	 * @var Deposit
 	 * @required
 	 */
-	private $deposit;
+	protected $deposit;
 	/**
 	 * @var Restriction[]
 	 * @required
 	 */
-	private $restrictions = [];
+	protected $restrictions = [];
 	/**
 	 * @var Available
 	 * @required
 	 */
-	private $available;
+	protected $available;
 
 	/**
 	 * @return Price

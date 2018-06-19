@@ -9,15 +9,68 @@ class Accreditation extends Model {
 	 * @var string
 	 * @required
 	 */
-	public $type;
+	protected $type;
 	/**
 	 * @var string
 	 * @required
 	 */
-	public $reference;
+	protected $reference;
 	/**
 	 * @var string
 	 * @required
 	 */
-	public $expiry;
+	protected $expiry;
+
+	/**
+	 * @return string
+	 */
+	public function getType(){
+		return $this->type;
+	}
+
+	/**
+	 * @param string $type
+	 * @return Accreditation
+	 */
+	public function setType($type){
+		$this->type = $type;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getReference(){
+		return $this->reference;
+	}
+
+	/**
+	 * @param string $reference
+	 * @return Accreditation
+	 */
+	public function setReference($reference){
+		$this->reference = $reference;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getExpiry(){
+		return $this->expiry;
+	}
+
+	/**
+	 * @param string $expiry
+	 * @return Accreditation
+	 */
+	public function setExpiry($expiry){
+		$this->expiry = $expiry;
+
+		return $this;
+	}
+
+
 }

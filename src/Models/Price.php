@@ -9,22 +9,22 @@ class Price extends Model {
 	 * @var float
 	 * @required
 	 */
-	public $amount;
+	protected $amount;
 	/**
 	 * @var string
 	 * @required
 	 */
-	public $amount_per;
+	protected $amount_per;
 	/**
 	 * @var string
 	 * @required
 	 */
-	public $time_period;
+	protected $time_period;
 	/**
 	 * @var Utilities
 	 * @required
 	 */
-	private $utilities;
+	protected $utilities;
 
 	/**
 	 * @return Utilities

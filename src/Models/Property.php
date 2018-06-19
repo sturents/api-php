@@ -9,101 +9,101 @@ class Property extends Model {
 	 * @var string
 	 * @required
 	 */
-	private $reference;
+	protected $reference;
 	/**
 	 * @var string
 	 * @required
 	 */
-	private $designation;
+	protected $designation;
 	/**
 	 * @var int
 	 * @required
 	 */
-	private $beds_available;
+	protected $beds_available;
 	/**
 	 * @var int
 	 * @required
 	 */
-	private $beds_total;
+	protected $beds_total;
 	/**
 	 * @var bool
 	 * @required
 	 */
-	private $rooms_let_individually = false;
+	protected $rooms_let_individually = false;
 	/**
 	 * @var int
 	 */
-	private $quantity;
+	protected $quantity;
 	/**
 	 * @var int
 	 */
-	private $quantity_available;
+	protected $quantity_available;
 	/**
 	 * @var string
 	 */
-	private $room_type;
+	protected $room_type;
 	/**
 	 * @var string
 	 */
-	private $property_type = 'Residential';
+	protected $property_type = 'Residential';
 	/**
 	 * @var string
 	 * @required
 	 */
-	private $description;
+	protected $description;
 	/**
 	 * @var int
 	 */
-	private $bathrooms;
+	protected $bathrooms;
 	/**
 	 * @var float
 	 * @required
 	 */
-	private $floor_space;
+	protected $floor_space;
 	/**
 	 * @var string[]
 	 * @required
 	 */
-	private $facilities;
+	protected $facilities;
 	/**
 	 * @var Address
 	 * @required
 	 */
-	private $address;
+	protected $address;
 	/**
 	 * @var Coordinates
 	 * @required
 	 */
-	private $coordinates;
+	protected $coordinates;
 	/**
 	 * @var Contract[]
 	 * @required
 	 */
-	private $contracts;
+	protected $contracts;
 	/**
 	 * @var Media
 	 * @required
 	 */
-	private $media;
+	protected $media;
 	/**
 	 * @var EnergyPerformance
 	 * @required
 	 */
-	private $energy_performance;
+	protected $energy_performance;
 	/**
 	 * @var Accreditation[]
 	 * @required
 	 */
-	private $accreditations;
+	protected $accreditations;
 	/**
 	 * @var bool
 	 */
-	private $disabled = false;
+	protected $disabled = false;
 	/**
 	 * @var Eligibility
 	 * @required
 	 */
-	private $eligibility;
+	protected $eligibility;
 
 	/**
 	 * @return Eligibility
@@ -477,7 +477,7 @@ class Property extends Model {
 	}
 
 	/**
-	 * @param string $facilities
+	 * @param string $facility
 	 * @return Property
 	 */
 	public function addFacility($facility){
