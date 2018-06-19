@@ -174,11 +174,11 @@ class Eligibility extends Model {
 	}
 
 	/**
-	 * @param boolean $female_only
+	 * @param boolean|null $female_only
 	 * @return Eligibility
 	 */
 	public function setFemaleOnly($female_only){
-		$this->female_only = $female_only;
+		$this->female_only = (bool) $female_only;
 
 		return $this;
 	}
@@ -191,11 +191,11 @@ class Eligibility extends Model {
 	}
 
 	/**
-	 * @param boolean $male_only
+	 * @param boolean|null $male_only
 	 * @return Eligibility
 	 */
 	public function setMaleOnly($male_only){
-		$this->male_only = $male_only;
+		$this->male_only = (bool) $male_only;
 
 		return $this;
 	}

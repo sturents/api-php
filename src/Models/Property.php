@@ -64,7 +64,7 @@ class Property extends Model {
 	 * @var string[]
 	 * @required
 	 */
-	protected $facilities;
+	protected $facilities = [];
 	/**
 	 * @var Address
 	 * @required
@@ -79,7 +79,7 @@ class Property extends Model {
 	 * @var Contract[]
 	 * @required
 	 */
-	protected $contracts;
+	protected $contracts = [];
 	/**
 	 * @var Media
 	 * @required
@@ -94,7 +94,7 @@ class Property extends Model {
 	 * @var Accreditation[]
 	 * @required
 	 */
-	protected $accreditations;
+	protected $accreditations = [];
 	/**
 	 * @var bool
 	 */
@@ -460,14 +460,14 @@ class Property extends Model {
 	}
 
 	/**
-	 * @return \string[]
+	 * @return string[]
 	 */
 	public function getFacilities(){
 		return $this->facilities;
 	}
 
 	/**
-	 * @param \string[] $facilities
+	 * @param string[] $facilities
 	 * @return Property
 	 */
 	public function setFacilities(array $facilities){

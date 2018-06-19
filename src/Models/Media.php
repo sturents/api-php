@@ -51,14 +51,14 @@ class Media extends Model {
 	}
 
 	/**
-	 * @return \string[]
+	 * @return string[]
 	 */
 	public function getVideos(){
 		return $this->videos;
 	}
 
 	/**
-	 * @param \string[] $videos
+	 * @param string[] $videos
 	 * @return Media
 	 */
 	public function setVideos(array $videos){
@@ -78,14 +78,14 @@ class Media extends Model {
 	}
 
 	/**
-	 * @return \string[]
+	 * @return string[]
 	 */
 	public function getFloorplans(){
 		return $this->floorplans;
 	}
 
 	/**
-	 * @param \string[] $floorplans
+	 * @param string[] $floorplans
 	 * @return Media
 	 */
 	public function setFloorplans(array $floorplans){

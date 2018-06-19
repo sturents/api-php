@@ -1,0 +1,113 @@
+{
+  "date": "2018-06-19 11:10:59",
+  "format": "SR-v1.3",
+  "provider": "StuRents",
+  "pagination": {
+    "pages": 1,
+    "current": 1
+  },
+  "agent": [],
+  "branches": [
+    {
+      "name": "Test Landlord",
+      "website": "http://example.com/rerum-reiciendis-aliquam-aut-tempora-est.html",
+      "properties": [
+        {
+          "eligibility": {
+            "undergraduate_student": true,
+            "postgraduate_student": true,
+            "professional": true,
+            "trainee": true,
+            "dss": true,
+            "pets_permitted": true,
+            "smoking_permitted": true,
+            "female_only": null,
+            "male_only": null
+          },
+          "accreditations": null,
+          "energyPerformance": null,
+          "media": {
+            "photos": [
+              {
+                "type": "url",
+                "photo": "http://test-static.sturents/images/gallery/1.jpg",
+                "thumb": "http://test-static.sturents/images/gallery_thumbs/1.jpg",
+                "caption": ""
+              },
+              {
+                "type": "url",
+                "photo": "http://test-static.sturents/images/gallery/2.jpg",
+                "thumb": "http://test-static.sturents/images/gallery_thumbs/2.jpg",
+                "caption": ""
+              }
+            ],
+            "videos": [
+              "http://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            ],
+            "floorplans": []
+          },
+          "contracts": [
+            {
+              "price": {
+                "utilities": {
+                  "water": false,
+                  "gas": false,
+                  "electricity": false,
+                  "broadband": false,
+                  "phone": false,
+                  "contents_insurance": false
+                },
+                "amount": "179.00",
+                "amount_per": "person",
+                "time_period": "week"
+              },
+              "deposit": {
+                "amount": "235.00",
+                "amount_per": "person",
+                "deposit_provider": null
+              },
+              "restrictions": [],
+              "available": {
+                "start_date": "2018-06-20",
+                "end_date": null,
+                "min_contract_days": 336
+              }
+            }
+          ],
+          "coordinates": {
+            "lat": "54.7812004089355500",
+            "lng": "-1.5675292015075684"
+          },
+          "address": {
+            "property_name": "",
+            "property_number": "7",
+            "road_name": "Test Road",
+            "city": "",
+            "postcode": "DH1 4EN",
+            "uprn": null
+          },
+          "sturents_id": "1300",
+          "api_ref": "kbjq",
+          "book_now_url": null,
+          "reference": "1300",
+          "designation": null,
+          "beds_available": "9",
+          "beds_total": "9",
+          "rooms_let_individually": false,
+          "quantity": "1",
+          "quantity_available": null,
+          "room_type": null,
+          "property_type": "Residential",
+          "description": "Voluptate repellendus officiis nihil odit quas qui officiis quia. Expedita numquam eum et. Eveniet non unde quidem et. Beatae in quae omnis ex iste.Hic illo velit blanditiis. Suscipit quia sit est. Aut in excepturi est inventore sunt voluptas. Earum tempore quibusdam consectetur cupiditate qui.Id temporibus aut ducimus. Quis laborum at tenetur rem non expedita aliquid in. Ea odio velit et amet.Temporibus voluptatem voluptatem et molestias consectetur nihil. Sint voluptatem impedit qui quo sed magnam velit. Consequatur sint cupiditate mollitia harum ea debitis.Ipsam non quae dolor quidem delectus ducimus sunt. Autem optio asperiores esse ipsam voluptatem adipisci. Aut quis sint sint quis. Et molestias laborum fuga necessitatibus unde incidunt. Excepturi vitae tenetur iure quibusdam voluptatem hic.",
+          "bathrooms": "0",
+          "floor_space": null,
+          "facilities": [
+            "Burglar Alarm",
+            "Nothing"
+          ],
+          "disabled": false
+        }
+      ]
+    }
+  ]
+}

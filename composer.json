@@ -9,7 +9,8 @@
 	],
 	"require": {
 		"php": ">=5.5.0",
-		"guzzlehttp/guzzle": "~6.0"
+		"guzzlehttp/guzzle": "~6.0",
+		"netresearch/jsonmapper": "^1.4"
 	},
 	"require-dev": {
 		"m1ke/git-php-lint": "1.0.0"

@@ -7,12 +7,10 @@ use Sturents\Api\Model;
 class Price extends Model {
 	/**
 	 * @var float
-	 * @required
 	 */
 	protected $amount;
 	/**
 	 * @var string
-	 * @required
 	 */
 	protected $amount_per;
 	/**
@@ -40,6 +38,57 @@ class Price extends Model {
 	 */
 	public function setUtilities(Utilities $utilities){
 		$this->utilities = $utilities;
+
+		return $this;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getAmount(){
+		return $this->amount;
+	}
+
+	/**
+	 * @param float $amount
+	 * @return Price
+	 */
+	public function setAmount($amount){
+		$this->amount = $amount;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAmountPer(){
+		return $this->amount_per;
+	}
+
+	/**
+	 * @param string $amount_per
+	 * @return Price
+	 */
+	public function setAmountPer($amount_per){
+		$this->amount_per = $amount_per;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTimePeriod(){
+		return $this->time_period;
+	}
+
+	/**
+	 * @param string $time_period
+	 * @return Price
+	 */
+	public function setTimePeriod($time_period){
+		$this->time_period = $time_period;
 
 		return $this;
 	}

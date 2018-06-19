@@ -71,6 +71,4 @@ class Accreditation extends Model {
 
 		return $this;
 	}
-
-
 }

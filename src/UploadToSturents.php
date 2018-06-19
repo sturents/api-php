@@ -1,14 +1,14 @@
 <?php
 namespace Sturents\Api;
 
-use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use JsonSerializable;
 use Psr\Http\Message\MessageInterface;
 use Sturents\Api\Models\Property;
 
-abstract class Send {
+class UploadToSturents {
 
 	const EX_CODE_NO_RESPONSE = 10;
 	const EX_CODE_RESPONSE = 11;
@@ -35,32 +35,35 @@ abstract class Send {
 	public function __construct($landlord_id, $api_key){
 		$this->landlord_id = $landlord_id;
 		$this->api_key = $api_key;
+
+		$this->uri_base = Fixtures::URI;
+	}
+
+	public function createOrUpdateProperty(Property $property){
+		$this->sendInternal($property, Fixtures::PATH_HOUSE, Fixtures::METHOD_POST);
+	}
+
+	public function updateProperty(Property $property){
+		$this->sendInternal($property, Fixtures::PATH_HOUSE, Fixtures::METHOD_PUT);
 	}
 
 	/**
-	 * Sends a property to StuRents
-	 */
-	abstract function send(Property $property);
-
-	/**
-	 * @param Property $property
-	 * @param string $url
+	 * @param JsonSerializable $item
+	 * @param string $url_path
 	 * @param string $method
-	 * @return Send
-	 * @throws Exception
+	 *
+	 * @return UploadToSturents
+	 *
+	 * @throws SturentsException
 	 */
-	protected function sendInternal(Property $property, $url, $method){
-		if (empty($this->body)){
-			throw new Exception("You must set a valid request body", self::EX_CODE_BODY);
-		}
-
+	protected function sendInternal(JsonSerializable $item, $url_path, $method){
 		try {
 			$client = new Client();
-			$json = $property->asJson();
+			$json = json_encode($item);
 
 			$auth = $this->generateAuth($json);
 
-			$this->response = $client->request($method, $url, [
+			$this->response = $client->request($method, $this->uri_base.$url_path, [
 				'query' => [
 					'landlord' => $this->landlord_id,
 					'auth' => $auth,
@@ -76,13 +79,13 @@ abstract class Send {
 			if ($e->hasResponse()){
 				$output = (string)$e->getResponse()->getBody();
 				$output = json_decode($output, true);
-				throw new Exception($output['Message']);
+				throw new SturentsException($output['Message']);
 			}
-			throw new Exception("The StuRents API could not be reached. The client reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
+			throw new SturentsException("The StuRents API could not be reached. The client reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
 		}
 		catch (GuzzleException $e) {
 			$this->request_exception = $e;
-			throw new Exception("The StuRents API could not be reached. The connection reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
+			throw new SturentsException("The StuRents API could not be reached. The connection reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
 		}
 	}
 
@@ -98,7 +101,7 @@ abstract class Send {
 
 	/**
 	 * @return string
-	 * @throws Exception
+	 * @throws SturentsException
 	 */
 	public function responseString(){
 		$body = (string)$this->response()->getBody();
@@ -108,11 +111,11 @@ abstract class Send {
 
 	/**
 	 * @return MessageInterface
-	 * @throws Exception
+	 * @throws SturentsException
 	 */
 	public function response(){
 		if (is_null($this->response)){
-			throw new Exception("No response has been recorded. Either run the send method or inspect the public 'request_exception' property", self::EX_CODE_NO_RESPONSE);
+			throw new SturentsException("No response has been recorded. Either run the send method or inspect the public 'request_exception' property", self::EX_CODE_NO_RESPONSE);
 		}
 
 		return $this->response;
@@ -168,10 +171,13 @@ abstract class Send {
 	 * @return string
 	 */
 	private function generateAuth($json){
-		return hash_hmac('sha256', (string) $json, (string) $this->api_key);
+		return hash_hmac('sha256', (string)$json, (string)$this->api_key);
 	}
 
-	private function asJson(Property $property){
-
+	/**
+	 * @param string $uri
+	 */
+	public function debugChangeUriBase($uri){
+		$this->uri_base = $uri;
 	}
 }
