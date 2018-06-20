@@ -22,6 +22,10 @@ class FetchFromSturents {
 	 */
 	public $request_exception;
 	public $response_string;
+	/**
+	 * @var array
+	 */
+	public $debug_json_errors = [];
 
 	private $landlord_id;
 	private $public_key;
@@ -47,20 +51,22 @@ class FetchFromSturents {
 		$json = $this->makeRequest();
 
 		$data = $this->processResponse($json);
+		$property_objects = $data->branches[0]->properties;
 
-		$mapper = new JsonMapper();
-		$mapper->bExceptionOnMissingData = true;
-		$mapper->bStrictObjectTypeChecking = true;
-		$mapper->bExceptionOnUndefinedProperty = true;
+		$mapper = $this->getJsonMapper();
 
-		try {
-			$property = $mapper->map($data, new Property());
+		$properties = [];
+		foreach ($property_objects as $property_obj){
+			try {
+				$properties[] = $mapper->map($property_obj, new PropertyOutbound());
+			}
+			catch (JsonMapper_Exception $e){
+				$this->debug_json_errors[] = $e->getMessage();
+				continue;
+			}
 		}
-		catch (JsonMapper_Exception $e){
-			throw new SturentsException('Unfortunately one of your fields has short circuited our JSON parser. Your JSON was formatted correctly but likely a field expecting a scalar value (string, integer) received an object. We don\'t have details of the field name, but check your JSON against our spec or contact us for an assesment of your request.');
-		}
 
-		return $property;
+		return $properties;
 	}
 
 	/**
@@ -75,11 +81,7 @@ class FetchFromSturents {
 		$data = $this->processResponse($json);
 		$property_obj = $data->branches[0]->properties[0];
 
-		$mapper = new JsonMapper();
-		$mapper->bExceptionOnMissingData = true;
-		$mapper->bStrictObjectTypeChecking = true;
-		$mapper->bExceptionOnUndefinedProperty = true;
-		$mapper->bStrictNullTypes = false;
+		$mapper = $this->getJsonMapper();
 
 		try {
 			$property = $mapper->map($property_obj, new PropertyOutbound());
@@ -156,7 +158,7 @@ class FetchFromSturents {
 
 		$data = json_decode($json);
 
-		if ($data===false){
+		if ($data===null){
 			$this->response_string = $data;
 			throw new SturentsException("The request was successful but could not be parsed as JSON. The JSON parser reported ".json_last_error_msg(), self::EX_CODE_JSON);
 		}
@@ -169,5 +171,18 @@ class FetchFromSturents {
 	 */
 	public function debugChangeUriBase($uri){
 		$this->uri_base = $uri;
+	}
+
+	/**
+	 * @return JsonMapper
+	 */
+	private function getJsonMapper(){
+		$mapper = new JsonMapper();
+		$mapper->bExceptionOnMissingData = true;
+		$mapper->bStrictObjectTypeChecking = true;
+		$mapper->bExceptionOnUndefinedProperty = true;
+		$mapper->bStrictNullTypes = false;
+
+		return $mapper;
 	}
 }
