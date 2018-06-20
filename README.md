@@ -21,24 +21,7 @@ Now you can create or use any object without having to worry about requiring its
 
 ## Send a property to StuRents
 
-    $property = new \SturentsLib\Api\Models\Property;
-    // Use setters to create sub-objects and set properties as
-    // described in the documentation:
-    // https://sturents.com/software/developer/house-create
-    
-    $sturents_upload = new \SturentsLib\Api\UploadToSturents(LANDLORD_ID, API_KEY);
-    try {
-        $create_response = $sturents_upload->createOrUpdateProperty($property);
-    }
-    catch (\Exception $e){
-       echo "A problem happened: ".$e->getMessage();
-    }
-    
-    var_dump($create_response->success); // true if request succeeded
-    
-    echo $create_response->sturents_id; // outputs an integer
-    
-    var_dump($create_response->messages); // outputs an array of warnings/errors
+_V1.3 does not allow sending properties; please check v1.4 for a modern ORM library, or 1.2 or previous can be accessed from the releases page_
     
 ## Fetch data from StuRents
 
