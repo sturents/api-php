@@ -1,14 +1,14 @@
 <?php
 
-namespace Sturents\Api;
+namespace SturentsLib\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonMapper;
 use JsonMapper_Exception;
-use Sturents\Api\Models\Property;
-use Sturents\Api\Models\PropertyOutbound;
+use SturentsLib\Api\Models\Property;
+use SturentsLib\Api\Models\PropertyOutbound;
 
 class FetchFromSturents {
 
@@ -18,10 +18,15 @@ class FetchFromSturents {
 	const EX_CODE_NOT_FOUND = 13;
 
 	/**
+	 * Debug vars public for analysis by those integrating the API
+	 *
 	 * @var GuzzleException
 	 */
-	public $request_exception;
-	public $response_string;
+	public $debug_request_exception;
+	/**
+	 * @var string
+	 */
+	public $debug_response_string;
 	/**
 	 * @var array
 	 */
@@ -47,10 +52,9 @@ class FetchFromSturents {
 	 * @return Property[]
 	 * @throws SturentsException
 	 */
-	public function fetchAll(){
-		$json = $this->makeRequest();
+	public function fetchProperties(){
+		$data = $this->makeRequest();
 
-		$data = $this->processResponse($json);
 		$property_objects = $data->branches[0]->properties;
 
 		$mapper = $this->getJsonMapper();
@@ -70,15 +74,13 @@ class FetchFromSturents {
 	}
 
 	/**
-	 * @param int $house_id
+	 * @param int $sturents_id
 	 *
 	 * @return Property
 	 * @throws SturentsException
 	 */
-	public function fetchOne($house_id){
-		$json = $this->makeRequest($house_id);
-
-		$data = $this->processResponse($json);
+	public function fetchProperty($sturents_id){
+		$data = $this->makeRequest($sturents_id);
 		$property_obj = $data->branches[0]->properties[0];
 
 		$mapper = $this->getJsonMapper();
@@ -96,10 +98,10 @@ class FetchFromSturents {
 	/**
 	 * @param int $house_id
 	 *
-	 * @return string
+	 * @return \stdClass
 	 * @throws SturentsException
 	 */
-	protected function makeRequest($house_id = null){
+	private function makeRequest($house_id = null){
 		try {
 			$client = new Client();
 			$url =  $this->uri_base.Fixtures::PATH_HOUSES.($house_id ? '/'.$house_id : '');
@@ -111,19 +113,23 @@ class FetchFromSturents {
 				],
 			]);
 
-			return (string) $response->getBody();
+			$json = (string) $response->getBody();
 		}
 		catch (ClientException $e) {
-			$this->request_exception = $e;
+			$this->debug_request_exception = $e;
 
 			$this->exceptionHasResponse($e);
 			
 			throw new SturentsException('The StuRents API could not be reached.', self::EX_CODE_RESPONSE);
 		}
 		catch (GuzzleException $e) {
-			$this->request_exception = $e;
+			$this->debug_request_exception = $e;
 			throw new SturentsException('The StuRents API could not be reached.', self::EX_CODE_RESPONSE);
 		}
+
+		$data = $this->processResponse($json);
+
+		return $data;
 	}
 
 	/**
@@ -131,19 +137,21 @@ class FetchFromSturents {
 	 * @throws SturentsException
 	 */
 	private function exceptionHasResponse(ClientException $e){
-		if ($e->hasResponse()){
-			$json = (string)$e->getResponse()->getBody();
-			$output = json_decode($json, true);
-			if (empty($output['error'])){
-				throw new SturentsException("An error response was returned but the content could not be parsed: $json");
-			}
-			
-			$exception_message = [];
-			foreach ($output['error'] as $field => $error_message){
-				$exception_message[] = "For field '$field' the API reported: $error_message";
-			}
-			throw new SturentsException(implode("\n", $exception_message));
+		if (!$e->hasResponse()){
+			return;
 		}
+
+		$json = (string)$e->getResponse()->getBody();
+		$output = json_decode($json, true);
+		if (empty($output['error'])){
+			throw new SturentsException("An error response was returned but the content could not be parsed: $json");
+		}
+
+		$exception_message = [];
+		foreach ($output['error'] as $field => $error_message){
+			$exception_message[] = "For field '$field' the API reported: $error_message";
+		}
+		throw new SturentsException(implode("\n", $exception_message));
 	}
 
 	/**
@@ -151,7 +159,7 @@ class FetchFromSturents {
 	 * @return \stdClass
 	 * @throws SturentsException
 	 */
-	protected function processResponse($json){
+	private function processResponse($json){
 		if (empty($json)){
 			throw new SturentsException("The request was successful but no data was returned");
 		}
@@ -159,7 +167,7 @@ class FetchFromSturents {
 		$data = json_decode($json);
 
 		if ($data===null){
-			$this->response_string = $data;
+			$this->debug_response_string = $data;
 			throw new SturentsException("The request was successful but could not be parsed as JSON. The JSON parser reported ".json_last_error_msg(), self::EX_CODE_JSON);
 		}
 

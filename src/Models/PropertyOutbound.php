@@ -1,6 +1,6 @@
 <?php
 
-namespace Sturents\Api\Models;
+namespace SturentsLib\Api\Models;
 
 class PropertyOutbound extends Property {
 	/**

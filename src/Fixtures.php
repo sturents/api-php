@@ -1,6 +1,6 @@
 <?php
 
-namespace Sturents\Api;
+namespace SturentsLib\Api;
 
 
 class Fixtures {

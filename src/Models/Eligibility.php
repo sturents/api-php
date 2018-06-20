@@ -1,9 +1,9 @@
 <?php
 
-namespace Sturents\Api\Models;
+namespace SturentsLib\Api\Models;
 
 
-use Sturents\Api\Model;
+use SturentsLib\Api\Model;
 
 class Eligibility extends Model {
 	/**

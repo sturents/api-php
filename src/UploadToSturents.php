@@ -1,12 +1,13 @@
 <?php
-namespace Sturents\Api;
+namespace SturentsLib\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use JsonMapper;
 use JsonSerializable;
-use Psr\Http\Message\MessageInterface;
-use Sturents\Api\Models\Property;
+use SturentsLib\Api\Models\Property;
+use SturentsLib\Responses\CreatePropertyResponse;
 
 class UploadToSturents {
 
@@ -20,11 +21,7 @@ class UploadToSturents {
 	/**
 	 * @var GuzzleException
 	 */
-	public $request_exception;
-	/**
-	 * @var MessageInterface
-	 */
-	private $response;
+	public $debug_request_exception;
 
 	/**
 	 * SendHouses constructor
@@ -39,12 +36,36 @@ class UploadToSturents {
 		$this->uri_base = Fixtures::URI;
 	}
 
+	/**
+	 * @param Property $property
+	 * @return object
+	 * @throws SturentsException
+	 * @throws \JsonMapper_Exception
+	 */
 	public function createOrUpdateProperty(Property $property){
-		$this->sendInternal($property, Fixtures::PATH_HOUSE, Fixtures::METHOD_POST);
+		$data = $this->sendInternal($property, Fixtures::PATH_HOUSE, Fixtures::METHOD_POST);
+
+		$mapper = $this->getJsonMapper();
+
+		$response = $mapper->map($data, new CreatePropertyResponse());
+
+		return $response;
 	}
 
+	/**
+	 * @param Property $property
+	 * @return object
+	 * @throws SturentsException
+	 * @throws \JsonMapper_Exception
+	 */
 	public function updateProperty(Property $property){
-		$this->sendInternal($property, Fixtures::PATH_HOUSE, Fixtures::METHOD_PUT);
+		$data = $this->sendInternal($property, Fixtures::PATH_HOUSE, Fixtures::METHOD_PUT);
+
+		$mapper = $this->getJsonMapper();
+
+		$response = $mapper->map($data, new CreatePropertyResponse());
+
+		return $response;
 	}
 
 	/**
@@ -56,14 +77,14 @@ class UploadToSturents {
 	 *
 	 * @throws SturentsException
 	 */
-	protected function sendInternal(JsonSerializable $item, $url_path, $method){
+	private function sendInternal(JsonSerializable $item, $url_path, $method){
 		try {
 			$client = new Client();
 			$json = json_encode($item);
 
 			$auth = $this->generateAuth($json);
 
-			$this->response = $client->request($method, $this->uri_base.$url_path, [
+			$response = $client->request($method, $this->uri_base.$url_path, [
 				'query' => [
 					'landlord' => $this->landlord_id,
 					'auth' => $auth,
@@ -71,99 +92,29 @@ class UploadToSturents {
 				],
 				'body' => $json,
 			]);
-
-			return $this;
 		}
 		catch (ClientException $e) {
-			$this->request_exception = $e;
+			$this->debug_request_exception = $e;
 			if ($e->hasResponse()){
 				$output = (string)$e->getResponse()->getBody();
 				$output = json_decode($output, true);
-				throw new SturentsException($output['Message']);
+				$msg = is_array($output['error']) ? reset($output['error']) : $output['error'];
+
+				throw new SturentsException($msg);
 			}
+
 			throw new SturentsException("The StuRents API could not be reached. The client reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
 		}
 		catch (GuzzleException $e) {
-			$this->request_exception = $e;
+			$this->debug_request_exception = $e;
 			throw new SturentsException("The StuRents API could not be reached. The connection reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
 		}
-	}
 
-	/**
-	 * @return \stdClass
-	 */
-	public function responseJson(){
-		$body = $this->responseString();
-		$decoded = json_decode($body);
+		$json = (string) $response->getBody();
 
-		return $decoded;
-	}
+		$data = json_decode($json);
 
-	/**
-	 * @return string
-	 * @throws SturentsException
-	 */
-	public function responseString(){
-		$body = (string)$this->response()->getBody();
-
-		return $body;
-	}
-
-	/**
-	 * @return MessageInterface
-	 * @throws SturentsException
-	 */
-	public function response(){
-		if (is_null($this->response)){
-			throw new SturentsException("No response has been recorded. Either run the send method or inspect the public 'request_exception' property", self::EX_CODE_NO_RESPONSE);
-		}
-
-		return $this->response;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isSuccess(){
-		$json = $this->responseJson();
-
-		return !empty($json->success);
-	}
-
-	/**
-	 * @return array
-	 */
-	public function responseMessages(){
-		$json = $this->responseJson();
-
-		return $json->messages ?: [];
-	}
-
-	/**
-	 * @return string
-	 */
-	public function responseErrorFirst(){
-		$json = $this->responseJson();
-
-		return reset($json->error) ?: '';
-	}
-
-	/**
-	 * @return array
-	 */
-	public function responseErrors(){
-		$json = $this->responseJson();
-
-		return $json->error ?: [];
-	}
-
-	/**
-	 * @return int
-	 */
-	public function responseAffectedProperty(){
-		$json = $this->responseJson();
-
-		return (int)$json->sturents_id;
+		return $data;
 	}
 
 	/**
@@ -179,5 +130,15 @@ class UploadToSturents {
 	 */
 	public function debugChangeUriBase($uri){
 		$this->uri_base = $uri;
+	}
+
+	/**
+	 * @return JsonMapper
+	 */
+	private function getJsonMapper(){
+		$mapper = new JsonMapper();
+		$mapper->bStrictObjectTypeChecking = true;
+
+		return $mapper;
 	}
 }

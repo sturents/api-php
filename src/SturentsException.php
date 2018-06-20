@@ -1,9 +1,8 @@
 <?php
-namespace Sturents\Api;
-
+namespace SturentsLib\Api;
 
 use Exception;
 
-class SturentsException extends Exception{
+class SturentsException extends Exception {
 
 }

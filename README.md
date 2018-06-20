@@ -21,34 +21,37 @@ Now you can create or use any object without having to worry about requiring its
 
 ## Send a property to StuRents
 
-    $data = [
-        ... // see https://sturents.com/software/developer/house-create
-    ];
-    $create_house = new \Sturents\Api\CreateOrUpdateHouse(LANDLORD_ID, API_KEY);
-    $create_house->setJson($data);
+    $property = new \SturentsLib\Api\Models\Property;
+    // Use setters to create sub-objects and set properties as
+    // described in the documentation:
+    // https://sturents.com/software/developer/house-create
+    
+    $sturents_upload = new \SturentsLib\Api\UploadToSturents(LANDLORD_ID, API_KEY);
     try {
-        $create_house->send();
+        $create_response = $sturents_upload->createOrUpdateProperty($property);
     }
     catch (\Exception $e){
        echo "A problem happened: ".$e->getMessage();
     }
     
-    var_dump($create_house->responseJson()->isSuccess()); // true if request succeeded
+    var_dump($create_response->success); // true if request succeeded
     
-    $affected_id = $create_house->responseAffectedProperty(); // outputs an integer
+    echo $create_response->sturents_id; // outputs an integer
+    
+    var_dump($create_response->messages); // outputs an array of warnings/errors
     
 ## Fetch data from StuRents
 
-    $fetch_houses = new \Sturents\Api\FetchHouses(LANDLORD_ID, PUBLIC_KEY);
+    $sturents_fetch = new \Sturents\Api\FetchFromSturents(LANDLORD_ID, PUBLIC_KEY);
     try {
-        $fetch_houses->fetchAll();
-        $properties = $fetch_houses->getProperties();
+        $properties = $sturents_fetch->fetchProperties();
     }
     catch (\Exception $e){
        echo "A problem happened: ".$e->getMessage();
     }
     
     echo count($properties) // echo, e.g. 1
+    echo $properties[0]->getAddress()->getRoad() // echo e.g. Test Street;
     
     
     
