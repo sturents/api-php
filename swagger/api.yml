@@ -58,6 +58,9 @@ securityDefinitions:
       Then a HMAC generated, e.g. in PHP,
 
       $auth = hash_hmac('sha256', $json_compressed.$timestamp, $key)
+
+      For a GET request with an empty body the same code could
+      be used, but the JSON field would be blank (i.e. HMAC of a timestamp)
 paths:
   /properties:
     get:
@@ -166,12 +169,10 @@ paths:
             type: array
             items:
               $ref: '#/definitions/ContractTemplate'
-        '400':
-          $ref: '#/definitions/GetError'
         '401':
-          $ref: '#/definitions/GetError'
+          $ref: '#/definitions/SendAuthError'
         '404':
-          $ref: '#/definitions/GetError'
+          $ref: '#/definitions/SendAuthError'
         default:
           $ref: '#/definitions/Error'
   /payment-structures:
@@ -193,12 +194,10 @@ paths:
             type: array
             items:
               $ref: '#/definitions/PaymentSchedule'
-        '400':
-          $ref: '#/definitions/GetError'
         '401':
-          $ref: '#/definitions/GetError'
+          $ref: '#/definitions/SendAuthError'
         '404':
-          $ref: '#/definitions/GetError'
+          $ref: '#/definitions/SendAuthError'
         default:
           $ref: '#/definitions/Error'
   /rooms/{property_id}:
@@ -400,7 +399,7 @@ paths:
           schema:
             $ref: '#/definitions/ContractSaved'
         '400':
-          $ref: '#/definitions/GetError'
+          $ref: '#/definitions/SendDataError'
         '401':
           $ref: '#/definitions/SendAuthError'
         '404':
@@ -441,7 +440,7 @@ paths:
           schema:
             $ref: '#/definitions/ContractSaved'
         '400':
-          $ref: '#/definitions/GetError'
+          $ref: '#/definitions/SendDataError'
         '401':
           $ref: '#/definitions/SendAuthError'
         '404':
@@ -691,7 +690,7 @@ definitions:
         type: boolean
       contents_insurance:
         type: boolean
-      contents_insurance:
+      tv_license:
         type: boolean
   Restriction:
     type: object
