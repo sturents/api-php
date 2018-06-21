@@ -1,9 +1,8 @@
 <?php
-
-
 namespace SturentsLib\Api\Models;
 
+use SturentsLib\Api\Model;
 
-class Room {
+class Room extends Model {
 
 }

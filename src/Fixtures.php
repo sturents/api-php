@@ -8,6 +8,7 @@ class Fixtures {
 
 	const URI = "https://sturents.com/api";
 	const PATH_HOUSES = "/houses";
+	const PATH_ROOMS = "/rooms";
 	const PATH_HOUSE = "/house";
 
 	const METHOD_GET = 'GET';

@@ -53,9 +53,7 @@ class FetchFromSturents {
 	 * @throws SturentsException
 	 */
 	public function fetchProperties(){
-		$data = $this->makeRequest();
-
-		$property_objects = $data->branches[0]->properties;
+		$property_objects = $this->makeRequest(Fixtures::PATH_HOUSES);
 
 		$mapper = $this->getJsonMapper();
 
@@ -64,7 +62,7 @@ class FetchFromSturents {
 			try {
 				$properties[] = $mapper->map($property_obj, new PropertyOutbound());
 			}
-			catch (JsonMapper_Exception $e){
+			catch (JsonMapper_Exception $e) {
 				$this->debug_json_errors[] = $e->getMessage();
 				continue;
 			}
@@ -80,7 +78,7 @@ class FetchFromSturents {
 	 * @throws SturentsException
 	 */
 	public function fetchProperty($sturents_id){
-		$data = $this->makeRequest($sturents_id);
+		$data = $this->makeRequest(Fixtures::PATH_HOUSES, $sturents_id);
 		$property_obj = $data->branches[0]->properties[0];
 
 		$mapper = $this->getJsonMapper();
@@ -88,7 +86,7 @@ class FetchFromSturents {
 		try {
 			$property = $mapper->map($property_obj, new PropertyOutbound());
 		}
-		catch (JsonMapper_Exception $e){
+		catch (JsonMapper_Exception $e) {
 			throw new SturentsException("Unfortunately something has gone wrong processing data from the API website using our library. Please report this problem to us. The following message may be useful: {$e->getMessage()}");
 		}
 
@@ -96,15 +94,41 @@ class FetchFromSturents {
 	}
 
 	/**
+	 * @param int $sturents_id
+	 *
+	 * @return Property
+	 * @throws SturentsException
+	 */
+	public function fetchRoomsForProperty($sturents_id){
+		$room_objects = $this->makeRequest(Fixtures::PATH_ROOMS, $sturents_id);
+
+		$mapper = $this->getJsonMapper();
+
+		$rooms = [];
+		foreach ($room_objects as $room_obj){
+			try {
+				$rooms[] = $mapper->map($room_obj, new PropertyOutbound());
+			}
+			catch (JsonMapper_Exception $e) {
+				$this->debug_json_errors[] = $e->getMessage();
+				continue;
+			}
+		}
+
+		return $rooms;
+	}
+
+	/**
+	 * @param string $url_path
 	 * @param int $house_id
 	 *
 	 * @return \stdClass
 	 * @throws SturentsException
 	 */
-	private function makeRequest($house_id = null){
+	private function makeRequest($url_path, $house_id = null){
 		try {
 			$client = new Client();
-			$url =  $this->uri_base.Fixtures::PATH_HOUSES.($house_id ? '/'.$house_id : '');
+			$url = $this->uri_base.$url_path.($house_id ? '/'.$house_id : '');
 			$response = $client->request(Fixtures::METHOD_GET, $url, [
 				'query' => [
 					'landlord' => $this->landlord_id,
@@ -113,13 +137,13 @@ class FetchFromSturents {
 				],
 			]);
 
-			$json = (string) $response->getBody();
+			$json = (string)$response->getBody();
 		}
 		catch (ClientException $e) {
 			$this->debug_request_exception = $e;
 
 			$this->exceptionHasResponse($e);
-			
+
 			throw new SturentsException('The StuRents API could not be reached.', self::EX_CODE_RESPONSE);
 		}
 		catch (GuzzleException $e) {
