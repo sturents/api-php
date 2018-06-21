@@ -691,6 +691,8 @@ definitions:
         type: boolean
       contents_insurance:
         type: boolean
+      contents_insurance:
+        type: boolean
   Restriction:
     type: object
     description: |
