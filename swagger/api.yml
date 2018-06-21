@@ -4,7 +4,7 @@ info:
   description: |
     Allow property manager websites and management tools to
     send and receive data from the StuRents database
-  version: 1.3.0
+  version: 2.0.0
 host: sturents.com
 schemes:
   - https
@@ -27,13 +27,18 @@ securityDefinitions:
     in: query
     name: public
     description: Provided public key string for landlord or channel
+  Timestamp:
+    type: apiKey
+    in: query
+    name: timestamp
+    description: unix eopch timestamp
   Auth:
     type: apiKey
     in: query
     name: auth
-    description: md5 of JSON body concatenated with API key
+    description: HMAC of JSON body concat with timestamp, encoded with API key
 paths:
-  /houses:
+  /properties:
     get:
       summary: Returns properties for the authenticated property manager
       security:
@@ -43,7 +48,7 @@ paths:
           PropertyManager: []
           Public: []
       tags:
-        - Properties
+        - Displaying data on external website
       responses:
         '200':
           description: |
@@ -57,7 +62,284 @@ paths:
         '404':
           $ref: '#/definitions/GetError'
         default:
+          $ref: '#/definitions/Error'
+  /property:
+    put:
+      summary: Create a new property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      parameters:
+        - in: body
+          name: Property
+          schema:
+            $ref: '#/definitions/PropertyCreation'
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: |
+            Information about the created property
+          schema:
+            $ref: '#/definitions/PropertySaved'
+        '400':
+          $ref: '#/definitions/SendDataError'
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
+  /property/{property_id}:
+    patch:
+      summary: Update an existing property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      parameters:
+        - in: path
+          name: property_id
+          type: string
+          required: true
+          description: |
+            The property ID provided by the initial creation
+            or a GET /properties request
+        - in: body
+          name: Property
+          schema:
+            $ref: '#/definitions/Property'
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: |
+            Information about the updated property
+          schema:
+            $ref: '#/definitions/PropertySaved'
+        '400':
+          $ref: '#/definitions/SendDataError'
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
+  /contract-templates:
+    get:
+      summary: Returns contract templates for the authenticated property manager
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: List of contract templates
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ContractTemplate'
+        '400':
           $ref: '#/definitions/GetError'
+        '401':
+          $ref: '#/definitions/GetError'
+        '404':
+          $ref: '#/definitions/GetError'
+        default:
+          $ref: '#/definitions/Error'
+  /payment-structures:
+    get:
+      summary: Returns payment schedules for the authenticated property manager
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: List of payment schedules
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PaymentSchedule'
+        '400':
+          $ref: '#/definitions/GetError'
+        '401':
+          $ref: '#/definitions/GetError'
+        '404':
+          $ref: '#/definitions/GetError'
+        default:
+          $ref: '#/definitions/Error'
+  /rooms/{property_id}:
+    get:
+      summary: Returns room IDs for the specified property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: List of property rooms
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Room'
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
+  /room/{property_id}:
+    put:
+      summary: Add a room to a property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: Indicates the saved room ID
+          schema:
+            $ref: '#/definitions/RoomSaved'
+        '400':
+          $ref: '#/definitions/SendDataError'
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
+  /room/{property_id}/{room_id}:
+    patch:
+      summary: Update a room on a property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: Indicates the saved room ID
+          schema:
+            $ref: '#/definitions/Room'
+        '400':
+          $ref: '#/definitions/SendDataError'
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
+    delete:
+      summary: Remove a room from a property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '204':
+          description: Indicates room was deleted
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
+  /contracts/{property_id}:
+    get:
+      summary: Returns contracts for the specified property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: List of property contracts
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Contract'
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
+  /contract/{property_id}:
+    put:
+      summary: Add a contract to a property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: Indicates the saved contract ID
+          schema:
+            $ref: '#/definitions/ContractSaved'
+        '400':
+          $ref: '#/definitions/GetError'
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
+  /contract/{property_id}/{contract_id}:
+    patch:
+      summary: Update a contract on a property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: Indicates the saved contract ID
+          schema:
+            $ref: '#/definitions/ContractSaved'
+        '400':
+          $ref: '#/definitions/GetError'
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
+    delete:
+      summary: Remove a contract from a property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '204':
+          description: Indicates contract was deleted
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
 definitions:
   GetError:
     description: |
@@ -75,10 +357,35 @@ definitions:
       public:
         type: string
         description: Indicates an issue with the provided "public" key
+  SendAuthError:
+    description: |
+      401 - the key supplied did not match the property manager or channel
+            specified, or the channel does not have access to the property manager
+      404 - the property manager does not exist, or the
+            specific resource requested does not exist
+    type: object
+    properties:
+      landlord:
+        type: string
+        description: Indicates an issue with the provided "landlord" parameter
+      auth:
+        type: string
+        description: Indicates an issue with the provided "auth" token
+  SendDataError:
+    description: |
+      There were problems with the input data in the request body.
+      These will be described in the "messages" field of the response
+    type: object
+    properties:
+      messages:
+        type: array
+        description: Keyed by field name (collapsed using . characters)
+        items:
+          type: string
   List:
     type: object
     properties:
-      format:
+      version:
         type: string
         description: The API version being returned
       pagination:
@@ -86,7 +393,7 @@ definitions:
       properties:
         type: array
         items:
-          $ref: '#/definitions/Property'
+          $ref: '#/definitions/PropertyOutbound'
   Pagination:
     type: object
     properties:
@@ -102,48 +409,77 @@ definitions:
       prev:
         type: integer
         description: if present this shows there is another page available prior to this one
+  PropertyOutbound:
+    allOf:
+      - $ref: '#/definitions/Property'
+      - type: object
+        properties:
+          property_id:
+            type: string
+            description: |
+              a unique reference to the property which will not change
+          rooms_count:
+            type: integer
+            description: |
+             the number of bedrooms
+          book_now_url:
+            type: string
+            description: |
+             A URL where the property may be booked online. Will be blank
+             if the property is not set up for this feature
+          contracts:
+            type: array
+            description: one or more contracts
+            items:
+              $ref: '#/definitions/Contract'
+  PropertyCreation:
+    allOf:
+      - $ref: '#/definitions/Property'
+      - type: object
+        properties:
+          initial_rooms:
+            type: integer
+            description: |
+              a number of rooms to generate for the property. Must be 1+
   Property:
     type: object
     properties:
-      reference:
-        type: string
-        description: |
-          a unique reference to the property on your platform which will not change
       designation:
         type: string
         description: |
           "house" or "pbsa"
-      beds_available:
-        type: string
-        description: |
-          the number of bedrooms (formerly called "beds").
-          If set to "zero" this will list the property as a studio flat
-      beds_total:
-        type: string
-        description: |
-          the number of bedrooms (if not specified,
-          will be set the same as the value above)
       rooms_let_individually:
         type: boolean
         description: |
-          where true indicates each room may be let on a separate contract
+          When designation is set to "house" this indicates whether
+          each room may be let on a separate contract
       quantity:
-        type: string
-        description: When designation is set to "pbsa" this describes the number of identical rental options available
+        type: integer
+        description: |
+          When designation is set to "pbsa" this describes the
+          number of identical rental options available
       quantity_available:
         type: string
         description: as above, but currently available to rent
       room_type:
         type: string
-        description: When designation is set to "pbsa" each property record describes a type of room. This field gives that type a name e.g. "Deluxe En-suite"
+        description: |
+          When designation is set to "pbsa" each property record
+          describes a type of room. This field gives that type a
+          name e.g. "Deluxe En-suite"
+      cluster_size:
+        type: integer
+        description: |
+          When designation is set to "pbsa" this indicates number of rooms
+          in a single cluster
       description:
         type: string
         description: a plain text or HTML description of the property. Please note HTML will be stripped but the HTML structure will be used to render line breaks where necessary
       bathrooms:
-        type: string
+        type: integer
         description: number of bathrooms
       floor_space:
-        type: string
+        type: number
         description: floor space of the property in square metres
       facilities:
         type: array
@@ -154,11 +490,6 @@ definitions:
         $ref: '#/definitions/Address'
       coordinates:
         $ref: '#/definitions/Coordinates'
-      contracts:
-        type: array
-        description: one or more contracts
-        items:
-          $ref: '#/definitions/Contract'
       media:
         $ref: '#/definitions/Media'
       energy_performance:
@@ -203,42 +534,41 @@ definitions:
   Contract:
     type: object
     properties:
-      price:
-        $ref: '#/definitions/Price'
-      deposit:
-        $ref: '#/definitions/Deposit'
-      available:
-        $ref: '#/definitions/Availability'
+      title:
+        type: string
+        description: the name given to this contract
+      start_date:
+        type: string
+        description: the earliest date at which it is possible to move in to the property
+      end_date:
+        type: string
+        description: the latest date at which it is possible to vacate the property
+      min_contract_days:
+        type: integer
+        description: the minimum time a tenant may rent the property for in days
+      utilities:
+        $ref: '#/definitions/Utilities'
+      room_prices:
+        type: array
+        description: A list of 1 or more rooms with prices
+        items:
+          $ref: '#/definitions/RoomPrice'
       restrictions:
         type: array
         description: zero or more restrictions
         items:
           $ref: '#/definitions/Restriction'
-  Price:
+  RoomPrice:
     type: object
     properties:
-      amount:
+      room_name:
+        type: string
+      price_per_person_per_week:
         type: number
         description: a monetary value
-      amount_per:
+      deposit_per_person:
         type: string
-        description: person, property
-      time_period:
-        type: string
-        description: |
-          month, week, quarter, year
-          (Nb prices are stored per person per week in our database)
-      utilities:
-        $ref: '#/definitions/Utilities'
-  Deposit:
-    type: object
-    properties:
-      amount:
-        type: number
         description: a monetary value
-      amount_per:
-        type: string
-        description: person, property
   Utilities:
     type: object
     description: |
@@ -257,18 +587,6 @@ definitions:
         type: boolean
       contents_insurance:
         type: boolean
-  Availability:
-    type: object
-    properties:
-      start_date:
-        type: string
-        description: the earliest date at which it is possible to move in to the property
-      end_date:
-        type: string
-        description: the latest date at which it is possible to vacate the property
-      min_contract_days:
-        type: integer
-        description: the minimum time a tenant may rent the property for in days
   Restriction:
     type: object
     properties:
@@ -384,6 +702,14 @@ definitions:
         type: boolean
       male_only:
         type: boolean
+  PropertySaved:
+     properties:
+      property_id:
+        type: string
+        description: unique reference to the property on StuRents
+      url:
+        type: string
+        description: link to the proprerty profile on StuRents
   Error:
     type: object
     properties:
