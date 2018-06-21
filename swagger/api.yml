@@ -31,12 +31,33 @@ securityDefinitions:
     type: apiKey
     in: query
     name: timestamp
-    description: unix eopch timestamp
+    description: unix eopch timestamp in seconds
   Auth:
     type: apiKey
     in: query
     name: auth
-    description: HMAC of JSON body concat with timestamp, encoded with API key
+    description: |
+      HMAC SHA256 of JSON body concat with timestamp, encoded with API key
+      E.g. for a request with a JSON body like,
+
+         {
+           "field": [
+             "val1",
+             "val2"
+            ]
+         }
+
+      The JSON must be compressed first,
+
+      {"field":["val1","val2"]}
+
+      Then concatenated with a timestamp
+
+      {"field":["val1","val2"]}1529593410
+
+      Then a HMAC generated, e.g. in PHP,
+
+      $auth = hash_hmac('sha256', $json_compressed.$timestamp, $key)
 paths:
   /properties:
     get:
@@ -128,7 +149,10 @@ paths:
           $ref: '#/definitions/Error'
   /contract-templates:
     get:
-      summary: Returns contract templates for the authenticated property manager
+      summary: |
+        Returns contract templates for the authenticated property manager
+        The IDs of these templates will be required to set up Contract
+        entities using a specific contract template
       security:
         - PropertyManager: []
           Timestamp: []
@@ -152,7 +176,10 @@ paths:
           $ref: '#/definitions/Error'
   /payment-structures:
     get:
-      summary: Returns payment schedules for the authenticated property manager
+      summary: |
+        Returns payment schedules for the authenticated property manager
+        The IDs of these schedules will be required to set up Contract
+        entities using a specific payment schedule
       security:
         - PropertyManager: []
           Timestamp: []
@@ -176,7 +203,10 @@ paths:
           $ref: '#/definitions/Error'
   /rooms/{property_id}:
     get:
-      summary: Returns rooms for the specified property
+      summary: |
+        Returns rooms for the specified property. Includes the room_id
+        field which is necessary in order to apply pricing specific to
+        a room, or to edit/delete an existing room
       security:
         - PropertyManager: []
           Timestamp: []
@@ -313,7 +343,9 @@ paths:
           $ref: '#/definitions/Error'
   /contracts/{property_id}:
     get:
-      summary: Returns contracts for the specified property
+      summary: |
+        Returns contracts for the specified property. Includes the contract_id
+        field which is necessary in order to edit/delete an existing contract
       security:
         - PropertyManager: []
           Timestamp: []
@@ -539,7 +571,7 @@ definitions:
             type: array
             description: one or more contracts
             items:
-              $ref: '#/definitions/Contract'
+              $ref: '#/definitions/ContractWithRooms'
   PropertyCreation:
     allOf:
       - $ref: '#/definitions/Property'
@@ -549,6 +581,8 @@ definitions:
             type: integer
             description: |
               a number of rooms to generate for the property. Must be 1+
+          initial_contract:
+            $ref: '#/definitions/ContractBasic'
   Property:
     type: object
     properties:
@@ -659,6 +693,10 @@ definitions:
         type: boolean
   Restriction:
     type: object
+    description: |
+      Allows for "special offers" or other conditions to be
+      applied to a contract. Not currently saved or output by StuRents
+      but specified for future integrations
     properties:
       start_date:
         type: string
@@ -772,8 +810,11 @@ definitions:
         type: boolean
       male_only:
         type: boolean
-  Contract:
+  ContractBasic:
     type: object
+    description: |
+      The bare minimum data for a contract which will be applied initially
+      to all rooms generated when a property is created
     properties:
       title:
         type: string
@@ -789,26 +830,42 @@ definitions:
         description: the minimum time a tenant may rent the property for in days
       utilities:
         $ref: '#/definitions/Utilities'
-      room_prices:
-        type: array
-        description: A list of 1 or more rooms with prices
-        items:
-          $ref: '#/definitions/RoomPrice'
       restrictions:
         type: array
         description: zero or more restrictions
         items:
           $ref: '#/definitions/Restriction'
-  ContractFull:
+  ContractWithRooms:
+    description: |
+      The contract object returned for fetching property data
+      to display externally - includes basic information plus
+      a list of room specific pricing
     allOf:
-      - $ref: '#/definitions/Contract'
+      - $ref: '#/definitions/ContractBasic'
+      - type: object
+        properties:
+          room_prices:
+            type: array
+            description: A list of 1 or more rooms with prices
+            items:
+              $ref: '#/definitions/RoomPrice'
+  ContractFull:
+    description: |
+      The contract object returned for fetching specific property contract
+      data. Also includes the contract_id value to allow edit/delete of contract
+    allOf:
+      - $ref: '#/definitions/ContractWithRooms'
       - type: object
         properties:
           contract_id:
             type: string
   ContractCreation:
+    description: |
+      The contract object submitted to create or update a contract.
+      Allows setting a template/schedule ID field and has a room price
+      array allowing linking of prices to specific rooms
     allOf:
-      - $ref: '#/definitions/Contract'
+      - $ref: '#/definitions/ContractBasic'
       - type: object
         properties:
           template_id:
@@ -821,6 +878,8 @@ definitions:
             items:
               $ref: '#/definitions/RoomPriceCreation'
   RoomPrice:
+    description: |
+      An entity linking a named room to pricing and deposit values
     type: object
     properties:
       room_name:
@@ -832,6 +891,9 @@ definitions:
         type: string
         description: a monetary value
   RoomPriceCreation:
+    description: |
+      A RoomPrice object for creating or updating a price, also allows setting
+      the room_id value to a unique room ID from a GET /rooms/{property_id} request
     allOf:
       - $ref: '#/definitions/RoomPrice'
       - type: object
@@ -839,6 +901,8 @@ definitions:
           room_id:
             type: string
   Room:
+    description: |
+      Basic room details for creating or updating a room
     properties:
       room_name:
         type: string
@@ -851,6 +915,9 @@ definitions:
       ensuite:
         type: boolean
   RoomOutbound:
+    description: |
+      A Room object fetched from the GET /rooms/{property_id} endpoint
+      which provides a room_id field to edit or delete the room
     allOf:
       - $ref: '#/definitions/Room'
       - type: object
