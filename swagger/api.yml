@@ -176,11 +176,19 @@ paths:
           $ref: '#/definitions/Error'
   /rooms/{property_id}:
     get:
-      summary: Returns room IDs for the specified property
+      summary: Returns rooms for the specified property
       security:
         - PropertyManager: []
           Timestamp: []
           Auth: []
+      parameters:
+        - in: path
+          name: property_id
+          type: string
+          required: true
+          description: |
+            The property ID provided by the initial creation
+            or a GET /properties request
       tags:
         - Changing data on StuRents
       responses:
@@ -189,7 +197,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/Room'
+              $ref: '#/definitions/RoomOutbound'
         '401':
           $ref: '#/definitions/SendAuthError'
         '404':
@@ -203,6 +211,18 @@ paths:
         - PropertyManager: []
           Timestamp: []
           Auth: []
+      parameters:
+        - in: path
+          name: property_id
+          type: string
+          required: true
+          description: |
+            The property ID provided by the initial creation
+            or a GET /properties request
+        - in: body
+          name: Room
+          schema:
+            $ref: '#/definitions/Room'
       tags:
         - Changing data on StuRents
       responses:
@@ -225,6 +245,25 @@ paths:
         - PropertyManager: []
           Timestamp: []
           Auth: []
+      parameters:
+        - in: path
+          name: property_id
+          type: string
+          required: true
+          description: |
+            The property ID provided by the initial creation
+            or a GET /properties request
+        - in: path
+          name: room_id
+          type: string
+          required: true
+          description: |
+            The room ID provided by the initial creation
+            or a GET /rooms/{property_id} request
+        - in: body
+          name: Room
+          schema:
+            $ref: '#/definitions/Room'
       tags:
         - Changing data on StuRents
       responses:
@@ -246,6 +285,21 @@ paths:
         - PropertyManager: []
           Timestamp: []
           Auth: []
+      parameters:
+        - in: path
+          name: property_id
+          type: string
+          required: true
+          description: |
+            The property ID provided by the initial creation
+            or a GET /properties request
+        - in: path
+          name: room_id
+          type: string
+          required: true
+          description: |
+            The room ID provided by the initial creation
+            or a GET /rooms/{property_id} request
       tags:
         - Changing data on StuRents
       responses:
@@ -264,6 +318,14 @@ paths:
         - PropertyManager: []
           Timestamp: []
           Auth: []
+      parameters:
+        - in: path
+          name: property_id
+          type: string
+          required: true
+          description: |
+            The property ID provided by the initial creation
+            or a GET /properties request
       tags:
         - Changing data on StuRents
       responses:
@@ -272,7 +334,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/Contract'
+              $ref: '#/definitions/ContractFull'
         '401':
           $ref: '#/definitions/SendAuthError'
         '404':
@@ -286,6 +348,18 @@ paths:
         - PropertyManager: []
           Timestamp: []
           Auth: []
+      parameters:
+        - in: path
+          name: property_id
+          type: string
+          required: true
+          description: |
+            The property ID provided by the initial creation
+            or a GET /properties request
+        - in: body
+          name: Contract
+          schema:
+            $ref: '#/definitions/ContractCreation'
       tags:
         - Changing data on StuRents
       responses:
@@ -308,6 +382,25 @@ paths:
         - PropertyManager: []
           Timestamp: []
           Auth: []
+      parameters:
+        - in: path
+          name: property_id
+          type: string
+          required: true
+          description: |
+            The property ID provided by the initial creation
+            or a GET /properties request
+        - in: path
+          name: contract_id
+          type: string
+          required: true
+          description: |
+            The contract ID provided by the initial creation
+            or a GET /contracts/{property_id} request
+        - in: body
+          name: Contract
+          schema:
+            $ref: '#/definitions/ContractCreation'
       tags:
         - Changing data on StuRents
       responses:
@@ -329,6 +422,21 @@ paths:
         - PropertyManager: []
           Timestamp: []
           Auth: []
+      parameters:
+        - in: path
+          name: property_id
+          type: string
+          required: true
+          description: |
+            The property ID provided by the initial creation
+            or a GET /properties request
+        - in: path
+          name: contract_id
+          type: string
+          required: true
+          description: |
+            The contract ID provided by the initial creation
+            or a GET /contracts/{property_id} request
       tags:
         - Changing data on StuRents
       responses:
@@ -531,44 +639,6 @@ definitions:
         type: number
       lng:
         type: number
-  Contract:
-    type: object
-    properties:
-      title:
-        type: string
-        description: the name given to this contract
-      start_date:
-        type: string
-        description: the earliest date at which it is possible to move in to the property
-      end_date:
-        type: string
-        description: the latest date at which it is possible to vacate the property
-      min_contract_days:
-        type: integer
-        description: the minimum time a tenant may rent the property for in days
-      utilities:
-        $ref: '#/definitions/Utilities'
-      room_prices:
-        type: array
-        description: A list of 1 or more rooms with prices
-        items:
-          $ref: '#/definitions/RoomPrice'
-      restrictions:
-        type: array
-        description: zero or more restrictions
-        items:
-          $ref: '#/definitions/Restriction'
-  RoomPrice:
-    type: object
-    properties:
-      room_name:
-        type: string
-      price_per_person_per_week:
-        type: number
-        description: a monetary value
-      deposit_per_person:
-        type: string
-        description: a monetary value
   Utilities:
     type: object
     description: |
@@ -702,14 +772,121 @@ definitions:
         type: boolean
       male_only:
         type: boolean
+  Contract:
+    type: object
+    properties:
+      title:
+        type: string
+        description: the name given to this contract
+      start_date:
+        type: string
+        description: the earliest date at which it is possible to move in to the property
+      end_date:
+        type: string
+        description: the latest date at which it is possible to vacate the property
+      min_contract_days:
+        type: integer
+        description: the minimum time a tenant may rent the property for in days
+      utilities:
+        $ref: '#/definitions/Utilities'
+      room_prices:
+        type: array
+        description: A list of 1 or more rooms with prices
+        items:
+          $ref: '#/definitions/RoomPrice'
+      restrictions:
+        type: array
+        description: zero or more restrictions
+        items:
+          $ref: '#/definitions/Restriction'
+  ContractFull:
+    allOf:
+      - $ref: '#/definitions/Contract'
+      - type: object
+        properties:
+          contract_id:
+            type: string
+  ContractCreation:
+    allOf:
+      - $ref: '#/definitions/Contract'
+      - type: object
+        properties:
+          template_id:
+            type: string
+          schedule_id:
+            type: string
+          room_prices:
+            type: array
+            description: A list of 1 or more rooms with prices
+            items:
+              $ref: '#/definitions/RoomPriceCreation'
+  RoomPrice:
+    type: object
+    properties:
+      room_name:
+        type: string
+      price_per_person_per_week:
+        type: number
+        description: a monetary value
+      deposit_per_person:
+        type: string
+        description: a monetary value
+  RoomPriceCreation:
+    allOf:
+      - $ref: '#/definitions/RoomPrice'
+      - type: object
+        properties:
+          room_id:
+            type: string
+  Room:
+    properties:
+      room_name:
+        type: string
+      floor:
+        type: string
+      floor_space:
+        type: number
+      disabled_access:
+        type: boolean
+      ensuite:
+        type: boolean
+  RoomOutbound:
+    allOf:
+      - $ref: '#/definitions/Room'
+      - type: object
+        properties:
+          room_id:
+            type: string
+  ContractTemplate:
+    properties:
+      title:
+        type: string
+      template_id:
+        type: string
+  PaymentSchedule:
+    properties:
+      title:
+        type: string
+      schedule_id:
+        type: string
   PropertySaved:
-     properties:
+    properties:
       property_id:
         type: string
         description: unique reference to the property on StuRents
       url:
         type: string
         description: link to the proprerty profile on StuRents
+  RoomSaved:
+     properties:
+      room_id:
+        type: string
+        description: unique reference to the room on StuRents
+  ContractSaved:
+     properties:
+      contract_id:
+        type: string
+        description: unique reference to the contract on StuRents
   Error:
     type: object
     properties:
