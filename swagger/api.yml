@@ -1,0 +1,391 @@
+swagger: '2.0'
+info:
+  title: StuRents API
+  description: |
+    Allow property manager websites and management tools to
+    send and receive data from the StuRents database
+  version: 1.3.0
+host: sturents.com
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+securityDefinitions:
+  PropertyManager:
+    type: apiKey
+    in: query
+    name: landlord
+    description: Property manager ID
+  Channel:
+    type: apiKey
+    in: query
+    name: channel
+    description: Channel ID (must also provide property manager ID)
+  Public:
+    type: apiKey
+    in: query
+    name: public
+    description: Provided public key string for landlord or channel
+  Auth:
+    type: apiKey
+    in: query
+    name: auth
+    description: md5 of JSON body concatenated with API key
+paths:
+  /houses:
+    get:
+      summary: Returns properties for the authenticated property manager
+      security:
+        - PropertyManager: []
+          Public: []
+        - Channel: []
+          PropertyManager: []
+          Public: []
+      tags:
+        - Properties
+      responses:
+        '200':
+          description: |
+            A list of property objects
+          schema:
+            $ref: '#/definitions/List'
+        '400':
+          $ref: '#/definitions/GetError'
+        '401':
+          $ref: '#/definitions/GetError'
+        '404':
+          $ref: '#/definitions/GetError'
+        default:
+          $ref: '#/definitions/GetError'
+definitions:
+  GetError:
+    description: |
+      400 - you didn't supply correct query string fields for your chosen
+            use case (see auth features of each endpoint)
+      401 - the key supplied did not match the property manager or channel
+            specified, or the channel does not have access to the property manager
+      404 - the property manager or channel does not exist, or the
+            property manager does not have any properties
+    type: object
+    properties:
+      landlord:
+        type: string
+        description: Informs that the provided "landlord" query string was incorrect
+      public:
+        type: string
+        description: Indicates an issue with the provided "public" key
+  List:
+    type: object
+    properties:
+      format:
+        type: string
+        description: The API version being returned
+      pagination:
+        $ref: '#/definitions/Pagination'
+      properties:
+        type: array
+        items:
+          $ref: '#/definitions/Property'
+  Pagination:
+    type: object
+    properties:
+      pages:
+        type: integer
+        description: the number of pages total
+      current:
+        type: integer
+        description: for data integrity, the page that these results relate to
+      next:
+        type: integer
+        description: if present this shows there is another page available after this one
+      prev:
+        type: integer
+        description: if present this shows there is another page available prior to this one
+  Property:
+    type: object
+    properties:
+      reference:
+        type: string
+        description: |
+          a unique reference to the property on your platform which will not change
+      designation:
+        type: string
+        description: |
+          "house" or "pbsa"
+      beds_available:
+        type: string
+        description: |
+          the number of bedrooms (formerly called "beds").
+          If set to "zero" this will list the property as a studio flat
+      beds_total:
+        type: string
+        description: |
+          the number of bedrooms (if not specified,
+          will be set the same as the value above)
+      rooms_let_individually:
+        type: boolean
+        description: |
+          where true indicates each room may be let on a separate contract
+      quantity:
+        type: string
+        description: When designation is set to "pbsa" this describes the number of identical rental options available
+      quantity_available:
+        type: string
+        description: as above, but currently available to rent
+      room_type:
+        type: string
+        description: When designation is set to "pbsa" each property record describes a type of room. This field gives that type a name e.g. "Deluxe En-suite"
+      description:
+        type: string
+        description: a plain text or HTML description of the property. Please note HTML will be stripped but the HTML structure will be used to render line breaks where necessary
+      bathrooms:
+        type: string
+        description: number of bathrooms
+      floor_space:
+        type: string
+        description: floor space of the property in square metres
+      facilities:
+        type: array
+        description: zero or more facility names
+        items:
+          type: string
+      address:
+        $ref: '#/definitions/Address'
+      coordinates:
+        $ref: '#/definitions/Coordinates'
+      contracts:
+        type: array
+        description: one or more contracts
+        items:
+          $ref: '#/definitions/Contract'
+      media:
+        $ref: '#/definitions/Media'
+      energy_performance:
+        $ref: '#/definitions/EnergyPerformance'
+      accreditations:
+        type: array
+        description: zero or more accreditations
+        items:
+          $ref: '#/definitions/Accreditation'
+      disabled:
+        type: boolean
+        description: |
+          where true indicates that the property is not ready
+          to be made public to students or shown in search results
+      eligibility:
+        $ref: '#/definitions/Eligibility'
+  Address:
+    type: object
+    properties:
+      property_name:
+        type: string
+        description: this is required if "property_number" is empty
+      property_number:
+        type: string
+        description: this is required if "property_name" is empty
+      road_name:
+        type: string
+      city:
+        type: string
+      postcode:
+        type: string
+      uprn:
+        type: string
+        description: if available, the unique property reference
+  Coordinates:
+    type: object
+    properties:
+      lat:
+        type: number
+      lng:
+        type: number
+  Contract:
+    type: object
+    properties:
+      price:
+        $ref: '#/definitions/Price'
+      deposit:
+        $ref: '#/definitions/Deposit'
+      available:
+        $ref: '#/definitions/Availability'
+      restrictions:
+        type: array
+        description: zero or more restrictions
+        items:
+          $ref: '#/definitions/Restriction'
+  Price:
+    type: object
+    properties:
+      amount:
+        type: number
+        description: a monetary value
+      amount_per:
+        type: string
+        description: person, property
+      time_period:
+        type: string
+        description: |
+          month, week, quarter, year
+          (Nb prices are stored per person per week in our database)
+      utilities:
+        $ref: '#/definitions/Utilities'
+  Deposit:
+    type: object
+    properties:
+      amount:
+        type: number
+        description: a monetary value
+      amount_per:
+        type: string
+        description: person, property
+  Utilities:
+    type: object
+    description: |
+      All keys are boolean where true indicates that
+      this utility is included with the rent
+    properties:
+      water:
+        type: boolean
+      gas:
+        type: boolean
+      electricity:
+        type: boolean
+      broadband:
+        type: boolean
+      phone:
+        type: boolean
+      contents_insurance:
+        type: boolean
+  Availability:
+    type: object
+    properties:
+      start_date:
+        type: string
+        description: the earliest date at which it is possible to move in to the property
+      end_date:
+        type: string
+        description: the latest date at which it is possible to vacate the property
+      min_contract_days:
+        type: integer
+        description: the minimum time a tenant may rent the property for in days
+  Restriction:
+    type: object
+    properties:
+      start_date:
+        type: string
+        description: |
+          the date that the contract this restriction
+          belongs to may be purchased from
+      end_date:
+        type: string
+        description: |
+          the date that the contract this restriction
+          belongs to may be purchased until
+      terms:
+        type: string
+        description: |
+          a text block describing this restriction
+          (e.g. "For home students only")
+      min_contract_days:
+        type: integer
+        description: |
+          minimum days a student must be renting for
+          the prices in this contract to be valid
+  Media:
+    type: object
+    properties:
+      photos:
+        type: array
+        description: |
+          zero or more photos
+          The order of photos will be maintained in the gallery;
+          the 1st will be the profile photo
+        items:
+          $ref: '#/definitions/Photo'
+      videos:
+        type: array
+        description: zero or more video embed URLs
+        items:
+          type: string
+      floorplans:
+        type: array
+        description: zero or more URLs which link to floorplan files (image or pdf)
+        items:
+          type: string
+  Photo:
+    type: object
+    properties:
+      type:
+        type: string
+        description: Currently only supports "url"
+      photo:
+        type: string
+        description: a URL linking to a photo file
+      thumb:
+        type: string
+        description: a URL linking to a thumbnail photo file
+      caption:
+        type: string
+  EnergyPerformance:
+    type: object
+    properties:
+      epc_reference:
+        type: string
+        description: the reference on the property's energy performance certificate
+      epc_certificate:
+        type: string
+        description: a URL to download the energy performance certificate
+      eef_current:
+        type: integer
+      eef_potential:
+        type: integer
+      co2_current:
+        type: integer
+      co2_potential:
+        type: integer
+  Accreditation:
+    type: object
+    properties:
+      type:
+        type: string
+        description: title of an accreditation on the property
+      reference:
+        type: string
+        description: the reference connecting the property to its accrediting agency
+      expiry:
+        type: string
+        description: |
+          date when the accreditation will expire
+          (empty is assumed to not expire)
+  Eligibility:
+    type: object
+    description: |
+      Each key is a boolean indicating if the specified item is
+      eligible to rent the property. At least one of the first
+      four fields must be set to true
+    properties:
+      undergraduate_student:
+        type: boolean
+      postgraduate_student:
+        type: boolean
+      professional:
+        type: boolean
+      trainee:
+        type: boolean
+      dss:
+        type: boolean
+        description: Allows a recipient of UK housing benefit
+      pets_permitted:
+        type: boolean
+      smoking_permitted:
+        type: boolean
+      female_only:
+        type: boolean
+      male_only:
+        type: boolean
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
