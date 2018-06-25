@@ -31,7 +31,7 @@ securityDefinitions:
     type: apiKey
     in: query
     name: timestamp
-    description: unix eopch timestamp in seconds
+    description: Unix eopch timestamp in seconds
   Auth:
     type: apiKey
     in: query
@@ -87,6 +87,20 @@ paths:
           $ref: '#/definitions/GetError'
         default:
           $ref: '#/definitions/Error'
+  /facilities:
+    get:
+      summary: |
+        Returns a list of all available facilities which can be
+        submitted as strings when creating/updating a property
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: List of facilities
+          schema:
+            type: array
+            items:
+              type: string
   /property:
     put:
       summary: Create a new property
@@ -194,6 +208,31 @@ paths:
             type: array
             items:
               $ref: '#/definitions/PaymentSchedule'
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
+  /bank-accounts:
+    get:
+      summary: |
+        Returns available bank accounts where rent can be paid
+        for a specific property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Changing data on StuRents
+      responses:
+        '200':
+          description: |
+            List of bank accounts (no sensitive data is provided)
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BankAccount'
         '401':
           $ref: '#/definitions/SendAuthError'
         '404':
@@ -538,16 +577,19 @@ definitions:
     properties:
       pages:
         type: integer
-        description: the number of pages total
+        description: The number of pages total
       current:
         type: integer
-        description: for data integrity, the page that these results relate to
+        description: |
+          For data integrity, the page that these results relate to
       next:
         type: integer
-        description: if present this shows there is another page available after this one
+        description: |
+          If present this shows there is another page available after this one
       prev:
         type: integer
-        description: if present this shows there is another page available prior to this one
+        description: |
+          If present this shows there is another page available prior to this one
   PropertyOutbound:
     allOf:
       - $ref: '#/definitions/Property'
@@ -561,14 +603,9 @@ definitions:
             type: integer
             description: |
              the number of bedrooms
-          book_now_url:
-            type: string
-            description: |
-             A URL where the property may be booked online. Will be blank
-             if the property is not set up for this feature
           contracts:
             type: array
-            description: one or more contracts
+            description: One or more contracts
             items:
               $ref: '#/definitions/ContractWithRooms'
   PropertyCreation:
@@ -601,7 +638,7 @@ definitions:
           number of identical rental options available
       quantity_available:
         type: string
-        description: as above, but currently available to rent
+        description: As above, but currently available to rent
       room_type:
         type: string
         description: |
@@ -615,16 +652,20 @@ definitions:
           in a single cluster
       description:
         type: string
-        description: a plain text or HTML description of the property. Please note HTML will be stripped but the HTML structure will be used to render line breaks where necessary
+        description: |
+          A plain text or HTML description of the property.
+          Please note HTML will be stripped but the HTML
+          structure will be used to render line breaks where necessary
       bathrooms:
         type: integer
-        description: number of bathrooms
+        description: Number of bathrooms
       floor_space:
         type: number
-        description: floor space of the property in square metres
+        description: |
+          Floor space of the whole property in metres squared
       facilities:
         type: array
-        description: zero or more facility names
+        description: Zero or more facility names
         items:
           type: string
       address:
@@ -637,9 +678,14 @@ definitions:
         $ref: '#/definitions/EnergyPerformance'
       accreditations:
         type: array
-        description: zero or more accreditations
+        description: Zero or more accreditations
         items:
           $ref: '#/definitions/Accreditation'
+      room_details:
+        type: array
+        description: One or more Room objects
+        items:
+          $ref: '#/definitions/Room'
       disabled:
         type: boolean
         description: |
@@ -652,10 +698,10 @@ definitions:
     properties:
       property_name:
         type: string
-        description: this is required if "property_number" is empty
+        description: This is required if "property_number" is empty
       property_number:
         type: string
-        description: this is required if "property_name" is empty
+        description: This is required if "property_name" is empty
       road_name:
         type: string
       city:
@@ -664,7 +710,7 @@ definitions:
         type: string
       uprn:
         type: string
-        description: if available, the unique property reference
+        description: If available, the unique property reference
   Coordinates:
     type: object
     properties:
@@ -691,6 +737,8 @@ definitions:
       contents_insurance:
         type: boolean
       tv_license:
+        type: boolean
+      council_tax:
         type: boolean
   Restriction:
     type: object
@@ -725,19 +773,20 @@ definitions:
       photos:
         type: array
         description: |
-          zero or more photos
+          Zero or more photos
           The order of photos will be maintained in the gallery;
           the 1st will be the profile photo
         items:
           $ref: '#/definitions/Photo'
       videos:
         type: array
-        description: zero or more video embed URLs
+        description: Zero or more video embed URLs
         items:
           type: string
       floorplans:
         type: array
-        description: zero or more URLs which link to floorplan files (image or pdf)
+        description: |
+          Zero or more URLs which link to floorplan files (image or pdf)
         items:
           type: string
   Photo:
@@ -748,10 +797,10 @@ definitions:
         description: Currently only supports "url"
       photo:
         type: string
-        description: a URL linking to a photo file
+        description: A URL linking to a photo file
       thumb:
         type: string
-        description: a URL linking to a thumbnail photo file
+        description: A URL linking to a thumbnail photo file
       caption:
         type: string
   EnergyPerformance:
@@ -759,10 +808,11 @@ definitions:
     properties:
       epc_reference:
         type: string
-        description: the reference on the property's energy performance certificate
+        description: |
+          The reference on the property's energy performance certificate
       epc_certificate:
         type: string
-        description: a URL to download the energy performance certificate
+        description: A URL to download the energy performance certificate
       eef_current:
         type: integer
       eef_potential:
@@ -776,10 +826,11 @@ definitions:
     properties:
       type:
         type: string
-        description: title of an accreditation on the property
+        description: Title of an accreditation on the property
       reference:
         type: string
-        description: the reference connecting the property to its accrediting agency
+        description: |
+          The reference connecting the property to its accrediting agency
       expiry:
         type: string
         description: |
@@ -819,21 +870,24 @@ definitions:
     properties:
       title:
         type: string
-        description: the name given to this contract
+        description: The name given to this contract
       start_date:
         type: string
-        description: the earliest date at which it is possible to move in to the property
+        description: |
+          The earliest date at which it is possible to move in to the property
       end_date:
         type: string
-        description: the latest date at which it is possible to vacate the property
+        description: |
+          The latest date at which it is possible to vacate the property
       min_contract_days:
         type: integer
-        description: the minimum time a tenant may rent the property for in days
+        description: |
+          The minimum time a tenant may rent the property for in days
       utilities:
         $ref: '#/definitions/Utilities'
       restrictions:
         type: array
-        description: zero or more restrictions
+        description: Zero or more restrictions
         items:
           $ref: '#/definitions/Restriction'
   ContractWithRooms:
@@ -845,9 +899,15 @@ definitions:
       - $ref: '#/definitions/ContractBasic'
       - type: object
         properties:
+          book_now_url:
+            type: string
+            description: |
+             A URL where the property may be booked online using this contract.
+             Will be blank if the property is not set up for this feature
           room_prices:
             type: array
-            description: A list of 1 or more rooms with prices
+            description: |
+              A list of 1 or more rooms with prices
             items:
               $ref: '#/definitions/RoomPrice'
   ContractFull:
@@ -860,6 +920,9 @@ definitions:
         properties:
           contract_id:
             type: string
+            description: |
+              A unique ID for this Contract which can be used when
+              editing/deleting the Contract
   ContractCreation:
     description: |
       The contract object submitted to create or update a contract.
@@ -871,11 +934,23 @@ definitions:
         properties:
           template_id:
             type: string
+            description: |
+              A unique identifier for a Contract Template fetched from
+              the /contract-templates endpoint. A contract template
+              allows a tenancy to be created for tenants who are renting
+              the property and can sign for it on StuRents
           schedule_id:
             type: string
+            description: |
+              A unique identifier for a Payment Schedule fetched from the
+              /payment-schedules endpoint. A payment schedule allows a rent
+              collection to be created for tenants to pay their rent via
+              the StuRents platform, and may also impact tenancy generation
+              with the schedule shown in the signed contract
           room_prices:
             type: array
-            description: A list of 1 or more rooms with prices
+            description: |
+              A list of 1 or more rooms with prices
             items:
               $ref: '#/definitions/RoomPriceCreation'
   RoomPrice:
@@ -887,10 +962,25 @@ definitions:
         type: string
       price_per_person_per_week:
         type: number
-        description: a monetary value
+        description: |
+          A monetary value indicating the weekly rent each tenant will
+          be expected to pay during their tenancy in the property.
+
+          This does not mean the rent is paid weekly - the StuRents
+          search and profiles display all rents as a weekly amount and this
+          will be used to calculate total and scheduled payments when
+          creating a tenancy and/or rent collection for the property
       deposit_per_person:
         type: string
-        description: a monetary value
+        description: |
+          A monetary value indicating the deposit each tenant will be
+          expected to pay upon signing a contract to rent the property
+      fee_per_person:
+        type: string
+        description: |
+          A monetary value indicating the fee to the property manager which
+          each tenant will be expected to pay upon signing a contract to
+          rent the property
   RoomPriceCreation:
     description: |
       A RoomPrice object for creating or updating a price, also allows setting
@@ -907,14 +997,25 @@ definitions:
     properties:
       room_name:
         type: string
+        description: |
+          Can be precise, e.g. 1a, or descrptive e.g. "downstairs front"
       floor:
         type: string
+        description: |
+          Intended for "pbsa" designation where floor number or classification
+          is relevant
       floor_space:
         type: number
+        description: |
+          Floor space of the room in metres squared
       disabled_access:
         type: boolean
+        description: |
+          "True" if the room should be advertised as accessible
       ensuite:
         type: boolean
+        description: |
+          "True" if an en-suite bathroom is present for the room
   RoomOutbound:
     description: |
       A Room object fetched from the GET /rooms/{property_id} endpoint
@@ -925,36 +1026,60 @@ definitions:
         properties:
           room_id:
             type: string
+            description: |
+              A unique ID for this Room object which can be used to allow
+              edit/delete of this room and also to attach pricing to the
+              Room using the RoomPrice object when creating/updating a
+              Contract object
   ContractTemplate:
     properties:
       title:
         type: string
+        description: |
+          Title entered when creating this contract template
+          within the StuRents website
       template_id:
         type: string
+        description: |
+          Pass this as the "template_id" field when creating/updating a contract
   PaymentSchedule:
     properties:
       title:
         type: string
+        description: |
+          Title entered when creating this schedule
+          within the StuRents website
       schedule_id:
         type: string
+        description: |
+          Pass this as the "schedule_id" field when creating/updating a contract
+  BankAccount:
+    properties:
+      descriptor:
+        type: string
+        description: How the bank account is described internally on StuRents
+      bank_id:
+        type: string
+        description: |
+          Pass this as the "bank_id" field when creating/updating a property
   PropertySaved:
     properties:
       property_id:
         type: string
-        description: unique reference to the property on StuRents
+        description: Unique reference to the Property on StuRents
       url:
         type: string
-        description: link to the proprerty profile on StuRents
+        description: Link to the property profile page on StuRents
   RoomSaved:
      properties:
       room_id:
         type: string
-        description: unique reference to the room on StuRents
+        description: Unique reference to the Room on StuRents
   ContractSaved:
      properties:
       contract_id:
         type: string
-        description: unique reference to the contract on StuRents
+        description: Unique reference to the Contract on StuRents
   Error:
     type: object
     properties:
