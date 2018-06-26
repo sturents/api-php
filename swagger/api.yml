@@ -383,7 +383,8 @@ paths:
     get:
       summary: |
         Returns contracts for the specified property. Includes the contract_id
-        field which is necessary in order to edit/delete an existing contract
+        field which is necessary in order to edit/delete an existing contract.
+        Will return disabled Contracts with the "disabled" field set to true
       security:
         - PropertyManager: []
           Timestamp: []
@@ -487,7 +488,10 @@ paths:
         default:
           $ref: '#/definitions/Error'
     delete:
-      summary: Remove a contract from a property
+      summary: |
+        Disables a contract on a property. It will no longer appear
+        in GET /properties requests but will appear in GET /contracts
+        requests with the "disabled" boolean set to true.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -511,7 +515,7 @@ paths:
         - Changing data on StuRents
       responses:
         '204':
-          description: Indicates contract was deleted
+          description: Indicates contract was disabled
         '401':
           $ref: '#/definitions/SendAuthError'
         '404':
@@ -599,13 +603,17 @@ definitions:
             type: string
             description: |
               a unique reference to the property which will not change
-          rooms_count:
-            type: integer
-            description: |
-             the number of bedrooms
+          room_details:
+            type: array
+            description: One or more Room objects
+            items:
+              $ref: '#/definitions/Room'
           contracts:
             type: array
-            description: One or more contracts
+            description: |
+              One or more Contracts (will not show contracts which have
+              been subject to a DELETE request and which show as "disabled"
+              in GET /contracts requests)
             items:
               $ref: '#/definitions/ContractWithRooms'
   PropertyCreation:
@@ -635,27 +643,31 @@ definitions:
         type: integer
         description: |
           When designation is set to "pbsa" this describes the
-          number of identical rental options available
+          number of identical rental options available. If designation is
+          "house" then this can be set to 0.
       quantity_available:
-        type: string
+        type: integer
         description: As above, but currently available to rent
       room_type:
         type: string
         description: |
           When designation is set to "pbsa" each property record
           describes a type of room. This field gives that type a
-          name e.g. "Deluxe En-suite"
+          name e.g. "Deluxe En-suite". If designation is "house"
+          then this can be left blank.
       cluster_size:
         type: integer
         description: |
           When designation is set to "pbsa" this indicates number of rooms
-          in a single cluster
+          in a single cluster. If designation is "house"
+          then this can be set to 0.
       description:
         type: string
         description: |
           A plain text or HTML description of the property.
           Please note HTML will be stripped but the HTML
-          structure will be used to render line breaks where necessary
+          structure will be used to render line breaks where
+          necessary. It is recommended this is at least 150 characters.
       bathrooms:
         type: integer
         description: Number of bathrooms
@@ -689,11 +701,6 @@ definitions:
         description: Zero or more accreditations
         items:
           $ref: '#/definitions/Accreditation'
-      room_details:
-        type: array
-        description: One or more Room objects
-        items:
-          $ref: '#/definitions/Room'
       disabled:
         type: boolean
         description: |
@@ -758,22 +765,22 @@ definitions:
       start_date:
         type: string
         description: |
-          the date that the contract this restriction
-          belongs to may be purchased from
+          The date that the contract this restriction
+          belongs to may be purchased from in yyyy-mm-dd
       end_date:
         type: string
         description: |
-          the date that the contract this restriction
-          belongs to may be purchased until
+          The date that the contract this restriction
+          belongs to may be purchased until in yyyy-mm-dd
       terms:
         type: string
         description: |
-          a text block describing this restriction
+          A text block describing this restriction
           (e.g. "For home students only")
       min_contract_days:
         type: integer
         description: |
-          minimum days a student must be renting for
+          Minimum days a student must be renting for
           the prices in this contract to be valid
   Media:
     type: object
@@ -788,13 +795,17 @@ definitions:
           $ref: '#/definitions/Photo'
       videos:
         type: array
-        description: Zero or more video embed URLs
+        description: |
+          Zero or more video embed URLs. Any video source can be
+          supplied but at present only videos from YouTube will
+          be rendered as embeded videos on the property profile pages
         items:
           type: string
       floorplans:
         type: array
         description: |
           Zero or more URLs which link to floorplan files (image or pdf)
+          These will be downloaded and stored on StuRents' system
         items:
           type: string
   Photo:
@@ -802,7 +813,9 @@ definitions:
     properties:
       type:
         type: string
-        description: Currently only supports "url"
+        description: |
+          Currently only supports "url".
+          These will be downloaded and stored on StuRents' system
       photo:
         type: string
         description: A URL linking to a photo file
@@ -817,7 +830,8 @@ definitions:
       epc_reference:
         type: string
         description: |
-          The reference on the property's energy performance certificate
+          The reference on the property's energy performance certificate.
+          This is known as an RRN and is a 20 character alphanumeric code
       epc_certificate:
         type: string
         description: A URL to download the energy performance certificate
@@ -842,7 +856,7 @@ definitions:
       expiry:
         type: string
         description: |
-          date when the accreditation will expire
+          Date when the accreditation will expire in yyyy-mm-dd format
           (empty is assumed to not expire)
   Eligibility:
     type: object
@@ -883,10 +897,12 @@ definitions:
         type: string
         description: |
           The earliest date at which it is possible to move in to the property
+          in yyyy-mm-dd format
       end_date:
         type: string
         description: |
           The latest date at which it is possible to vacate the property
+          in yyyy-mm-dd format
       min_contract_days:
         type: integer
         description: |
@@ -902,7 +918,8 @@ definitions:
     description: |
       The contract object returned for fetching property data
       to display externally - includes basic information plus
-      a list of room specific pricing
+      a list of room specific pricing. Only Contracts which are
+      not disabled will be returned as this type.
     allOf:
       - $ref: '#/definitions/ContractBasic'
       - type: object
@@ -926,6 +943,12 @@ definitions:
       - $ref: '#/definitions/ContractWithRooms'
       - type: object
         properties:
+          disabled:
+            type: boolean
+            description: |
+              If this is set to true then the Contract is not available
+              but can still be edited. Contracts which are disabled are
+              not returned for GET /properties requests
           contract_id:
             type: string
             description: |
