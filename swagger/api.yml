@@ -638,29 +638,32 @@ definitions:
         type: boolean
         description: |
           When designation is set to "house" this indicates whether
-          each room may be let on a separate contract
+          rooms can be individually let or not
       quantity:
         type: integer
         description: |
-          When designation is set to "pbsa" this describes the
-          number of identical rental options available. If designation is
-          "house" then this can be set to 0.
+          When designation is set to "pbsa" this describes the total
+          number of identical rooms (including those currrently let).
+          If designation is "house" then this should be set to 0
       quantity_available:
         type: integer
-        description: As above, but currently available to rent
+        description: |
+          When designation is set to “pbsa” this describes the number
+          of identical rooms still available. If designation is "house"
+          then this should be set to 0
       room_type:
         type: string
         description: |
           When designation is set to "pbsa" each property record
           describes a type of room. This field gives that type a
           name e.g. "Deluxe En-suite". If designation is "house"
-          then this can be left blank.
+          then this should be left blank.
       cluster_size:
         type: integer
         description: |
           When designation is set to "pbsa" this indicates number of rooms
           in a single cluster. If designation is "house"
-          then this can be set to 0.
+          then this should be set to 0.
       description:
         type: string
         description: |
@@ -674,7 +677,7 @@ definitions:
       floor_space:
         type: number
         description: |
-          Floor space of the whole property in metres squared
+          Floor space of the whole property in square metres
       bank_id:
         type: string
         description: |
@@ -685,7 +688,9 @@ definitions:
           or sort code - that information cannot be retrieved
       facilities:
         type: array
-        description: Zero or more facility names
+        description: |
+          Zero or more facility names. Allowed names can be found
+          by making a GET /facilities request
         items:
           type: string
       address:
@@ -824,6 +829,8 @@ definitions:
         description: A URL linking to a thumbnail photo file
       caption:
         type: string
+        description: |
+          Max 60 characters
   EnergyPerformance:
     type: object
     properties:
@@ -978,6 +985,29 @@ definitions:
               collection to be created for tenants to pay their rent via
               the StuRents platform, and may also impact tenancy generation
               with the schedule shown in the signed contract
+          book_now_allowed:
+            type: boolean
+            description: |
+              Describes whether this contract may be booked directly via
+              the StuRents platform. Setting this to true does not guarantee
+              that "book now" buttons will be available for the Contract,
+              as other conditions for the Property and the Property Manager's
+              account can also affect this. However if this is set to "false"
+              then "book now" is definitely NOT available for this Contract
+              regardless of other settings
+          require_guarantor:
+            type: boolean
+            description: |
+              When a tenancy is created this states whether a guarantor
+              is required, if set to true, not required if set to false.
+          housing_hand:
+            type: boolean
+            description: |
+              The Housing Hand service is a partnership offered by StuRents
+              in order to provide guarantors for tenants who are otherwise
+              unable to acquire one. When a tenancy is created this field
+              states whether Housing Hand is permitted, if set to true,
+              not permitted if set to false.
           room_prices:
             type: array
             description: |
