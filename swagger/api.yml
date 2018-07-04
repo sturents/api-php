@@ -73,6 +73,7 @@ paths:
           Public: []
       tags:
         - Displaying data on external website
+        - Properties
       responses:
         '200':
           description: |
@@ -93,7 +94,8 @@ paths:
         Returns a list of all available facilities which can be
         submitted as strings when creating/updating a property
       tags:
-        - Changing data on StuRents
+        - Fetching data to make changes
+        - Properties
       responses:
         '200':
           description: List of facilities
@@ -101,6 +103,32 @@ paths:
             type: array
             items:
               type: string
+  /bank-accounts:
+    get:
+      summary: |
+        Returns available bank accounts where rent can be paid
+        for a specific property
+      security:
+        - PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Fetching data to make changes
+        - Properties
+      responses:
+        '200':
+          description: |
+            List of bank accounts (no sensitive data is provided)
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BankAccount'
+        '401':
+          $ref: '#/definitions/SendAuthError'
+        '404':
+          $ref: '#/definitions/SendAuthError'
+        default:
+          $ref: '#/definitions/Error'
   /property:
     put:
       summary: Create a new property
@@ -115,6 +143,7 @@ paths:
             $ref: '#/definitions/PropertyCreation'
       tags:
         - Changing data on StuRents
+        - Properties
       responses:
         '200':
           description: |
@@ -150,6 +179,7 @@ paths:
             $ref: '#/definitions/Property'
       tags:
         - Changing data on StuRents
+        - Properties
       responses:
         '200':
           description: |
@@ -175,7 +205,8 @@ paths:
           Timestamp: []
           Auth: []
       tags:
-        - Changing data on StuRents
+        - Fetching data to make changes
+        - Contracts
       responses:
         '200':
           description: List of contract templates
@@ -200,7 +231,8 @@ paths:
           Timestamp: []
           Auth: []
       tags:
-        - Changing data on StuRents
+        - Fetching data to make changes
+        - Contracts
       responses:
         '200':
           description: List of payment schedules
@@ -208,31 +240,6 @@ paths:
             type: array
             items:
               $ref: '#/definitions/PaymentSchedule'
-        '401':
-          $ref: '#/definitions/SendAuthError'
-        '404':
-          $ref: '#/definitions/SendAuthError'
-        default:
-          $ref: '#/definitions/Error'
-  /bank-accounts:
-    get:
-      summary: |
-        Returns available bank accounts where rent can be paid
-        for a specific property
-      security:
-        - PropertyManager: []
-          Timestamp: []
-          Auth: []
-      tags:
-        - Changing data on StuRents
-      responses:
-        '200':
-          description: |
-            List of bank accounts (no sensitive data is provided)
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/BankAccount'
         '401':
           $ref: '#/definitions/SendAuthError'
         '404':
@@ -258,7 +265,9 @@ paths:
             The property ID provided by the initial creation
             or a GET /properties request
       tags:
-        - Changing data on StuRents
+        - Fetching data to make changes
+        - Rooms
+        - Property child entities
       responses:
         '200':
           description: List of property rooms
@@ -293,6 +302,7 @@ paths:
             $ref: '#/definitions/Room'
       tags:
         - Changing data on StuRents
+        - Rooms
       responses:
         '200':
           description: Indicates the saved room ID
@@ -334,6 +344,7 @@ paths:
             $ref: '#/definitions/Room'
       tags:
         - Changing data on StuRents
+        - Rooms
       responses:
         '200':
           description: Indicates the saved room ID
@@ -370,6 +381,7 @@ paths:
             or a GET /rooms/{property_id} request
       tags:
         - Changing data on StuRents
+        - Rooms
       responses:
         '204':
           description: Indicates room was deleted
@@ -398,7 +410,9 @@ paths:
             The property ID provided by the initial creation
             or a GET /properties request
       tags:
-        - Changing data on StuRents
+        - Fetching data to make changes
+        - Contracts
+        - Property child entities
       responses:
         '200':
           description: List of property contracts
@@ -433,6 +447,7 @@ paths:
             $ref: '#/definitions/ContractCreation'
       tags:
         - Changing data on StuRents
+        - Contracts
       responses:
         '200':
           description: Indicates the saved contract ID
@@ -474,6 +489,7 @@ paths:
             $ref: '#/definitions/ContractCreation'
       tags:
         - Changing data on StuRents
+        - Contracts
       responses:
         '200':
           description: Indicates the saved contract ID
@@ -513,6 +529,7 @@ paths:
             or a GET /contracts/{property_id} request
       tags:
         - Changing data on StuRents
+        - Contracts
       responses:
         '204':
           description: Indicates contract was disabled
@@ -624,9 +641,10 @@ definitions:
           initial_rooms:
             type: integer
             description: |
-              a number of rooms to generate for the property. Must be 1+
-          initial_contract:
-            $ref: '#/definitions/ContractBasic'
+              A number of rooms to generate for the property.
+              Cannot be zero.
+              If desired to add rooms manually as soon as the property
+              is created, set this to -1
   Property:
     type: object
     properties:
@@ -891,11 +909,11 @@ definitions:
         type: boolean
       male_only:
         type: boolean
-  ContractBasic:
+  ContractAbstract:
     type: object
     description: |
-      The bare minimum data for a contract which will be applied initially
-      to all rooms generated when a property is created
+      Basic contract details which are extended by both inbound and outbound
+      data with objects which extend ContractBasic
     properties:
       title:
         type: string
@@ -928,7 +946,7 @@ definitions:
       a list of room specific pricing. Only Contracts which are
       not disabled will be returned as this type.
     allOf:
-      - $ref: '#/definitions/ContractBasic'
+      - $ref: '#/definitions/ContractAbstract'
       - type: object
         properties:
           book_now_url:
@@ -967,7 +985,7 @@ definitions:
       Allows setting a template/schedule ID field and has a room price
       array allowing linking of prices to specific rooms
     allOf:
-      - $ref: '#/definitions/ContractBasic'
+      - $ref: '#/definitions/ContractAbstract'
       - type: object
         properties:
           template_id:
@@ -1011,12 +1029,22 @@ definitions:
           room_prices:
             type: array
             description: |
-              A list of 1 or more rooms with prices
+              Contracts can assign different prices per room or the same
+              price to all rooms. To assign different prices per room this
+              array must contain one RoomPrice object per room in the
+              property. To assign the same price to all rooms, leave this
+              array empty and instead submit a Price object
             items:
-              $ref: '#/definitions/RoomPriceCreation'
-  RoomPrice:
+              $ref: '#/definitions/RoomPrice'
+          price:
+            # Can be null
+            $ref: '#/definitions/Price'
+  Price:
     description: |
-      An entity linking a named room to pricing and deposit values
+      Defined pricing details for tenants renting the property.
+      When submitted as the "price" field of the Contract object
+      this will apply to all rooms. That field may be left null
+      if the "room_prices" array is used instead.
     type: object
     properties:
       room_name:
@@ -1042,16 +1070,18 @@ definitions:
           A monetary value indicating the fee to the property manager which
           each tenant will be expected to pay upon signing a contract to
           rent the property
-  RoomPriceCreation:
+  RoomPrice:
     description: |
       A RoomPrice object for creating or updating a price, also allows setting
       the room_id value to a unique room ID from a GET /rooms/{property_id} request
     allOf:
-      - $ref: '#/definitions/RoomPrice'
+      - $ref: '#/definitions/Price'
       - type: object
         properties:
           room_id:
             type: string
+            description: |
+              Describes which room this price refers to
   Room:
     description: |
       Basic room details for creating or updating a room
