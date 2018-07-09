@@ -611,40 +611,6 @@ definitions:
         type: integer
         description: |
           If present this shows there is another page available prior to this one
-  PropertyOutbound:
-    allOf:
-      - $ref: '#/definitions/Property'
-      - type: object
-        properties:
-          property_id:
-            type: string
-            description: |
-              a unique reference to the property which will not change
-          room_details:
-            type: array
-            description: One or more Room objects
-            items:
-              $ref: '#/definitions/Room'
-          contracts:
-            type: array
-            description: |
-              One or more Contracts (will not show contracts which have
-              been subject to a DELETE request and which show as "disabled"
-              in GET /contracts requests)
-            items:
-              $ref: '#/definitions/ContractWithRooms'
-  PropertyCreation:
-    allOf:
-      - $ref: '#/definitions/Property'
-      - type: object
-        properties:
-          initial_rooms:
-            type: integer
-            description: |
-              A number of rooms to generate for the property.
-              Cannot be zero.
-              If desired to add rooms manually as soon as the property
-              is created, set this to -1
   Property:
     type: object
     properties:
@@ -731,6 +697,40 @@ definitions:
           to be made public to students or shown in search results
       eligibility:
         $ref: '#/definitions/Eligibility'
+  PropertyOutbound:
+    allOf:
+      - $ref: '#/definitions/Property'
+      - type: object
+        properties:
+          property_id:
+            type: string
+            description: |
+              a unique reference to the property which will not change
+          room_details:
+            type: array
+            description: One or more Room objects
+            items:
+              $ref: '#/definitions/Room'
+          contracts:
+            type: array
+            description: |
+              One or more Contracts (will not show contracts which have
+              been subject to a DELETE request and which show as "disabled"
+              in GET /contracts requests)
+            items:
+              $ref: '#/definitions/ContractWithRooms'
+  PropertyCreation:
+    allOf:
+      - $ref: '#/definitions/Property'
+      - type: object
+        properties:
+          initial_rooms:
+            type: integer
+            description: |
+              A number of rooms to generate for the property.
+              Cannot be zero.
+              If desired to add rooms manually as soon as the property
+              is created, set this to -1
   Address:
     type: object
     properties:
@@ -954,12 +954,16 @@ definitions:
             description: |
              A URL where the property may be booked online using this contract.
              Will be blank if the property is not set up for this feature
-          room_prices:
+          prices:
             type: array
             description: |
-              A list of 1 or more rooms with prices
+              A list of 1 or more prices with optional room name. It may
+              be the case that all the price values are equal but still
+              one entity per room in the property is returned. This allows
+              for the situation where each room is priced individually to be
+              accommodated using the same data structure
             items:
-              $ref: '#/definitions/RoomPrice'
+              $ref: '#/definitions/PriceOutbound'
   ContractFull:
     description: |
       The contract object returned for fetching specific property contract
@@ -1031,11 +1035,11 @@ definitions:
             description: |
               Contracts can assign different prices per room or the same
               price to all rooms. To assign different prices per room this
-              array must contain one RoomPrice object per room in the
+              array must contain one PriceRoom object per room in the
               property. To assign the same price to all rooms, leave this
               array empty and instead submit a Price object
             items:
-              $ref: '#/definitions/RoomPrice'
+              $ref: '#/definitions/PriceRoom'
           price:
             # Can be null
             $ref: '#/definitions/Price'
@@ -1047,8 +1051,6 @@ definitions:
       if the "room_prices" array is used instead.
     type: object
     properties:
-      room_name:
-        type: string
       price_per_person_per_week:
         type: number
         description: |
@@ -1070,6 +1072,33 @@ definitions:
           A monetary value indicating the fee to the property manager which
           each tenant will be expected to pay upon signing a contract to
           rent the property
+  PriceOutbound:
+    description: |
+      When fetching property details this describes a Price attached
+      to the contract and may also list the name of the Room to which
+      it applies.
+    allOf:
+      - $ref: '#/definitions/Price'
+      - type: object
+        properties:
+          room_name:
+            type: string
+            description: |
+              Describes the room for users consuming outbound data
+  PriceRoom:
+    description: |
+      For creating or updating a price specific to one room, also allows
+      setting the room_id value to a unique room ID from a
+      GET /rooms/{property_id} request
+    allOf:
+      - $ref: '#/definitions/Price'
+      - type: object
+        properties:
+          room_id:
+            type: string
+            description: |
+              The room_id field from a GET or PUT /rooms request, unique
+              identifier for the room that this price relates to
   RoomPrice:
     description: |
       A RoomPrice object for creating or updating a price, also allows setting
