@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * All keys are boolean where true indicates that
  * this utility is included with the rent
  */

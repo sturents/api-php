@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * 401 - the key supplied did not match the property manager or channel
  *       specified, or the channel does not have access to the property manager
  * 404 - the property manager does not exist, or the

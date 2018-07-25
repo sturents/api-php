@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * A Room object fetched from the GET /rooms/{property_id} endpoint
  * which provides a room_id field to edit or delete the room
  */

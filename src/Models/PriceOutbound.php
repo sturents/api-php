@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * When fetching property details this describes a Price attached
  * to the contract and may also list the name of the Room to which
  * it applies.

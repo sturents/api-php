@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * The contract object returned for fetching property data
  * to display externally - includes basic information plus
  * a list of room specific pricing. Only Contracts which are

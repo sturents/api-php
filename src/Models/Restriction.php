@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * Allows for "special offers" or other conditions to be
  * applied to a contract. Not currently saved or output by StuRents
  * but specified for future integrations

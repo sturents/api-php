@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * A RoomPrice object for creating or updating a price, also allows setting
  * the room_id value to a unique room ID from a GET /rooms/{property_id} request
  */

@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * The contract object returned for fetching specific property contract
  * data. Also includes the contract_id value to allow edit/delete of contract
  */

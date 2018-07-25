@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * There were problems with the input data in the request body.
  * These will be described in the "messages" field of the response
  */

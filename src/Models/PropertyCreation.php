@@ -2,6 +2,9 @@
 
 namespace SturentsLib\Api\Models;
 
+/**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ */
 class PropertyCreation extends Property
 {
 	/**

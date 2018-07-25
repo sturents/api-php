@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * Defined pricing details for tenants renting the property.
  * When submitted as the "price" field of the Contract object
  * this will apply to all rooms. That field may be left null

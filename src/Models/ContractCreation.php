@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * The contract object submitted to create or update a contract.
  * Allows setting a template/schedule ID field and has a room price
  * array allowing linking of prices to specific rooms

@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * Each key is a boolean indicating if the specified item is
  * eligible to rent the property. At least one of the first
  * four fields must be set to true

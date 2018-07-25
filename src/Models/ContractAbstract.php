@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * Basic contract details which are extended by both inbound and outbound
  * data with objects which extend ContractBasic
  */

@@ -3,6 +3,8 @@
 namespace SturentsLib\Api\Models;
 
 /**
+ * ** This file was generated automatically, you might want to avoid editing it **
+ *
  * 400 - you didn't supply correct query string fields for your chosen
  *       use case (see auth features of each endpoint)
  * 401 - the key supplied did not match the property manager or channel
