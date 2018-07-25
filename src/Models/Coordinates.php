@@ -2,53 +2,60 @@
 
 namespace SturentsLib\Api\Models;
 
-use SturentsLib\Api\Model;
-
-class Coordinates extends Model {
+class Coordinates
+{
 	/**
-	 * @var float
-	 * @required
+	 * @var number
 	 */
-	protected $lat;
-	/**
-	 * @var float
-	 * @required
-	 */
-	protected $lng;
+	private $lat;
 
 	/**
-	 * @return float
+	 * @var number
 	 */
-	public function getLat(){
+	private $lng;
+
+
+	/**
+	 * @return number
+	 */
+	public function getLat()
+	{
 		return $this->lat;
 	}
 
+
 	/**
-	 * @param float $lat
-	 * @return Coordinates
+	 * @param number $lat
+	 *
+	 * @return $this
 	 */
-	public function setLat($lat){
+	public function setLat(\number $lat)
+	{
 		$this->lat = $lat;
 
 		return $this;
 	}
 
+
 	/**
-	 * @return float
+	 * @return number
 	 */
-	public function getLng(){
+	public function getLng()
+	{
 		return $this->lng;
 	}
 
+
 	/**
-	 * @param float $lng
-	 * @return Coordinates
+	 * @param number $lng
+	 *
+	 * @return $this
 	 */
-	public function setLng($lng){
+	public function setLng(\number $lng)
+	{
 		$this->lng = $lng;
 
 		return $this;
 	}
-
-
 }
+

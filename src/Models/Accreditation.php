@@ -2,73 +2,93 @@
 
 namespace SturentsLib\Api\Models;
 
-use SturentsLib\Api\Model;
+class Accreditation
+{
+	/**
+	 * Title of an accreditation on the property
+	 * @var string
+	 */
+	private $type;
 
-class Accreditation extends Model {
 	/**
+	 * The reference connecting the property to its accrediting agency
+	 *
 	 * @var string
-	 * @required
 	 */
-	protected $type;
+	private $reference;
+
 	/**
+	 * Date when the accreditation will expire in yyyy-mm-dd format
+	 * (empty is assumed to not expire)
+	 *
 	 * @var string
-	 * @required
 	 */
-	protected $reference;
-	/**
-	 * @var string
-	 * @required
-	 */
-	protected $expiry;
+	private $expiry;
+
 
 	/**
 	 * @return string
 	 */
-	public function getType(){
+	public function getType()
+	{
 		return $this->type;
 	}
 
+
 	/**
 	 * @param string $type
-	 * @return Accreditation
+	 *
+	 * @return $this
 	 */
-	public function setType($type){
+	public function setType($type)
+	{
 		$this->type = $type;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getReference(){
+	public function getReference()
+	{
 		return $this->reference;
 	}
 
+
 	/**
 	 * @param string $reference
-	 * @return Accreditation
+	 *
+	 * @return $this
 	 */
-	public function setReference($reference){
+	public function setReference($reference)
+	{
 		$this->reference = $reference;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getExpiry(){
+	public function getExpiry()
+	{
 		return $this->expiry;
 	}
 
+
 	/**
 	 * @param string $expiry
-	 * @return Accreditation
+	 *
+	 * @return $this
 	 */
-	public function setExpiry($expiry){
+	public function setExpiry($expiry)
+	{
 		$this->expiry = $expiry;
 
 		return $this;
 	}
 }
+

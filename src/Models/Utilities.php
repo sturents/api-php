@@ -2,139 +2,226 @@
 
 namespace SturentsLib\Api\Models;
 
-use SturentsLib\Api\Model;
+/**
+ * All keys are boolean where true indicates that
+ * this utility is included with the rent
+ */
+class Utilities
+{
+	/**
+	 * @var boolean
+	 */
+	private $water;
 
-class Utilities extends Model {
 	/**
-	 * @var bool
-	 * @required
+	 * @var boolean
 	 */
-	protected $water;
+	private $gas;
+
 	/**
-	 * @var bool
-	 * @required
+	 * @var boolean
 	 */
-	protected $gas;
+	private $electricity;
+
 	/**
-	 * @var bool
-	 * @required
+	 * @var boolean
 	 */
-	protected $electricity;
+	private $broadband;
+
 	/**
-	 * @var bool
-	 * @required
+	 * @var boolean
 	 */
-	protected $broadband;
+	private $phone;
+
 	/**
-	 * @var bool
-	 * @required
+	 * @var boolean
 	 */
-	protected $phone;
+	private $contents_insurance;
+
 	/**
-	 * @var bool
-	 * @required
+	 * @var boolean
 	 */
-	protected $contents_insurance;
+	private $tv_license;
+
+	/**
+	 * @var boolean
+	 */
+	private $council_tax;
+
 
 	/**
 	 * @return boolean
 	 */
-	public function isWater(){
+	public function getWater()
+	{
 		return $this->water;
 	}
 
+
 	/**
 	 * @param boolean $water
-	 * @return Utilities
+	 *
+	 * @return $this
 	 */
-	public function setWater($water){
+	public function setWater($water)
+	{
 		$this->water = $water;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isGas(){
+	public function getGas()
+	{
 		return $this->gas;
 	}
 
+
 	/**
 	 * @param boolean $gas
-	 * @return Utilities
+	 *
+	 * @return $this
 	 */
-	public function setGas($gas){
+	public function setGas($gas)
+	{
 		$this->gas = $gas;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isElectricity(){
+	public function getElectricity()
+	{
 		return $this->electricity;
 	}
 
+
 	/**
 	 * @param boolean $electricity
-	 * @return Utilities
+	 *
+	 * @return $this
 	 */
-	public function setElectricity($electricity){
+	public function setElectricity($electricity)
+	{
 		$this->electricity = $electricity;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isBroadband(){
+	public function getBroadband()
+	{
 		return $this->broadband;
 	}
 
+
 	/**
 	 * @param boolean $broadband
-	 * @return Utilities
+	 *
+	 * @return $this
 	 */
-	public function setBroadband($broadband){
+	public function setBroadband($broadband)
+	{
 		$this->broadband = $broadband;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isPhone(){
+	public function getPhone()
+	{
 		return $this->phone;
 	}
 
+
 	/**
 	 * @param boolean $phone
-	 * @return Utilities
+	 *
+	 * @return $this
 	 */
-	public function setPhone($phone){
+	public function setPhone($phone)
+	{
 		$this->phone = $phone;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isContentsInsurance(){
+	public function getContentsInsurance()
+	{
 		return $this->contents_insurance;
 	}
 
+
 	/**
 	 * @param boolean $contents_insurance
-	 * @return Utilities
+	 *
+	 * @return $this
 	 */
-	public function setContentsInsurance($contents_insurance){
+	public function setContentsInsurance($contents_insurance)
+	{
 		$this->contents_insurance = $contents_insurance;
 
 		return $this;
 	}
+
+
+	/**
+	 * @return boolean
+	 */
+	public function getTvLicense()
+	{
+		return $this->tv_license;
+	}
+
+
+	/**
+	 * @param boolean $tv_license
+	 *
+	 * @return $this
+	 */
+	public function setTvLicense($tv_license)
+	{
+		$this->tv_license = $tv_license;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return boolean
+	 */
+	public function getCouncilTax()
+	{
+		return $this->council_tax;
+	}
+
+
+	/**
+	 * @param boolean $council_tax
+	 *
+	 * @return $this
+	 */
+	public function setCouncilTax($council_tax)
+	{
+		$this->council_tax = $council_tax;
+
+		return $this;
+	}
 }
+

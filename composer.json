@@ -8,16 +8,12 @@
 		}
 	],
 	"require": {
-		"php": ">=5.5.0",
+		"php": ">=7.0",
 		"guzzlehttp/guzzle": "~6.0",
-		"netresearch/jsonmapper": "^1.4",
-		"nette/php-generator": "^3.0",
-		"symfony/yaml": "^3.4",
-		"symfony/serializer": "^3.4"
+		"netresearch/jsonmapper": "^1.4"
 	},
 	"require-dev": {
-		"m1ke/git-php-lint": "1.0.0",
-		"psx/api": "^2.5"
+		"sturents/swagger-php-model-generator": "0.0.1"
 	},
 	"autoload": {
 		"psr-4": {

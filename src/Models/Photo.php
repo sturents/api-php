@@ -2,94 +2,121 @@
 
 namespace SturentsLib\Api\Models;
 
-use SturentsLib\Api\Model;
+class Photo
+{
+	/**
+	 * Currently only supports "url".
+	 * These will be downloaded and stored on StuRents' system
+	 *
+	 * @var string
+	 */
+	private $type;
 
-class Photo extends Model {
 	/**
-	 * @var string
-	 * @required
-	 */
-	protected $type;
-	/**
-	 * @var string
-	 * @required
-	 */
-	protected $photo;
-	/**
+	 * A URL linking to a photo file
 	 * @var string
 	 */
-	protected $thumb;
+	private $photo;
+
 	/**
+	 * A URL linking to a thumbnail photo file
 	 * @var string
 	 */
-	protected $caption;
+	private $thumb;
+
+	/**
+	 * Max 60 characters
+	 *
+	 * @var string
+	 */
+	private $caption;
+
 
 	/**
 	 * @return string
 	 */
-	public function getType(){
+	public function getType()
+	{
 		return $this->type;
 	}
 
+
 	/**
 	 * @param string $type
-	 * @return Photo
+	 *
+	 * @return $this
 	 */
-	public function setType($type){
+	public function setType($type)
+	{
 		$this->type = $type;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getPhoto(){
+	public function getPhoto()
+	{
 		return $this->photo;
 	}
 
+
 	/**
 	 * @param string $photo
-	 * @return Photo
+	 *
+	 * @return $this
 	 */
-	public function setPhoto($photo){
+	public function setPhoto($photo)
+	{
 		$this->photo = $photo;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getThumb(){
+	public function getThumb()
+	{
 		return $this->thumb;
 	}
 
+
 	/**
 	 * @param string $thumb
-	 * @return Photo
+	 *
+	 * @return $this
 	 */
-	public function setThumb($thumb){
+	public function setThumb($thumb)
+	{
 		$this->thumb = $thumb;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getCaption(){
+	public function getCaption()
+	{
 		return $this->caption;
 	}
 
+
 	/**
 	 * @param string $caption
-	 * @return Photo
+	 *
+	 * @return $this
 	 */
-	public function setCaption($caption){
+	public function setCaption($caption)
+	{
 		$this->caption = $caption;
 
 		return $this;
 	}
-
 }
+

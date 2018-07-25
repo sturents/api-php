@@ -2,138 +2,171 @@
 
 namespace SturentsLib\Api\Models;
 
-use SturentsLib\Api\Model;
+class Address
+{
+	/**
+	 * This is required if "property_number" is empty
+	 * @var string
+	 */
+	private $property_name;
 
-class Address extends Model {
+	/**
+	 * This is required if "property_name" is empty
+	 * @var string
+	 */
+	private $property_number;
+
 	/**
 	 * @var string
 	 */
-	protected $property_name;
+	private $road_name;
+
 	/**
 	 * @var string
 	 */
-	protected $property_number;
-	/**
-	 * @var string
-	 * @required
-	 */
-	protected $road_name;
-	/**
-	 * @var string
-	 * @required
-	 */
-	protected $city;
-	/**
-	 * @var string
-	 * @required
-	 */
-	protected $postcode;
+	private $city;
+
 	/**
 	 * @var string
 	 */
-	protected $uprn;
+	private $postcode;
+
+	/**
+	 * If available, the unique property reference
+	 * @var string
+	 */
+	private $uprn;
+
 
 	/**
 	 * @return string
 	 */
-	public function getPropertyName(){
+	public function getPropertyName()
+	{
 		return $this->property_name;
 	}
 
+
 	/**
 	 * @param string $property_name
-	 * @return Address
+	 *
+	 * @return $this
 	 */
-	public function setPropertyName($property_name){
+	public function setPropertyName($property_name)
+	{
 		$this->property_name = $property_name;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getPropertyNumber(){
+	public function getPropertyNumber()
+	{
 		return $this->property_number;
 	}
 
+
 	/**
 	 * @param string $property_number
-	 * @return Address
+	 *
+	 * @return $this
 	 */
-	public function setPropertyNumber($property_number){
+	public function setPropertyNumber($property_number)
+	{
 		$this->property_number = $property_number;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getRoadName(){
+	public function getRoadName()
+	{
 		return $this->road_name;
 	}
 
+
 	/**
 	 * @param string $road_name
-	 * @return Address
+	 *
+	 * @return $this
 	 */
-	public function setRoadName($road_name){
+	public function setRoadName($road_name)
+	{
 		$this->road_name = $road_name;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getCity(){
+	public function getCity()
+	{
 		return $this->city;
 	}
 
+
 	/**
 	 * @param string $city
-	 * @return Address
+	 *
+	 * @return $this
 	 */
-	public function setCity($city){
+	public function setCity($city)
+	{
 		$this->city = $city;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getPostcode(){
+	public function getPostcode()
+	{
 		return $this->postcode;
 	}
 
+
 	/**
 	 * @param string $postcode
-	 * @return Address
+	 *
+	 * @return $this
 	 */
-	public function setPostcode($postcode){
+	public function setPostcode($postcode)
+	{
 		$this->postcode = $postcode;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getUprn(){
+	public function getUprn()
+	{
 		return $this->uprn;
 	}
 
+
 	/**
 	 * @param string $uprn
-	 * @return Address
+	 *
+	 * @return $this
 	 */
-	public function setUprn($uprn){
+	public function setUprn($uprn)
+	{
 		$this->uprn = $uprn;
 
 		return $this;
 	}
-
-
 }
+

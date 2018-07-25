@@ -2,72 +2,94 @@
 
 namespace SturentsLib\Api\Models;
 
-class PropertyOutbound extends Property {
+class PropertyOutbound extends Property
+{
 	/**
-	 * @var int
-	 */
-	protected $sturents_id;
-
-	/**
+	 * a unique reference to the property which will not change
+	 *
 	 * @var string
 	 */
-	protected $api_ref;
+	private $property_id;
 
 	/**
-	 * @var string
+	 * One or more Room objects
+	 * @var Room[]
 	 */
-	protected $book_now_url;
+	private $room_details;
 
 	/**
-	 * @return int
+	 * One or more Contracts (will not show contracts which have
+	 * been subject to a DELETE request and which show as "disabled"
+	 * in GET /contracts requests)
+	 *
+	 * @var ContractWithRooms[]
 	 */
-	public function getSturentsId(){
-		return $this->sturents_id;
-	}
+	private $contracts;
 
-	/**
-	 * @param int $sturents_id
-	 * @return PropertyOutbound
-	 */
-	public function setSturentsId($sturents_id){
-		$this->sturents_id = $sturents_id;
-
-		return $this;
-	}
 
 	/**
 	 * @return string
 	 */
-	public function getApiRef(){
-		return $this->api_ref;
+	public function getPropertyId()
+	{
+		return $this->property_id;
 	}
 
-	/**
-	 * @param string $api_ref
-	 * @return PropertyOutbound
-	 */
-	public function setApiRef($api_ref){
-		$this->api_ref = $api_ref;
-
-		return $this;
-	}
 
 	/**
-	 * @return string
+	 * @param string $property_id
+	 *
+	 * @return $this
 	 */
-	public function getBookNowUrl(){
-		return $this->book_now_url;
-	}
-
-	/**
-	 * @param string $book_now_url
-	 * @return PropertyOutbound
-	 */
-	public function setBookNowUrl($book_now_url){
-		$this->book_now_url = $book_now_url;
+	public function setPropertyId($property_id)
+	{
+		$this->property_id = $property_id;
 
 		return $this;
 	}
 
 
+	/**
+	 * @return Room[]
+	 */
+	public function getRoomDetails()
+	{
+		return $this->room_details;
+	}
+
+
+	/**
+	 * @param Room[] $room_details
+	 *
+	 * @return $this
+	 */
+	public function setRoomDetails(array $room_details)
+	{
+		$this->room_details = $room_details;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return ContractWithRooms[]
+	 */
+	public function getContracts()
+	{
+		return $this->contracts;
+	}
+
+
+	/**
+	 * @param ContractWithRooms[] $contracts
+	 *
+	 * @return $this
+	 */
+	public function setContracts(array $contracts)
+	{
+		$this->contracts = $contracts;
+
+		return $this;
+	}
 }
+

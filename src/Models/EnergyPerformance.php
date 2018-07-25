@@ -2,135 +2,172 @@
 
 namespace SturentsLib\Api\Models;
 
-use SturentsLib\Api\Model;
+class EnergyPerformance
+{
+	/**
+	 * The reference on the property's energy performance certificate.
+	 * This is known as an RRN and is a 20 character alphanumeric code
+	 *
+	 * @var string
+	 */
+	private $epc_reference;
 
-class EnergyPerformance extends Model {
 	/**
+	 * A URL to download the energy performance certificate
 	 * @var string
-	 * @required
 	 */
-	protected $epc_reference;
+	private $epc_certificate;
+
 	/**
-	 * @var string
-	 * @required
+	 * @var integer
 	 */
-	protected $epc_certificate;
+	private $eef_current;
+
 	/**
-	 * @var int
+	 * @var integer
 	 */
-	protected $eef_current;
+	private $eef_potential;
+
 	/**
-	 * @var int
+	 * @var integer
 	 */
-	protected $eef_potential;
+	private $co2_current;
+
 	/**
-	 * @var int
+	 * @var integer
 	 */
-	protected $co2_current;
-	/**
-	 * @var int
-	 */
-	protected $co2_potential;
+	private $co2_potential;
+
 
 	/**
 	 * @return string
 	 */
-	public function getEpcReference(){
+	public function getEpcReference()
+	{
 		return $this->epc_reference;
 	}
 
+
 	/**
 	 * @param string $epc_reference
-	 * @return EnergyPerformance
+	 *
+	 * @return $this
 	 */
-	public function setEpcReference($epc_reference){
+	public function setEpcReference($epc_reference)
+	{
 		$this->epc_reference = $epc_reference;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return string
 	 */
-	public function getEpcCertificate(){
+	public function getEpcCertificate()
+	{
 		return $this->epc_certificate;
 	}
 
+
 	/**
 	 * @param string $epc_certificate
-	 * @return EnergyPerformance
+	 *
+	 * @return $this
 	 */
-	public function setEpcCertificate($epc_certificate){
+	public function setEpcCertificate($epc_certificate)
+	{
 		$this->epc_certificate = $epc_certificate;
 
 		return $this;
 	}
 
+
 	/**
-	 * @return int
+	 * @return integer
 	 */
-	public function getEefCurrent(){
+	public function getEefCurrent()
+	{
 		return $this->eef_current;
 	}
 
+
 	/**
-	 * @param int $eef_current
-	 * @return EnergyPerformance
+	 * @param integer $eef_current
+	 *
+	 * @return $this
 	 */
-	public function setEefCurrent($eef_current){
+	public function setEefCurrent($eef_current)
+	{
 		$this->eef_current = $eef_current;
 
 		return $this;
 	}
 
+
 	/**
-	 * @return int
+	 * @return integer
 	 */
-	public function getEefPotential(){
+	public function getEefPotential()
+	{
 		return $this->eef_potential;
 	}
 
+
 	/**
-	 * @param int $eef_potential
-	 * @return EnergyPerformance
+	 * @param integer $eef_potential
+	 *
+	 * @return $this
 	 */
-	public function setEefPotential($eef_potential){
+	public function setEefPotential($eef_potential)
+	{
 		$this->eef_potential = $eef_potential;
 
 		return $this;
 	}
 
+
 	/**
-	 * @return int
+	 * @return integer
 	 */
-	public function getCo2Current(){
+	public function getCo2Current()
+	{
 		return $this->co2_current;
 	}
 
+
 	/**
-	 * @param int $co2_current
-	 * @return EnergyPerformance
+	 * @param integer $co2_current
+	 *
+	 * @return $this
 	 */
-	public function setCo2Current($co2_current){
+	public function setCo2Current($co2_current)
+	{
 		$this->co2_current = $co2_current;
 
 		return $this;
 	}
 
+
 	/**
-	 * @return int
+	 * @return integer
 	 */
-	public function getCo2Potential(){
+	public function getCo2Potential()
+	{
 		return $this->co2_potential;
 	}
 
+
 	/**
-	 * @param int $co2_potential
-	 * @return EnergyPerformance
+	 * @param integer $co2_potential
+	 *
+	 * @return $this
 	 */
-	public function setCo2Potential($co2_potential){
+	public function setCo2Potential($co2_potential)
+	{
 		$this->co2_potential = $co2_potential;
 
 		return $this;
 	}
 }
+

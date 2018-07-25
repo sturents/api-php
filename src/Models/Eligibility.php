@@ -2,201 +2,255 @@
 
 namespace SturentsLib\Api\Models;
 
+/**
+ * Each key is a boolean indicating if the specified item is
+ * eligible to rent the property. At least one of the first
+ * four fields must be set to true
+ */
+class Eligibility
+{
+	/**
+	 * @var boolean
+	 */
+	private $undergraduate_student;
 
-use SturentsLib\Api\Model;
+	/**
+	 * @var boolean
+	 */
+	private $postgraduate_student;
 
-class Eligibility extends Model {
 	/**
-	 * @var bool
-	 * @required
+	 * @var boolean
 	 */
-	protected $undergraduate_student;
+	private $professional;
+
 	/**
-	 * @var bool
-	 * @required
+	 * @var boolean
 	 */
-	protected $postgraduate_student;
+	private $trainee;
+
 	/**
-	 * @var bool
-	 * @required
+	 * Allows a recipient of UK housing benefit
+	 * @var boolean
 	 */
-	protected $professional;
+	private $dss;
+
 	/**
-	 * @var bool
-	 * @required
+	 * @var boolean
 	 */
-	protected $trainee;
+	private $pets_permitted;
+
 	/**
-	 * @var bool
+	 * @var boolean
 	 */
-	protected $dss;
+	private $smoking_permitted;
+
 	/**
-	 * @var bool
+	 * @var boolean
 	 */
-	protected $pets_permitted;
+	private $female_only;
+
 	/**
-	 * @var bool
+	 * @var boolean
 	 */
-	protected $smoking_permitted;
-	/**
-	 * @var bool
-	 */
-	protected $female_only;
-	/**
-	 * @var bool
-	 */
-	protected $male_only;
+	private $male_only;
+
 
 	/**
 	 * @return boolean
 	 */
-	public function isUndergraduateStudent(){
+	public function getUndergraduateStudent()
+	{
 		return $this->undergraduate_student;
 	}
 
+
 	/**
 	 * @param boolean $undergraduate_student
-	 * @return Eligibility
+	 *
+	 * @return $this
 	 */
-	public function setUndergraduateStudent($undergraduate_student){
+	public function setUndergraduateStudent($undergraduate_student)
+	{
 		$this->undergraduate_student = $undergraduate_student;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isPostgraduateStudent(){
+	public function getPostgraduateStudent()
+	{
 		return $this->postgraduate_student;
 	}
 
+
 	/**
 	 * @param boolean $postgraduate_student
-	 * @return Eligibility
+	 *
+	 * @return $this
 	 */
-	public function setPostgraduateStudent($postgraduate_student){
+	public function setPostgraduateStudent($postgraduate_student)
+	{
 		$this->postgraduate_student = $postgraduate_student;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isProfessional(){
+	public function getProfessional()
+	{
 		return $this->professional;
 	}
 
+
 	/**
 	 * @param boolean $professional
-	 * @return Eligibility
+	 *
+	 * @return $this
 	 */
-	public function setProfessional($professional){
+	public function setProfessional($professional)
+	{
 		$this->professional = $professional;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isTrainee(){
+	public function getTrainee()
+	{
 		return $this->trainee;
 	}
 
+
 	/**
 	 * @param boolean $trainee
-	 * @return Eligibility
+	 *
+	 * @return $this
 	 */
-	public function setTrainee($trainee){
+	public function setTrainee($trainee)
+	{
 		$this->trainee = $trainee;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isDss(){
+	public function getDss()
+	{
 		return $this->dss;
 	}
 
+
 	/**
 	 * @param boolean $dss
-	 * @return Eligibility
+	 *
+	 * @return $this
 	 */
-	public function setDss($dss){
+	public function setDss($dss)
+	{
 		$this->dss = $dss;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isPetsPermitted(){
+	public function getPetsPermitted()
+	{
 		return $this->pets_permitted;
 	}
 
+
 	/**
 	 * @param boolean $pets_permitted
-	 * @return Eligibility
+	 *
+	 * @return $this
 	 */
-	public function setPetsPermitted($pets_permitted){
+	public function setPetsPermitted($pets_permitted)
+	{
 		$this->pets_permitted = $pets_permitted;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isSmokingPermitted(){
+	public function getSmokingPermitted()
+	{
 		return $this->smoking_permitted;
 	}
 
+
 	/**
 	 * @param boolean $smoking_permitted
-	 * @return Eligibility
+	 *
+	 * @return $this
 	 */
-	public function setSmokingPermitted($smoking_permitted){
+	public function setSmokingPermitted($smoking_permitted)
+	{
 		$this->smoking_permitted = $smoking_permitted;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isFemaleOnly(){
+	public function getFemaleOnly()
+	{
 		return $this->female_only;
 	}
 
+
 	/**
-	 * @param boolean|null $female_only
-	 * @return Eligibility
+	 * @param boolean $female_only
+	 *
+	 * @return $this
 	 */
-	public function setFemaleOnly($female_only){
-		$this->female_only = (bool) $female_only;
+	public function setFemaleOnly($female_only)
+	{
+		$this->female_only = $female_only;
 
 		return $this;
 	}
 
+
 	/**
 	 * @return boolean
 	 */
-	public function isMaleOnly(){
+	public function getMaleOnly()
+	{
 		return $this->male_only;
 	}
 
+
 	/**
-	 * @param boolean|null $male_only
-	 * @return Eligibility
+	 * @param boolean $male_only
+	 *
+	 * @return $this
 	 */
-	public function setMaleOnly($male_only){
-		$this->male_only = (bool) $male_only;
+	public function setMaleOnly($male_only)
+	{
+		$this->male_only = $male_only;
 
 		return $this;
 	}
 }
+
