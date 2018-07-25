@@ -54,6 +54,19 @@ class Media
 
 
 	/**
+	 * @param Photo $photo
+	 *
+	 * @return $this
+	 */
+	public function addPhoto(Photo $photo)
+	{
+		$this->photos[] = $photo;
+
+		return $this;
+	}
+
+
+	/**
 	 * @return string[]
 	 */
 	public function getVideos()
@@ -76,6 +89,19 @@ class Media
 
 
 	/**
+	 * @param string $video
+	 *
+	 * @return $this
+	 */
+	public function addVideo($video)
+	{
+		$this->videos[] = $video;
+
+		return $this;
+	}
+
+
+	/**
 	 * @return string[]
 	 */
 	public function getFloorplans()
@@ -92,6 +118,19 @@ class Media
 	public function setFloorplans(array $floorplans)
 	{
 		$this->floorplans = $floorplans;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param string $floorplan
+	 *
+	 * @return $this
+	 */
+	public function addFloorplan($floorplan)
+	{
+		$this->floorplans[] = $floorplan;
 
 		return $this;
 	}

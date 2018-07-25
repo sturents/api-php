@@ -72,6 +72,19 @@ class PropertyOutbound extends Property
 
 
 	/**
+	 * @param Room $room_detail
+	 *
+	 * @return $this
+	 */
+	public function addRoomDetail(Room $room_detail)
+	{
+		$this->room_details[] = $room_detail;
+
+		return $this;
+	}
+
+
+	/**
 	 * @return ContractWithRooms[]
 	 */
 	public function getContracts()
@@ -88,6 +101,19 @@ class PropertyOutbound extends Property
 	public function setContracts(array $contracts)
 	{
 		$this->contracts = $contracts;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param ContractWithRooms $contract
+	 *
+	 * @return $this
+	 */
+	public function addContract(ContractWithRooms $contract)
+	{
+		$this->contracts[] = $contract;
 
 		return $this;
 	}

@@ -212,6 +212,19 @@ class ContractCreation extends ContractAbstract
 
 
 	/**
+	 * @param PriceRoom $room_price
+	 *
+	 * @return $this
+	 */
+	public function addRoomPrice(PriceRoom $room_price)
+	{
+		$this->room_prices[] = $room_price;
+
+		return $this;
+	}
+
+
+	/**
 	 * @return Price
 	 */
 	public function getPrice()

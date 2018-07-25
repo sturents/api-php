@@ -35,5 +35,18 @@ class SendDataError
 
 		return $this;
 	}
+
+
+	/**
+	 * @param string $message
+	 *
+	 * @return $this
+	 */
+	public function addMessage($message)
+	{
+		$this->messages[] = $message;
+
+		return $this;
+	}
 }
 

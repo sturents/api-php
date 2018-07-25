@@ -328,7 +328,7 @@ class Property
 	 *
 	 * @return $this
 	 */
-	public function setFloorSpace(\number $floor_space)
+	public function setFloorSpace($floor_space)
 	{
 		$this->floor_space = $floor_space;
 
@@ -375,6 +375,19 @@ class Property
 	public function setFacilities(array $facilities)
 	{
 		$this->facilities = $facilities;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param string $facilitie
+	 *
+	 * @return $this
+	 */
+	public function addFacilitie($facilitie)
+	{
+		$this->facilities[] = $facilitie;
 
 		return $this;
 	}
@@ -485,6 +498,19 @@ class Property
 	public function setAccreditations(array $accreditations)
 	{
 		$this->accreditations = $accreditations;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param Accreditation $accreditation
+	 *
+	 * @return $this
+	 */
+	public function addAccreditation(Accreditation $accreditation)
+	{
+		$this->accreditations[] = $accreditation;
 
 		return $this;
 	}

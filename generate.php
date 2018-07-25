@@ -8,6 +8,8 @@ $root_namespace = 'Models';
 $namespace = "SturentsLib\\Api\\$root_namespace";
 $dir = "src/$root_namespace";
 
+shell_exec("find ./{$dir} -type f -delete");
+
 $generator = new GenerateModels($namespace);
 $generator->generate(__DIR__.'/swagger/api.yml');
 $generator->saveClasses($dir);

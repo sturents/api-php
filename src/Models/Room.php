@@ -102,7 +102,7 @@ class Room
 	 *
 	 * @return $this
 	 */
-	public function setFloorSpace(\number $floor_space)
+	public function setFloorSpace($floor_space)
 	{
 		$this->floor_space = $floor_space;
 

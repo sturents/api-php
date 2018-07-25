@@ -179,5 +179,18 @@ class ContractAbstract
 
 		return $this;
 	}
+
+
+	/**
+	 * @param Restriction $restriction
+	 *
+	 * @return $this
+	 */
+	public function addRestriction(Restriction $restriction)
+	{
+		$this->restrictions[] = $restriction;
+
+		return $this;
+	}
 }
 

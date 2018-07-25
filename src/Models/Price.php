@@ -55,7 +55,7 @@ class Price
 	 *
 	 * @return $this
 	 */
-	public function setPricePerPersonPerWeek(\number $price_per_person_per_week)
+	public function setPricePerPersonPerWeek($price_per_person_per_week)
 	{
 		$this->price_per_person_per_week = $price_per_person_per_week;
 

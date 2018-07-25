@@ -29,7 +29,7 @@ class Coordinates
 	 *
 	 * @return $this
 	 */
-	public function setLat(\number $lat)
+	public function setLat($lat)
 	{
 		$this->lat = $lat;
 
@@ -51,7 +51,7 @@ class Coordinates
 	 *
 	 * @return $this
 	 */
-	public function setLng(\number $lng)
+	public function setLng($lng)
 	{
 		$this->lng = $lng;
 

@@ -72,5 +72,18 @@ class ContractWithRooms extends ContractAbstract
 
 		return $this;
 	}
+
+
+	/**
+	 * @param PriceOutbound $price
+	 *
+	 * @return $this
+	 */
+	public function addPrice(PriceOutbound $price)
+	{
+		$this->prices[] = $price;
+
+		return $this;
+	}
 }
 

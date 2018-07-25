@@ -13,7 +13,7 @@
 		"netresearch/jsonmapper": "^1.4"
 	},
 	"require-dev": {
-		"sturents/swagger-php-model-generator": "0.0.1"
+		"sturents/swagger-php-model-generator": "^0.0.4"
 	},
 	"autoload": {
 		"psr-4": {

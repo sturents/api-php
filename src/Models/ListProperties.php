@@ -85,5 +85,18 @@ class ListProperties
 
 		return $this;
 	}
+
+
+	/**
+	 * @param PropertyOutbound $propertie
+	 *
+	 * @return $this
+	 */
+	public function addPropertie(PropertyOutbound $propertie)
+	{
+		$this->properties[] = $propertie;
+
+		return $this;
+	}
 }
 
