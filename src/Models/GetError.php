@@ -11,7 +11,7 @@ namespace SturentsLib\Api\Models;
  * 404 - the property manager or channel does not exist, or the
  *       property manager does not have any properties
  */
-class GetError
+class GetError extends SwaggerModel
 {
 	/**
 	 * Informs that the provided "landlord" query string was incorrect

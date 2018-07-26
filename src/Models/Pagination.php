@@ -4,7 +4,7 @@ namespace SturentsLib\Api\Models;
 /**
  * ** This file was generated automatically, you might want to avoid editing it **
  */
-class Pagination
+class Pagination extends SwaggerModel
 {
 	/**
 	 * The number of pages total

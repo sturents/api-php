@@ -4,7 +4,7 @@ namespace SturentsLib\Api\Models;
 /**
  * ** This file was generated automatically, you might want to avoid editing it **
  */
-class Accreditation
+class Accreditation extends SwaggerModel
 {
 	/**
 	 * Title of an accreditation on the property

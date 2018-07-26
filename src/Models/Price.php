@@ -9,7 +9,7 @@ namespace SturentsLib\Api\Models;
  * this will apply to all rooms. That field may be left null
  * if the "room_prices" array is used instead.
  */
-class Price
+class Price extends SwaggerModel
 {
 	/**
 	 * A monetary value indicating the weekly rent each tenant will

@@ -4,7 +4,7 @@ namespace SturentsLib\Api\Models;
 /**
  * ** This file was generated automatically, you might want to avoid editing it **
  */
-class PaymentSchedule
+class PaymentSchedule extends SwaggerModel
 {
 	/**
 	 * Title entered when creating this schedule

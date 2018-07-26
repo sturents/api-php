@@ -4,7 +4,7 @@ namespace SturentsLib\Api\Models;
 /**
  * ** This file was generated automatically, you might want to avoid editing it **
  */
-class BankAccount
+class BankAccount extends SwaggerModel
 {
 	/**
 	 * How the bank account is described internally on StuRents

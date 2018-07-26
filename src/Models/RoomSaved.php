@@ -4,7 +4,7 @@ namespace SturentsLib\Api\Models;
 /**
  * ** This file was generated automatically, you might want to avoid editing it **
  */
-class RoomSaved
+class RoomSaved extends SwaggerModel
 {
 	/**
 	 * Unique reference to the Room on StuRents

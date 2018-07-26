@@ -8,7 +8,7 @@ namespace SturentsLib\Api\Models;
  * eligible to rent the property. At least one of the first
  * four fields must be set to true
  */
-class Eligibility
+class Eligibility extends SwaggerModel
 {
 	/**
 	 * @var boolean

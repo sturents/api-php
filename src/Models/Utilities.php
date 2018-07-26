@@ -7,7 +7,7 @@ namespace SturentsLib\Api\Models;
  * All keys are boolean where true indicates that
  * this utility is included with the rent
  */
-class Utilities
+class Utilities extends SwaggerModel
 {
 	/**
 	 * @var boolean

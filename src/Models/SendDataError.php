@@ -7,7 +7,7 @@ namespace SturentsLib\Api\Models;
  * There were problems with the input data in the request body.
  * These will be described in the "messages" field of the response
  */
-class SendDataError
+class SendDataError extends SwaggerModel
 {
 	/**
 	 * Keyed by field name (collapsed using . characters)

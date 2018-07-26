@@ -4,7 +4,7 @@ namespace SturentsLib\Api\Models;
 /**
  * ** This file was generated automatically, you might want to avoid editing it **
  */
-class Address
+class Address extends SwaggerModel
 {
 	/**
 	 * This is required if "property_number" is empty

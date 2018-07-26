@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Models;
  *
  * Basic room details for creating or updating a room
  */
-class Room
+class Room extends SwaggerModel
 {
 	/**
 	 * Can be precise, e.g. 1a, or descrptive e.g. "downstairs front"

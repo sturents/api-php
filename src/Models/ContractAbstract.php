@@ -7,7 +7,7 @@ namespace SturentsLib\Api\Models;
  * Basic contract details which are extended by both inbound and outbound
  * data with objects which extend ContractBasic
  */
-class ContractAbstract
+class ContractAbstract extends SwaggerModel
 {
 	/**
 	 * The name given to this contract

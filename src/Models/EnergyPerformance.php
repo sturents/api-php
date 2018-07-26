@@ -4,7 +4,7 @@ namespace SturentsLib\Api\Models;
 /**
  * ** This file was generated automatically, you might want to avoid editing it **
  */
-class EnergyPerformance
+class EnergyPerformance extends SwaggerModel
 {
 	/**
 	 * The reference on the property's energy performance certificate.

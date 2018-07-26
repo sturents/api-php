@@ -8,7 +8,7 @@ namespace SturentsLib\Api\Models;
  * applied to a contract. Not currently saved or output by StuRents
  * but specified for future integrations
  */
-class Restriction
+class Restriction extends SwaggerModel
 {
 	/**
 	 * The date that the contract this restriction

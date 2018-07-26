@@ -4,7 +4,7 @@ namespace SturentsLib\Api\Models;
 /**
  * ** This file was generated automatically, you might want to avoid editing it **
  */
-class ListProperties
+class ListProperties extends SwaggerModel
 {
 	/**
 	 * The API version being returned

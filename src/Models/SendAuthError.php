@@ -9,7 +9,7 @@ namespace SturentsLib\Api\Models;
  * 404 - the property manager does not exist, or the
  *       specific resource requested does not exist
  */
-class SendAuthError
+class SendAuthError extends SwaggerModel
 {
 	/**
 	 * Indicates an issue with the provided "landlord" parameter
