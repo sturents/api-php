@@ -299,7 +299,7 @@ paths:
         - in: body
           name: Room
           schema:
-            $ref: '#/definitions/Room'
+            $ref: '#/definitions/RoomSaved'
       tags:
         - Changing data on StuRents
         - Rooms

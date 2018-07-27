@@ -10,7 +10,7 @@ use JsonMapper_Exception;
 use SturentsLib\Api\Models\Property;
 use SturentsLib\Api\Models\PropertyOutbound;
 
-class FetchFromSturents {
+class PublicRequests {
 
 	const EX_CODE_NO_DATA = 10;
 	const EX_CODE_JSON = 12;

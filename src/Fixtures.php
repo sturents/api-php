@@ -4,7 +4,7 @@ namespace SturentsLib\Api;
 
 
 class Fixtures {
-	const VERSION = 1.4;
+	const VERSION = 2.0;
 
 	const URI = "https://sturents.com/api";
 	const PATH_HOUSES = "/houses";
