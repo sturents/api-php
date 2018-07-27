@@ -5,8 +5,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Response;
 use JsonMapper;
+use Psr\Http\Message\ResponseInterface;
 use SturentsLib\Api\Models\SwaggerModel;
 use SturentsLib\Api\Requests\SwaggerRequest;
 
@@ -72,9 +72,15 @@ abstract class SturentsClient {
 			];
 			$query = array_merge($query, $this->authQuery($request));
 			$uri = $request->getUri()->withQuery(http_build_query($query));
+			$client = $this->getClient();
+
+			$host = $uri->getHost();
+			if (empty($host)){
+				$uri = $uri->withHost($client->getConfig()['base_uri']);
+			}
+
 			$request = $request->withUri($uri);
 
-			$client = $this->getClient();
 			$response = $client->send($request);
 		}
 		catch (ClientException $e) {
@@ -108,13 +114,13 @@ abstract class SturentsClient {
 	abstract protected function authQuery(SwaggerRequest $request);
 
 	/**
-	 * @param Response $response
+	 * @param ResponseInterface $response
 	 * @param SwaggerRequest $request
 	 * @return SwaggerModel|Models\SwaggerModel[]
 	 * @throws SturentsException
 	 * @throws \JsonMapper_Exception
 	 */
-	protected function handleResponse(Response $response, SwaggerRequest $request){
+	protected function handleResponse(ResponseInterface $response, SwaggerRequest $request){
 		$json = (string)$response->getBody();
 
 		$data = json_decode($json);
