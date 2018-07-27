@@ -10,7 +10,8 @@ $dir = "src/";
 $yaml = __DIR__.'/swagger/api.yml';
 $uri = "https://sturents.com/api";
 
-shell_exec("find ./{$dir} -type f -delete");
+shell_exec("find ./{$dir}/Models -type f -delete");
+shell_exec("find ./{$dir}/Requests -type f -delete");
 
 $generator = new GenerateModels($namespace);
 $generator->generate($yaml);
