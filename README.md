@@ -32,7 +32,7 @@ Now you can create or use any object without having to worry about requiring its
     $put_property = new \SturentsLib\Api\Requests\PutProperty;
     $put_property->setBody($property);
     try {
-        $response = $sturents->send($put_property);
+        $response = $put_property->send($sturents);
     }
     catch (\Exception $e){
        echo "A problem happened: ".$e->getMessage();
@@ -47,7 +47,7 @@ Now you can create or use any object without having to worry about requiring its
     $sturents = new \Sturents\Api\PublicRequests(LANDLORD_ID, PUBLIC_KEY);
     $get_properties = new \SturentsLib\Api\Requests\GetProperties;
     try {
-        $properties = $sturents->send($get_properties);
+        $properties = $get_properties->send($sturents);
     }
     catch (\Exception $e){
        echo "A problem happened: ".$e->getMessage();
