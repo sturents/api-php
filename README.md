@@ -1,6 +1,6 @@
 # StuRents API Helper
 
-_Master branch is for v1.4 which is not available yet; please check releases for previous versions. For outbound data check 1.3.*, for inbound use 1.2.*_
+_Master branch is for v2.0 which is not available yet; please check releases for previous versions. For outbound data check 1.3.*, for inbound use 1.2.*_
 
 Install using composer:
 
@@ -28,33 +28,33 @@ Now you can create or use any object without having to worry about requiring its
     // described in the documentation:
     // https://sturents.com/software/developer/house-create
     
-    $sturents_upload = new \SturentsLib\Api\UploadToSturents(LANDLORD_ID, API_KEY);
+    $sturents = new \SturentsLib\Api\AuthRequests(LANDLORD_ID, API_KEY);
+    $put_property = new \SturentsLib\Api\Requests\PutProperty;
+    $put_property->setBody($property);
     try {
-        $create_response = $sturents_upload->createOrUpdateProperty($property);
+        $response = $sturents->send($put_property);
     }
     catch (\Exception $e){
        echo "A problem happened: ".$e->getMessage();
     }
     
-    var_dump($create_response->success); // true if request succeeded
+    var_dump($response instanceof PropertySaved); // outputs 'true'
     
-    echo $create_response->sturents_id; // outputs an integer
-    
-    var_dump($create_response->messages); // outputs an array of warnings/errors
+    echo $response->property_id; // outputs an integer
     
 ## Fetch data from StuRents
 
-    $sturents_fetch = new \Sturents\Api\FetchFromSturents(LANDLORD_ID, PUBLIC_KEY);
+    $sturents = new \Sturents\Api\PublicRequests(LANDLORD_ID, PUBLIC_KEY);
+    $get_properties = new \SturentsLib\Api\Requests\GetProperties;
     try {
-        $properties = $sturents_fetch->fetchProperties();
+        $properties = $sturents->send($get_properties);
     }
     catch (\Exception $e){
        echo "A problem happened: ".$e->getMessage();
     }
     
-    echo count($properties) // echo, e.g. 1
-    echo $properties[0]->getAddress()->getRoad() // echo e.g. Test Street;
+    var_dump($response instanceof ListProperties); // outputs 'true'
     
+    echo $response->pagination->pages // echo, e.g. 3
     
-    
-    
+    var_dump($response->properties[0] instanceof PropertyOutbound) // outputs 'true'
