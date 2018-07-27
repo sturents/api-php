@@ -21,15 +21,13 @@ class ContractCreation extends ContractAbstract
 	protected $template_id;
 
 	/**
-	 * A unique identifier for a Payment Schedule fetched from the
-	 * /payment-schedules endpoint. A payment schedule allows a rent
-	 * collection to be created for tenants to pay their rent via
-	 * the StuRents platform, and may also impact tenancy generation
-	 * with the schedule shown in the signed contract
+	 * An array of one or more ScheduleOption entities describing how
+	 * the rent for this contract can be structured and what additional
+	 * conditions are applied.
 	 *
-	 * @var string
+	 * @var ScheduleOption[]
 	 */
-	protected $schedule_id;
+	protected $schedules;
 
 	/**
 	 * Describes whether this contract may be booked directly via
@@ -43,25 +41,6 @@ class ContractCreation extends ContractAbstract
 	 * @var boolean
 	 */
 	protected $book_now_allowed;
-
-	/**
-	 * When a tenancy is created this states whether a guarantor
-	 * is required, if set to true, not required if set to false.
-	 *
-	 * @var boolean
-	 */
-	protected $require_guarantor;
-
-	/**
-	 * The Housing Hand service is a partnership offered by StuRents
-	 * in order to provide guarantors for tenants who are otherwise
-	 * unable to acquire one. When a tenancy is created this field
-	 * states whether Housing Hand is permitted, if set to true,
-	 * not permitted if set to false.
-	 *
-	 * @var boolean
-	 */
-	protected $housing_hand;
 
 	/**
 	 * Contracts can assign different prices per room or the same
@@ -103,22 +82,35 @@ class ContractCreation extends ContractAbstract
 
 
 	/**
-	 * @return string
+	 * @return ScheduleOption[]
 	 */
-	public function getScheduleId()
+	public function getSchedules()
 	{
-		return $this->schedule_id;
+		return $this->schedules;
 	}
 
 
 	/**
-	 * @param string $schedule_id
+	 * @param ScheduleOption[] $schedules
 	 *
 	 * @return $this
 	 */
-	public function setScheduleId($schedule_id)
+	public function setSchedules(array $schedules)
 	{
-		$this->schedule_id = $schedule_id;
+		$this->schedules = $schedules;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param ScheduleOption $schedule
+	 *
+	 * @return $this
+	 */
+	public function addSchedule(ScheduleOption $schedule)
+	{
+		$this->schedules[] = $schedule;
 
 		return $this;
 	}
@@ -141,50 +133,6 @@ class ContractCreation extends ContractAbstract
 	public function setBookNowAllowed($book_now_allowed)
 	{
 		$this->book_now_allowed = $book_now_allowed;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return boolean
-	 */
-	public function getRequireGuarantor()
-	{
-		return $this->require_guarantor;
-	}
-
-
-	/**
-	 * @param boolean $require_guarantor
-	 *
-	 * @return $this
-	 */
-	public function setRequireGuarantor($require_guarantor)
-	{
-		$this->require_guarantor = $require_guarantor;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return boolean
-	 */
-	public function getHousingHand()
-	{
-		return $this->housing_hand;
-	}
-
-
-	/**
-	 * @param boolean $housing_hand
-	 *
-	 * @return $this
-	 */
-	public function setHousingHand($housing_hand)
-	{
-		$this->housing_hand = $housing_hand;
 
 		return $this;
 	}
