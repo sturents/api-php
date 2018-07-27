@@ -14,7 +14,7 @@
 		"psr/http-message": "^1.0"
 	},
 	"require-dev": {
-		"sturents/swagger-php-model-generator": "^0.0.4"
+		"sturents/swagger-php-model-generator": "^0.0.7"
 	},
 	"autoload": {
 		"psr-4": {
