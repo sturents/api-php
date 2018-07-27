@@ -34,6 +34,12 @@ class Address extends SwaggerModel
 	protected $postcode;
 
 	/**
+	 * 2 character country code corresponding to the ISO 3166-1 alpha-2 list of country codes
+	 * @var string
+	 */
+	protected $country;
+
+	/**
 	 * If available, the unique property reference
 	 * @var string
 	 */
@@ -145,6 +151,28 @@ class Address extends SwaggerModel
 	public function setPostcode($postcode)
 	{
 		$this->postcode = $postcode;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getCountry()
+	{
+		return $this->country;
+	}
+
+
+	/**
+	 * @param string $country
+	 *
+	 * @return $this
+	 */
+	public function setCountry($country)
+	{
+		$this->country = $country;
 
 		return $this;
 	}
