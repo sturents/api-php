@@ -15,13 +15,13 @@ class SendAuthError extends SwaggerModel
 	 * Indicates an issue with the provided "landlord" parameter
 	 * @var string
 	 */
-	private $landlord;
+	protected $landlord;
 
 	/**
 	 * Indicates an issue with the provided "auth" token
 	 * @var string
 	 */
-	private $auth;
+	protected $auth;
 
 
 	/**

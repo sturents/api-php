@@ -11,7 +11,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $designation;
+	protected $designation;
 
 	/**
 	 * When designation is set to "house" this indicates whether
@@ -19,7 +19,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var boolean
 	 */
-	private $rooms_let_individually;
+	protected $rooms_let_individually;
 
 	/**
 	 * When designation is set to "pbsa" this describes the total
@@ -28,7 +28,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var integer
 	 */
-	private $quantity;
+	protected $quantity;
 
 	/**
 	 * When designation is set to “pbsa” this describes the number
@@ -37,7 +37,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var integer
 	 */
-	private $quantity_available;
+	protected $quantity_available;
 
 	/**
 	 * When designation is set to "pbsa" each property record
@@ -47,7 +47,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $room_type;
+	protected $room_type;
 
 	/**
 	 * When designation is set to "pbsa" this indicates number of rooms
@@ -56,7 +56,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var integer
 	 */
-	private $cluster_size;
+	protected $cluster_size;
 
 	/**
 	 * A plain text or HTML description of the property.
@@ -66,20 +66,20 @@ class Property extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $description;
+	protected $description;
 
 	/**
 	 * Number of bathrooms
 	 * @var integer
 	 */
-	private $bathrooms;
+	protected $bathrooms;
 
 	/**
 	 * Floor space of the whole property in square metres
 	 *
 	 * @var number
 	 */
-	private $floor_space;
+	protected $floor_space;
 
 	/**
 	 * The unique ID for a bank account where it is intended that
@@ -90,7 +90,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $bank_id;
+	protected $bank_id;
 
 	/**
 	 * Zero or more facility names. Allowed names can be found
@@ -98,33 +98,33 @@ class Property extends SwaggerModel
 	 *
 	 * @var string[]
 	 */
-	private $facilities;
+	protected $facilities;
 
 	/**
 	 * @var Address
 	 */
-	private $address;
+	protected $address;
 
 	/**
 	 * @var Coordinates
 	 */
-	private $coordinates;
+	protected $coordinates;
 
 	/**
 	 * @var Media
 	 */
-	private $media;
+	protected $media;
 
 	/**
 	 * @var EnergyPerformance
 	 */
-	private $energy_performance;
+	protected $energy_performance;
 
 	/**
 	 * Zero or more accreditations
 	 * @var Accreditation[]
 	 */
-	private $accreditations;
+	protected $accreditations;
 
 	/**
 	 * where true indicates that the property is not ready
@@ -132,12 +132,12 @@ class Property extends SwaggerModel
 	 *
 	 * @var boolean
 	 */
-	private $disabled;
+	protected $disabled;
 
 	/**
 	 * @var Eligibility
 	 */
-	private $eligibility;
+	protected $eligibility;
 
 
 	/**

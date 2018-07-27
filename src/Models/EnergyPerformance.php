@@ -12,33 +12,33 @@ class EnergyPerformance extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $epc_reference;
+	protected $epc_reference;
 
 	/**
 	 * A URL to download the energy performance certificate
 	 * @var string
 	 */
-	private $epc_certificate;
+	protected $epc_certificate;
 
 	/**
 	 * @var integer
 	 */
-	private $eef_current;
+	protected $eef_current;
 
 	/**
 	 * @var integer
 	 */
-	private $eef_potential;
+	protected $eef_potential;
 
 	/**
 	 * @var integer
 	 */
-	private $co2_current;
+	protected $co2_current;
 
 	/**
 	 * @var integer
 	 */
-	private $co2_potential;
+	protected $co2_potential;
 
 
 	/**

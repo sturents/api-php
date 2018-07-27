@@ -12,14 +12,14 @@ class ContractTemplate extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $title;
+	protected $title;
 
 	/**
 	 * Pass this as the "template_id" field when creating/updating a contract
 	 *
 	 * @var string
 	 */
-	private $template_id;
+	protected $template_id;
 
 
 	/**

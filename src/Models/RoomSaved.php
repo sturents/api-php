@@ -10,7 +10,7 @@ class RoomSaved extends SwaggerModel
 	 * Unique reference to the Room on StuRents
 	 * @var string
 	 */
-	private $room_id;
+	protected $room_id;
 
 
 	/**

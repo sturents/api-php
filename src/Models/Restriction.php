@@ -16,7 +16,7 @@ class Restriction extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $start_date;
+	protected $start_date;
 
 	/**
 	 * The date that the contract this restriction
@@ -24,7 +24,7 @@ class Restriction extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $end_date;
+	protected $end_date;
 
 	/**
 	 * A text block describing this restriction
@@ -32,7 +32,7 @@ class Restriction extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $terms;
+	protected $terms;
 
 	/**
 	 * Minimum days a student must be renting for
@@ -40,7 +40,7 @@ class Restriction extends SwaggerModel
 	 *
 	 * @var integer
 	 */
-	private $min_contract_days;
+	protected $min_contract_days;
 
 
 	/**

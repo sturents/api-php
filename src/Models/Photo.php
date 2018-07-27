@@ -12,26 +12,26 @@ class Photo extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $type;
+	protected $type;
 
 	/**
 	 * A URL linking to a photo file
 	 * @var string
 	 */
-	private $photo;
+	protected $photo;
 
 	/**
 	 * A URL linking to a thumbnail photo file
 	 * @var string
 	 */
-	private $thumb;
+	protected $thumb;
 
 	/**
 	 * Max 60 characters
 	 *
 	 * @var string
 	 */
-	private $caption;
+	protected $caption;
 
 
 	/**

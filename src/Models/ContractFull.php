@@ -16,7 +16,7 @@ class ContractFull extends ContractWithRooms
 	 *
 	 * @var boolean
 	 */
-	private $disabled;
+	protected $disabled;
 
 	/**
 	 * A unique ID for this Contract which can be used when
@@ -24,7 +24,7 @@ class ContractFull extends ContractWithRooms
 	 *
 	 * @var string
 	 */
-	private $contract_id;
+	protected $contract_id;
 
 
 	/**

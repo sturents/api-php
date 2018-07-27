@@ -22,7 +22,7 @@ class Price extends SwaggerModel
 	 *
 	 * @var number
 	 */
-	private $price_per_person_per_week;
+	protected $price_per_person_per_week;
 
 	/**
 	 * A monetary value indicating the deposit each tenant will be
@@ -30,7 +30,7 @@ class Price extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $deposit_per_person;
+	protected $deposit_per_person;
 
 	/**
 	 * A monetary value indicating the fee to the property manager which
@@ -39,7 +39,7 @@ class Price extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $fee_per_person;
+	protected $fee_per_person;
 
 
 	/**

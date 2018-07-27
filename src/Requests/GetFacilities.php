@@ -9,6 +9,10 @@ class GetFacilities extends SwaggerRequest
 {
 	const URI = 'https://sturents.com/api/facilities';
 	const METHOD = 'GET';
+	const RESPONSE_CLASS = '\SturentsLib\Api\Models\string';
+
+	public $response_is_array = true;
+
 
 }
 

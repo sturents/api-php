@@ -10,7 +10,7 @@ class ContractSaved extends SwaggerModel
 	 * Unique reference to the Contract on StuRents
 	 * @var string
 	 */
-	private $contract_id;
+	protected $contract_id;
 
 
 	/**

@@ -16,7 +16,7 @@ class PriceRoom extends Price
 	 *
 	 * @var string
 	 */
-	private $room_id;
+	protected $room_id;
 
 
 	/**

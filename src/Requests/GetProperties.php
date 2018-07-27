@@ -8,6 +8,7 @@ class GetProperties extends SwaggerRequest
 {
 	const URI = 'https://sturents.com/api/properties';
 	const METHOD = 'GET';
+	const RESPONSE_CLASS = '\SturentsLib\Api\Models\ListProperties';
 
 }
 

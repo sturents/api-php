@@ -10,6 +10,10 @@ class GetPaymentStructures extends SwaggerRequest
 {
 	const URI = 'https://sturents.com/api/payment-structures';
 	const METHOD = 'GET';
+	const RESPONSE_CLASS = '\SturentsLib\Api\Models\PaymentSchedule';
+
+	public $response_is_array = true;
+
 
 }
 

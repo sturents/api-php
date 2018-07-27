@@ -15,7 +15,7 @@ class PriceOutbound extends Price
 	 *
 	 * @var string
 	 */
-	private $room_name;
+	protected $room_name;
 
 
 	/**

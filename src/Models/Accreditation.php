@@ -10,14 +10,14 @@ class Accreditation extends SwaggerModel
 	 * Title of an accreditation on the property
 	 * @var string
 	 */
-	private $type;
+	protected $type;
 
 	/**
 	 * The reference connecting the property to its accrediting agency
 	 *
 	 * @var string
 	 */
-	private $reference;
+	protected $reference;
 
 	/**
 	 * Date when the accreditation will expire in yyyy-mm-dd format
@@ -25,7 +25,7 @@ class Accreditation extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $expiry;
+	protected $expiry;
 
 
 	/**

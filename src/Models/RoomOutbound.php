@@ -17,7 +17,7 @@ class RoomOutbound extends Room
 	 *
 	 * @var string
 	 */
-	private $room_id;
+	protected $room_id;
 
 
 	/**

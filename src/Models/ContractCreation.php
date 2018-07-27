@@ -18,7 +18,7 @@ class ContractCreation extends ContractAbstract
 	 *
 	 * @var string
 	 */
-	private $template_id;
+	protected $template_id;
 
 	/**
 	 * A unique identifier for a Payment Schedule fetched from the
@@ -29,7 +29,7 @@ class ContractCreation extends ContractAbstract
 	 *
 	 * @var string
 	 */
-	private $schedule_id;
+	protected $schedule_id;
 
 	/**
 	 * Describes whether this contract may be booked directly via
@@ -42,7 +42,7 @@ class ContractCreation extends ContractAbstract
 	 *
 	 * @var boolean
 	 */
-	private $book_now_allowed;
+	protected $book_now_allowed;
 
 	/**
 	 * When a tenancy is created this states whether a guarantor
@@ -50,7 +50,7 @@ class ContractCreation extends ContractAbstract
 	 *
 	 * @var boolean
 	 */
-	private $require_guarantor;
+	protected $require_guarantor;
 
 	/**
 	 * The Housing Hand service is a partnership offered by StuRents
@@ -61,7 +61,7 @@ class ContractCreation extends ContractAbstract
 	 *
 	 * @var boolean
 	 */
-	private $housing_hand;
+	protected $housing_hand;
 
 	/**
 	 * Contracts can assign different prices per room or the same
@@ -72,12 +72,12 @@ class ContractCreation extends ContractAbstract
 	 *
 	 * @var PriceRoom[]
 	 */
-	private $room_prices;
+	protected $room_prices;
 
 	/**
 	 * @var Price
 	 */
-	private $price;
+	protected $price;
 
 
 	/**

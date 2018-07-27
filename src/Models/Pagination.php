@@ -10,28 +10,28 @@ class Pagination extends SwaggerModel
 	 * The number of pages total
 	 * @var integer
 	 */
-	private $pages;
+	protected $pages;
 
 	/**
 	 * For data integrity, the page that these results relate to
 	 *
 	 * @var integer
 	 */
-	private $current;
+	protected $current;
 
 	/**
 	 * If present this shows there is another page available after this one
 	 *
 	 * @var integer
 	 */
-	private $next;
+	protected $next;
 
 	/**
 	 * If present this shows there is another page available prior to this one
 	 *
 	 * @var integer
 	 */
-	private $prev;
+	protected $prev;
 
 
 	/**

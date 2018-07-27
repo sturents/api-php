@@ -10,34 +10,34 @@ class Address extends SwaggerModel
 	 * This is required if "property_number" is empty
 	 * @var string
 	 */
-	private $property_name;
+	protected $property_name;
 
 	/**
 	 * This is required if "property_name" is empty
 	 * @var string
 	 */
-	private $property_number;
+	protected $property_number;
 
 	/**
 	 * @var string
 	 */
-	private $road_name;
+	protected $road_name;
 
 	/**
 	 * @var string
 	 */
-	private $city;
+	protected $city;
 
 	/**
 	 * @var string
 	 */
-	private $postcode;
+	protected $postcode;
 
 	/**
 	 * If available, the unique property reference
 	 * @var string
 	 */
-	private $uprn;
+	protected $uprn;
 
 
 	/**

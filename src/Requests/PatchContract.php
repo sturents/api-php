@@ -8,6 +8,7 @@ class PatchContract extends SwaggerRequest
 {
 	const URI = 'https://sturents.com/api/contract';
 	const METHOD = 'PATCH';
+	const RESPONSE_CLASS = '\SturentsLib\Api\Models\ContractSaved';
 
 	/**
 	 * The property ID provided by the initial creation

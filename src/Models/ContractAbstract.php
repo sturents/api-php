@@ -13,7 +13,7 @@ class ContractAbstract extends SwaggerModel
 	 * The name given to this contract
 	 * @var string
 	 */
-	private $title;
+	protected $title;
 
 	/**
 	 * The earliest date at which it is possible to move in to the property
@@ -21,7 +21,7 @@ class ContractAbstract extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $start_date;
+	protected $start_date;
 
 	/**
 	 * The latest date at which it is possible to vacate the property
@@ -29,25 +29,25 @@ class ContractAbstract extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	private $end_date;
+	protected $end_date;
 
 	/**
 	 * The minimum time a tenant may rent the property for in days
 	 *
 	 * @var integer
 	 */
-	private $min_contract_days;
+	protected $min_contract_days;
 
 	/**
 	 * @var Utilities
 	 */
-	private $utilities;
+	protected $utilities;
 
 	/**
 	 * Zero or more restrictions
 	 * @var Restriction[]
 	 */
-	private $restrictions;
+	protected $restrictions;
 
 
 	/**

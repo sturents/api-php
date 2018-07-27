@@ -17,13 +17,13 @@ class GetError extends SwaggerModel
 	 * Informs that the provided "landlord" query string was incorrect
 	 * @var string
 	 */
-	private $landlord;
+	protected $landlord;
 
 	/**
 	 * Indicates an issue with the provided "public" key
 	 * @var string
 	 */
-	private $public;
+	protected $public;
 
 
 	/**

@@ -13,48 +13,48 @@ class Eligibility extends SwaggerModel
 	/**
 	 * @var boolean
 	 */
-	private $undergraduate_student;
+	protected $undergraduate_student;
 
 	/**
 	 * @var boolean
 	 */
-	private $postgraduate_student;
+	protected $postgraduate_student;
 
 	/**
 	 * @var boolean
 	 */
-	private $professional;
+	protected $professional;
 
 	/**
 	 * @var boolean
 	 */
-	private $trainee;
+	protected $trainee;
 
 	/**
 	 * Allows a recipient of UK housing benefit
 	 * @var boolean
 	 */
-	private $dss;
+	protected $dss;
 
 	/**
 	 * @var boolean
 	 */
-	private $pets_permitted;
+	protected $pets_permitted;
 
 	/**
 	 * @var boolean
 	 */
-	private $smoking_permitted;
+	protected $smoking_permitted;
 
 	/**
 	 * @var boolean
 	 */
-	private $female_only;
+	protected $female_only;
 
 	/**
 	 * @var boolean
 	 */
-	private $male_only;
+	protected $male_only;
 
 
 	/**

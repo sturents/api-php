@@ -10,6 +10,7 @@ class GetRooms extends SwaggerRequest
 {
 	const URI = 'https://sturents.com/api/rooms';
 	const METHOD = 'GET';
+	const RESPONSE_CLASS = '\SturentsLib\Api\Models\RoomOutbound';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -21,6 +22,8 @@ class GetRooms extends SwaggerRequest
 	public $property_id;
 
 	protected static $param_names = ['property_id'];
+
+	public $response_is_array = true;
 
 
 	public function __construct($property_id)

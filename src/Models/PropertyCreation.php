@@ -14,7 +14,7 @@ class PropertyCreation extends Property
 	 *
 	 * @var integer
 	 */
-	private $initial_rooms;
+	protected $initial_rooms;
 
 
 	/**

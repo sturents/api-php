@@ -9,7 +9,7 @@ class Error extends SwaggerModel
 	/**
 	 * @var string
 	 */
-	private $error;
+	protected $error;
 
 
 	/**

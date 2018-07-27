@@ -21,6 +21,8 @@ class SwaggerRequest implements RequestInterface {
 	 */
 	private $uri;
 
+	public $response_is_array = false;
+
 	/**
 	 * Retrieves the HTTP protocol version as a string.
 	 *

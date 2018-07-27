@@ -8,6 +8,7 @@ class PutRoom extends SwaggerRequest
 {
 	const URI = 'https://sturents.com/api/room';
 	const METHOD = 'PUT';
+	const RESPONSE_CLASS = '\SturentsLib\Api\Models\RoomSaved';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -22,9 +23,9 @@ class PutRoom extends SwaggerRequest
 
 
 	/**
-	 * @param \SturentsLib\Api\Models\Room $room
+	 * @param \SturentsLib\Api\Models\RoomSaved $room
 	 */
-	public function setBody(\SturentsLib\Api\Models\Room $room)
+	public function setBody(\SturentsLib\Api\Models\RoomSaved $room)
 	{
 		$this->body = json_encode($room);
 	}
