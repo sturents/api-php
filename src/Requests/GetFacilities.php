@@ -9,10 +9,14 @@ class GetFacilities extends SwaggerRequest
 {
 	const URI = '/api/facilities';
 	const METHOD = 'GET';
-	const RESPONSE_CLASS = '\SturentsLib\Api\Models\string';
 
-	public $response_is_array = true;
-
-
+	/**
+	 * @param SwaggerClient $client
+	 * @return \SturentsLib\Api\Models\string[]
+	 */
+	public function send(SwaggerClient $client)
+	{
+		return $client->send($this, new \SturentsLib\Api\Models\string());
+	}
 }
 

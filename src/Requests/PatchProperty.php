@@ -8,7 +8,6 @@ class PatchProperty extends SwaggerRequest
 {
 	const URI = '/api/property';
 	const METHOD = 'PATCH';
-	const RESPONSE_CLASS = '\SturentsLib\Api\Models\PropertySaved';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -34,6 +33,16 @@ class PatchProperty extends SwaggerRequest
 	public function __construct($property_id)
 	{
 		$this->property_id = $property_id;
+	}
+
+
+	/**
+	 * @param SwaggerClient $client
+	 * @return \SturentsLib\Api\Models\PropertySaved
+	 */
+	public function send(SwaggerClient $client)
+	{
+		return $client->send($this, new \SturentsLib\Api\Models\PropertySaved());
 	}
 }
 

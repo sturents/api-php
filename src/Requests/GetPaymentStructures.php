@@ -10,10 +10,14 @@ class GetPaymentStructures extends SwaggerRequest
 {
 	const URI = '/api/payment-structures';
 	const METHOD = 'GET';
-	const RESPONSE_CLASS = '\SturentsLib\Api\Models\PaymentSchedule';
 
-	public $response_is_array = true;
-
-
+	/**
+	 * @param SwaggerClient $client
+	 * @return \SturentsLib\Api\Models\PaymentSchedule[]
+	 */
+	public function send(SwaggerClient $client)
+	{
+		return $client->send($this, new \SturentsLib\Api\Models\PaymentSchedule());
+	}
 }
 

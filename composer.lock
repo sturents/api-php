@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c36956121244df49fd75a1c150907927",
+    "content-hash": "4948a7e479d255bf854ddd46e2690068",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -427,16 +427,16 @@
         },
         {
             "name": "sturents/swagger-php-model-generator",
-            "version": "0.0.9",
+            "version": "0.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sturents/swagger-php-model-generator.git",
-                "reference": "19de5a1b2f3a9f9fb3b2297c429891bc3e90a804"
+                "reference": "2708c7e7b768337af7c83198ad31a8efc749568f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sturents/swagger-php-model-generator/zipball/19de5a1b2f3a9f9fb3b2297c429891bc3e90a804",
-                "reference": "19de5a1b2f3a9f9fb3b2297c429891bc3e90a804",
+                "url": "https://api.github.com/repos/sturents/swagger-php-model-generator/zipball/2708c7e7b768337af7c83198ad31a8efc749568f",
+                "reference": "2708c7e7b768337af7c83198ad31a8efc749568f",
                 "shasum": ""
             },
             "require": {
@@ -462,7 +462,7 @@
                     "email": "mike@m1ke.me"
                 }
             ],
-            "time": "2018-07-27T13:49:25+00:00"
+            "time": "2018-07-27T16:21:11+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",

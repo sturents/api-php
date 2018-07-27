@@ -10,7 +10,6 @@ class GetContracts extends SwaggerRequest
 {
 	const URI = '/api/contracts';
 	const METHOD = 'GET';
-	const RESPONSE_CLASS = '\SturentsLib\Api\Models\ContractFull';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -23,12 +22,20 @@ class GetContracts extends SwaggerRequest
 
 	protected static $param_names = ['property_id'];
 
-	public $response_is_array = true;
-
 
 	public function __construct($property_id)
 	{
 		$this->property_id = $property_id;
+	}
+
+
+	/**
+	 * @param SwaggerClient $client
+	 * @return \SturentsLib\Api\Models\ContractFull[]
+	 */
+	public function send(SwaggerClient $client)
+	{
+		return $client->send($this, new \SturentsLib\Api\Models\ContractFull());
 	}
 }
 

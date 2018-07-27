@@ -8,9 +8,10 @@ use GuzzleHttp\Exception\GuzzleException;
 use JsonMapper;
 use Psr\Http\Message\ResponseInterface;
 use SturentsLib\Api\Models\SwaggerModel;
+use SturentsLib\Api\Requests\SwaggerClient;
 use SturentsLib\Api\Requests\SwaggerRequest;
 
-abstract class SturentsClient {
+abstract class SturentsClient implements SwaggerClient {
 	const VERSION = 2.0;
 
 	const EX_CODE_NO_RESPONSE = 10;
@@ -61,10 +62,11 @@ abstract class SturentsClient {
 
 	/**
 	 * @param SwaggerRequest $request
+	 * @param SwaggerModel $response_model
 	 * @return SwaggerModel|SwaggerModel[]
 	 * @throws SturentsException
 	 */
-	public function send(SwaggerRequest $request){
+	public function send(SwaggerRequest $request, SwaggerModel $response_model){
 		try {
 			$query = [
 				'landlord' => $this->landlord_id,
@@ -104,7 +106,7 @@ abstract class SturentsClient {
 			throw new SturentsException("The StuRents API could not be reached. The connection reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
 		}
 
-		return $this->handleResponse($response, $request);
+		return $this->handleResponse($response, $response_model);
 	}
 
 	/**
@@ -115,12 +117,11 @@ abstract class SturentsClient {
 
 	/**
 	 * @param ResponseInterface $response
-	 * @param SwaggerRequest $request
+	 * @param SwaggerModel $response_model
 	 * @return SwaggerModel|Models\SwaggerModel[]
 	 * @throws SturentsException
-	 * @throws \JsonMapper_Exception
 	 */
-	protected function handleResponse(ResponseInterface $response, SwaggerRequest $request){
+	protected function handleResponse(ResponseInterface $response, SwaggerModel $response_model){
 		$json = (string)$response->getBody();
 
 		$data = json_decode($json);
@@ -129,15 +130,14 @@ abstract class SturentsClient {
 			throw new SturentsException("The returned JSON data could not be processed with error: ".json_last_error_msg());
 		}
 
-		$class_name = $request->getResponseClass();
 		try {
 			if (!is_array($data)){
-				return $this->map($data, $class_name);
+				return $this->map($data, $response_model);
 			}
 
 			$list = [];
 			foreach ($data as $key => $item){
-				$list[$key] = $this->map($item, $class_name);
+				$list[$key] = $this->map($item, $response_model);
 			}
 
 			return $list;
@@ -149,15 +149,15 @@ abstract class SturentsClient {
 
 	/**
 	 * @param $data
-	 * @param $class_name
+	 * @param SwaggerModel $response_model
 	 * @return SwaggerModel
 	 * @throws \JsonMapper_Exception
 	 */
-	private function map($data, $class_name){
+	private function map($data, SwaggerModel $response_model){
 		$mapper = $this->getJsonMapper();
-		$class = new $class_name();
+		$model = clone $response_model;
 
-		return $mapper->map($data, $class);
+		return $mapper->map($data, $model);
 	}
 
 	/**

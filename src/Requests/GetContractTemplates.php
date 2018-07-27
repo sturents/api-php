@@ -10,10 +10,14 @@ class GetContractTemplates extends SwaggerRequest
 {
 	const URI = '/api/contract-templates';
 	const METHOD = 'GET';
-	const RESPONSE_CLASS = '\SturentsLib\Api\Models\ContractTemplate';
 
-	public $response_is_array = true;
-
-
+	/**
+	 * @param SwaggerClient $client
+	 * @return \SturentsLib\Api\Models\ContractTemplate[]
+	 */
+	public function send(SwaggerClient $client)
+	{
+		return $client->send($this, new \SturentsLib\Api\Models\ContractTemplate());
+	}
 }
 

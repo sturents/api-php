@@ -9,10 +9,14 @@ class GetBankAccounts extends SwaggerRequest
 {
 	const URI = '/api/bank-accounts';
 	const METHOD = 'GET';
-	const RESPONSE_CLASS = '\SturentsLib\Api\Models\BankAccount';
 
-	public $response_is_array = true;
-
-
+	/**
+	 * @param SwaggerClient $client
+	 * @return \SturentsLib\Api\Models\BankAccount[]
+	 */
+	public function send(SwaggerClient $client)
+	{
+		return $client->send($this, new \SturentsLib\Api\Models\BankAccount());
+	}
 }
 

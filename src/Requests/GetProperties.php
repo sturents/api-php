@@ -8,7 +8,14 @@ class GetProperties extends SwaggerRequest
 {
 	const URI = '/api/properties';
 	const METHOD = 'GET';
-	const RESPONSE_CLASS = '\SturentsLib\Api\Models\ListProperties';
 
+	/**
+	 * @param SwaggerClient $client
+	 * @return \SturentsLib\Api\Models\ListProperties
+	 */
+	public function send(SwaggerClient $client)
+	{
+		return $client->send($this, new \SturentsLib\Api\Models\ListProperties());
+	}
 }
 

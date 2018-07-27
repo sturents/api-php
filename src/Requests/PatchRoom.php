@@ -8,7 +8,6 @@ class PatchRoom extends SwaggerRequest
 {
 	const URI = '/api/room';
 	const METHOD = 'PATCH';
-	const RESPONSE_CLASS = '\SturentsLib\Api\Models\Room';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -44,6 +43,16 @@ class PatchRoom extends SwaggerRequest
 	{
 		$this->property_id = $property_id;
 		$this->room_id = $room_id;
+	}
+
+
+	/**
+	 * @param SwaggerClient $client
+	 * @return \SturentsLib\Api\Models\Room
+	 */
+	public function send(SwaggerClient $client)
+	{
+		return $client->send($this, new \SturentsLib\Api\Models\Room());
 	}
 }
 

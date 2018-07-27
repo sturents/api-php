@@ -8,7 +8,6 @@ class PatchContract extends SwaggerRequest
 {
 	const URI = '/api/contract';
 	const METHOD = 'PATCH';
-	const RESPONSE_CLASS = '\SturentsLib\Api\Models\ContractSaved';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -44,6 +43,16 @@ class PatchContract extends SwaggerRequest
 	{
 		$this->property_id = $property_id;
 		$this->contract_id = $contract_id;
+	}
+
+
+	/**
+	 * @param SwaggerClient $client
+	 * @return \SturentsLib\Api\Models\ContractSaved
+	 */
+	public function send(SwaggerClient $client)
+	{
+		return $client->send($this, new \SturentsLib\Api\Models\ContractSaved());
 	}
 }
 
