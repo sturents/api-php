@@ -2,6 +2,7 @@
 namespace SturentsLib\Api;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
@@ -15,6 +16,7 @@ abstract class SturentsClient {
 	const EX_CODE_NO_RESPONSE = 10;
 	const EX_CODE_RESPONSE = 11;
 	const EX_CODE_BODY = 12;
+	const URI_BASE = 'https://sturents.com';
 
 	private $landlord_id;
 	/**
@@ -25,9 +27,36 @@ abstract class SturentsClient {
 	 * @var GuzzleException
 	 */
 	private $debug_request_exception;
+	/**
+	 * @var ClientInterface
+	 */
+	private $client;
 
 	public function __construct($landlord_id){
 		$this->landlord_id = $landlord_id;
+	}
+
+	/**
+	 * @return ClientInterface
+	 */
+	public function getClient(){
+		if (is_null($this->client)){
+			$this->client = new Client([
+				'base_uri' => self::URI_BASE,
+			]);
+		}
+
+		return $this->client;
+	}
+
+	/**
+	 * @param ClientInterface $client
+	 * @return $this
+	 */
+	public function setClient(ClientInterface $client){
+		$this->client = $client;
+
+		return $this;
 	}
 
 	/**
@@ -45,7 +74,7 @@ abstract class SturentsClient {
 			$uri = $request->getUri()->withQuery(http_build_query($query));
 			$request = $request->withUri($uri);
 
-			$client = new Client();
+			$client = $this->getClient();
 			$response = $client->send($request);
 		}
 		catch (ClientException $e) {

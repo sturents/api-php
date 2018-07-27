@@ -7,7 +7,7 @@ namespace SturentsLib\Api\Requests;
  */
 class GetFacilities extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/facilities';
+	const URI = '/api/facilities';
 	const METHOD = 'GET';
 	const RESPONSE_CLASS = '\SturentsLib\Api\Models\string';
 

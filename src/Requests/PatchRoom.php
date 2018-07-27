@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PatchRoom extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/room';
+	const URI = '/api/room';
 	const METHOD = 'PATCH';
 	const RESPONSE_CLASS = '\SturentsLib\Api\Models\Room';
 

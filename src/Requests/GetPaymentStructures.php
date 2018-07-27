@@ -8,7 +8,7 @@ namespace SturentsLib\Api\Requests;
  */
 class GetPaymentStructures extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/payment-structures';
+	const URI = '/api/payment-structures';
 	const METHOD = 'GET';
 	const RESPONSE_CLASS = '\SturentsLib\Api\Models\PaymentSchedule';
 

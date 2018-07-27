@@ -8,7 +8,7 @@ namespace SturentsLib\Api\Requests;
  */
 class DeleteContract extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/contract';
+	const URI = '/api/contract';
 	const METHOD = 'DELETE';
 
 	/**

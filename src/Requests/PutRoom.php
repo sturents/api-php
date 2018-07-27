@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PutRoom extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/room';
+	const URI = '/api/room';
 	const METHOD = 'PUT';
 	const RESPONSE_CLASS = '\SturentsLib\Api\Models\RoomSaved';
 

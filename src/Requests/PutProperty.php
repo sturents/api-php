@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PutProperty extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/property';
+	const URI = '/api/property';
 	const METHOD = 'PUT';
 	const RESPONSE_CLASS = '\SturentsLib\Api\Models\PropertySaved';
 

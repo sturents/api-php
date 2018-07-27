@@ -8,7 +8,7 @@ namespace SturentsLib\Api\Requests;
  */
 class GetContracts extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/contracts';
+	const URI = '/api/contracts';
 	const METHOD = 'GET';
 	const RESPONSE_CLASS = '\SturentsLib\Api\Models\ContractFull';
 

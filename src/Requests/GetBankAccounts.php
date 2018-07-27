@@ -7,7 +7,7 @@ namespace SturentsLib\Api\Requests;
  */
 class GetBankAccounts extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/bank-accounts';
+	const URI = '/api/bank-accounts';
 	const METHOD = 'GET';
 	const RESPONSE_CLASS = '\SturentsLib\Api\Models\BankAccount';
 

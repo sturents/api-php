@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PatchContract extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/contract';
+	const URI = '/api/contract';
 	const METHOD = 'PATCH';
 	const RESPONSE_CLASS = '\SturentsLib\Api\Models\ContractSaved';
 
