@@ -194,12 +194,12 @@ paths:
           $ref: '#/definitions/SendAuthError'
         default:
           $ref: '#/definitions/Error'
-  /contract-templates:
+  /tenancy-templates:
     get:
       summary: |
-        Returns contract templates for the authenticated property manager
+        Returns tenancy templates for the authenticated property manager
         The IDs of these templates will be required to set up Contract
-        entities using a specific contract template
+        entities using a specific tenancy template
       security:
         - PropertyManager: []
           Timestamp: []
@@ -209,11 +209,11 @@ paths:
         - Contracts
       responses:
         '200':
-          description: List of contract templates
+          description: List of tenancy templates
           schema:
             type: array
             items:
-              $ref: '#/definitions/ContractTemplate'
+              $ref: '#/definitions/TenancyTemplate'
         '401':
           $ref: '#/definitions/SendAuthError'
         '404':
@@ -935,6 +935,15 @@ definitions:
         type: integer
         description: |
           The minimum time a tenant may rent the property for in days
+      paused:
+        type: boolean
+        description: |
+          A contract may be temporarily unavailable for some reason; this field
+          allows setting or reading that status. API consumers may want to discard
+          contracts with this setting, or may want to display a different status to
+          users. Book Now URLs will not work for "paused=true" contracts. API senders
+          might tie this to a similar internal status, but this should not be used to
+          permanently remove a Contract - use the DELETE method instead for that purpose.
       utilities:
         $ref: '#/definitions/Utilities'
       restrictions:
@@ -998,8 +1007,8 @@ definitions:
           template_id:
             type: string
             description: |
-              A unique identifier for a Contract Template fetched from
-              the /contract-templates endpoint. A contract template
+              A unique identifier for a Tenancy Template fetched from
+              the /contract-templates endpoint. A tenancy template
               allows a tenancy to be created for tenants who are renting
               the property and can sign for it on StuRents
           schedules:
@@ -1168,12 +1177,12 @@ definitions:
               edit/delete of this room and also to attach pricing to the
               Room using the RoomPrice object when creating/updating a
               Contract object
-  ContractTemplate:
+  TenancyTemplate:
     properties:
       title:
         type: string
         description: |
-          Title entered when creating this contract template
+          Title entered when creating this tenancy template
           within the StuRents website
       template_id:
         type: string

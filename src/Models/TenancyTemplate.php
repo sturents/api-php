@@ -4,10 +4,10 @@ namespace SturentsLib\Api\Models;
 /**
  * ** This file was generated automatically, you might want to avoid editing it **
  */
-class ContractTemplate extends SwaggerModel
+class TenancyTemplate extends SwaggerModel
 {
 	/**
-	 * Title entered when creating this contract template
+	 * Title entered when creating this tenancy template
 	 * within the StuRents website
 	 *
 	 * @var string

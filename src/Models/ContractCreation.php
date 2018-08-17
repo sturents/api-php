@@ -11,8 +11,8 @@ namespace SturentsLib\Api\Models;
 class ContractCreation extends ContractAbstract
 {
 	/**
-	 * A unique identifier for a Contract Template fetched from
-	 * the /contract-templates endpoint. A contract template
+	 * A unique identifier for a Tenancy Template fetched from
+	 * the /contract-templates endpoint. A tenancy template
 	 * allows a tenancy to be created for tenants who are renting
 	 * the property and can sign for it on StuRents
 	 *
