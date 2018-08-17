@@ -28,6 +28,11 @@ class PropertyOutbound extends Property
 	 */
 	protected $contracts;
 
+	/**
+	 * @var Media
+	 */
+	protected $media;
+
 
 	/**
 	 * @return string
@@ -116,6 +121,28 @@ class PropertyOutbound extends Property
 	public function addContract(ContractWithRooms $contract)
 	{
 		$this->contracts[] = $contract;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return Media
+	 */
+	public function getMedia()
+	{
+		return $this->media;
+	}
+
+
+	/**
+	 * @param Media $media
+	 *
+	 * @return $this
+	 */
+	public function setMedia(Media $media)
+	{
+		$this->media = $media;
 
 		return $this;
 	}

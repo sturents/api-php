@@ -7,14 +7,6 @@ namespace SturentsLib\Api\Models;
 class Photo extends SwaggerModel
 {
 	/**
-	 * Currently only supports "url".
-	 * These will be downloaded and stored on StuRents' system
-	 *
-	 * @var string
-	 */
-	protected $type;
-
-	/**
 	 * A URL linking to a photo file
 	 * @var string
 	 */
@@ -32,28 +24,6 @@ class Photo extends SwaggerModel
 	 * @var string
 	 */
 	protected $caption;
-
-
-	/**
-	 * @return string
-	 */
-	public function getType()
-	{
-		return $this->type;
-	}
-
-
-	/**
-	 * @param string $type
-	 *
-	 * @return $this
-	 */
-	public function setType($type)
-	{
-		$this->type = $type;
-
-		return $this;
-	}
 
 
 	/**

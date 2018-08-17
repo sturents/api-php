@@ -2,9 +2,8 @@
 namespace SturentsLib\Api\Requests;
 
 /**
- * Disables a contract on a property. It will no longer appear
- * in GET /properties requests but will appear in GET /contracts
- * requests with the "disabled" boolean set to true.
+ * Deletes a contract on a property. It will no longer appear
+ * in GET /properties or GET /contracts requests
  */
 class DeleteContract extends SwaggerRequest
 {

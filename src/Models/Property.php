@@ -111,11 +111,6 @@ class Property extends SwaggerModel
 	protected $coordinates;
 
 	/**
-	 * @var Media
-	 */
-	protected $media;
-
-	/**
 	 * @var EnergyPerformance
 	 */
 	protected $energy_performance;
@@ -434,28 +429,6 @@ class Property extends SwaggerModel
 	public function setCoordinates(Coordinates $coordinates)
 	{
 		$this->coordinates = $coordinates;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return Media
-	 */
-	public function getMedia()
-	{
-		return $this->media;
-	}
-
-
-	/**
-	 * @param Media $media
-	 *
-	 * @return $this
-	 */
-	public function setMedia(Media $media)
-	{
-		$this->media = $media;
 
 		return $this;
 	}

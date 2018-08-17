@@ -5,3 +5,5 @@ vendor/
 *.jar
 test.php
 src/Test/
+swagger/api.json
+swagger-json

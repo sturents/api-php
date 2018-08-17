@@ -4,7 +4,6 @@ namespace SturentsLib\Api\Requests;
 /**
  * Returns contracts for the specified property. Includes the contract_id
  * field which is necessary in order to edit/delete an existing contract.
- * Will return disabled Contracts with the "disabled" field set to true
  */
 class GetContracts extends SwaggerRequest
 {
