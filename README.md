@@ -35,12 +35,17 @@ Now you can create or use any object without having to worry about requiring its
         $response = $put_property->send($sturents);
     }
     catch (\Exception $e){
-       echo "A problem happened: ".$e->getMessage();
+       echo "An unexpected problem happened: ".$e->getMessage();
     }
     
-    var_dump($response instanceof PropertySaved); // outputs 'true'
+    if ($response->isError()){
+        echo "A known error occurred of type ".gettype($response); 
+    }
+    else {    
+        var_dump($response instanceof PropertySaved); // outputs 'true'
     
-    echo $response->property_id; // outputs an integer
+        echo $response->property_id; // outputs an integer
+    }
     
 ## Fetch data from StuRents
 

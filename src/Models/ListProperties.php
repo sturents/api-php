@@ -90,13 +90,13 @@ class ListProperties extends SwaggerModel
 
 
 	/**
-	 * @param PropertyOutbound $propertie
+	 * @param PropertyOutbound $property
 	 *
 	 * @return $this
 	 */
-	public function addPropertie(PropertyOutbound $propertie)
+	public function addProperty(PropertyOutbound $property)
 	{
-		$this->properties[] = $propertie;
+		$this->properties[] = $property;
 
 		return $this;
 	}

@@ -378,13 +378,13 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @param string $facilitie
+	 * @param string $facility
 	 *
 	 * @return $this
 	 */
-	public function addFacilitie($facilitie)
+	public function addFacility($facility)
 	{
-		$this->facilities[] = $facilitie;
+		$this->facilities[] = $facility;
 
 		return $this;
 	}

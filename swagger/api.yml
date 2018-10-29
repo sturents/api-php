@@ -299,7 +299,7 @@ paths:
         - in: body
           name: Room
           schema:
-            $ref: '#/definitions/RoomSaved'
+            $ref: '#/definitions/Room'
       tags:
         - Changing data on StuRents
         - Rooms
@@ -349,7 +349,7 @@ paths:
         '200':
           description: Indicates the saved room ID
           schema:
-            $ref: '#/definitions/Room'
+            $ref: '#/definitions/RoomSaved'
         '400':
           $ref: '#/definitions/SendDataError'
         '401':
