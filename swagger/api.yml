@@ -573,46 +573,6 @@ paths:
         default:
           $ref: '#/definitions/Error'
   /media/{property_id}/{media_id}:
-    patch:
-      summary: Update a media item on a property
-      security:
-        - PropertyManager: []
-          Timestamp: []
-          Auth: []
-      parameters:
-        - in: path
-          name: property_id
-          type: string
-          required: true
-          description: |
-            The property ID provided by the initial creation
-            or a GET /properties request
-        - in: path
-          name: media_id
-          type: string
-          required: true
-          description: |
-            The media ID provided by the initial upload
-        - in: body
-          name: MediaUpload
-          schema:
-            $ref: '#/definitions/MediaUpload'
-      tags:
-        - Changing data on StuRents
-        - Media
-      responses:
-        '200':
-          description: Indicates the saved media ID
-          schema:
-            $ref: '#/definitions/MediaSaved'
-        '400':
-          $ref: '#/definitions/SendDataError'
-        '401':
-          $ref: '#/definitions/SendAuthError'
-        '404':
-          $ref: '#/definitions/SendAuthError'
-        default:
-          $ref: '#/definitions/Error'
     delete:
       summary: |
         Deletes a media item from a property
