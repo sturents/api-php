@@ -62,11 +62,11 @@ abstract class SturentsClient implements SwaggerClient {
 
 	/**
 	 * @param SwaggerRequest $request
-	 * @param SwaggerModel $response_model
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @param string[] $response_models
+	 * @return SwaggerModel|Models\SwaggerModel[]
 	 * @throws SturentsException
 	 */
-	public function send(SwaggerRequest $request, SwaggerModel $response_model){
+	public function send(SwaggerRequest $request, array $response_models){
 		try {
 			$query = [
 				'landlord' => $this->landlord_id,
@@ -88,25 +88,23 @@ abstract class SturentsClient implements SwaggerClient {
 		catch (ClientException $e) {
 			$this->debug_request_exception = $e;
 			$output = null;
-			if ($e->hasResponse()){
-				$output = (string)$e->getResponse()->getBody();
-				$output = json_decode($output, true);
+			if (!$e->hasResponse()){
+				throw new SturentsException("The StuRents API could not be reached. The client reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
 			}
 
-			if ($output){
-				$msg = is_array($output['error']) ? reset($output['error']) : $output['error'];
+			$response = $e->getResponse();
+			$response_model = $this->handleResponse($response, $response_models);
 
-				throw new SturentsException($msg);
-			}
+			$response_model->asError();
 
-			throw new SturentsException("The StuRents API could not be reached. The client reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
+			return $response_model;
 		}
 		catch (GuzzleException $e) {
 			$this->debug_request_exception = $e;
 			throw new SturentsException("The StuRents API could not be reached. The connection reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
 		}
 
-		return $this->handleResponse($response, $response_model);
+		return $this->handleResponse($response, $response_models);
 	}
 
 	/**
@@ -117,27 +115,39 @@ abstract class SturentsClient implements SwaggerClient {
 
 	/**
 	 * @param ResponseInterface $response
-	 * @param SwaggerModel $response_model
+	 * @param array $response_models
 	 * @return SwaggerModel|Models\SwaggerModel[]
 	 * @throws SturentsException
 	 */
-	protected function handleResponse(ResponseInterface $response, SwaggerModel $response_model){
+	protected function handleResponse(ResponseInterface $response, array $response_models){
 		$json = (string)$response->getBody();
 
-		$data = json_decode($json);
+		$status = (string)$response->getStatusCode();
+		$response_class = $response_models[$status];
+		if (is_null($response_class)){
+			$response_class = $response_models['default'];
+		}
+		if (is_null($response_class)){
+			throw new SturentsException("The response type received ($status) did not have a handler.");
+		}
 
+		if (empty($response_class)){
+			$response_class = SwaggerModel::class;
+		}
+
+		$data = json_decode($json);
 		if (!$data){
 			throw new SturentsException("The returned JSON data could not be processed with error: ".json_last_error_msg());
 		}
 
 		try {
 			if (!is_array($data)){
-				return $this->map($data, $response_model);
+				return $this->map($data, $response_class);
 			}
 
 			$list = [];
 			foreach ($data as $key => $item){
-				$list[$key] = $this->map($item, $response_model);
+				$list[$key] = $this->map($item, $response_class);
 			}
 
 			return $list;
@@ -149,13 +159,13 @@ abstract class SturentsClient implements SwaggerClient {
 
 	/**
 	 * @param $data
-	 * @param SwaggerModel $response_model
+	 * @param string $response_class
 	 * @return SwaggerModel
 	 * @throws \JsonMapper_Exception
 	 */
-	private function map($data, SwaggerModel $response_model){
+	private function map($data, string $response_class){
 		$mapper = $this->getJsonMapper();
-		$model = clone $response_model;
+		$model = new $response_class;
 
 		return $mapper->map($data, $model);
 	}
