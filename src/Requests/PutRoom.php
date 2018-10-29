@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PutRoom extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api//room';
+	const URI = 'https://sturents.com/api/room';
 	const METHOD = 'PUT';
 
 	/**
@@ -22,9 +22,9 @@ class PutRoom extends SwaggerRequest
 
 
 	/**
-	 * @param \SturentsLib\Api\Models\RoomSaved $room
+	 * @param \SturentsLib\Api\Models\Room $room
 	 */
-	public function setBody(\SturentsLib\Api\Models\RoomSaved $room)
+	public function setBody(\SturentsLib\Api\Models\Room $room)
 	{
 		$this->body = json_encode($room);
 	}

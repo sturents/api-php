@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class GetProperties extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api//properties';
+	const URI = 'https://sturents.com/api/properties';
 	const METHOD = 'GET';
 
 	/**

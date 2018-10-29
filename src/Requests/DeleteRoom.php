@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class DeleteRoom extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api//room';
+	const URI = 'https://sturents.com/api/room';
 	const METHOD = 'DELETE';
 
 	/**

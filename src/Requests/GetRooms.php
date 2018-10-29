@@ -8,7 +8,7 @@ namespace SturentsLib\Api\Requests;
  */
 class GetRooms extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api//rooms';
+	const URI = 'https://sturents.com/api/rooms';
 	const METHOD = 'GET';
 
 	/**

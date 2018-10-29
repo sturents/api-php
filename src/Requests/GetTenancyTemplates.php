@@ -8,7 +8,7 @@ namespace SturentsLib\Api\Requests;
  */
 class GetTenancyTemplates extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api//tenancy-templates';
+	const URI = 'https://sturents.com/api/tenancy-templates';
 	const METHOD = 'GET';
 
 	/**

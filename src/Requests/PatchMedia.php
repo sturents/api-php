@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PatchMedia extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api//media';
+	const URI = 'https://sturents.com/api/media';
 	const METHOD = 'PATCH';
 
 	/**

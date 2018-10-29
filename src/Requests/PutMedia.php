@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PutMedia extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api//media';
+	const URI = 'https://sturents.com/api/media';
 	const METHOD = 'PUT';
 
 	/**

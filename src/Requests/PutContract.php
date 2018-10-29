@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PutContract extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api//contract';
+	const URI = 'https://sturents.com/api/contract';
 	const METHOD = 'PUT';
 
 	/**
