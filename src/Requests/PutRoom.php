@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PutRoom extends SwaggerRequest
 {
-	const URI = '/api/room';
+	const URI = 'https://sturents.com/api//room';
 	const METHOD = 'PUT';
 
 	/**
@@ -38,11 +38,17 @@ class PutRoom extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return \SturentsLib\Api\Models\RoomSaved
+	 * @return string[]
 	 */
 	public function send(SwaggerClient $client)
 	{
-		return $client->send($this, new \SturentsLib\Api\Models\RoomSaved());
+		return $client->send($this, [
+			'200' => '\\SturentsLib\\Api\\Models\\RoomSaved',
+			'400' => '\\SturentsLib\\Api\\Models\\SendDataError',
+			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'default' => '\\SturentsLib\\Api\\Models\\Error'
+		]);
 	}
 }
 

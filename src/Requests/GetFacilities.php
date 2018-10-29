@@ -7,16 +7,18 @@ namespace SturentsLib\Api\Requests;
  */
 class GetFacilities extends SwaggerRequest
 {
-	const URI = '/api/facilities';
+	const URI = 'https://sturents.com/api//facilities';
 	const METHOD = 'GET';
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return \SturentsLib\Api\Models\string[]
+	 * @return string[]
 	 */
 	public function send(SwaggerClient $client)
 	{
-		return $client->send($this, new \SturentsLib\Api\Models\string());
+		return $client->send($this, [
+			'200' => '\\SturentsLib\\Api\\Models\\array'
+		]);
 	}
 }
 

@@ -8,16 +8,21 @@ namespace SturentsLib\Api\Requests;
  */
 class GetPaymentStructures extends SwaggerRequest
 {
-	const URI = '/api/payment-structures';
+	const URI = 'https://sturents.com/api//payment-structures';
 	const METHOD = 'GET';
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return \SturentsLib\Api\Models\PaymentSchedule[]
+	 * @return string[]
 	 */
 	public function send(SwaggerClient $client)
 	{
-		return $client->send($this, new \SturentsLib\Api\Models\PaymentSchedule());
+		return $client->send($this, [
+			'200' => '\\SturentsLib\\Api\\Models\\array',
+			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'default' => '\\SturentsLib\\Api\\Models\\Error'
+		]);
 	}
 }
 

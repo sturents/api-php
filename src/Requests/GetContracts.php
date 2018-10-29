@@ -7,7 +7,7 @@ namespace SturentsLib\Api\Requests;
  */
 class GetContracts extends SwaggerRequest
 {
-	const URI = '/api/contracts';
+	const URI = 'https://sturents.com/api//contracts';
 	const METHOD = 'GET';
 
 	/**
@@ -30,11 +30,16 @@ class GetContracts extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return \SturentsLib\Api\Models\ContractFull[]
+	 * @return string[]
 	 */
 	public function send(SwaggerClient $client)
 	{
-		return $client->send($this, new \SturentsLib\Api\Models\ContractFull());
+		return $client->send($this, [
+			'200' => '\\SturentsLib\\Api\\Models\\array',
+			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'default' => '\\SturentsLib\\Api\\Models\\Error'
+		]);
 	}
 }
 

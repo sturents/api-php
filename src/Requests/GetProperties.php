@@ -6,16 +6,22 @@ namespace SturentsLib\Api\Requests;
  */
 class GetProperties extends SwaggerRequest
 {
-	const URI = '/api/properties';
+	const URI = 'https://sturents.com/api//properties';
 	const METHOD = 'GET';
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return \SturentsLib\Api\Models\ListProperties
+	 * @return string[]
 	 */
 	public function send(SwaggerClient $client)
 	{
-		return $client->send($this, new \SturentsLib\Api\Models\ListProperties());
+		return $client->send($this, [
+			'200' => '\\SturentsLib\\Api\\Models\\ListProperties',
+			'400' => '\\SturentsLib\\Api\\Models\\GetError',
+			'401' => '\\SturentsLib\\Api\\Models\\GetError',
+			'404' => '\\SturentsLib\\Api\\Models\\GetError',
+			'default' => '\\SturentsLib\\Api\\Models\\Error'
+		]);
 	}
 }
 

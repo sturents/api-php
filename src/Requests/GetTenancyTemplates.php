@@ -8,16 +8,21 @@ namespace SturentsLib\Api\Requests;
  */
 class GetTenancyTemplates extends SwaggerRequest
 {
-	const URI = '/api/tenancy-templates';
+	const URI = 'https://sturents.com/api//tenancy-templates';
 	const METHOD = 'GET';
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return \SturentsLib\Api\Models\TenancyTemplate[]
+	 * @return string[]
 	 */
 	public function send(SwaggerClient $client)
 	{
-		return $client->send($this, new \SturentsLib\Api\Models\TenancyTemplate());
+		return $client->send($this, [
+			'200' => '\\SturentsLib\\Api\\Models\\array',
+			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'default' => '\\SturentsLib\\Api\\Models\\Error'
+		]);
 	}
 }
 

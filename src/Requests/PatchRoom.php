@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PatchRoom extends SwaggerRequest
 {
-	const URI = '/api/room';
+	const URI = 'https://sturents.com/api//room';
 	const METHOD = 'PATCH';
 
 	/**
@@ -48,11 +48,17 @@ class PatchRoom extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return \SturentsLib\Api\Models\Room
+	 * @return string[]
 	 */
 	public function send(SwaggerClient $client)
 	{
-		return $client->send($this, new \SturentsLib\Api\Models\Room());
+		return $client->send($this, [
+			'200' => '\\SturentsLib\\Api\\Models\\Room',
+			'400' => '\\SturentsLib\\Api\\Models\\SendDataError',
+			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'default' => '\\SturentsLib\\Api\\Models\\Error'
+		]);
 	}
 }
 

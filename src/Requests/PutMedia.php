@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PutMedia extends SwaggerRequest
 {
-	const URI = '/api/media';
+	const URI = 'https://sturents.com/api//media';
 	const METHOD = 'PUT';
 
 	/**
@@ -38,11 +38,17 @@ class PutMedia extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return \SturentsLib\Api\Models\MediaSaved
+	 * @return string[]
 	 */
 	public function send(SwaggerClient $client)
 	{
-		return $client->send($this, new \SturentsLib\Api\Models\MediaSaved());
+		return $client->send($this, [
+			'200' => '\\SturentsLib\\Api\\Models\\MediaSaved',
+			'400' => '\\SturentsLib\\Api\\Models\\SendDataError',
+			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'default' => '\\SturentsLib\\Api\\Models\\Error'
+		]);
 	}
 }
 
