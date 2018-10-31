@@ -127,12 +127,13 @@ abstract class SturentsClient implements SwaggerClient {
 		if (is_null($response_class)){
 			$response_class = $response_models['default'];
 		}
-		if (is_null($response_class)){
-			throw new SturentsException("The response type received ($status) did not have a handler.");
+
+		if (empty($json) && empty($response_class)){
+			return new SwaggerModel();
 		}
 
 		if (empty($response_class)){
-			$response_class = SwaggerModel::class;
+			throw new SturentsException("The response type received ($status) did not have a handler.");
 		}
 
 		$data = json_decode($json);

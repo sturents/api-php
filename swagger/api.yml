@@ -81,9 +81,9 @@ paths:
           schema:
             $ref: '#/definitions/ListProperties'
         '400':
-          $ref: '#/definitions/GetError'
+          $ref: '#/definitions/Error'
         '401':
-          $ref: '#/definitions/GetError'
+          $ref: '#/definitions/AuthError'
         '404':
           $ref: '#/definitions/GetError'
         default:
@@ -124,9 +124,9 @@ paths:
             items:
               $ref: '#/definitions/BankAccount'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
   /property:
@@ -153,9 +153,7 @@ paths:
         '400':
           $ref: '#/definitions/SendDataError'
         '401':
-          $ref: '#/definitions/SendAuthError'
-        '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         default:
           $ref: '#/definitions/Error'
   /property/{property_id}:
@@ -189,9 +187,9 @@ paths:
         '400':
           $ref: '#/definitions/SendDataError'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
   /tenancy-templates:
@@ -215,9 +213,9 @@ paths:
             items:
               $ref: '#/definitions/TenancyTemplate'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/GetError'
         default:
           $ref: '#/definitions/Error'
   /payment-structures:
@@ -241,9 +239,9 @@ paths:
             items:
               $ref: '#/definitions/PaymentSchedule'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/GetError'
         default:
           $ref: '#/definitions/Error'
   /rooms/{property_id}:
@@ -276,9 +274,9 @@ paths:
             items:
               $ref: '#/definitions/RoomOutbound'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/GetError'
         default:
           $ref: '#/definitions/Error'
   /room/{property_id}:
@@ -311,9 +309,9 @@ paths:
         '400':
           $ref: '#/definitions/SendDataError'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
   /room/{property_id}/{room_id}:
@@ -353,9 +351,9 @@ paths:
         '400':
           $ref: '#/definitions/SendDataError'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
     delete:
@@ -386,9 +384,9 @@ paths:
         '204':
           description: Indicates room was deleted
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
   /contracts/{property_id}:
@@ -420,9 +418,9 @@ paths:
             items:
               $ref: '#/definitions/ContractFull'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/GetError'
         default:
           $ref: '#/definitions/Error'
   /contract/{property_id}:
@@ -455,9 +453,9 @@ paths:
         '400':
           $ref: '#/definitions/SendDataError'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
   /contract/{property_id}/{contract_id}:
@@ -497,9 +495,9 @@ paths:
         '400':
           $ref: '#/definitions/SendDataError'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
     delete:
@@ -532,9 +530,9 @@ paths:
         '204':
           description: Indicates contract was deleted
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
   /media/{property_id}:
@@ -567,9 +565,9 @@ paths:
         '400':
           $ref: '#/definitions/SendDataError'
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
   /media/{property_id}/{media_id}:
@@ -601,9 +599,9 @@ paths:
         '204':
           description: Indicates media item was disabled
         '401':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/SendAuthError'
+          $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
 definitions:
@@ -611,8 +609,6 @@ definitions:
     description: |
       400 - you didn't supply correct query string fields for your chosen
             use case (see auth features of each endpoint)
-      401 - the key supplied did not match the property manager or channel
-            specified, or the channel does not have access to the property manager
       404 - the property manager or channel does not exist, or the
             property manager does not have any properties
     type: object
@@ -620,15 +616,16 @@ definitions:
       landlord:
         type: string
         description: Informs that the provided "landlord" query string was incorrect
-      public:
+      auth:
         type: string
-        description: Indicates an issue with the provided "public" key
-  SendAuthError:
+        description: Indicates an issue with the provided "auth" key
+      error:
+        type: string
+        description: Another error message not related to authenticaiton
+  AuthError:
     description: |
-      401 - the key supplied did not match the property manager or channel
-            specified, or the channel does not have access to the property manager
-      404 - the property manager does not exist, or the
-            specific resource requested does not exist
+      The key supplied did not match the property manager or channel
+      specified, or the channel does not have access to the property manager
     type: object
     properties:
       landlord:
