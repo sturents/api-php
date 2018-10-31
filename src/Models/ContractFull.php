@@ -10,43 +10,12 @@ namespace SturentsLib\Api\Models;
 class ContractFull extends ContractWithRooms
 {
 	/**
-	 * If this is set to true then the Contract is not available
-	 * but can still be edited. Contracts which are disabled are
-	 * not returned for GET /properties requests
-	 *
-	 * @var boolean
-	 */
-	protected $disabled;
-
-	/**
 	 * A unique ID for this Contract which can be used when
 	 * editing/deleting the Contract
 	 *
 	 * @var string
 	 */
 	protected $contract_id;
-
-
-	/**
-	 * @return boolean
-	 */
-	public function getDisabled()
-	{
-		return $this->disabled;
-	}
-
-
-	/**
-	 * @param boolean $disabled
-	 *
-	 * @return $this
-	 */
-	public function setDisabled($disabled)
-	{
-		$this->disabled = $disabled;
-
-		return $this;
-	}
 
 
 	/**
@@ -70,4 +39,3 @@ class ContractFull extends ContractWithRooms
 		return $this;
 	}
 }
-

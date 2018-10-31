@@ -1014,13 +1014,15 @@ definitions:
         type: integer
         description: |
           The minimum time a tenant may rent the property for in days
-      paused:
+      disabled:
         type: boolean
         description: |
           A contract may be temporarily unavailable for some reason; this field
           allows setting or reading that status. API consumers may want to discard
           contracts with this setting, or may want to display a different status to
-          users. Book Now URLs will not work for "paused=true" contracts. API senders
+          users. If this is set to true then the Contract is not available, but can
+          still be edited. Being not available means it is not returned for
+          GET /properties requests, and Book Now URLs will not work for it. API senders
           might tie this to a similar internal status, but this should not be used to
           permanently remove a Contract - use the DELETE method instead for that purpose.
       utilities:
@@ -1063,12 +1065,6 @@ definitions:
       - $ref: '#/definitions/ContractWithRooms'
       - type: object
         properties:
-          disabled:
-            type: boolean
-            description: |
-              If this is set to true then the Contract is not available
-              but can still be edited. Contracts which are disabled are
-              not returned for GET /properties requests
           contract_id:
             type: string
             description: |
