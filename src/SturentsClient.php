@@ -165,6 +165,10 @@ abstract class SturentsClient implements SwaggerClient {
 	 * @throws \JsonMapper_Exception
 	 */
 	private function map($data, string $response_class){
+		if (empty($response_class)){
+			return $data;
+		}
+
 		$mapper = $this->getJsonMapper();
 		$model = new $response_class;
 

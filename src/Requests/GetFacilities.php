@@ -17,7 +17,7 @@ class GetFacilities extends SwaggerRequest
 	public function send(SwaggerClient $client)
 	{
 		return $client->send($this, [
-			'200' => '\\SturentsLib\\Api\\Models\\array'
+			'200' => ''
 		]);
 	}
 }

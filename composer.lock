@@ -427,16 +427,16 @@
         },
         {
             "name": "sturents/swagger-php-model-generator",
-            "version": "0.0.14",
+            "version": "0.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sturents/swagger-php-model-generator.git",
-                "reference": "106613353f5ac695a2c0472d3c68568a729f9b1f"
+                "reference": "56a662d0d2ad57ff5c7bde0ab919e93d4b9e820b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sturents/swagger-php-model-generator/zipball/106613353f5ac695a2c0472d3c68568a729f9b1f",
-                "reference": "106613353f5ac695a2c0472d3c68568a729f9b1f",
+                "url": "https://api.github.com/repos/sturents/swagger-php-model-generator/zipball/56a662d0d2ad57ff5c7bde0ab919e93d4b9e820b",
+                "reference": "56a662d0d2ad57ff5c7bde0ab919e93d4b9e820b",
                 "shasum": ""
             },
             "require": {
@@ -462,7 +462,7 @@
                     "email": "mike@m1ke.me"
                 }
             ],
-            "time": "2018-10-31T09:56:05+00:00"
+            "time": "2018-10-31T12:24:19+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
