@@ -1167,12 +1167,12 @@ definitions:
           will be used to calculate total and scheduled payments when
           creating a tenancy and/or rent collection for the property
       deposit_per_person:
-        type: string
+        type: number
         description: |
           A monetary value indicating the deposit each tenant will be
           expected to pay upon signing a contract to rent the property
       fee_per_person:
-        type: string
+        type: number
         description: |
           A monetary value indicating the fee to the property manager which
           each tenant will be expected to pay upon signing a contract to

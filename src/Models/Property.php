@@ -77,7 +77,7 @@ class Property extends SwaggerModel
 	/**
 	 * Floor space of the whole property in square metres
 	 *
-	 * @var number
+	 * @var float
 	 */
 	protected $floor_space;
 
@@ -312,7 +312,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @return number
+	 * @return float
 	 */
 	public function getFloorSpace()
 	{
@@ -321,7 +321,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @param number $floor_space
+	 * @param float $floor_space
 	 *
 	 * @return $this
 	 */

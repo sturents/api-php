@@ -7,18 +7,18 @@ namespace SturentsLib\Api\Models;
 class Coordinates extends SwaggerModel
 {
 	/**
-	 * @var number
+	 * @var float
 	 */
 	protected $lat;
 
 	/**
-	 * @var number
+	 * @var float
 	 */
 	protected $lng;
 
 
 	/**
-	 * @return number
+	 * @return float
 	 */
 	public function getLat()
 	{
@@ -27,7 +27,7 @@ class Coordinates extends SwaggerModel
 
 
 	/**
-	 * @param number $lat
+	 * @param float $lat
 	 *
 	 * @return $this
 	 */
@@ -40,7 +40,7 @@ class Coordinates extends SwaggerModel
 
 
 	/**
-	 * @return number
+	 * @return float
 	 */
 	public function getLng()
 	{
@@ -49,7 +49,7 @@ class Coordinates extends SwaggerModel
 
 
 	/**
-	 * @param number $lng
+	 * @param float $lng
 	 *
 	 * @return $this
 	 */
