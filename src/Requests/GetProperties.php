@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class GetProperties extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/properties';
+	const URI = '/api/properties';
 	const METHOD = 'GET';
 
 	/**
@@ -17,8 +17,8 @@ class GetProperties extends SwaggerRequest
 	{
 		return $client->send($this, [
 			'200' => '\\SturentsLib\\Api\\Models\\ListProperties',
-			'400' => '\\SturentsLib\\Api\\Models\\GetError',
-			'401' => '\\SturentsLib\\Api\\Models\\GetError',
+			'400' => '\\SturentsLib\\Api\\Models\\Error',
+			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
 			'404' => '\\SturentsLib\\Api\\Models\\GetError',
 			'default' => '\\SturentsLib\\Api\\Models\\Error'
 		]);

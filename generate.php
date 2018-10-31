@@ -14,11 +14,11 @@ shell_exec("find ./{$dir}/Models -type f -delete");
 shell_exec("find ./{$dir}/Requests -type f -delete");
 
 $generate_models = new GenerateModels($namespace);
-$generate_models->runFull($yaml, $dir);
+$count = $generate_models->runFull($yaml, $dir);
 
-echo "Generated ".count($generator->classes)." files in $dir\n";
+echo "Generated $count files in $dir\n";
 
 $generate_requests = new GenerateRequests($namespace, $uri);
-$generate_requests->runFull($yaml, $dir);
+$count = $generate_requests->runFull($yaml, $dir);
 
-echo "Generated ".count($generator->classes)." files in $dir\n";
+echo "Generated $count files in $dir\n";

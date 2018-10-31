@@ -7,7 +7,7 @@ namespace SturentsLib\Api\Requests;
  */
 class DeleteContract extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/contract';
+	const URI = '/api/contract';
 	const METHOD = 'DELETE';
 
 	/**
@@ -46,8 +46,8 @@ class DeleteContract extends SwaggerRequest
 	{
 		return $client->send($this, [
 			'204' => '',
-			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
-			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\Error',
 			'default' => '\\SturentsLib\\Api\\Models\\Error'
 		]);
 	}

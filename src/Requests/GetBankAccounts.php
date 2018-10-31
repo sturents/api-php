@@ -7,7 +7,7 @@ namespace SturentsLib\Api\Requests;
  */
 class GetBankAccounts extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/bank-accounts';
+	const URI = '/api/bank-accounts';
 	const METHOD = 'GET';
 
 	/**
@@ -18,8 +18,8 @@ class GetBankAccounts extends SwaggerRequest
 	{
 		return $client->send($this, [
 			'200' => '\\SturentsLib\\Api\\Models\\array',
-			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
-			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\Error',
 			'default' => '\\SturentsLib\\Api\\Models\\Error'
 		]);
 	}

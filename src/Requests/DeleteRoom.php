@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class DeleteRoom extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/room';
+	const URI = '/api/room';
 	const METHOD = 'DELETE';
 
 	/**
@@ -45,8 +45,8 @@ class DeleteRoom extends SwaggerRequest
 	{
 		return $client->send($this, [
 			'204' => '',
-			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
-			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\Error',
 			'default' => '\\SturentsLib\\Api\\Models\\Error'
 		]);
 	}

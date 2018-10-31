@@ -6,8 +6,6 @@ namespace SturentsLib\Api\Models;
  *
  * 400 - you didn't supply correct query string fields for your chosen
  *       use case (see auth features of each endpoint)
- * 401 - the key supplied did not match the property manager or channel
- *       specified, or the channel does not have access to the property manager
  * 404 - the property manager or channel does not exist, or the
  *       property manager does not have any properties
  */
@@ -20,10 +18,16 @@ class GetError extends SwaggerModel
 	protected $landlord;
 
 	/**
-	 * Indicates an issue with the provided "public" key
+	 * Indicates an issue with the provided "auth" key
 	 * @var string
 	 */
-	protected $public;
+	protected $auth;
+
+	/**
+	 * Another error message not related to authenticaiton
+	 * @var string
+	 */
+	protected $error;
 
 
 	/**
@@ -51,20 +55,42 @@ class GetError extends SwaggerModel
 	/**
 	 * @return string
 	 */
-	public function getPublic()
+	public function getAuth()
 	{
-		return $this->public;
+		return $this->auth;
 	}
 
 
 	/**
-	 * @param string $public
+	 * @param string $auth
 	 *
 	 * @return $this
 	 */
-	public function setPublic($public)
+	public function setAuth($auth)
 	{
-		$this->public = $public;
+		$this->auth = $auth;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getError()
+	{
+		return $this->error;
+	}
+
+
+	/**
+	 * @param string $error
+	 *
+	 * @return $this
+	 */
+	public function setError($error)
+	{
+		$this->error = $error;
 
 		return $this;
 	}

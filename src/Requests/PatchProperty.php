@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class PatchProperty extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/property';
+	const URI = '/api/property';
 	const METHOD = 'PATCH';
 
 	/**
@@ -45,8 +45,8 @@ class PatchProperty extends SwaggerRequest
 		return $client->send($this, [
 			'200' => '\\SturentsLib\\Api\\Models\\PropertySaved',
 			'400' => '\\SturentsLib\\Api\\Models\\SendDataError',
-			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
-			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\Error',
 			'default' => '\\SturentsLib\\Api\\Models\\Error'
 		]);
 	}

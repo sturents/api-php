@@ -6,7 +6,7 @@ namespace SturentsLib\Api\Requests;
  */
 class DeleteMedia extends SwaggerRequest
 {
-	const URI = 'https://sturents.com/api/media';
+	const URI = '/api/media';
 	const METHOD = 'DELETE';
 
 	/**
@@ -44,8 +44,8 @@ class DeleteMedia extends SwaggerRequest
 	{
 		return $client->send($this, [
 			'204' => '',
-			'401' => '\\SturentsLib\\Api\\Models\\SendAuthError',
-			'404' => '\\SturentsLib\\Api\\Models\\SendAuthError',
+			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
+			'404' => '\\SturentsLib\\Api\\Models\\Error',
 			'default' => '\\SturentsLib\\Api\\Models\\Error'
 		]);
 	}
