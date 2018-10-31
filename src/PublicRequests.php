@@ -2,13 +2,6 @@
 
 namespace SturentsLib\Api;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\GuzzleException;
-use JsonMapper;
-use JsonMapper_Exception;
-use SturentsLib\Api\Models\Property;
-use SturentsLib\Api\Models\PropertyOutbound;
 use SturentsLib\Api\Requests\SwaggerRequest;
 
 class PublicRequests extends SturentsClient {
@@ -31,9 +24,20 @@ class PublicRequests extends SturentsClient {
 	 * @return array
 	 */
 	protected function authQuery(SwaggerRequest $request){
+		$timestamp = time();
+		$auth = $this->generateAuth($timestamp);
+
 		return [
-			'public' => $this->public_key,
+			'auth' => $auth,
+			'timestamp' => $timestamp,
 		];
 	}
 
+	/**
+	 * @param string $timestamp
+	 * @return string
+	 */
+	protected function generateAuth($timestamp){
+		return hash_hmac('sha256', (string)$timestamp, (string)$this->public_key);
+	}
 }
