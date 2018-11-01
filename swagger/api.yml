@@ -147,7 +147,7 @@ paths:
         '401':
           $ref: '#/definitions/AuthError'
         '404':
-          $ref: '#/definitions/Error'
+          $ref: '#/definitions/GetError'
         default:
           $ref: '#/definitions/Error'
   /property:
