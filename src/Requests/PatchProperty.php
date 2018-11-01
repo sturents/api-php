@@ -18,7 +18,7 @@ class PatchProperty extends SwaggerRequest
 	 */
 	public $property_id;
 
-	protected static $param_names = ['property_id'];
+	protected static $path_params = ['property_id'];
 
 
 	/**
@@ -40,9 +40,9 @@ class PatchProperty extends SwaggerRequest
 	 * @param SwaggerClient $client
 	 * @return string[]
 	 */
-	public function send(SwaggerClient $client)
+	public function sendWith(SwaggerClient $client)
 	{
-		return $client->send($this, [
+		return $client->make($this, [
 			'200' => '\\SturentsLib\\Api\\Models\\PropertySaved',
 			'400' => '\\SturentsLib\\Api\\Models\\SendDataError',
 			'401' => '\\SturentsLib\\Api\\Models\\AuthError',

@@ -16,28 +16,39 @@ securityDefinitions:
     type: apiKey
     in: query
     name: landlord
-    description: Property manager ID
+    description: |
+      The ID of the property manager whose data you wish to fetch
+      or modify. This field will always be sent
   Channel:
     type: apiKey
     in: query
     name: channel
-    description: Channel ID (must also provide property manager ID)
-  Public:
-    type: apiKey
-    in: query
-    name: public
-    description: Provided public key string for landlord or channel
+    description: |
+      If you are implementing a system which manages data for multiple
+      property managers you will have been given a "Channel ID" to use
+      when sending requests. This channel identifies your system, and
+      it will then be checked that your channel on the website has been
+      granted access to the property manager ID you provide in each
+      request
   Timestamp:
     type: apiKey
     in: query
     name: timestamp
-    description: Unix eopch timestamp in seconds
+    description: Unix eopch timestamp in seconds, used to prevent API replay
   Auth:
     type: apiKey
     in: query
     name: auth
     description: |
-      HMAC SHA256 of JSON body concat with timestamp, encoded with API key
+      There are two types of API key, but both function identically when
+      making a request. The key types are "upload key" and "display key".
+      The "display key" is used ONLY for making GET /properties requests.
+      The "upload key" is used for all other requests.
+
+      The "auth" query parameter will be an HMAC SHA256 of the request
+      body (i.e. JSON or blank for GET) concatenated with the timestamp,
+      signed with the applicable API key as abve
+
       E.g. for a request with a JSON body like,
 
          {
@@ -55,7 +66,7 @@ securityDefinitions:
 
       {"field":["val1","val2"]}1529593410
 
-      Then a HMAC generated, e.g. in PHP,
+      Then an HMAC generated, e.g. in PHP,
 
       $auth = hash_hmac('sha256', $json_compressed.$timestamp, $key)
 
@@ -67,17 +78,20 @@ paths:
       summary: Returns properties for the authenticated property manager
       security:
         - PropertyManager: []
-          Public: []
+          Auth: []
         - Channel: []
           PropertyManager: []
-          Public: []
+          Auth: []
       parameters:
         - in: query
           name: page
           type: integer
           required: false
           description: |
-            Where there are multiple pages of results, which one to return
+            When there are multiple pages of results, which one to return
+            If the page number is not provided then the first page will be
+            returned. If the page number is too high no results (404) will
+            be returned
       tags:
         - Displaying data on external website
         - Properties
@@ -614,18 +628,10 @@ paths:
 definitions:
   GetError:
     description: |
-      400 - you didn't supply correct query string fields for your chosen
-            use case (see auth features of each endpoint)
-      404 - the property manager or channel does not exist, or the
-            property manager does not have any properties
+      The requested GET entities did not exist for the property manager
+      or sub-resource requested
     type: object
     properties:
-      landlord:
-        type: string
-        description: Informs that the provided "landlord" query string was incorrect
-      auth:
-        type: string
-        description: Indicates an issue with the provided "auth" key
       error:
         type: string
         description: Another error message not related to authenticaiton

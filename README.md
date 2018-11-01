@@ -28,11 +28,11 @@ Now you can create or use any object without having to worry about requiring its
     // described in the documentation:
     // https://sturents.com/software/developer/house-create
     
-    $sturents = new \SturentsLib\Api\AuthRequests(LANDLORD_ID, API_KEY);
+    $upload_client = new \SturentsLib\Api\UploadClient(LANDLORD_ID, UPLOAD_KEY);
     $put_property = new \SturentsLib\Api\Requests\PutProperty;
     $put_property->setBody($property);
     try {
-        $response = $put_property->send($sturents);
+        $response = $put_property->sendWith($upload_client);
     }
     catch (\Exception $e){
        echo "An unexpected problem happened: ".$e->getMessage();
@@ -49,10 +49,10 @@ Now you can create or use any object without having to worry about requiring its
     
 ## Fetch data from StuRents
 
-    $sturents = new \Sturents\Api\PublicRequests(LANDLORD_ID, PUBLIC_KEY);
+    $display_client = new \Sturents\Api\DisplayClient(LANDLORD_ID, DISPLAY_KEY);
     $get_properties = new \SturentsLib\Api\Requests\GetProperties;
     try {
-        $properties = $get_properties->send($sturents);
+        $properties = $get_properties->sendWith($display_client);
     }
     catch (\Exception $e){
        echo "A problem happened: ".$e->getMessage();

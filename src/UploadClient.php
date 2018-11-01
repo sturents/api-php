@@ -3,19 +3,19 @@ namespace SturentsLib\Api;
 
 use SturentsLib\Api\Requests\SwaggerRequest;
 
-class AuthRequests extends SturentsClient {
+class UploadClient extends SturentsClient {
 
-	private $api_key;
+	private $upload_key;
 
 	/**
 	 * SendHouses constructor
 	 *
 	 * @param int $landlord_id
-	 * @param string $api_key
+	 * @param string $upload_key
 	 */
-	public function __construct($landlord_id, $api_key){
+	public function __construct($landlord_id, $upload_key){
 		parent::__construct($landlord_id);
-		$this->api_key = $api_key;
+		$this->upload_key = $upload_key;
 	}
 
 	/**
@@ -38,6 +38,6 @@ class AuthRequests extends SturentsClient {
 	 * @return string
 	 */
 	protected function generateAuth($json, $timestamp){
-		return hash_hmac('sha256', (string)$json.(string)$timestamp, (string)$this->api_key);
+		return hash_hmac('sha256', (string)$json.(string)$timestamp, (string)$this->upload_key);
 	}
 }
