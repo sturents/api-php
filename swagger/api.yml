@@ -41,11 +41,11 @@ securityDefinitions:
     name: auth
     description: |
       There are two types of API key, but both function identically when
-      making a request. The key types are "upload_key" and "display_key".
-      The "display_key" is used ONLY for making GET /properties requests.
-      The "uplaod_key" is used for all other requests.
+      making a request. The key types are "upload key" and "display key".
+      The "display key" is used ONLY for making GET /properties requests.
+      The "upload key" is used for all other requests.
 
-      The "auth" query parameter will be and HMAC SHA256 of the request
+      The "auth" query parameter will be an HMAC SHA256 of the request
       body (i.e. JSON or blank for GET) concatenated with the timestamp,
       signed with the applicable API key as abve
 
@@ -66,7 +66,7 @@ securityDefinitions:
 
       {"field":["val1","val2"]}1529593410
 
-      Then a HMAC generated, e.g. in PHP,
+      Then an HMAC generated, e.g. in PHP,
 
       $auth = hash_hmac('sha256', $json_compressed.$timestamp, $key)
 
