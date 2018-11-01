@@ -15,9 +15,9 @@ class GetTenancyTemplates extends SwaggerRequest
 	 * @param SwaggerClient $client
 	 * @return string[]
 	 */
-	public function send(SwaggerClient $client)
+	public function sendWith(SwaggerClient $client)
 	{
-		return $client->send($this, [
+		return $client->make($this, [
 			'200' => '\\SturentsLib\\Api\\Models\\TenancyTemplate',
 			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
 			'404' => '\\SturentsLib\\Api\\Models\\GetError',

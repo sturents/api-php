@@ -20,7 +20,7 @@ class GetRooms extends SwaggerRequest
 	 */
 	public $property_id;
 
-	protected static $param_names = ['property_id'];
+	protected static $path_params = ['property_id'];
 
 
 	public function __construct($property_id)
@@ -33,9 +33,9 @@ class GetRooms extends SwaggerRequest
 	 * @param SwaggerClient $client
 	 * @return string[]
 	 */
-	public function send(SwaggerClient $client)
+	public function sendWith(SwaggerClient $client)
 	{
-		return $client->send($this, [
+		return $client->make($this, [
 			'200' => '\\SturentsLib\\Api\\Models\\RoomOutbound',
 			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
 			'404' => '\\SturentsLib\\Api\\Models\\GetError',

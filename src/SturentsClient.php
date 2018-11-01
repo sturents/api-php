@@ -66,7 +66,7 @@ abstract class SturentsClient implements SwaggerClient {
 	 * @return SwaggerModel|Models\SwaggerModel[]
 	 * @throws SturentsException
 	 */
-	public function send(SwaggerRequest $request, array $response_models){
+	public function make(SwaggerRequest $request, array $response_models){
 		try {
 			$query = [
 				'landlord' => $this->landlord_id,
