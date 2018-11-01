@@ -4,7 +4,7 @@ namespace SturentsLib\Api;
 
 use SturentsLib\Api\Requests\SwaggerRequest;
 
-class DisplayRequests extends SturentsClient {
+class DisplayClient extends SturentsClient {
 
 	private $display_key;
 

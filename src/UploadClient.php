@@ -3,7 +3,7 @@ namespace SturentsLib\Api;
 
 use SturentsLib\Api\Requests\SwaggerRequest;
 
-class UploadRequests extends SturentsClient {
+class UploadClient extends SturentsClient {
 
 	private $upload_key;
 
