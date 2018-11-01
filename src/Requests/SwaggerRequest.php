@@ -374,6 +374,7 @@ class SwaggerRequest implements RequestInterface {
 			$query[] = $this->{$param_name};
 		}
 		if (!empty($query)){
+			/** @noinspection PhpUnusedLocalVariableInspection */
 			$uri .= '/'.implode('/', $query);
 		}
 
