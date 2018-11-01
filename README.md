@@ -28,7 +28,7 @@ Now you can create or use any object without having to worry about requiring its
     // described in the documentation:
     // https://sturents.com/software/developer/house-create
     
-    $sturents = new \SturentsLib\Api\AuthRequests(LANDLORD_ID, API_KEY);
+    $sturents = new \SturentsLib\Api\UploadRequests(LANDLORD_ID, UPLOAD_KEY);
     $put_property = new \SturentsLib\Api\Requests\PutProperty;
     $put_property->setBody($property);
     try {
@@ -49,7 +49,7 @@ Now you can create or use any object without having to worry about requiring its
     
 ## Fetch data from StuRents
 
-    $sturents = new \Sturents\Api\PublicRequests(LANDLORD_ID, PUBLIC_KEY);
+    $sturents = new \Sturents\Api\DisplayRequests(LANDLORD_ID, DISPLAY_KEY);
     $get_properties = new \SturentsLib\Api\Requests\GetProperties;
     try {
         $properties = $get_properties->send($sturents);
