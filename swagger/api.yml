@@ -71,6 +71,13 @@ paths:
         - Channel: []
           PropertyManager: []
           Public: []
+      parameters:
+        - in: query
+          name: page
+          type: integer
+          required: false
+          description: |
+            Where there are multiple pages of results, which one to return
       tags:
         - Displaying data on external website
         - Properties

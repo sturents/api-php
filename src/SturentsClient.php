@@ -72,7 +72,7 @@ abstract class SturentsClient implements SwaggerClient {
 				'landlord' => $this->landlord_id,
 				'version' => self::VERSION,
 			];
-			$query = array_merge($query, $this->authQuery($request));
+			$query = array_merge($query, $this->authQuery($request), $request->getQuery());
 			$uri = $request->getUri()->withQuery(http_build_query($query));
 			$client = $this->getClient();
 

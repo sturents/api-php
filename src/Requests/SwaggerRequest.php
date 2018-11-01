@@ -15,6 +15,8 @@ class SwaggerRequest implements RequestInterface {
 
 	protected static $param_names = [];
 
+	protected static $query_params = [];
+
 	protected $headers = [];
 	/**
 	 * @var UriInterface
@@ -364,6 +366,17 @@ class SwaggerRequest implements RequestInterface {
 
 	private function setUri(UriInterface $uri){
 		$this->uri = $uri;
+	}
+
+	public function getQuery(){
+		$query = [];
+		foreach (static::$query_params as $param_name){
+			if (!is_null($this->{$param_name})){
+				$query[$param_name] = $this->{$param_name};
+			}
+		}
+
+		return $query;
 	}
 
 	private function makeUri(){
