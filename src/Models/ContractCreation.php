@@ -11,6 +11,20 @@ namespace SturentsLib\Api\Models;
 class ContractCreation extends ContractAbstract
 {
 	/**
+	 *   A contract may be temporarily unavailable for some reason; this field
+	 *	 allows setting or reading that status. API consumers may want to discard
+	 *	 contracts with this setting, or may want to display a different status to
+	 *	 users. If this is set to true then the Contract is not available, but can
+	 *	 still be edited. Being not available means it is not returned for
+	 *	 GET /properties requests, and Book Now URLs will not work for it. API senders
+	 *	 might tie this to a similar internal status, but this should not be used to
+	 *	 permanently remove a Contract - use the DELETE method instead for that purpose.
+	 *
+	 * @var boolean
+	 */
+	protected $disabled;
+
+	/**
 	 * A unique identifier for a Tenancy Template fetched from
 	 * the /contract-templates endpoint. A tenancy template
 	 * allows a tenancy to be created for tenants who are renting
@@ -57,6 +71,28 @@ class ContractCreation extends ContractAbstract
 	 * @var Price
 	 */
 	protected $price;
+
+
+	/**
+	 * @return boolean
+	 */
+	public function getDisabled()
+	{
+		return $this->disabled;
+	}
+
+
+	/**
+	 * @param boolean $disabled
+	 *
+	 * @return $this
+	 */
+	public function setDisabled($disabled)
+	{
+		$this->disabled = $disabled;
+
+		return $this;
+	}
 
 
 	/**
@@ -194,4 +230,3 @@ class ContractCreation extends ContractAbstract
 		return $this;
 	}
 }
-

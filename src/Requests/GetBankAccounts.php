@@ -19,9 +19,8 @@ class GetBankAccounts extends SwaggerRequest
 		return $client->make($this, [
 			'200' => '\\SturentsLib\\Api\\Models\\BankAccount',
 			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
-			'404' => '\\SturentsLib\\Api\\Models\\Error',
+			'404' => '\\SturentsLib\\Api\\Models\\GetError',
 			'default' => '\\SturentsLib\\Api\\Models\\Error'
 		]);
 	}
 }
-

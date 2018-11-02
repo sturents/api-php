@@ -39,18 +39,6 @@ class ContractAbstract extends SwaggerModel
 	protected $min_contract_days;
 
 	/**
-	 * A contract may be temporarily unavailable for some reason; this field
-	 * allows setting or reading that status. API consumers may want to discard
-	 * contracts with this setting, or may want to display a different status to
-	 * users. Book Now URLs will not work for "paused=true" contracts. API senders
-	 * might tie this to a similar internal status, but this should not be used to
-	 * permanently remove a Contract - use the DELETE method instead for that purpose.
-	 *
-	 * @var boolean
-	 */
-	protected $paused;
-
-	/**
 	 * @var Utilities
 	 */
 	protected $utilities;
@@ -151,28 +139,6 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @return boolean
-	 */
-	public function getPaused()
-	{
-		return $this->paused;
-	}
-
-
-	/**
-	 * @param boolean $paused
-	 *
-	 * @return $this
-	 */
-	public function setPaused($paused)
-	{
-		$this->paused = $paused;
-
-		return $this;
-	}
-
-
-	/**
 	 * @return Utilities
 	 */
 	public function getUtilities()
@@ -228,4 +194,3 @@ class ContractAbstract extends SwaggerModel
 		return $this;
 	}
 }
-

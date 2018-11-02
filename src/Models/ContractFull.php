@@ -10,9 +10,14 @@ namespace SturentsLib\Api\Models;
 class ContractFull extends ContractWithRooms
 {
 	/**
-	 * If this is set to true then the Contract is not available
-	 * but can still be edited. Contracts which are disabled are
-	 * not returned for GET /properties requests
+	 *   A contract may be temporarily unavailable for some reason; this field
+	 *	 allows setting or reading that status. API consumers may want to discard
+	 *	 contracts with this setting, or may want to display a different status to
+	 *	 users. If this is set to true then the Contract is not available, but can
+	 *	 still be edited. Being not available means it is not returned for
+	 *	 GET /properties requests, and Book Now URLs will not work for it. API senders
+	 *	 might tie this to a similar internal status, but this should not be used to
+	 *	 permanently remove a Contract - use the DELETE method instead for that purpose.
 	 *
 	 * @var boolean
 	 */
@@ -70,4 +75,3 @@ class ContractFull extends ContractWithRooms
 		return $this;
 	}
 }
-
