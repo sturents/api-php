@@ -647,6 +647,9 @@ definitions:
       auth:
         type: string
         description: Indicates an issue with the provided "auth" token
+      channel:
+        type: string
+        description: Indicates an issue with the provided "channel" token
   SendDataError:
     description: |
       There were problems with the input data in the request body.

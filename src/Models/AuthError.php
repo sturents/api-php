@@ -21,6 +21,12 @@ class AuthError extends SwaggerModel
 	 */
 	protected $auth;
 
+	/**
+	 * Indicates an issue with the provided "channel" token
+	 * @var string
+	 */
+	protected $channel;
+
 
 	/**
 	 * @return string
@@ -64,5 +70,26 @@ class AuthError extends SwaggerModel
 
 		return $this;
 	}
-}
 
+
+	/**
+	 * @return string
+	 */
+	public function getChannel()
+	{
+		return $this->channel;
+	}
+
+
+	/**
+	 * @param string $channel
+	 *
+	 * @return $this
+	 */
+	public function setChannel($channel)
+	{
+		$this->channel = $channel;
+
+		return $this;
+	}
+}
