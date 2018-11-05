@@ -34,15 +34,16 @@ securityDefinitions:
     type: apiKey
     in: query
     name: timestamp
-    description: Unix eopch timestamp in seconds, used to prevent API replay
+    description: Unix epoch timestamp in seconds, used to prevent API replay
   Auth:
     type: apiKey
     in: query
     name: auth
     description: |
-      There are two types of API key, but both function identically when
-      making a request. The key types are "upload key" and "display key".
+      There are three types of API key, but all function identically when
+      making a request. The key types are "upload key", "display key", and "channel key".
       The "display key" is used ONLY for making GET /properties requests.
+      The "channel key" is used only when making a request with a channel value set.
       The "upload key" is used for all other requests.
 
       The "auth" query parameter will be an HMAC SHA256 of the request
@@ -245,7 +246,7 @@ paths:
   /tenancy-templates:
     get:
       summary: |
-        Returns tenancy templates for the authenticated property manager
+        Returns tenancy templates for the authenticated property manager.
         The IDs of these templates will be required to set up Contract
         entities using a specific tenancy template
       security:
@@ -271,7 +272,7 @@ paths:
   /payment-structures:
     get:
       summary: |
-        Returns payment schedules for the authenticated property manager
+        Returns payment schedules for the authenticated property manager.
         The IDs of these schedules will be required to set up Contract
         entities using a specific payment schedule
       security:
