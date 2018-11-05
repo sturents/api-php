@@ -78,9 +78,11 @@ paths:
       summary: Returns properties for the authenticated property manager
       security:
         - PropertyManager: []
+          Timestamp: []
           Auth: []
         - Channel: []
           PropertyManager: []
+          Timestamp: []
           Auth: []
       parameters:
         - in: query
@@ -101,6 +103,33 @@ paths:
             A list of property objects
           schema:
             $ref: '#/definitions/ListProperties'
+        '400':
+          $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/definitions/AuthError'
+        '404':
+          $ref: '#/definitions/GetError'
+        default:
+          $ref: '#/definitions/Error'
+  /summary:
+    get:
+      summary: Returns all property managers in the channel
+      security:
+        - Channel: []
+          PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Fetching data to make changes
+        - Properties
+      responses:
+        '200':
+          description: |
+            A list of property manager objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PropertyManager'
         '400':
           $ref: '#/definitions/Error'
         '401':
@@ -1301,6 +1330,24 @@ definitions:
         type: string
         description: |
           Pass this as the "schedule_id" field when creating/updating a contract
+  PropertyManager:
+    properties:
+      landlord:
+        type: string
+        description: |
+          Pass this as the "landlord" field when requesting data for this account
+      title:
+        type: string
+        description: |
+          Title of this account on the StuRents website
+      company_title:
+        type: string
+        description: |
+          Title of the organisation this account belongs to on the StuRents website
+      company:
+        type: string
+        description: |
+          ID for the organisation this account belongs to on the StuRents website
   BankAccount:
     properties:
       descriptor:
