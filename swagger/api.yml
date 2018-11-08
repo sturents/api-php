@@ -34,15 +34,16 @@ securityDefinitions:
     type: apiKey
     in: query
     name: timestamp
-    description: Unix eopch timestamp in seconds, used to prevent API replay
+    description: Unix epoch timestamp in seconds, used to prevent API replay
   Auth:
     type: apiKey
     in: query
     name: auth
     description: |
-      There are two types of API key, but both function identically when
-      making a request. The key types are "upload key" and "display key".
+      There are three types of API key, but all function identically when
+      making a request. The key types are "upload key", "display key", and "channel key".
       The "display key" is used ONLY for making GET /properties requests.
+      The "channel key" is used only when making a request with a channel value set.
       The "upload key" is used for all other requests.
 
       The "auth" query parameter will be an HMAC SHA256 of the request
@@ -78,9 +79,11 @@ paths:
       summary: Returns properties for the authenticated property manager
       security:
         - PropertyManager: []
+          Timestamp: []
           Auth: []
         - Channel: []
           PropertyManager: []
+          Timestamp: []
           Auth: []
       parameters:
         - in: query
@@ -101,6 +104,33 @@ paths:
             A list of property objects
           schema:
             $ref: '#/definitions/ListProperties'
+        '400':
+          $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/definitions/AuthError'
+        '404':
+          $ref: '#/definitions/GetError'
+        default:
+          $ref: '#/definitions/Error'
+  /summary:
+    get:
+      summary: Returns all property managers in the channel
+      security:
+        - Channel: []
+          PropertyManager: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Fetching data to make changes
+        - Properties
+      responses:
+        '200':
+          description: |
+            A list of property manager objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PropertyManager'
         '400':
           $ref: '#/definitions/Error'
         '401':
@@ -216,7 +246,7 @@ paths:
   /tenancy-templates:
     get:
       summary: |
-        Returns tenancy templates for the authenticated property manager
+        Returns tenancy templates for the authenticated property manager.
         The IDs of these templates will be required to set up Contract
         entities using a specific tenancy template
       security:
@@ -242,7 +272,7 @@ paths:
   /payment-structures:
     get:
       summary: |
-        Returns payment schedules for the authenticated property manager
+        Returns payment schedules for the authenticated property manager.
         The IDs of these schedules will be required to set up Contract
         entities using a specific payment schedule
       security:
@@ -647,6 +677,9 @@ definitions:
       auth:
         type: string
         description: Indicates an issue with the provided "auth" token
+      channel:
+        type: string
+        description: Indicates an issue with the provided "channel" token
   SendDataError:
     description: |
       There were problems with the input data in the request body.
@@ -1298,6 +1331,24 @@ definitions:
         type: string
         description: |
           Pass this as the "schedule_id" field when creating/updating a contract
+  PropertyManager:
+    properties:
+      landlord:
+        type: string
+        description: |
+          Pass this as the "landlord" field when requesting data for this account
+      title:
+        type: string
+        description: |
+          Title of this account on the StuRents website
+      company_title:
+        type: string
+        description: |
+          Title of the organisation this account belongs to on the StuRents website
+      company:
+        type: string
+        description: |
+          ID for the organisation this account belongs to on the StuRents website
   BankAccount:
     properties:
       descriptor:
