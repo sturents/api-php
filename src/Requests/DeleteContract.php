@@ -1,6 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
-use SwaggerGen\SwaggerModel;
+use SturentsLib\Api\Models\SwaggerModel;
 
 /**
  * Deletes a contract on a property. It will no longer appear

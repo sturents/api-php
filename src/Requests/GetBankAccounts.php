@@ -1,6 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
-use SwaggerGen\SwaggerModel;
+use SturentsLib\Api\Models\SwaggerModel;
 
 /**
  * Returns available bank accounts where rent can be paid
