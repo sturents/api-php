@@ -33,6 +33,11 @@ abstract class SturentsClient implements SwaggerClient {
 	 */
 	private $client;
 
+	/**
+	 * @var bool
+	 */
+	private $debug = false;
+
 	public function __construct($landlord_id){
 		$this->landlord_id = $landlord_id;
 	}
@@ -82,6 +87,7 @@ abstract class SturentsClient implements SwaggerClient {
 			}
 
 			$request = $request->withUri($uri);
+			$this->debug("Requesting URL $uri");
 
 			$response = $client->send($request);
 		}
@@ -120,6 +126,7 @@ abstract class SturentsClient implements SwaggerClient {
 	 * @throws SturentsException
 	 */
 	protected function handleResponse(ResponseInterface $response, array $response_models){
+
 		$json = (string)$response->getBody();
 
 		$status = (string)$response->getStatusCode();
@@ -138,6 +145,7 @@ abstract class SturentsClient implements SwaggerClient {
 
 		$data = json_decode($json);
 		if (!$data){
+			$this->debug($json);
 			throw new SturentsException("The returned JSON data could not be processed with error: ".json_last_error_msg());
 		}
 
@@ -185,5 +193,28 @@ abstract class SturentsClient implements SwaggerClient {
 		}
 
 		return $this->mapper;
+	}
+
+	private function debug(string $message){
+		if (!$this->debug){
+			return;
+		}
+
+		echo $message;
+	}
+
+	/**
+	 */
+	public function useDebug(){
+		$this->debug = true;
+
+		return $this;
+	}
+
+	/**
+	 * @return GuzzleException
+	 */
+	public function getDebugRequestException(){
+		return $this->debug_request_exception;
 	}
 }
