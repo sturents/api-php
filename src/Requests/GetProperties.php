@@ -24,7 +24,7 @@ class GetProperties extends SwaggerRequest
 	protected static $query_params = ['page'];
 
 
-	public function __construct($page)
+	public function __construct($page = null)
 	{
 		$this->page = $page;
 	}
