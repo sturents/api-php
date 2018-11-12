@@ -65,4 +65,3 @@ class TenancyTemplate extends SwaggerModel
 		return $this;
 	}
 }
-

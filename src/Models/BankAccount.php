@@ -63,4 +63,3 @@ class BankAccount extends SwaggerModel
 		return $this;
 	}
 }
-

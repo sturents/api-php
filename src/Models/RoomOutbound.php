@@ -41,4 +41,3 @@ class RoomOutbound extends Room
 		return $this;
 	}
 }
-

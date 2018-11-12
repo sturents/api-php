@@ -1,5 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
+use SwaggerGen\SwaggerModel;
 
 /**
  * Update a contract on a property
@@ -48,7 +49,7 @@ class PatchContract extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return string[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
@@ -61,4 +62,3 @@ class PatchContract extends SwaggerRequest
 		]);
 	}
 }
-

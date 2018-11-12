@@ -154,4 +154,3 @@ class Room extends SwaggerModel
 		return $this;
 	}
 }
-

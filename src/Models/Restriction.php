@@ -130,4 +130,3 @@ class Restriction extends SwaggerModel
 		return $this;
 	}
 }
-

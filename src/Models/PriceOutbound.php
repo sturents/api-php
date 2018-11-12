@@ -39,4 +39,3 @@ class PriceOutbound extends Price
 		return $this;
 	}
 }
-

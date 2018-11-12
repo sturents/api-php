@@ -105,4 +105,3 @@ class ScheduleOption extends SwaggerModel
 		return $this;
 	}
 }
-

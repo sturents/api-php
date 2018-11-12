@@ -34,4 +34,3 @@ class RoomSaved extends SwaggerModel
 		return $this;
 	}
 }
-

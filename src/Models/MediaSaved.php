@@ -34,4 +34,3 @@ class MediaSaved extends SwaggerModel
 		return $this;
 	}
 }
-

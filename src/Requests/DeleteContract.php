@@ -1,5 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
+use SwaggerGen\SwaggerModel;
 
 /**
  * Deletes a contract on a property. It will no longer appear
@@ -40,7 +41,7 @@ class DeleteContract extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return string[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
@@ -52,4 +53,3 @@ class DeleteContract extends SwaggerRequest
 		]);
 	}
 }
-

@@ -1,5 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
+use SwaggerGen\SwaggerModel;
 
 /**
  * Returns a list of all available facilities which can be
@@ -12,7 +13,7 @@ class GetFacilities extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return string[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
@@ -21,4 +22,3 @@ class GetFacilities extends SwaggerRequest
 		]);
 	}
 }
-

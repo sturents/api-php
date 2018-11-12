@@ -147,4 +147,3 @@ class PropertyOutbound extends Property
 		return $this;
 	}
 }
-

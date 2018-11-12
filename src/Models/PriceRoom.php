@@ -40,4 +40,3 @@ class PriceRoom extends Price
 		return $this;
 	}
 }
-

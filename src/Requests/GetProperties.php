@@ -1,5 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
+use SwaggerGen\SwaggerModel;
 
 /**
  * Returns properties for the authenticated property manager
@@ -23,7 +24,7 @@ class GetProperties extends SwaggerRequest
 	protected static $query_params = ['page'];
 
 
-	public function __construct($page = null)
+	public function __construct($page)
 	{
 		$this->page = $page;
 	}
@@ -31,7 +32,7 @@ class GetProperties extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return string[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

@@ -62,4 +62,3 @@ class PropertySaved extends SwaggerModel
 		return $this;
 	}
 }
-

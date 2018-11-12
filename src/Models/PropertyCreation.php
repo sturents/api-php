@@ -38,4 +38,3 @@ class PropertyCreation extends Property
 		return $this;
 	}
 }
-

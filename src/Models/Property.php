@@ -534,4 +534,3 @@ class Property extends SwaggerModel
 		return $this;
 	}
 }
-

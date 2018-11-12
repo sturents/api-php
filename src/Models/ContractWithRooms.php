@@ -87,4 +87,3 @@ class ContractWithRooms extends ContractAbstract
 		return $this;
 	}
 }
-

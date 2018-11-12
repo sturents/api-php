@@ -107,4 +107,3 @@ class Price extends SwaggerModel
 		return $this;
 	}
 }
-

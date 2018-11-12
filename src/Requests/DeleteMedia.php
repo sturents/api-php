@@ -1,5 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
+use SwaggerGen\SwaggerModel;
 
 /**
  * Deletes a media item from a property
@@ -38,7 +39,7 @@ class DeleteMedia extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return string[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
@@ -50,4 +51,3 @@ class DeleteMedia extends SwaggerRequest
 		]);
 	}
 }
-

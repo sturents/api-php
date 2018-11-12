@@ -1,5 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
+use SwaggerGen\SwaggerModel;
 
 /**
  * Remove a room from a property
@@ -39,7 +40,7 @@ class DeleteRoom extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return string[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
@@ -51,4 +52,3 @@ class DeleteRoom extends SwaggerRequest
 		]);
 	}
 }
-

@@ -101,4 +101,3 @@ class ListProperties extends SwaggerModel
 		return $this;
 	}
 }
-

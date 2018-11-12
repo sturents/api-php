@@ -37,4 +37,3 @@ class GetError extends SwaggerModel
 		return $this;
 	}
 }
-

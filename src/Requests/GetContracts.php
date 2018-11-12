@@ -1,5 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
+use SwaggerGen\SwaggerModel;
 
 /**
  * Returns contracts for the specified property. Includes the contract_id
@@ -30,7 +31,7 @@ class GetContracts extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return string[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
@@ -42,4 +43,3 @@ class GetContracts extends SwaggerRequest
 		]);
 	}
 }
-

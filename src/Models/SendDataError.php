@@ -50,4 +50,3 @@ class SendDataError extends SwaggerModel
 		return $this;
 	}
 }
-

@@ -65,4 +65,3 @@ class PaymentSchedule extends SwaggerModel
 		return $this;
 	}
 }
-

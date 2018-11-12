@@ -199,4 +199,3 @@ class Address extends SwaggerModel
 		return $this;
 	}
 }
-

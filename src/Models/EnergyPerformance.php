@@ -172,4 +172,3 @@ class EnergyPerformance extends SwaggerModel
 		return $this;
 	}
 }
-

@@ -34,4 +34,3 @@ class ContractSaved extends SwaggerModel
 		return $this;
 	}
 }
-

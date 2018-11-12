@@ -1,5 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
+use SwaggerGen\SwaggerModel;
 
 /**
  * Returns rooms for the specified property. Includes the room_id
@@ -31,7 +32,7 @@ class GetRooms extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return string[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
@@ -43,4 +44,3 @@ class GetRooms extends SwaggerRequest
 		]);
 	}
 }
-

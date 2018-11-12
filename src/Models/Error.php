@@ -33,4 +33,3 @@ class Error extends SwaggerModel
 		return $this;
 	}
 }
-

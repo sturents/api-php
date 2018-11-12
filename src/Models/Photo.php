@@ -91,4 +91,3 @@ class Photo extends SwaggerModel
 		return $this;
 	}
 }
-

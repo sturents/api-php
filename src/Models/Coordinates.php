@@ -60,4 +60,3 @@ class Coordinates extends SwaggerModel
 		return $this;
 	}
 }
-

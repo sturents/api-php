@@ -254,4 +254,3 @@ class Eligibility extends SwaggerModel
 		return $this;
 	}
 }
-

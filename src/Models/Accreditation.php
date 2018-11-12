@@ -93,4 +93,3 @@ class Accreditation extends SwaggerModel
 		return $this;
 	}
 }
-

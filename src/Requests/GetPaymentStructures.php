@@ -1,8 +1,9 @@
 <?php
 namespace SturentsLib\Api\Requests;
+use SwaggerGen\SwaggerModel;
 
 /**
- * Returns payment schedules for the authenticated property manager
+ * Returns payment schedules for the authenticated property manager.
  * The IDs of these schedules will be required to set up Contract
  * entities using a specific payment schedule
  */
@@ -13,7 +14,7 @@ class GetPaymentStructures extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return string[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
@@ -25,4 +26,3 @@ class GetPaymentStructures extends SwaggerRequest
 		]);
 	}
 }
-

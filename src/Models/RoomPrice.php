@@ -38,4 +38,3 @@ class RoomPrice extends Price
 		return $this;
 	}
 }
-

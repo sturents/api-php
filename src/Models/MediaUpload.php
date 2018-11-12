@@ -98,4 +98,3 @@ class MediaUpload extends SwaggerModel
 		return $this;
 	}
 }
-

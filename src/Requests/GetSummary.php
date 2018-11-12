@@ -1,5 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
+use SwaggerGen\SwaggerModel;
 
 /**
  * Returns all property managers in the channel
@@ -9,10 +10,9 @@ class GetSummary extends SwaggerRequest
 	const URI = '/api/summary';
 	const METHOD = 'GET';
 
-
 	/**
 	 * @param SwaggerClient $client
-	 * @return string[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

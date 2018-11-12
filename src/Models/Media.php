@@ -137,4 +137,3 @@ class Media extends SwaggerModel
 		return $this;
 	}
 }
-

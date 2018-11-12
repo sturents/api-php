@@ -225,4 +225,3 @@ class Utilities extends SwaggerModel
 		return $this;
 	}
 }
-
