@@ -14,8 +14,8 @@ class PropertyOutbound extends Property
 	protected $property_id;
 
 	/**
-	 * One or more Room objects
-	 * @var Room[]
+	 * One or more RoomOutbound objects
+	 * @var RoomOutbound[]
 	 */
 	protected $room_details;
 
@@ -57,7 +57,7 @@ class PropertyOutbound extends Property
 
 
 	/**
-	 * @return Room[]
+	 * @return RoomOutbound[]
 	 */
 	public function getRoomDetails()
 	{
@@ -66,7 +66,7 @@ class PropertyOutbound extends Property
 
 
 	/**
-	 * @param Room[] $room_details
+	 * @param RoomOutbound[] $room_details
 	 *
 	 * @return $this
 	 */
@@ -79,7 +79,7 @@ class PropertyOutbound extends Property
 
 
 	/**
-	 * @param Room $room_detail
+	 * @param RoomOutbound $room_detail
 	 *
 	 * @return $this
 	 */

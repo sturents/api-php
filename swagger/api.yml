@@ -816,9 +816,9 @@ definitions:
               a unique reference to the property which will not change
           room_details:
             type: array
-            description: One or more Room objects
+            description: One or more RoomOutbound objects
             items:
-              $ref: '#/definitions/Room'
+              $ref: '#/definitions/RoomOutbound'
           contracts:
             type: array
             description: |
@@ -1296,7 +1296,8 @@ definitions:
           "True" if an en-suite bathroom is present for the room
   RoomOutbound:
     description: |
-      A Room object fetched from the GET /rooms/{property_id} endpoint
+      A Room object fetched from the GET /rooms/{property_id} endpoint,
+      or as listed in a PropertyOutbound object,
       which provides a room_id field to edit or delete the room
     allOf:
       - $ref: '#/definitions/Room'
