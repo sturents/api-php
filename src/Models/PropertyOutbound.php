@@ -83,7 +83,7 @@ class PropertyOutbound extends Property
 	 *
 	 * @return $this
 	 */
-	public function addRoomDetail(Room $room_detail)
+	public function addRoomDetail(RoomOutbound $room_detail)
 	{
 		$this->room_details[] = $room_detail;
 
