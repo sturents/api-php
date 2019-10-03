@@ -944,6 +944,13 @@ definitions:
           These will be downloaded and stored on StuRents' system
         items:
           type: string
+      tours:
+        type: array
+        description: |
+          Zero or more 360 tour URLs to an external service. Any 360 tour source can be supplied
+          and used as a link
+        items:
+          type: string
   Photo:
     type: object
     properties:

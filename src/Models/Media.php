@@ -32,6 +32,14 @@ class Media extends SwaggerModel
 	 */
 	protected $floorplans;
 
+	/**
+	 * Zero or more 360 tour URLs to an external service. Any 360 tour source can be supplied
+	 * and used as a link
+	 *
+	 * @var string[]
+	 */
+	protected $tours;
+
 
 	/**
 	 * @return Photo[]
@@ -133,6 +141,41 @@ class Media extends SwaggerModel
 	public function addFloorplan($floorplan)
 	{
 		$this->floorplans[] = $floorplan;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string[]
+	 */
+	public function getTours()
+	{
+		return $this->tours;
+	}
+
+
+	/**
+	 * @param string[] $tours
+	 *
+	 * @return $this
+	 */
+	public function setTours(array $tours)
+	{
+		$this->tours = $tours;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param string $tour
+	 *
+	 * @return $this
+	 */
+	public function addTour($tour)
+	{
+		$this->tours[] = $tour;
 
 		return $this;
 	}
