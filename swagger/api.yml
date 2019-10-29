@@ -921,6 +921,13 @@ definitions:
   Media:
     type: object
     properties:
+      photos_360:
+        type: array
+        description: |
+          Zero or more 360 photos
+          The order of photos will be maintained in the gallery;
+        items:
+          $ref: '#/definitions/Photo'
       photos:
         type: array
         description: |
