@@ -7,6 +7,14 @@ namespace SturentsLib\Api\Models;
 class Media extends SwaggerModel
 {
 	/**
+	 * Zero or more 360 photos
+	 * The order of photos will be maintained in the gallery;
+	 *
+	 * @var Photo[]
+	 */
+	protected $photos_360;
+
+	/**
 	 * Zero or more photos
 	 * The order of photos will be maintained in the gallery;
 	 * the 1st will be the profile photo
@@ -39,6 +47,41 @@ class Media extends SwaggerModel
 	 * @var string[]
 	 */
 	protected $tours;
+
+
+	/**
+	 * @return Photo[]
+	 */
+	public function getPhotos360()
+	{
+		return $this->photos_360;
+	}
+
+
+	/**
+	 * @param Photo[] $photos_360
+	 *
+	 * @return $this
+	 */
+	public function setPhotos360(array $photos_360)
+	{
+		$this->photos_360 = $photos_360;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param Photo $photos_360
+	 *
+	 * @return $this
+	 */
+	public function addPhotos360(Photo $photos_360)
+	{
+		$this->photos_360[] = $photos_360;
+
+		return $this;
+	}
 
 
 	/**
