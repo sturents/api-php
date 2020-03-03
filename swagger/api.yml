@@ -941,6 +941,13 @@ definitions:
   Media:
     type: object
     properties:
+      photos_360:
+        type: array
+        description: |
+          Zero or more 360 photos
+          The order of photos will be maintained in the gallery;
+        items:
+          $ref: '#/definitions/Photo'
       photos:
         type: array
         description: |
@@ -962,6 +969,13 @@ definitions:
         description: |
           Zero or more URLs which link to floorplan files (image or pdf)
           These will be downloaded and stored on StuRents' system
+        items:
+          type: string
+      tours:
+        type: array
+        description: |
+          Zero or more 360 tour URLs to an external service. Any 360 tour source can be supplied
+          and used as a link
         items:
           type: string
   Photo:
