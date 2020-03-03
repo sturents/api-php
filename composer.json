@@ -8,13 +8,14 @@
 		}
 	],
 	"require": {
-		"php": ">=7.0",
+		"php": ">=7.1",
 		"guzzlehttp/guzzle": "~6.0",
 		"netresearch/jsonmapper": "^1.4",
 		"psr/http-message": "^1.0"
 	},
 	"require-dev": {
-		"sturents/swagger-php-model-generator": ">=0.0.11"
+		"roave/security-advisories": "dev-master",
+		"sturents/swagger-php-model-generator": "^0.1"
 	},
 	"autoload": {
 		"psr-4": {

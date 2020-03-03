@@ -13,7 +13,7 @@ class GetError extends SwaggerModel
 	 * Another error message not related to authenticaiton
 	 * @var string
 	 */
-	protected $error;
+	protected $error = '';
 
 
 	/**

@@ -7,11 +7,45 @@ namespace SturentsLib\Api\Models;
 class Property extends SwaggerModel
 {
 	/**
-	 * "house" or "pbsa"
+	 * Describes the property where HMOs are generally houses or single flats,
+	 * and PBSA are purpose built accommodation
 	 *
 	 * @var string
+	 * @required
 	 */
 	protected $designation;
+
+	/**
+	 * Zero or more facility names. Allowed names can be found
+	 * by making a GET /facilities request
+	 *
+	 * @var string[]
+	 */
+	protected $facilities = [];
+
+	/**
+	 * @var Address
+	 * @required
+	 */
+	protected $address;
+
+	/**
+	 * @var Coordinates
+	 * @required
+	 */
+	protected $coordinates;
+
+	/**
+	 * @var EnergyPerformance
+	 * @required
+	 */
+	protected $energy_performance;
+
+	/**
+	 * @var Eligibility
+	 * @required
+	 */
+	protected $eligibility;
 
 	/**
 	 * When designation is set to "house" this indicates whether
@@ -19,7 +53,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var boolean
 	 */
-	protected $rooms_let_individually;
+	protected $rooms_let_individually = false;
 
 	/**
 	 * When designation is set to "pbsa" this describes the total
@@ -28,7 +62,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var integer
 	 */
-	protected $quantity;
+	protected $quantity = 0;
 
 	/**
 	 * When designation is set to “pbsa” this describes the number
@@ -37,7 +71,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var integer
 	 */
-	protected $quantity_available;
+	protected $quantity_available = 0;
 
 	/**
 	 * When designation is set to "pbsa" each property record
@@ -47,7 +81,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $room_type;
+	protected $room_type = '';
 
 	/**
 	 * When designation is set to "pbsa" this indicates number of rooms
@@ -56,7 +90,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var integer
 	 */
-	protected $cluster_size;
+	protected $cluster_size = 0;
 
 	/**
 	 * A plain text or HTML description of the property.
@@ -66,20 +100,20 @@ class Property extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $description;
+	protected $description = '';
 
 	/**
 	 * Number of bathrooms
 	 * @var integer
 	 */
-	protected $bathrooms;
+	protected $bathrooms = 0;
 
 	/**
 	 * Floor space of the whole property in square metres
 	 *
 	 * @var float
 	 */
-	protected $floor_space;
+	protected $floor_space = 0.0;
 
 	/**
 	 * The unique ID for a bank account where it is intended that
@@ -90,36 +124,13 @@ class Property extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $bank_id;
-
-	/**
-	 * Zero or more facility names. Allowed names can be found
-	 * by making a GET /facilities request
-	 *
-	 * @var string[]
-	 */
-	protected $facilities;
-
-	/**
-	 * @var Address
-	 */
-	protected $address;
-
-	/**
-	 * @var Coordinates
-	 */
-	protected $coordinates;
-
-	/**
-	 * @var EnergyPerformance
-	 */
-	protected $energy_performance;
+	protected $bank_id = '';
 
 	/**
 	 * Zero or more accreditations
 	 * @var Accreditation[]
 	 */
-	protected $accreditations;
+	protected $accreditations = [];
 
 	/**
 	 * where true indicates that the property is not ready
@@ -127,12 +138,7 @@ class Property extends SwaggerModel
 	 *
 	 * @var boolean
 	 */
-	protected $disabled;
-
-	/**
-	 * @var Eligibility
-	 */
-	protected $eligibility;
+	protected $disabled = false;
 
 
 	/**
@@ -152,6 +158,129 @@ class Property extends SwaggerModel
 	public function setDesignation($designation)
 	{
 		$this->designation = $designation;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string[]
+	 */
+	public function getFacilities()
+	{
+		return $this->facilities;
+	}
+
+
+	/**
+	 * @param string[] $facilities
+	 *
+	 * @return $this
+	 */
+	public function setFacilities(array $facilities)
+	{
+		$this->facilities = $facilities;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param string $facility
+	 *
+	 * @return $this
+	 */
+	public function addFacility($facility)
+	{
+		$this->facilities[] = $facility;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return Address
+	 */
+	public function getAddress()
+	{
+		return $this->address;
+	}
+
+
+	/**
+	 * @param Address $address
+	 *
+	 * @return $this
+	 */
+	public function setAddress(Address $address)
+	{
+		$this->address = $address;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return Coordinates
+	 */
+	public function getCoordinates()
+	{
+		return $this->coordinates;
+	}
+
+
+	/**
+	 * @param Coordinates $coordinates
+	 *
+	 * @return $this
+	 */
+	public function setCoordinates(Coordinates $coordinates)
+	{
+		$this->coordinates = $coordinates;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return EnergyPerformance
+	 */
+	public function getEnergyPerformance()
+	{
+		return $this->energy_performance;
+	}
+
+
+	/**
+	 * @param EnergyPerformance $energy_performance
+	 *
+	 * @return $this
+	 */
+	public function setEnergyPerformance(EnergyPerformance $energy_performance)
+	{
+		$this->energy_performance = $energy_performance;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return Eligibility
+	 */
+	public function getEligibility()
+	{
+		return $this->eligibility;
+	}
+
+
+	/**
+	 * @param Eligibility $eligibility
+	 *
+	 * @return $this
+	 */
+	public function setEligibility(Eligibility $eligibility)
+	{
+		$this->eligibility = $eligibility;
 
 		return $this;
 	}
@@ -356,107 +485,6 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @return string[]
-	 */
-	public function getFacilities()
-	{
-		return $this->facilities;
-	}
-
-
-	/**
-	 * @param string[] $facilities
-	 *
-	 * @return $this
-	 */
-	public function setFacilities(array $facilities)
-	{
-		$this->facilities = $facilities;
-
-		return $this;
-	}
-
-
-	/**
-	 * @param string $facility
-	 *
-	 * @return $this
-	 */
-	public function addFacility($facility)
-	{
-		$this->facilities[] = $facility;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return Address
-	 */
-	public function getAddress()
-	{
-		return $this->address;
-	}
-
-
-	/**
-	 * @param Address $address
-	 *
-	 * @return $this
-	 */
-	public function setAddress(Address $address)
-	{
-		$this->address = $address;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return Coordinates
-	 */
-	public function getCoordinates()
-	{
-		return $this->coordinates;
-	}
-
-
-	/**
-	 * @param Coordinates $coordinates
-	 *
-	 * @return $this
-	 */
-	public function setCoordinates(Coordinates $coordinates)
-	{
-		$this->coordinates = $coordinates;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return EnergyPerformance
-	 */
-	public function getEnergyPerformance()
-	{
-		return $this->energy_performance;
-	}
-
-
-	/**
-	 * @param EnergyPerformance $energy_performance
-	 *
-	 * @return $this
-	 */
-	public function setEnergyPerformance(EnergyPerformance $energy_performance)
-	{
-		$this->energy_performance = $energy_performance;
-
-		return $this;
-	}
-
-
-	/**
 	 * @return Accreditation[]
 	 */
 	public function getAccreditations()
@@ -508,28 +536,6 @@ class Property extends SwaggerModel
 	public function setDisabled($disabled)
 	{
 		$this->disabled = $disabled;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return Eligibility
-	 */
-	public function getEligibility()
-	{
-		return $this->eligibility;
-	}
-
-
-	/**
-	 * @param Eligibility $eligibility
-	 *
-	 * @return $this
-	 */
-	public function setEligibility(Eligibility $eligibility)
-	{
-		$this->eligibility = $eligibility;
 
 		return $this;
 	}

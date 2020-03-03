@@ -12,42 +12,42 @@ class Utilities extends SwaggerModel
 	/**
 	 * @var boolean
 	 */
-	protected $water;
+	protected $water = false;
 
 	/**
 	 * @var boolean
 	 */
-	protected $gas;
+	protected $gas = false;
 
 	/**
 	 * @var boolean
 	 */
-	protected $electricity;
+	protected $electricity = false;
 
 	/**
 	 * @var boolean
 	 */
-	protected $broadband;
+	protected $broadband = false;
 
 	/**
 	 * @var boolean
 	 */
-	protected $phone;
+	protected $phone = false;
 
 	/**
 	 * @var boolean
 	 */
-	protected $contents_insurance;
+	protected $contents_insurance = false;
 
 	/**
 	 * @var boolean
 	 */
-	protected $tv_license;
+	protected $tv_license = false;
 
 	/**
 	 * @var boolean
 	 */
-	protected $council_tax;
+	protected $council_tax = false;
 
 
 	/**

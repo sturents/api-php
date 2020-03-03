@@ -705,6 +705,8 @@ definitions:
           $ref: '#/definitions/PropertyOutbound'
   Pagination:
     type: object
+    required:
+      - pages
     properties:
       pages:
         type: integer
@@ -723,11 +725,34 @@ definitions:
           If present this shows there is another page available prior to this one
   Property:
     type: object
+    required:
+      - designation
+      - address
+      - coordinates
+      - energy_performance
+      - eligibility
     properties:
       designation:
         type: string
+        enum: [house, pbsa]
         description: |
-          "house" or "pbsa"
+          Describes the property where HMOs are generally houses or single flats,
+          and PBSA are purpose built accommodation
+      facilities:
+        type: array
+        description: |
+          Zero or more facility names. Allowed names can be found
+          by making a GET /facilities request
+        items:
+          type: string
+      address:
+        $ref: '#/definitions/Address'
+      coordinates:
+        $ref: '#/definitions/Coordinates'
+      energy_performance:
+        $ref: '#/definitions/EnergyPerformance'
+      eligibility:
+        $ref: '#/definitions/Eligibility'
       rooms_let_individually:
         type: boolean
         description: |
@@ -780,19 +805,6 @@ definitions:
           retrived from the /bank-accounts endpoint. Note that this ID
           will not contain sensitive information, e.g. account number
           or sort code - that information cannot be retrieved
-      facilities:
-        type: array
-        description: |
-          Zero or more facility names. Allowed names can be found
-          by making a GET /facilities request
-        items:
-          type: string
-      address:
-        $ref: '#/definitions/Address'
-      coordinates:
-        $ref: '#/definitions/Coordinates'
-      energy_performance:
-        $ref: '#/definitions/EnergyPerformance'
       accreditations:
         type: array
         description: Zero or more accreditations
@@ -803,8 +815,6 @@ definitions:
         description: |
           where true indicates that the property is not ready
           to be made public to students or shown in search results
-      eligibility:
-        $ref: '#/definitions/Eligibility'
   PropertyOutbound:
     allOf:
       - $ref: '#/definitions/Property'
@@ -833,6 +843,8 @@ definitions:
     allOf:
       - $ref: '#/definitions/Property'
       - type: object
+        required:
+          - initial_rooms
         properties:
           initial_rooms:
             type: integer
@@ -843,19 +855,23 @@ definitions:
               is created, set this to -1
   Address:
     type: object
+    required:
+      - road_name
+      - city
+      - postcode
     properties:
-      property_name:
-        type: string
-        description: This is required if "property_number" is empty
-      property_number:
-        type: string
-        description: This is required if "property_name" is empty
       road_name:
         type: string
       city:
         type: string
       postcode:
         type: string
+      property_name:
+        type: string
+        description: This is required if "property_number" is empty
+      property_number:
+        type: string
+        description: This is required if "property_name" is empty
       country:
         type: string
         description: 2 character country code corresponding to the ISO 3166-1 alpha-2 list of country codes
@@ -897,6 +913,10 @@ definitions:
       Allows for "special offers" or other conditions to be
       applied to a contract. Not currently saved or output by StuRents
       but specified for future integrations
+    required:
+      - start_date
+      - end_date
+      - min_contract_days
     properties:
       start_date:
         type: string
@@ -946,6 +966,8 @@ definitions:
           type: string
   Photo:
     type: object
+    required:
+      - photo
     properties:
       photo:
         type: string
@@ -959,6 +981,9 @@ definitions:
           Max 60 characters
   MediaUpload:
     type: object
+    required:
+      - type
+      - url
     properties:
       type:
         type: string
@@ -998,6 +1023,8 @@ definitions:
         type: integer
   Accreditation:
     type: object
+    required:
+      - type
     properties:
       type:
         type: string
@@ -1017,6 +1044,9 @@ definitions:
       Each key is a boolean indicating if the specified item is
       eligible to rent the property. At least one of the first
       four fields must be set to true
+    required:
+      - undergraduate_student
+      - postgraduate_student
     properties:
       undergraduate_student:
         type: boolean
@@ -1042,6 +1072,11 @@ definitions:
     description: |
       Basic contract details which are extended by both inbound and outbound
       data with objects which extend ContractBasic
+    required:
+      - title
+      - start_date
+      - end_date
+      - min_contract_days
     properties:
       title:
         type: string
@@ -1124,6 +1159,10 @@ definitions:
     allOf:
       - $ref: '#/definitions/ContractAbstract'
       - type: object
+        required:
+          - template_id
+          - schedules
+          - items
         properties:
           disabled:
             type: boolean
@@ -1179,6 +1218,9 @@ definitions:
       A schedule that can be used to pay rent for a contract, with specific
       rules regarding whether it requires a guarantor or allows use of Housing Hand
     type: object
+    required:
+      - schedule_id
+      - require_guarantor
     properties:
       schedule_id:
         type: string
@@ -1208,6 +1250,8 @@ definitions:
       this will apply to all rooms. That field may be left null
       if the "room_prices" array is used instead.
     type: object
+    required:
+      - price_per_person_per_week
     properties:
       price_per_person_per_week:
         type: number
@@ -1251,6 +1295,8 @@ definitions:
     allOf:
       - $ref: '#/definitions/Price'
       - type: object
+        required:
+          - room_id
         properties:
           room_id:
             type: string

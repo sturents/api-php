@@ -13,7 +13,7 @@ class SendDataError extends SwaggerModel
 	 * Keyed by field name (collapsed using . characters)
 	 * @var string[]
 	 */
-	protected $messages;
+	protected $messages = [];
 
 
 	/**

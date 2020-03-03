@@ -17,6 +17,7 @@ class ScheduleOption extends SwaggerModel
 	 * with the schedule shown in the signed contract
 	 *
 	 * @var string
+	 * @required
 	 */
 	protected $schedule_id;
 
@@ -25,6 +26,7 @@ class ScheduleOption extends SwaggerModel
 	 * is required, if set to true, not required if set to false.
 	 *
 	 * @var boolean
+	 * @required
 	 */
 	protected $require_guarantor;
 
@@ -37,7 +39,7 @@ class ScheduleOption extends SwaggerModel
 	 *
 	 * @var boolean
 	 */
-	protected $housing_hand;
+	protected $housing_hand = false;
 
 
 	/**

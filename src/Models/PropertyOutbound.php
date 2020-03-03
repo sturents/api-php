@@ -11,13 +11,13 @@ class PropertyOutbound extends Property
 	 *
 	 * @var string
 	 */
-	protected $property_id;
+	protected $property_id = '';
 
 	/**
 	 * One or more RoomOutbound objects
 	 * @var RoomOutbound[]
 	 */
-	protected $room_details;
+	protected $room_details = [];
 
 	/**
 	 * One or more Contracts (will not show contracts which have
@@ -26,7 +26,7 @@ class PropertyOutbound extends Property
 	 *
 	 * @var ContractWithRooms[]
 	 */
-	protected $contracts;
+	protected $contracts = [];
 
 	/**
 	 * @var Media

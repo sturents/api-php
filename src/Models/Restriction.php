@@ -15,6 +15,7 @@ class Restriction extends SwaggerModel
 	 * belongs to may be purchased from in yyyy-mm-dd
 	 *
 	 * @var string
+	 * @required
 	 */
 	protected $start_date;
 
@@ -23,6 +24,7 @@ class Restriction extends SwaggerModel
 	 * belongs to may be purchased until in yyyy-mm-dd
 	 *
 	 * @var string
+	 * @required
 	 */
 	protected $end_date;
 
@@ -32,13 +34,14 @@ class Restriction extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $terms;
+	protected $terms = '';
 
 	/**
 	 * Minimum days a student must be renting for
 	 * the prices in this contract to be valid
 	 *
 	 * @var integer
+	 * @required
 	 */
 	protected $min_contract_days;
 

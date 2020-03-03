@@ -23,10 +23,11 @@ Now you can create or use any object without having to worry about requiring its
 
 ## Send a property to StuRents
 
-    $property = new \SturentsLib\Api\Models\Property;
+    $property = new \SturentsLib\Api\Models\PropertyCreation;
     // Use setters to create sub-objects and set properties as
     // described in the documentation:
-    // https://sturents.com/software/developer/house-create
+    //   https://sturents.com/software/developer/house-create
+    // Or as demonstrated in `examples/send.php`
     
     $upload_client = new \SturentsLib\Api\UploadClient(LANDLORD_ID, UPLOAD_KEY);
     $put_property = new \SturentsLib\Api\Requests\PutProperty;
@@ -38,13 +39,15 @@ Now you can create or use any object without having to worry about requiring its
        echo "An unexpected problem happened: ".$e->getMessage();
     }
     
-    if ($response->isError()){
-        echo "A known error occurred of type ".gettype($response); 
+    if ($response instanceof PropertySaved){
+    	echo 'Property created with ID: '.$response->getPropertyId()."\n"; // outputs an integer
     }
-    else {    
-        var_dump($response instanceof PropertySaved); // outputs 'true'
-    
-        echo $response->property_id; // outputs an integer
+    elseif ($response->isError()){
+    	echo 'A known error occurred of type '.get_class($response)."\n";
+    	echo json_encode($response)."\n";
+    }
+    else {
+    	echo 'An unknown error occurred of type '.get_class($response)."\n";
     }
     
 ## Fetch data from StuRents

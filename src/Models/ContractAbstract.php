@@ -12,6 +12,7 @@ class ContractAbstract extends SwaggerModel
 	/**
 	 * The name given to this contract
 	 * @var string
+	 * @required
 	 */
 	protected $title;
 
@@ -20,6 +21,7 @@ class ContractAbstract extends SwaggerModel
 	 * in yyyy-mm-dd format
 	 *
 	 * @var string
+	 * @required
 	 */
 	protected $start_date;
 
@@ -28,6 +30,7 @@ class ContractAbstract extends SwaggerModel
 	 * in yyyy-mm-dd format
 	 *
 	 * @var string
+	 * @required
 	 */
 	protected $end_date;
 
@@ -35,6 +38,7 @@ class ContractAbstract extends SwaggerModel
 	 * The minimum time a tenant may rent the property for in days
 	 *
 	 * @var integer
+	 * @required
 	 */
 	protected $min_contract_days;
 
@@ -47,7 +51,7 @@ class ContractAbstract extends SwaggerModel
 	 * Zero or more restrictions
 	 * @var Restriction[]
 	 */
-	protected $restrictions;
+	protected $restrictions = [];
 
 
 	/**

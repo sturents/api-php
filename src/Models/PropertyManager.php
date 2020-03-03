@@ -11,28 +11,28 @@ class PropertyManager extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $landlord;
+	protected $landlord = '';
 
 	/**
 	 * Title of this account on the StuRents website
 	 *
 	 * @var string
 	 */
-	protected $title;
+	protected $title = '';
 
 	/**
 	 * Title of the organisation this account belongs to on the StuRents website
 	 *
 	 * @var string
 	 */
-	protected $company_title;
+	protected $company_title = '';
 
 	/**
 	 * ID for the organisation this account belongs to on the StuRents website
 	 *
 	 * @var string
 	 */
-	protected $company;
+	protected $company = '';
 
 
 	/**

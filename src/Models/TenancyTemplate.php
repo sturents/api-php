@@ -12,14 +12,14 @@ class TenancyTemplate extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $title;
+	protected $title = '';
 
 	/**
 	 * Pass this as the "template_id" field when creating/updating a contract
 	 *
 	 * @var string
 	 */
-	protected $template_id;
+	protected $template_id = '';
 
 
 	/**

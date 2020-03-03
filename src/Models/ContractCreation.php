@@ -22,7 +22,7 @@ class ContractCreation extends ContractAbstract
 	 *
 	 * @var boolean
 	 */
-	protected $disabled;
+	protected $disabled = false;
 
 	/**
 	 * A unique identifier for a Tenancy Template fetched from
@@ -31,6 +31,7 @@ class ContractCreation extends ContractAbstract
 	 * the property and can sign for it on StuRents
 	 *
 	 * @var string
+	 * @required
 	 */
 	protected $template_id;
 
@@ -40,6 +41,7 @@ class ContractCreation extends ContractAbstract
 	 * conditions are applied.
 	 *
 	 * @var ScheduleOption[]
+	 * @required
 	 */
 	protected $schedules;
 
@@ -54,7 +56,7 @@ class ContractCreation extends ContractAbstract
 	 *
 	 * @var boolean
 	 */
-	protected $book_now_allowed;
+	protected $book_now_allowed = false;
 
 	/**
 	 * Contracts can assign different prices per room or the same
@@ -65,7 +67,7 @@ class ContractCreation extends ContractAbstract
 	 *
 	 * @var PriceRoom[]
 	 */
-	protected $room_prices;
+	protected $room_prices = [];
 
 	/**
 	 * @var Price

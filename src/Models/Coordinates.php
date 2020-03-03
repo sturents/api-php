@@ -9,12 +9,12 @@ class Coordinates extends SwaggerModel
 	/**
 	 * @var float
 	 */
-	protected $lat;
+	protected $lat = 0.0;
 
 	/**
 	 * @var float
 	 */
-	protected $lng;
+	protected $lng = 0.0;
 
 
 	/**

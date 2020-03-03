@@ -13,6 +13,7 @@ class PropertyCreation extends Property
 	 * is created, set this to -1
 	 *
 	 * @var integer
+	 * @required
 	 */
 	protected $initial_rooms;
 

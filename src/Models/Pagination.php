@@ -9,6 +9,7 @@ class Pagination extends SwaggerModel
 	/**
 	 * The number of pages total
 	 * @var integer
+	 * @required
 	 */
 	protected $pages;
 
@@ -17,21 +18,21 @@ class Pagination extends SwaggerModel
 	 *
 	 * @var integer
 	 */
-	protected $current;
+	protected $current = 0;
 
 	/**
 	 * If present this shows there is another page available after this one
 	 *
 	 * @var integer
 	 */
-	protected $next;
+	protected $next = 0;
 
 	/**
 	 * If present this shows there is another page available prior to this one
 	 *
 	 * @var integer
 	 */
-	protected $prev;
+	protected $prev = 0;
 
 
 	/**

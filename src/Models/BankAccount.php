@@ -10,14 +10,14 @@ class BankAccount extends SwaggerModel
 	 * How the bank account is described internally on StuRents
 	 * @var string
 	 */
-	protected $descriptor;
+	protected $descriptor = '';
 
 	/**
 	 * Pass this as the "bank_id" field when creating/updating a property
 	 *
 	 * @var string
 	 */
-	protected $bank_id;
+	protected $bank_id = '';
 
 
 	/**

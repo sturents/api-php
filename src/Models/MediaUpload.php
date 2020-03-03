@@ -10,6 +10,7 @@ class MediaUpload extends SwaggerModel
 	 * Can be "photo", "video", "floorplan"
 	 *
 	 * @var string
+	 * @required
 	 */
 	protected $type;
 
@@ -21,6 +22,7 @@ class MediaUpload extends SwaggerModel
 	 * Floor plans must be JPG, PNG or PDF files.
 	 *
 	 * @var string
+	 * @required
 	 */
 	protected $url;
 
@@ -30,7 +32,7 @@ class MediaUpload extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $caption;
+	protected $caption = '';
 
 
 	/**

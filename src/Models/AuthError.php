@@ -13,19 +13,19 @@ class AuthError extends SwaggerModel
 	 * Indicates an issue with the provided "landlord" parameter
 	 * @var string
 	 */
-	protected $landlord;
+	protected $landlord = '';
 
 	/**
 	 * Indicates an issue with the provided "auth" token
 	 * @var string
 	 */
-	protected $auth;
+	protected $auth = '';
 
 	/**
 	 * Indicates an issue with the provided "channel" token
 	 * @var string
 	 */
-	protected $channel;
+	protected $channel = '';
 
 
 	/**

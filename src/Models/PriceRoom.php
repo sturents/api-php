@@ -15,6 +15,7 @@ class PriceRoom extends Price
 	 * identifier for the room that this price relates to
 	 *
 	 * @var string
+	 * @required
 	 */
 	protected $room_id;
 

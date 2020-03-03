@@ -12,14 +12,14 @@ class PaymentSchedule extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $title;
+	protected $title = '';
 
 	/**
 	 * Pass this as the "schedule_id" field when creating/updating a contract
 	 *
 	 * @var string
 	 */
-	protected $schedule_id;
+	protected $schedule_id = '';
 
 
 	/**

@@ -10,7 +10,7 @@ class ListProperties extends SwaggerModel
 	 * The API version being returned
 	 * @var string
 	 */
-	protected $version;
+	protected $version = '';
 
 	/**
 	 * @var Pagination
@@ -20,7 +20,7 @@ class ListProperties extends SwaggerModel
 	/**
 	 * @var PropertyOutbound[]
 	 */
-	protected $properties;
+	protected $properties = [];
 
 
 	/**

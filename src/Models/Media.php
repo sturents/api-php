@@ -13,7 +13,7 @@ class Media extends SwaggerModel
 	 *
 	 * @var Photo[]
 	 */
-	protected $photos;
+	protected $photos = [];
 
 	/**
 	 * Zero or more video embed URLs. Any video source can be
@@ -22,7 +22,7 @@ class Media extends SwaggerModel
 	 *
 	 * @var string[]
 	 */
-	protected $videos;
+	protected $videos = [];
 
 	/**
 	 * Zero or more URLs which link to floorplan files (image or pdf)
@@ -30,7 +30,7 @@ class Media extends SwaggerModel
 	 *
 	 * @var string[]
 	 */
-	protected $floorplans;
+	protected $floorplans = [];
 
 
 	/**

@@ -10,13 +10,13 @@ class PropertySaved extends SwaggerModel
 	 * Unique reference to the Property on StuRents
 	 * @var string
 	 */
-	protected $property_id;
+	protected $property_id = '';
 
 	/**
 	 * Link to the property profile page on StuRents
 	 * @var string
 	 */
-	protected $url;
+	protected $url = '';
 
 
 	/**

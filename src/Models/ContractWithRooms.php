@@ -17,7 +17,7 @@ class ContractWithRooms extends ContractAbstract
 	 *
 	 * @var string
 	 */
-	protected $book_now_url;
+	protected $book_now_url = '';
 
 	/**
 	 * A list of 1 or more prices with optional room name. It may
@@ -28,7 +28,7 @@ class ContractWithRooms extends ContractAbstract
 	 *
 	 * @var PriceOutbound[]
 	 */
-	protected $prices;
+	protected $prices = [];
 
 
 	/**

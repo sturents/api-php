@@ -18,7 +18,7 @@ $count = $generate_models->runFull($yaml, $dir);
 
 echo "Generated $count files in $dir\n";
 
-$generate_requests = new GenerateRequests($namespace, $uri);
+$generate_requests = new GenerateRequests($namespace);
 $count = $generate_requests->runFull($yaml, $dir);
 
 echo "Generated $count files in $dir\n";

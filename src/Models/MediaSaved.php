@@ -10,7 +10,7 @@ class MediaSaved extends SwaggerModel
 	 * Unique reference to the Media item on StuRents
 	 * @var string
 	 */
-	protected $media_id;
+	protected $media_id = '';
 
 
 	/**

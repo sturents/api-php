@@ -21,6 +21,7 @@ class Price extends SwaggerModel
 	 * creating a tenancy and/or rent collection for the property
 	 *
 	 * @var float
+	 * @required
 	 */
 	protected $price_per_person_per_week;
 
@@ -30,7 +31,7 @@ class Price extends SwaggerModel
 	 *
 	 * @var float
 	 */
-	protected $deposit_per_person;
+	protected $deposit_per_person = 0.0;
 
 	/**
 	 * A monetary value indicating the fee to the property manager which
@@ -39,7 +40,7 @@ class Price extends SwaggerModel
 	 *
 	 * @var float
 	 */
-	protected $fee_per_person;
+	protected $fee_per_person = 0.0;
 
 
 	/**

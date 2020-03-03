@@ -13,7 +13,7 @@ class Room extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $room_name;
+	protected $room_name = '';
 
 	/**
 	 * Intended for "pbsa" designation where floor number or classification
@@ -21,28 +21,28 @@ class Room extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $floor;
+	protected $floor = '';
 
 	/**
 	 * Floor space of the room in metres squared
 	 *
 	 * @var float
 	 */
-	protected $floor_space;
+	protected $floor_space = 0.0;
 
 	/**
 	 * "True" if the room should be advertised as accessible
 	 *
 	 * @var boolean
 	 */
-	protected $disabled_access;
+	protected $disabled_access = false;
 
 	/**
 	 * "True" if an en-suite bathroom is present for the room
 	 *
 	 * @var boolean
 	 */
-	protected $ensuite;
+	protected $ensuite = false;
 
 
 	/**

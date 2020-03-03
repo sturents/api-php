@@ -9,6 +9,7 @@ class Accreditation extends SwaggerModel
 	/**
 	 * Title of an accreditation on the property
 	 * @var string
+	 * @required
 	 */
 	protected $type;
 
@@ -17,7 +18,7 @@ class Accreditation extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $reference;
+	protected $reference = '';
 
 	/**
 	 * Date when the accreditation will expire in yyyy-mm-dd format
@@ -25,7 +26,7 @@ class Accreditation extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $expiry;
+	protected $expiry = '';
 
 
 	/**

@@ -9,6 +9,7 @@ class Photo extends SwaggerModel
 	/**
 	 * A URL linking to a photo file
 	 * @var string
+	 * @required
 	 */
 	protected $photo;
 
@@ -16,14 +17,14 @@ class Photo extends SwaggerModel
 	 * A URL linking to a thumbnail photo file
 	 * @var string
 	 */
-	protected $thumb;
+	protected $thumb = '';
 
 	/**
 	 * Max 60 characters
 	 *
 	 * @var string
 	 */
-	protected $caption;
+	protected $caption = '';
 
 
 	/**
