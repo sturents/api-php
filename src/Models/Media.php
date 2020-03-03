@@ -12,7 +12,7 @@ class Media extends SwaggerModel
 	 *
 	 * @var Photo[]
 	 */
-	protected $photos_360;
+	protected $photos_360 = [];
 
 	/**
 	 * Zero or more photos
@@ -46,7 +46,7 @@ class Media extends SwaggerModel
 	 *
 	 * @var string[]
 	 */
-	protected $tours;
+	protected $tours = [];
 
 
 	/**
