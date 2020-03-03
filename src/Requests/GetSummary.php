@@ -17,11 +17,11 @@ class GetSummary extends SwaggerRequest
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => '\\SturentsLib\\Api\\Models\\PropertyManager',
-			'400' => '\\SturentsLib\\Api\\Models\\Error',
-			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
-			'404' => '\\SturentsLib\\Api\\Models\\GetError',
-			'default' => '\\SturentsLib\\Api\\Models\\Error'
+			'200' => \SturentsLib\Api\Models\PropertyManager::class,
+			'400' => \SturentsLib\Api\Models\Error::class,
+			'401' => \SturentsLib\Api\Models\AuthError::class,
+			'404' => \SturentsLib\Api\Models\GetError::class,
+			'default' => \SturentsLib\Api\Models\Error::class
 		]);
 	}
 }

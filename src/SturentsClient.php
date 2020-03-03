@@ -71,7 +71,7 @@ abstract class SturentsClient implements SwaggerClient {
 	/**
 	 * @param SwaggerRequest $request
 	 * @param string[] $response_models
-	 * @return SwaggerModel|Models\SwaggerModel[]
+	 * @return SwaggerModel|SwaggerModel[]
 	 * @throws SturentsException
 	 */
 	public function make(SwaggerRequest $request, array $response_models){

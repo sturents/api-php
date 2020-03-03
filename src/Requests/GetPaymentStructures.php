@@ -19,10 +19,10 @@ class GetPaymentStructures extends SwaggerRequest
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => '\\SturentsLib\\Api\\Models\\PaymentSchedule',
-			'401' => '\\SturentsLib\\Api\\Models\\AuthError',
-			'404' => '\\SturentsLib\\Api\\Models\\GetError',
-			'default' => '\\SturentsLib\\Api\\Models\\Error'
+			'200' => \SturentsLib\Api\Models\PaymentSchedule::class,
+			'401' => \SturentsLib\Api\Models\AuthError::class,
+			'404' => \SturentsLib\Api\Models\GetError::class,
+			'default' => \SturentsLib\Api\Models\Error::class
 		]);
 	}
 }
