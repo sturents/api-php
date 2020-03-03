@@ -13,7 +13,7 @@ class UploadClient extends SturentsClient {
 	 * @param int $landlord_id
 	 * @param string $upload_key
 	 */
-	public function __construct($landlord_id, $upload_key){
+	public function __construct(int $landlord_id, string $upload_key){
 		parent::__construct($landlord_id);
 		$this->upload_key = $upload_key;
 	}
@@ -22,7 +22,7 @@ class UploadClient extends SturentsClient {
 	 * @param SwaggerRequest $request
 	 * @return array
 	 */
-	protected function authQuery(SwaggerRequest $request){
+	protected function authQuery(SwaggerRequest $request) :array{
 		$timestamp = time();
 		$auth = $this->generateAuth($request->getBody(), $timestamp);
 
@@ -37,7 +37,7 @@ class UploadClient extends SturentsClient {
 	 * @param string $timestamp
 	 * @return string
 	 */
-	protected function generateAuth($json, $timestamp){
-		return hash_hmac('sha256', (string)$json.(string)$timestamp, (string)$this->upload_key);
+	protected function generateAuth(string $json, string $timestamp): string{
+		return hash_hmac('sha256', $json.$timestamp, $this->upload_key);
 	}
 }

@@ -16,7 +16,7 @@ class ChannelClient extends SturentsClient {
 	 * @param string $channel_id
 	 * @param string $display_key
 	 */
-	public function __construct($landlord_id, $channel_id, $display_key){
+	public function __construct(string $landlord_id, string $channel_id, string $display_key){
 		parent::__construct($landlord_id);
 		$this->channel_id = $channel_id;
 		$this->display_key = $display_key;
@@ -26,7 +26,7 @@ class ChannelClient extends SturentsClient {
 	 * @param SwaggerRequest $request
 	 * @return array
 	 */
-	protected function authQuery(SwaggerRequest $request){
+	protected function authQuery(SwaggerRequest $request): array{
 		$timestamp = time();
 		$auth = $this->generateAuth($timestamp);
 
@@ -41,7 +41,7 @@ class ChannelClient extends SturentsClient {
 	 * @param string $timestamp
 	 * @return string
 	 */
-	protected function generateAuth($timestamp){
-		return hash_hmac('sha256', (string)$timestamp, (string)$this->display_key);
+	protected function generateAuth(string $timestamp): string{
+		return hash_hmac('sha256', $timestamp, $this->display_key);
 	}
 }
