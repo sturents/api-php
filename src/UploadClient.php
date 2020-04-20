@@ -24,7 +24,7 @@ class UploadClient extends SturentsClient {
 	 */
 	protected function authQuery(SwaggerRequest $request) :array{
 		$timestamp = time();
-		$auth = $this->generateAuth($request->getBody(), $timestamp);
+		$auth = $this->generateAuth($request->getBody()->getContents(), $timestamp);
 
 		return [
 			'auth' => $auth,
