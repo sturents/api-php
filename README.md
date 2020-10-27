@@ -50,12 +50,31 @@ Now you can create or use any object without having to worry about requiring its
     	echo 'An unknown error occurred of type '.get_class($response)."\n";
     }
     
-## Fetch data from StuRents
+## Fetch data from StuRents with a Landlord ID
 
-    $display_client = new \Sturents\Api\DisplayClient(LANDLORD_ID, DISPLAY_KEY);
+    // Where LANDLORD_ID is an integer
+    $display_client = new \SturentsLib\Api\DisplayClient(LANDLORD_ID, DISPLAY_KEY);
     $get_properties = new \SturentsLib\Api\Requests\GetProperties;
     try {
-        $properties = $get_properties->sendWith($display_client);
+        $response = $get_properties->sendWith($display_client);
+    }
+    catch (\Exception $e){
+       echo "A problem happened: ".$e->getMessage();
+    }
+    
+    var_dump($response instanceof ListProperties); // outputs 'true'
+    
+    echo $response->pagination->pages // echo, e.g. 3
+    
+    var_dump($response->properties[0] instanceof PropertyOutbound) // outputs 'true'
+    
+## Fetch data from StuRents as a channel
+
+    // Where *_ID values are strings
+    $display_client = new \SturentsLib\Api\ChannelClient(LANDLORD_ID, CHANNEL_ID, DISPLAY_KEY);
+    $get_properties = new \SturentsLib\Api\Requests\GetProperties;
+    try {
+        $response = $get_properties->sendWith($display_client);
     }
     catch (\Exception $e){
        echo "A problem happened: ".$e->getMessage();
