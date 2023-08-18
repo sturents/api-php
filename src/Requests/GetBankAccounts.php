@@ -8,12 +8,12 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetBankAccounts extends SwaggerRequest
 {
-	const URI = '/api/bank-accounts';
-	const METHOD = 'GET';
+	public const URI = '/api/bank-accounts';
+	public const METHOD = 'GET';
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

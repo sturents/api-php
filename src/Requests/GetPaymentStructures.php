@@ -9,12 +9,12 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetPaymentStructures extends SwaggerRequest
 {
-	const URI = '/api/payment-structures';
-	const METHOD = 'GET';
+	public const URI = '/api/payment-structures';
+	public const METHOD = 'GET';
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

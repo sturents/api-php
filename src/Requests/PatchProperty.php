@@ -7,8 +7,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class PatchProperty extends SwaggerRequest
 {
-	const URI = '/api/property';
-	const METHOD = 'PATCH';
+	public const URI = '/api/property';
+	public const METHOD = 'PATCH';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -39,7 +39,7 @@ class PatchProperty extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

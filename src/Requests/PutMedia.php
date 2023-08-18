@@ -7,8 +7,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class PutMedia extends SwaggerRequest
 {
-	const URI = '/api/media';
-	const METHOD = 'PUT';
+	public const URI = '/api/media';
+	public const METHOD = 'PUT';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -39,7 +39,7 @@ class PutMedia extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

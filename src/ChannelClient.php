@@ -28,7 +28,7 @@ class ChannelClient extends SturentsClient {
 	 */
 	protected function authQuery(SwaggerRequest $request): array{
 		$timestamp = time();
-		$auth = $this->generateAuth($timestamp);
+		$auth = $this->generateAuth((string)$timestamp);
 
 		return [
 			'auth' => $auth,

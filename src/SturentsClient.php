@@ -24,7 +24,7 @@ abstract class SturentsClient implements SwaggerClient {
 	 */
 	private $landlord_id;
 	/**
-	 * @var JsonMapper
+	 * @var ?JsonMapper
 	 */
 	private $mapper;
 	/**
@@ -103,7 +103,13 @@ abstract class SturentsClient implements SwaggerClient {
 			$response = $e->getResponse();
 			$response_model = $this->handleResponse($response, $response_models);
 
-			$response_model->asError();
+			if (is_array($response_model)) {
+				foreach($response_model as $response_model_item) {
+					$response_model_item->asError();
+				}
+			} else {
+				$response_model->asError();
+			}
 
 			return $response_model;
 		}
@@ -169,9 +175,10 @@ abstract class SturentsClient implements SwaggerClient {
 	}
 
 	/**
+	 * @template T of SwaggerModel
 	 * @param $data
-	 * @param string $response_class
-	 * @return SwaggerModel
+	 * @param class-string<T> $response_class
+	 * @return T
 	 * @throws JsonMapper_Exception
 	 */
 	private function map($data, string $response_class): SwaggerModel{

@@ -14,7 +14,7 @@ class DisplayClient extends SturentsClient {
 	 * @param string $display_key
 	 */
 	public function __construct(int $landlord_id, string $display_key){
-		parent::__construct($landlord_id);
+		parent::__construct((string)$landlord_id);
 		$this->display_key = $display_key;
 	}
 
@@ -24,7 +24,7 @@ class DisplayClient extends SturentsClient {
 	 */
 	protected function authQuery(SwaggerRequest $request) :array{
 		$timestamp = time();
-		$auth = $this->generateAuth($timestamp);
+		$auth = $this->generateAuth((string)$timestamp);
 
 		return [
 			'auth' => $auth,

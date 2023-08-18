@@ -7,8 +7,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class DeleteMedia extends SwaggerRequest
 {
-	const URI = '/api/media';
-	const METHOD = 'DELETE';
+	public const URI = '/api/media';
+	public const METHOD = 'DELETE';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -39,7 +39,7 @@ class DeleteMedia extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

@@ -9,12 +9,12 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetTenancyTemplates extends SwaggerRequest
 {
-	const URI = '/api/tenancy-templates';
-	const METHOD = 'GET';
+	public const URI = '/api/tenancy-templates';
+	public const METHOD = 'GET';
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
