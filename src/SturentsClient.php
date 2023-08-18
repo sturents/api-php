@@ -138,9 +138,9 @@ abstract class SturentsClient implements SwaggerClient {
 		$json = (string)$response->getBody();
 
 		$status = (string)$response->getStatusCode();
-		$response_class = $response_models[$status];
+		$response_class = $response_models[$status] ?? null;
 		if (is_null($response_class)){
-			$response_class = $response_models['default'];
+			$response_class = $response_models['default'] ?? null;
 		}
 
 		if (empty($json) && empty($response_class)){
