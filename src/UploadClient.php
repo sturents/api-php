@@ -14,7 +14,7 @@ class UploadClient extends SturentsClient {
 	 * @param string $upload_key
 	 */
 	public function __construct(int $landlord_id, string $upload_key){
-		parent::__construct($landlord_id);
+		parent::__construct((string)$landlord_id);
 		$this->upload_key = $upload_key;
 	}
 
@@ -24,7 +24,7 @@ class UploadClient extends SturentsClient {
 	 */
 	protected function authQuery(SwaggerRequest $request) :array{
 		$timestamp = time();
-		$auth = $this->generateAuth((string) $request->getBody(), $timestamp);
+		$auth = $this->generateAuth((string) $request->getBody(), (string)$timestamp);
 
 		return [
 			'auth' => $auth,

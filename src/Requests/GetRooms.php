@@ -9,8 +9,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetRooms extends SwaggerRequest
 {
-	const URI = '/api/rooms';
-	const METHOD = 'GET';
+	public const URI = '/api/rooms';
+	public const METHOD = 'GET';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -32,7 +32,7 @@ class GetRooms extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

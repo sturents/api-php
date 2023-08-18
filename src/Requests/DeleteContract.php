@@ -8,8 +8,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class DeleteContract extends SwaggerRequest
 {
-	const URI = '/api/contract';
-	const METHOD = 'DELETE';
+	public const URI = '/api/contract';
+	public const METHOD = 'DELETE';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -41,7 +41,7 @@ class DeleteContract extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

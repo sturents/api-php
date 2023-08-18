@@ -8,8 +8,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetContracts extends SwaggerRequest
 {
-	const URI = '/api/contracts';
-	const METHOD = 'GET';
+	public const URI = '/api/contracts';
+	public const METHOD = 'GET';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -31,7 +31,7 @@ class GetContracts extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

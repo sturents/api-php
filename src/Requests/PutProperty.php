@@ -7,8 +7,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class PutProperty extends SwaggerRequest
 {
-	const URI = '/api/property';
-	const METHOD = 'PUT';
+	public const URI = '/api/property';
+	public const METHOD = 'PUT';
 
 	/**
 	 * @param \SturentsLib\Api\Models\PropertyCreation $property
@@ -21,7 +21,7 @@ class PutProperty extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

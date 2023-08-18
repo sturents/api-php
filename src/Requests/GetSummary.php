@@ -7,12 +7,12 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetSummary extends SwaggerRequest
 {
-	const URI = '/api/summary';
-	const METHOD = 'GET';
+	public const URI = '/api/summary';
+	public const METHOD = 'GET';
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

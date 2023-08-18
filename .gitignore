@@ -8,3 +8,4 @@ src/Test/
 swagger/api.json
 swagger-json
 examples/_config.php
+composer.lock

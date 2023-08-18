@@ -18,7 +18,7 @@ class SwaggerRequest implements RequestInterface {
 
 	protected $headers = [];
 	/**
-	 * @var UriInterface
+	 * @var ?UriInterface
 	 */
 	private $uri;
 
@@ -32,7 +32,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @return string HTTP protocol version.
 	 */
 	public function getProtocolVersion(){
-		return 1.1;
+		return '1.1';
 	}
 
 	/**
@@ -48,7 +48,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @param string $version HTTP protocol version
 	 * @return static
 	 */
-	public function withProtocolVersion($version){
+	public function withProtocolVersion(string $version){
 		return clone $this;
 	}
 
@@ -377,7 +377,6 @@ class SwaggerRequest implements RequestInterface {
 			$query[] = $this->{$param_name};
 		}
 		if (!empty($query)){
-			/** @noinspection PhpUnusedLocalVariableInspection */
 			$uri .= '/'.implode('/', $query);
 		}
 

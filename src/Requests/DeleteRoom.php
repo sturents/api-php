@@ -7,8 +7,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class DeleteRoom extends SwaggerRequest
 {
-	const URI = '/api/room';
-	const METHOD = 'DELETE';
+	public const URI = '/api/room';
+	public const METHOD = 'DELETE';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -40,7 +40,7 @@ class DeleteRoom extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return SwaggerModel|SwaggerModel[]
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
