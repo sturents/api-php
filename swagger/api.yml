@@ -655,6 +655,35 @@ paths:
           $ref: '#/definitions/Error'
         default:
           $ref: '#/definitions/Error'
+  /booking-status:
+    get:
+      summary: |
+        Provides the booking status and basic contract information for a hosted booking
+      security:
+        - Channel: []
+          Timestamp: []
+          Auth: []
+      parameters:
+        - in: query
+          name: tenant_id
+          type: string
+          required: true
+          description: Unique booking identifier provided in the redirect URL
+      tags:
+        - Contracts
+      responses:
+        '200':
+          description: Booking status and basic contract information
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BookingStatus'
+        '401':
+          $ref: '#/definitions/AuthError'
+        '404':
+          $ref: '#/definitions/GetError'
+        default:
+          $ref: '#/definitions/Error'
 definitions:
   GetError:
     description: |
@@ -1129,8 +1158,8 @@ definitions:
           book_now_url:
             type: string
             description: |
-             A URL where the property may be booked online using this contract.
-             Will be blank if the property is not set up for this feature
+              A URL where the property may be booked online using this contract.
+              Will be blank if the property is not set up for this feature
           prices:
             type: array
             description: |
@@ -1428,17 +1457,17 @@ definitions:
         type: string
         description: Link to the property profile page on StuRents
   RoomSaved:
-     properties:
+    properties:
       room_id:
         type: string
         description: Unique reference to the Room on StuRents
   ContractSaved:
-     properties:
+    properties:
       contract_id:
         type: string
         description: Unique reference to the Contract on StuRents
   MediaSaved:
-     properties:
+    properties:
       media_id:
         type: string
         description: Unique reference to the Media item on StuRents
@@ -1447,3 +1476,68 @@ definitions:
     properties:
       error:
         type: string
+  BookingStatus:
+    description: |
+      The contract information and status of a hosted booking identified using the channel_tenant_id.
+    type: object
+    properties:
+      tenant_name:
+        type: string
+        description: Full name of the user whom initialised the booking
+      channel_tenant_id:
+        type: string
+        description: Identifier provided in the redirect URL when the tenant initialised the booking
+      unique_channel_tenant_id:
+        type: string
+        description: Generated unique identifier, this will be the same as the channel_tenant_id unless the same identifier has been provided for multiple bookings.
+      tenant_email:
+        type: string
+        description: Email address of the user whom initialised the booking
+      tenant_phone:
+        type: string
+        description: Phone number of the user whom initialised the booking
+      guarantor_required:
+        type: number
+        description: 1|0, indicates whether the contract requires a guarantor
+      property_manager_name:
+        type: string
+        description: Name of the booking's property manager
+      property_address:
+        type: string
+        description: Address of the property used in the booking
+      contract_start_date:
+        type: string
+        description: Date that the contract has started
+      contract_end_date:
+        type: string
+        description: Date that the contract has ended
+      contract_length:
+        type: number
+        description: Total contract duration in days
+      rent_pppw:
+        type: number
+        description: Total rent per person per week
+      booking_option:
+        type: string
+        description: Title of the availability selected for the booking
+      currency:
+        type: string
+        description: Contract's currency code
+      total_contract_value:
+        type: number
+        description: Total monetary value of the contract
+      tenancy_size:
+        type: number
+        description: Number of tenants included in the booking
+      rent_installnents:
+        type: number
+        description: Number of rent installments due throughout the duration of the contract
+      created_date:
+        type: string
+        description: Date that the contract was created
+      booking_status:
+        type: string
+        description: Status of the booking
+      booking_expiry:
+        type: string
+        description: Date that the booking will expire if not signed by the tenant
