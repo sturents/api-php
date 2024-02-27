@@ -106,9 +106,9 @@ class BookingStatus extends SwaggerModel
 
 	/**
 	 * Number of rent instalments due throughout the duration of the contract
-	 * @var float
+	 * @var int
 	 */
-	protected $rent_instalments = 0.0;
+	protected $rent_instalments = 0;
 
 	/**
 	 * Date and time that the contract was created
