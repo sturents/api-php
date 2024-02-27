@@ -1478,24 +1478,24 @@ definitions:
         type: string
   BookingStatus:
     description: |
-      The contract information and status of a hosted booking identified using the channel_tenant_id.
+      Basic contract information and booking status.
     type: object
     properties:
       tenant_name:
         type: string
-        description: Full name of the user whom initialised the booking
-      channel_tenant_id:
+        description: Full name of the user who initiated the booking
+      tenant_id:
         type: string
-        description: Identifier provided in the redirect URL when the tenant initialised the booking
-      unique_channel_tenant_id:
+        description: Identifier provided in the redirect URL when the user initiated the booking
+      unique_tenant_id:
         type: string
-        description: Generated unique identifier, this will be the same as the channel_tenant_id unless the same identifier has been provided for multiple bookings.
+        description: Generated unique identifier, this will be the same as the tenant_id unless the same identifier has been provided for multiple bookings.
       tenant_email:
         type: string
-        description: Email address of the user whom initialised the booking
+        description: Email address of the user who initiated the booking
       tenant_phone:
         type: string
-        description: Phone number of the user whom initialised the booking
+        description: Phone number of the user who initiated the booking
       guarantor_required:
         type: number
         description: 1|0, indicates whether the contract requires a guarantor
@@ -1507,10 +1507,10 @@ definitions:
         description: Address of the property used in the booking
       contract_start_date:
         type: string
-        description: Date that the contract has started
+        description: Start date of the contract
       contract_end_date:
         type: string
-        description: Date that the contract has ended
+        description: End date of the contract
       contract_length:
         type: number
         description: Total contract duration in days
@@ -1529,15 +1529,15 @@ definitions:
       tenancy_size:
         type: number
         description: Number of tenants included in the booking
-      rent_installnents:
+      rent_instalments:
         type: number
-        description: Number of rent installments due throughout the duration of the contract
-      created_date:
+        description: Number of rent instalments due throughout the duration of the contract
+      created_datetime:
         type: string
-        description: Date that the contract was created
+        description: Date and time that the contract was created
       booking_status:
         type: string
         description: Status of the booking
-      booking_expiry:
+      booking_expiry_datetime:
         type: string
-        description: Date that the booking will expire if not signed by the tenant
+        description: Date and time that the booking will expire if not signed by the tenant
