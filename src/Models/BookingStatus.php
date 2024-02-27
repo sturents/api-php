@@ -40,9 +40,9 @@ class BookingStatus extends SwaggerModel
 
 	/**
 	 * 1|0, indicates whether the contract requires a guarantor
-	 * @var float
+	 * @var int
 	 */
-	protected $guarantor_required = 0.0;
+	protected $guarantor_required = 0;
 
 	/**
 	 * Name of the booking's property manager
@@ -70,9 +70,9 @@ class BookingStatus extends SwaggerModel
 
 	/**
 	 * Total contract duration in days
-	 * @var float
+	 * @var int
 	 */
-	protected $contract_length = 0.0;
+	protected $contract_length = 0;
 
 	/**
 	 * Total rent per person per week
@@ -100,9 +100,9 @@ class BookingStatus extends SwaggerModel
 
 	/**
 	 * Number of tenants included in the booking
-	 * @var float
+	 * @var int
 	 */
-	protected $tenancy_size = 0.0;
+	protected $tenancy_size = 0;
 
 	/**
 	 * Number of rent instalments due throughout the duration of the contract

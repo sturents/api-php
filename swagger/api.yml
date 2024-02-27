@@ -1497,7 +1497,7 @@ definitions:
         type: string
         description: Phone number of the user who initiated the booking
       guarantor_required:
-        type: number
+        type: integer
         description: 1|0, indicates whether the contract requires a guarantor
       property_manager_name:
         type: string
@@ -1512,7 +1512,7 @@ definitions:
         type: string
         description: End date of the contract
       contract_length:
-        type: number
+        type: integer
         description: Total contract duration in days
       rent_pppw:
         type: number
@@ -1527,10 +1527,10 @@ definitions:
         type: number
         description: Total monetary value of the contract
       tenancy_size:
-        type: number
+        type: integer
         description: Number of tenants included in the booking
       rent_instalments:
-        type: number
+        type: integer
         description: Number of rent instalments due throughout the duration of the contract
       created_datetime:
         type: string
