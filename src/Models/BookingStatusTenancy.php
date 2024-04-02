@@ -15,7 +15,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 	/**
 	 * Title of the availability selected for the booking
-	 * @var string
+	 * @var ?string
 	 * @required
 	 */
 	protected $booking_option;
@@ -29,14 +29,14 @@ class BookingStatusTenancy extends SwaggerModel
 
 	/**
 	 * End date of the contract
-	 * @var string
+	 * @var ?string
 	 * @required
 	 */
 	protected $contract_end_date;
 
 	/**
 	 * Total contract duration in days
-	 * @var integer
+	 * @var ?int
 	 * @required
 	 */
 	protected $contract_length;
@@ -57,14 +57,14 @@ class BookingStatusTenancy extends SwaggerModel
 
 	/**
 	 * Number of tenants included in the booking
-	 * @var integer
+	 * @var int
 	 * @required
 	 */
 	protected $tenancy_size;
 
 	/**
 	 * Date and time that the booking will expire if not signed by the tenant
-	 * @var string
+	 * @var ?string
 	 * @required
 	 */
 	protected $booking_expiry_datetime;
@@ -93,7 +93,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 
 	/**
-	 * @return string
+	 * @return ?string
 	 */
 	public function getBookingOption()
 	{
@@ -102,7 +102,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 
 	/**
-	 * @param string $booking_option
+	 * @param ?string $booking_option
 	 *
 	 * @return $this
 	 */
@@ -137,7 +137,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 
 	/**
-	 * @return string
+	 * @return ?string
 	 */
 	public function getContractEndDate()
 	{
@@ -146,7 +146,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 
 	/**
-	 * @param string $contract_end_date
+	 * @param ?string $contract_end_date
 	 *
 	 * @return $this
 	 */
@@ -159,7 +159,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return ?int
 	 */
 	public function getContractLength()
 	{
@@ -168,7 +168,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 
 	/**
-	 * @param integer $contract_length
+	 * @param ?int $contract_length
 	 *
 	 * @return $this
 	 */
@@ -225,7 +225,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getTenancySize()
 	{
@@ -234,7 +234,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 
 	/**
-	 * @param integer $tenancy_size
+	 * @param int $tenancy_size
 	 *
 	 * @return $this
 	 */
@@ -247,7 +247,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 
 	/**
-	 * @return string
+	 * @return ?string
 	 */
 	public function getBookingExpiryDatetime()
 	{
@@ -256,7 +256,7 @@ class BookingStatusTenancy extends SwaggerModel
 
 
 	/**
-	 * @param string $booking_expiry_datetime
+	 * @param ?string $booking_expiry_datetime
 	 *
 	 * @return $this
 	 */

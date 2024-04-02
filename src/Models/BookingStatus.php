@@ -58,8 +58,7 @@ class BookingStatus extends SwaggerModel
 	protected $tenants;
 
 	/**
-	 * Details of tenancy created from booking
-	 * @var BookingStatusTenancy
+	 * @var ?BookingStatusTenancy
 	 * @required
 	 */
 	protected $tenancy;
@@ -233,7 +232,7 @@ class BookingStatus extends SwaggerModel
 
 
 	/**
-	 * @return BookingStatusTenancy
+	 * @return ?BookingStatusTenancy
 	 */
 	public function getTenancy()
 	{
@@ -242,11 +241,11 @@ class BookingStatus extends SwaggerModel
 
 
 	/**
-	 * @param BookingStatusTenancy $tenancy
+	 * @param ?BookingStatusTenancy $tenancy
 	 *
 	 * @return $this
 	 */
-	public function setTenancy(BookingStatusTenancy $tenancy)
+	public function setTenancy(?BookingStatusTenancy $tenancy)
 	{
 		$this->tenancy = $tenancy;
 

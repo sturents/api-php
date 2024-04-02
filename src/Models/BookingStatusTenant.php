@@ -43,35 +43,35 @@ class BookingStatusTenant extends SwaggerModel
 
 	/**
 	 * Indicates whether the user requires a guarantor
-	 * @var boolean
+	 * @var ?bool
 	 * @required
 	 */
 	protected $guarantor_required;
 
 	/**
 	 * Rent per week
-	 * @var float
+	 * @var ?float
 	 * @required
 	 */
 	protected $rent_pw;
 
 	/**
 	 * Total rent
-	 * @var float
+	 * @var ?float
 	 * @required
 	 */
 	protected $total_rent;
 
 	/**
 	 * Number of rent instalments due throughout the duration of the contract
-	 * @var integer
+	 * @var ?int
 	 * @required
 	 */
 	protected $rent_instalments;
 
 	/**
 	 * Date and time that the tenant signed the tenancy
-	 * @var string
+	 * @var ?string
 	 * @required
 	 */
 	protected $signed_datetime;
@@ -188,7 +188,7 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return ?bool
 	 */
 	public function getGuarantorRequired()
 	{
@@ -197,7 +197,7 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @param boolean $guarantor_required
+	 * @param ?bool $guarantor_required
 	 *
 	 * @return $this
 	 */
@@ -210,7 +210,7 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @return float
+	 * @return ?float
 	 */
 	public function getRentPw()
 	{
@@ -219,7 +219,7 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @param float $rent_pw
+	 * @param ?float $rent_pw
 	 *
 	 * @return $this
 	 */
@@ -232,7 +232,7 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @return float
+	 * @return ?float
 	 */
 	public function getTotalRent()
 	{
@@ -241,7 +241,7 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @param float $total_rent
+	 * @param ?float $total_rent
 	 *
 	 * @return $this
 	 */
@@ -254,7 +254,7 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return ?int
 	 */
 	public function getRentInstalments()
 	{
@@ -263,7 +263,7 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @param integer $rent_instalments
+	 * @param ?int $rent_instalments
 	 *
 	 * @return $this
 	 */
@@ -276,7 +276,7 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @return string
+	 * @return ?string
 	 */
 	public function getSignedDatetime()
 	{
@@ -285,7 +285,7 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @param string $signed_datetime
+	 * @param ?string $signed_datetime
 	 *
 	 * @return $this
 	 */
