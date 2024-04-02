@@ -23,13 +23,6 @@ class BookingStatus extends SwaggerModel
 	protected $unique_booking_id;
 
 	/**
-	 * Date and time that the contract was created
-	 * @var string
-	 * @required
-	 */
-	protected $created_datetime;
-
-	/**
 	 * Status of the booking
 	 * @var string
 	 * @required
@@ -111,28 +104,6 @@ class BookingStatus extends SwaggerModel
 	public function setUniqueBookingId($unique_booking_id)
 	{
 		$this->unique_booking_id = $unique_booking_id;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getCreatedDatetime()
-	{
-		return $this->created_datetime;
-	}
-
-
-	/**
-	 * @param string $created_datetime
-	 *
-	 * @return $this
-	 */
-	public function setCreatedDatetime($created_datetime)
-	{
-		$this->created_datetime = $created_datetime;
 
 		return $this;
 	}

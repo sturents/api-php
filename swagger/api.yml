@@ -1528,6 +1528,7 @@ definitions:
   BookingStatusTenancy:
     type: object
     required:
+      - created_datetime
       - contract_start_date
       - contract_end_date
       - contract_length
@@ -1537,6 +1538,9 @@ definitions:
       - tenancy_size
       - booking_expiry_datetime
     properties:
+      created_datetime:
+        type: string
+        description: Date and time that the contract was created
       contract_start_date:
         type: string
         description: Start date of the contract
@@ -1572,7 +1576,6 @@ definitions:
     required:
       - booking_id
       - unique_booking_id
-      - created_datetime
       - booking_status
       - property_manager_name
       - property_address
@@ -1586,9 +1589,6 @@ definitions:
       unique_booking_id:
         type: string
         description: Generated unique identifier, this will be the same as the booking_id unless the same identifier has been provided for multiple bookings.
-      created_datetime:
-        type: string
-        description: Date and time that the contract was created
       booking_status:
         type: string
         description: Status of the booking

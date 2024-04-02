@@ -7,6 +7,13 @@ namespace SturentsLib\Api\Models;
 class BookingStatusTenancy extends SwaggerModel
 {
 	/**
+	 * Date and time that the contract was created
+	 * @var string
+	 * @required
+	 */
+	protected $created_datetime;
+
+	/**
 	 * Start date of the contract
 	 * @var string
 	 * @required
@@ -61,6 +68,28 @@ class BookingStatusTenancy extends SwaggerModel
 	 * @required
 	 */
 	protected $booking_expiry_datetime;
+
+
+	/**
+	 * @return string
+	 */
+	public function getCreatedDatetime()
+	{
+		return $this->created_datetime;
+	}
+
+
+	/**
+	 * @param string $created_datetime
+	 *
+	 * @return $this
+	 */
+	public function setCreatedDatetime($created_datetime)
+	{
+		$this->created_datetime = $created_datetime;
+
+		return $this;
+	}
 
 
 	/**
