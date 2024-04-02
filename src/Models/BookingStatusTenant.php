@@ -7,11 +7,25 @@ namespace SturentsLib\Api\Models;
 class BookingStatusTenant extends SwaggerModel
 {
 	/**
-	 * Full name of the user
+	 * Title of the user
 	 * @var string
 	 * @required
 	 */
-	protected $name;
+	protected $title;
+
+	/**
+	 * First name of the user
+	 * @var string
+	 * @required
+	 */
+	protected $first_name;
+
+	/**
+	 * Last name of the user
+	 * @var string
+	 * @required
+	 */
+	protected $last_name;
 
 	/**
 	 * Email address of the user
@@ -35,27 +49,6 @@ class BookingStatusTenant extends SwaggerModel
 	protected $guarantor_required;
 
 	/**
-	 * Start date of the contract
-	 * @var string
-	 * @required
-	 */
-	protected $contract_start_date;
-
-	/**
-	 * End date of the contract
-	 * @var string
-	 * @required
-	 */
-	protected $contract_end_date;
-
-	/**
-	 * Total contract duration in days
-	 * @var integer
-	 * @required
-	 */
-	protected $contract_length;
-
-	/**
 	 * Rent per week
 	 * @var float
 	 * @required
@@ -76,24 +69,75 @@ class BookingStatusTenant extends SwaggerModel
 	 */
 	protected $rent_instalments;
 
+	/**
+	 * Date and time that the tenant signed the tenancy
+	 * @var string
+	 * @required
+	 */
+	protected $signed_datetime;
+
 
 	/**
 	 * @return string
 	 */
-	public function getName()
+	public function getTitle()
 	{
-		return $this->name;
+		return $this->title;
 	}
 
 
 	/**
-	 * @param string $name
+	 * @param string $title
 	 *
 	 * @return $this
 	 */
-	public function setName($name)
+	public function setTitle($title)
 	{
-		$this->name = $name;
+		$this->title = $title;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getFirstName()
+	{
+		return $this->first_name;
+	}
+
+
+	/**
+	 * @param string $first_name
+	 *
+	 * @return $this
+	 */
+	public function setFirstName($first_name)
+	{
+		$this->first_name = $first_name;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getLastName()
+	{
+		return $this->last_name;
+	}
+
+
+	/**
+	 * @param string $last_name
+	 *
+	 * @return $this
+	 */
+	public function setLastName($last_name)
+	{
+		$this->last_name = $last_name;
 
 		return $this;
 	}
@@ -166,72 +210,6 @@ class BookingStatusTenant extends SwaggerModel
 
 
 	/**
-	 * @return string
-	 */
-	public function getContractStartDate()
-	{
-		return $this->contract_start_date;
-	}
-
-
-	/**
-	 * @param string $contract_start_date
-	 *
-	 * @return $this
-	 */
-	public function setContractStartDate($contract_start_date)
-	{
-		$this->contract_start_date = $contract_start_date;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getContractEndDate()
-	{
-		return $this->contract_end_date;
-	}
-
-
-	/**
-	 * @param string $contract_end_date
-	 *
-	 * @return $this
-	 */
-	public function setContractEndDate($contract_end_date)
-	{
-		$this->contract_end_date = $contract_end_date;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return integer
-	 */
-	public function getContractLength()
-	{
-		return $this->contract_length;
-	}
-
-
-	/**
-	 * @param integer $contract_length
-	 *
-	 * @return $this
-	 */
-	public function setContractLength($contract_length)
-	{
-		$this->contract_length = $contract_length;
-
-		return $this;
-	}
-
-
-	/**
 	 * @return float
 	 */
 	public function getRentPw()
@@ -292,6 +270,28 @@ class BookingStatusTenant extends SwaggerModel
 	public function setRentInstalments($rent_instalments)
 	{
 		$this->rent_instalments = $rent_instalments;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getSignedDatetime()
+	{
+		return $this->signed_datetime;
+	}
+
+
+	/**
+	 * @param string $signed_datetime
+	 *
+	 * @return $this
+	 */
+	public function setSignedDatetime($signed_datetime)
+	{
+		$this->signed_datetime = $signed_datetime;
 
 		return $this;
 	}

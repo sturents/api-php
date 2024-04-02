@@ -14,6 +14,13 @@ class BookingStatusTenancy extends SwaggerModel
 	protected $created_datetime;
 
 	/**
+	 * Title of the availability selected for the booking
+	 * @var string
+	 * @required
+	 */
+	protected $booking_option;
+
+	/**
 	 * Start date of the contract
 	 * @var string
 	 * @required
@@ -40,13 +47,6 @@ class BookingStatusTenancy extends SwaggerModel
 	 * @required
 	 */
 	protected $rent_pppw;
-
-	/**
-	 * Title of the availability selected for the booking
-	 * @var string
-	 * @required
-	 */
-	protected $booking_option;
 
 	/**
 	 * Total monetary value of the contract
@@ -87,6 +87,28 @@ class BookingStatusTenancy extends SwaggerModel
 	public function setCreatedDatetime($created_datetime)
 	{
 		$this->created_datetime = $created_datetime;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getBookingOption()
+	{
+		return $this->booking_option;
+	}
+
+
+	/**
+	 * @param string $booking_option
+	 *
+	 * @return $this
+	 */
+	public function setBookingOption($booking_option)
+	{
+		$this->booking_option = $booking_option;
 
 		return $this;
 	}
@@ -175,28 +197,6 @@ class BookingStatusTenancy extends SwaggerModel
 	public function setRentPppw($rent_pppw)
 	{
 		$this->rent_pppw = $rent_pppw;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getBookingOption()
-	{
-		return $this->booking_option;
-	}
-
-
-	/**
-	 * @param string $booking_option
-	 *
-	 * @return $this
-	 */
-	public function setBookingOption($booking_option)
-	{
-		$this->booking_option = $booking_option;
 
 		return $this;
 	}

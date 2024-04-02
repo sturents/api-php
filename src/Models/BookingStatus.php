@@ -30,15 +30,15 @@ class BookingStatus extends SwaggerModel
 	protected $booking_status;
 
 	/**
-	 * Name of the booking's property manager
-	 * @var string
+	 * Details of the booking's property manager
+	 * @var BookingStatusPropertyManager
 	 * @required
 	 */
-	protected $property_manager_name;
+	protected $property_manager;
 
 	/**
 	 * Address of the property used in the booking
-	 * @var string
+	 * @var BookingStatusAddress
 	 * @required
 	 */
 	protected $property_address;
@@ -132,29 +132,29 @@ class BookingStatus extends SwaggerModel
 
 
 	/**
-	 * @return string
+	 * @return BookingStatusPropertyManager
 	 */
-	public function getPropertyManagerName()
+	public function getPropertyManager()
 	{
-		return $this->property_manager_name;
+		return $this->property_manager;
 	}
 
 
 	/**
-	 * @param string $property_manager_name
+	 * @param BookingStatusPropertyManager $property_manager
 	 *
 	 * @return $this
 	 */
-	public function setPropertyManagerName($property_manager_name)
+	public function setPropertyManager(BookingStatusPropertyManager $property_manager)
 	{
-		$this->property_manager_name = $property_manager_name;
+		$this->property_manager = $property_manager;
 
 		return $this;
 	}
 
 
 	/**
-	 * @return string
+	 * @return BookingStatusAddress
 	 */
 	public function getPropertyAddress()
 	{
@@ -163,11 +163,11 @@ class BookingStatus extends SwaggerModel
 
 
 	/**
-	 * @param string $property_address
+	 * @param BookingStatusAddress $property_address
 	 *
 	 * @return $this
 	 */
-	public function setPropertyAddress($property_address)
+	public function setPropertyAddress(BookingStatusAddress $property_address)
 	{
 		$this->property_address = $property_address;
 

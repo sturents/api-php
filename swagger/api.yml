@@ -1474,23 +1474,65 @@ definitions:
     properties:
       error:
         type: string
-  BookingStatusTenant:
+  BookingStatusPropertyManager:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        description: ID of the property manager
+      name:
+        type: string
+        description: Name of the property manager
+  BookingStatusAddress:
     type: object
     required:
       - name
-      - email
-      - phone
-      - guarantor_required
-      - contract_start_date
-      - contract_end_date
-      - contract_length
-      - rent_pw
-      - total_rent
-      - rent_instalments
+      - number
+      - street
+      - city
+      - postcode
     properties:
       name:
         type: string
-        description: Full name of the user
+        description: Name of the address
+      number:
+        type: string
+        description: Number of the address
+      street:
+        type: string
+        description: Street of the address
+      city:
+        type: string
+        description: City of the address
+      postcode:
+        type: string
+        description: Postcode of the address
+  BookingStatusTenant:
+    type: object
+    required:
+      - title
+      - first_name
+      - last_name
+      - email
+      - phone
+      - guarantor_required
+      - rent_pw
+      - total_rent
+      - rent_instalments
+      - signed_datetime
+    properties:
+      title:
+        type: string
+        description: Title of the user
+      first_name:
+        type: string
+        description: First name of the user
+      last_name:
+        type: string
+        description: Last name of the user
       email:
         type: string
         description: Email address of the user
@@ -1501,39 +1543,33 @@ definitions:
         type: boolean
         nullable: true
         description: Indicates whether the user requires a guarantor
-      contract_start_date:
-        type: string
-        nullable: true
-        description: Start date of the contract
-      contract_end_date:
-        type: string
-        nullable: true
-        description: End date of the contract
-      contract_length:
-        type: integer
-        nullable: true
-        description: Total contract duration in days
       rent_pw:
         type: number
+        format: double
         nullable: true
         description: Rent per week
       total_rent:
         type: number
+        format: double
         nullable: true
         description: Total rent
       rent_instalments:
         type: integer
         nullable: true
         description: Number of rent instalments due throughout the duration of the contract
+      signed_datetime:
+        type: string
+        nullable: true
+        description: Date and time that the tenant signed the tenancy
   BookingStatusTenancy:
     type: object
     required:
       - created_datetime
+      - booking_option
       - contract_start_date
       - contract_end_date
       - contract_length
       - rent_pppw
-      - booking_option
       - total_contract_value
       - tenancy_size
       - booking_expiry_datetime
@@ -1541,6 +1577,10 @@ definitions:
       created_datetime:
         type: string
         description: Date and time that the contract was created
+      booking_option:
+        type: string
+        nullable: true
+        description: Title of the availability selected for the booking
       contract_start_date:
         type: string
         description: Start date of the contract
@@ -1554,13 +1594,11 @@ definitions:
         description: Total contract duration in days
       rent_pppw:
         type: number
+        format: double
         description: Total rent per person per week
-      booking_option:
-        type: string
-        nullable: true
-        description: Title of the availability selected for the booking
       total_contract_value:
         type: number
+        format: double
         description: Total monetary value of the contract
       tenancy_size:
         type: integer
@@ -1577,7 +1615,7 @@ definitions:
       - booking_id
       - unique_booking_id
       - booking_status
-      - property_manager_name
+      - property_manager
       - property_address
       - currency
       - tenants
@@ -1592,12 +1630,12 @@ definitions:
       booking_status:
         type: string
         description: Status of the booking
-      property_manager_name:
-        type: string
-        description: Name of the booking's property manager
+      property_manager:
+        description: Details of the booking's property manager
+        $ref: '#/definitions/BookingStatusPropertyManager'
       property_address:
-        type: string
         description: Address of the property used in the booking
+        $ref: '#/definitions/BookingStatusAddress'
       currency:
         type: string
         description: Contract's currency code
@@ -1608,6 +1646,6 @@ definitions:
           $ref: '#/definitions/BookingStatusTenant'
       tenancy:
         description: Details of tenancy created from booking
+        nullable: true
         allOf:
-          - nullable: true
           - $ref: '#/definitions/BookingStatusTenancy'
