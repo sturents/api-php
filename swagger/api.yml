@@ -665,7 +665,7 @@ paths:
           Auth: []
       parameters:
         - in: query
-          name: tenant_id
+          name: booking_id
           type: string
           required: true
           description: Unique booking identifier provided in the redirect URL
@@ -675,9 +675,7 @@ paths:
         '200':
           description: Booking status and basic contract information
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/BookingStatus'
+            $ref: '#/definitions/BookingStatus'
         '401':
           $ref: '#/definitions/AuthError'
         '404':
@@ -1476,68 +1474,140 @@ definitions:
     properties:
       error:
         type: string
-  BookingStatus:
-    description: |
-      Basic contract information and booking status.
+  BookingStatusTenant:
     type: object
+    required:
+      - name
+      - email
+      - phone
+      - guarantor_required
+      - contract_start_date
+      - contract_end_date
+      - contract_length
+      - rent_pw
+      - total_rent
+      - rent_instalments
     properties:
-      tenant_name:
+      name:
         type: string
-        description: Full name of the user who initiated the booking
-      tenant_id:
+        description: Full name of the user
+      email:
         type: string
-        description: Identifier provided in the redirect URL when the user initiated the booking
-      unique_tenant_id:
+        description: Email address of the user
+      phone:
         type: string
-        description: Generated unique identifier, this will be the same as the tenant_id unless the same identifier has been provided for multiple bookings.
-      tenant_email:
-        type: string
-        description: Email address of the user who initiated the booking
-      tenant_phone:
-        type: string
-        description: Phone number of the user who initiated the booking
+        description: Phone number of the user
       guarantor_required:
+        type: boolean
+        nullable: true
+        description: Indicates whether the user requires a guarantor
+      contract_start_date:
+        type: string
+        nullable: true
+        description: Start date of the contract
+      contract_end_date:
+        type: string
+        nullable: true
+        description: End date of the contract
+      contract_length:
         type: integer
-        description: 1|0, indicates whether the contract requires a guarantor
-      property_manager_name:
-        type: string
-        description: Name of the booking's property manager
-      property_address:
-        type: string
-        description: Address of the property used in the booking
+        nullable: true
+        description: Total contract duration in days
+      rent_pw:
+        type: number
+        nullable: true
+        description: Rent per week
+      total_rent:
+        type: number
+        nullable: true
+        description: Total rent
+      rent_instalments:
+        type: integer
+        nullable: true
+        description: Number of rent instalments due throughout the duration of the contract
+  BookingStatusTenancy:
+    type: object
+    required:
+      - contract_start_date
+      - contract_end_date
+      - contract_length
+      - rent_pppw
+      - booking_option
+      - total_contract_value
+      - tenancy_size
+      - booking_expiry_datetime
+    properties:
       contract_start_date:
         type: string
         description: Start date of the contract
       contract_end_date:
         type: string
+        nullable: true
         description: End date of the contract
       contract_length:
         type: integer
+        nullable: true
         description: Total contract duration in days
       rent_pppw:
         type: number
         description: Total rent per person per week
       booking_option:
         type: string
+        nullable: true
         description: Title of the availability selected for the booking
-      currency:
-        type: string
-        description: Contract's currency code
       total_contract_value:
         type: number
         description: Total monetary value of the contract
       tenancy_size:
         type: integer
         description: Number of tenants included in the booking
-      rent_instalments:
-        type: integer
-        description: Number of rent instalments due throughout the duration of the contract
+      booking_expiry_datetime:
+        type: string
+        nullable: true
+        description: Date and time that the booking will expire if not signed by the tenant
+  BookingStatus:
+    description: |
+      Basic contract information and booking status.
+    type: object
+    required:
+      - booking_id
+      - unique_booking_id
+      - created_datetime
+      - booking_status
+      - property_manager_name
+      - property_address
+      - currency
+      - tenants
+      - tenancy
+    properties:
+      booking_id:
+        type: string
+        description: Identifier provided in the redirect URL when the user initiated the booking
+      unique_booking_id:
+        type: string
+        description: Generated unique identifier, this will be the same as the booking_id unless the same identifier has been provided for multiple bookings.
       created_datetime:
         type: string
         description: Date and time that the contract was created
       booking_status:
         type: string
         description: Status of the booking
-      booking_expiry_datetime:
+      property_manager_name:
         type: string
-        description: Date and time that the booking will expire if not signed by the tenant
+        description: Name of the booking's property manager
+      property_address:
+        type: string
+        description: Address of the property used in the booking
+      currency:
+        type: string
+        description: Contract's currency code
+      tenants:
+        type: array
+        description: List of users involved in booking
+        items:
+          $ref: '#/definitions/BookingStatusTenant'
+      tenancy:
+        description: Details of tenancy created from booking
+        allOf:
+          - nullable: true
+          - $ref: '#/definitions/BookingStatusTenancy'
