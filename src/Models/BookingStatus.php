@@ -9,165 +9,78 @@ namespace SturentsLib\Api\Models;
 class BookingStatus extends SwaggerModel
 {
 	/**
-	 * Full name of the user who initiated the booking
-	 * @var string
-	 */
-	protected $tenant_name = '';
-
-	/**
 	 * Identifier provided in the redirect URL when the user initiated the booking
 	 * @var string
+	 * @required
 	 */
-	protected $tenant_id = '';
+	protected $booking_id;
 
 	/**
-	 * Generated unique identifier, this will be the same as the tenant_id unless the same identifier has been provided for multiple bookings.
+	 * Generated unique identifier, this will be the same as the booking_id unless the same identifier has been provided for multiple bookings.
 	 * @var string
+	 * @required
 	 */
-	protected $unique_tenant_id = '';
-
-	/**
-	 * Email address of the user who initiated the booking
-	 * @var string
-	 */
-	protected $tenant_email = '';
-
-	/**
-	 * Phone number of the user who initiated the booking
-	 * @var string
-	 */
-	protected $tenant_phone = '';
-
-	/**
-	 * 1|0, indicates whether the contract requires a guarantor
-	 * @var int
-	 */
-	protected $guarantor_required = 0;
-
-	/**
-	 * Name of the booking's property manager
-	 * @var string
-	 */
-	protected $property_manager_name = '';
-
-	/**
-	 * Address of the property used in the booking
-	 * @var string
-	 */
-	protected $property_address = '';
-
-	/**
-	 * Start date of the contract
-	 * @var string
-	 */
-	protected $contract_start_date = '';
-
-	/**
-	 * End date of the contract
-	 * @var string
-	 */
-	protected $contract_end_date = '';
-
-	/**
-	 * Total contract duration in days
-	 * @var int
-	 */
-	protected $contract_length = 0;
-
-	/**
-	 * Total rent per person per week
-	 * @var float
-	 */
-	protected $rent_pppw = 0.0;
-
-	/**
-	 * Title of the availability selected for the booking
-	 * @var string
-	 */
-	protected $booking_option = '';
-
-	/**
-	 * Contract's currency code
-	 * @var string
-	 */
-	protected $currency = '';
-
-	/**
-	 * Total monetary value of the contract
-	 * @var float
-	 */
-	protected $total_contract_value = 0.0;
-
-	/**
-	 * Number of tenants included in the booking
-	 * @var int
-	 */
-	protected $tenancy_size = 0;
-
-	/**
-	 * Number of rent instalments due throughout the duration of the contract
-	 * @var int
-	 */
-	protected $rent_instalments = 0;
-
-	/**
-	 * Date and time that the contract was created
-	 * @var string
-	 */
-	protected $created_datetime = '';
+	protected $unique_booking_id;
 
 	/**
 	 * Status of the booking
 	 * @var string
+	 * @required
 	 */
-	protected $booking_status = '';
+	protected $booking_status;
 
 	/**
-	 * Date and time that the booking will expire if not signed by the tenant
+	 * Details of the booking's property manager
+	 * @var BookingStatusPropertyManager
+	 * @required
+	 */
+	protected $property_manager;
+
+	/**
+	 * Address of the property used in the booking
+	 * @var BookingStatusAddress
+	 * @required
+	 */
+	protected $property_address;
+
+	/**
+	 * Contract's currency code
 	 * @var string
+	 * @required
 	 */
-	protected $booking_expiry_datetime = '';
+	protected $currency;
+
+	/**
+	 * List of users involved in booking
+	 * @var BookingStatusTenant[]
+	 * @required
+	 */
+	protected $tenants;
+
+	/**
+	 * @var ?BookingStatusTenancy
+	 * @required
+	 */
+	protected $tenancy;
 
 
 	/**
 	 * @return string
 	 */
-	public function getTenantName()
+	public function getBookingId()
 	{
-		return $this->tenant_name;
+		return $this->booking_id;
 	}
 
 
 	/**
-	 * @param string $tenant_name
+	 * @param string $booking_id
 	 *
 	 * @return $this
 	 */
-	public function setTenantName($tenant_name)
+	public function setBookingId($booking_id)
 	{
-		$this->tenant_name = $tenant_name;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getTenantId()
-	{
-		return $this->tenant_id;
-	}
-
-
-	/**
-	 * @param string $tenant_id
-	 *
-	 * @return $this
-	 */
-	public function setTenantId($tenant_id)
-	{
-		$this->tenant_id = $tenant_id;
+		$this->booking_id = $booking_id;
 
 		return $this;
 	}
@@ -176,350 +89,20 @@ class BookingStatus extends SwaggerModel
 	/**
 	 * @return string
 	 */
-	public function getUniqueTenantId()
+	public function getUniqueBookingId()
 	{
-		return $this->unique_tenant_id;
+		return $this->unique_booking_id;
 	}
 
 
 	/**
-	 * @param string $unique_tenant_id
+	 * @param string $unique_booking_id
 	 *
 	 * @return $this
 	 */
-	public function setUniqueTenantId($unique_tenant_id)
+	public function setUniqueBookingId($unique_booking_id)
 	{
-		$this->unique_tenant_id = $unique_tenant_id;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getTenantEmail()
-	{
-		return $this->tenant_email;
-	}
-
-
-	/**
-	 * @param string $tenant_email
-	 *
-	 * @return $this
-	 */
-	public function setTenantEmail($tenant_email)
-	{
-		$this->tenant_email = $tenant_email;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getTenantPhone()
-	{
-		return $this->tenant_phone;
-	}
-
-
-	/**
-	 * @param string $tenant_phone
-	 *
-	 * @return $this
-	 */
-	public function setTenantPhone($tenant_phone)
-	{
-		$this->tenant_phone = $tenant_phone;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return float
-	 */
-	public function getGuarantorRequired()
-	{
-		return $this->guarantor_required;
-	}
-
-
-	/**
-	 * @param float $guarantor_required
-	 *
-	 * @return $this
-	 */
-	public function setGuarantorRequired($guarantor_required)
-	{
-		$this->guarantor_required = $guarantor_required;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getPropertyManagerName()
-	{
-		return $this->property_manager_name;
-	}
-
-
-	/**
-	 * @param string $property_manager_name
-	 *
-	 * @return $this
-	 */
-	public function setPropertyManagerName($property_manager_name)
-	{
-		$this->property_manager_name = $property_manager_name;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getPropertyAddress()
-	{
-		return $this->property_address;
-	}
-
-
-	/**
-	 * @param string $property_address
-	 *
-	 * @return $this
-	 */
-	public function setPropertyAddress($property_address)
-	{
-		$this->property_address = $property_address;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getContractStartDate()
-	{
-		return $this->contract_start_date;
-	}
-
-
-	/**
-	 * @param string $contract_start_date
-	 *
-	 * @return $this
-	 */
-	public function setContractStartDate($contract_start_date)
-	{
-		$this->contract_start_date = $contract_start_date;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getContractEndDate()
-	{
-		return $this->contract_end_date;
-	}
-
-
-	/**
-	 * @param string $contract_end_date
-	 *
-	 * @return $this
-	 */
-	public function setContractEndDate($contract_end_date)
-	{
-		$this->contract_end_date = $contract_end_date;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return float
-	 */
-	public function getContractLength()
-	{
-		return $this->contract_length;
-	}
-
-
-	/**
-	 * @param float $contract_length
-	 *
-	 * @return $this
-	 */
-	public function setContractLength($contract_length)
-	{
-		$this->contract_length = $contract_length;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return float
-	 */
-	public function getRentPppw()
-	{
-		return $this->rent_pppw;
-	}
-
-
-	/**
-	 * @param float $rent_pppw
-	 *
-	 * @return $this
-	 */
-	public function setRentPppw($rent_pppw)
-	{
-		$this->rent_pppw = $rent_pppw;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getBookingOption()
-	{
-		return $this->booking_option;
-	}
-
-
-	/**
-	 * @param string $booking_option
-	 *
-	 * @return $this
-	 */
-	public function setBookingOption($booking_option)
-	{
-		$this->booking_option = $booking_option;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getCurrency()
-	{
-		return $this->currency;
-	}
-
-
-	/**
-	 * @param string $currency
-	 *
-	 * @return $this
-	 */
-	public function setCurrency($currency)
-	{
-		$this->currency = $currency;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return float
-	 */
-	public function getTotalContractValue()
-	{
-		return $this->total_contract_value;
-	}
-
-
-	/**
-	 * @param float $total_contract_value
-	 *
-	 * @return $this
-	 */
-	public function setTotalContractValue($total_contract_value)
-	{
-		$this->total_contract_value = $total_contract_value;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return float
-	 */
-	public function getTenancySize()
-	{
-		return $this->tenancy_size;
-	}
-
-
-	/**
-	 * @param float $tenancy_size
-	 *
-	 * @return $this
-	 */
-	public function setTenancySize($tenancy_size)
-	{
-		$this->tenancy_size = $tenancy_size;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return float
-	 */
-	public function getRentInstalments()
-	{
-		return $this->rent_instalments;
-	}
-
-
-	/**
-	 * @param float $rent_instalments
-	 *
-	 * @return $this
-	 */
-	public function setRentInstalments($rent_instalments)
-	{
-		$this->rent_instalments = $rent_instalments;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getCreatedDatetime()
-	{
-		return $this->created_datetime;
-	}
-
-
-	/**
-	 * @param string $created_datetime
-	 *
-	 * @return $this
-	 */
-	public function setCreatedDatetime($created_datetime)
-	{
-		$this->created_datetime = $created_datetime;
+		$this->unique_booking_id = $unique_booking_id;
 
 		return $this;
 	}
@@ -548,22 +131,123 @@ class BookingStatus extends SwaggerModel
 
 
 	/**
-	 * @return string
+	 * @return BookingStatusPropertyManager
 	 */
-	public function getBookingExpiryDatetime()
+	public function getPropertyManager()
 	{
-		return $this->booking_expiry_datetime;
+		return $this->property_manager;
 	}
 
 
 	/**
-	 * @param string $booking_expiry_datetime
+	 * @param BookingStatusPropertyManager $property_manager
 	 *
 	 * @return $this
 	 */
-	public function setBookingExpiryDatetime($booking_expiry_datetime)
+	public function setPropertyManager(BookingStatusPropertyManager $property_manager)
 	{
-		$this->booking_expiry_datetime = $booking_expiry_datetime;
+		$this->property_manager = $property_manager;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return BookingStatusAddress
+	 */
+	public function getPropertyAddress()
+	{
+		return $this->property_address;
+	}
+
+
+	/**
+	 * @param BookingStatusAddress $property_address
+	 *
+	 * @return $this
+	 */
+	public function setPropertyAddress(BookingStatusAddress $property_address)
+	{
+		$this->property_address = $property_address;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getCurrency()
+	{
+		return $this->currency;
+	}
+
+
+	/**
+	 * @param string $currency
+	 *
+	 * @return $this
+	 */
+	public function setCurrency($currency)
+	{
+		$this->currency = $currency;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return BookingStatusTenant[]
+	 */
+	public function getTenants()
+	{
+		return $this->tenants;
+	}
+
+
+	/**
+	 * @param BookingStatusTenant[] $tenants
+	 *
+	 * @return $this
+	 */
+	public function setTenants(array $tenants)
+	{
+		$this->tenants = $tenants;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param BookingStatusTenant $tenant
+	 *
+	 * @return $this
+	 */
+	public function addTenant(BookingStatusTenant $tenant)
+	{
+		$this->tenants[] = $tenant;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return ?BookingStatusTenancy
+	 */
+	public function getTenancy()
+	{
+		return $this->tenancy;
+	}
+
+
+	/**
+	 * @param ?BookingStatusTenancy $tenancy
+	 *
+	 * @return $this
+	 */
+	public function setTenancy(?BookingStatusTenancy $tenancy)
+	{
+		$this->tenancy = $tenancy;
 
 		return $this;
 	}
