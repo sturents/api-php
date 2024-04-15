@@ -31,7 +31,7 @@ class SwaggerRequest implements RequestInterface {
 	 *
 	 * @return string HTTP protocol version.
 	 */
-	public function getProtocolVersion(){
+	public function getProtocolVersion() :string{
 		return '1.1';
 	}
 
@@ -48,7 +48,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @param string $version HTTP protocol version
 	 * @return static
 	 */
-	public function withProtocolVersion(string $version){
+	public function withProtocolVersion(string $version) :self{
 		return clone $this;
 	}
 
@@ -77,7 +77,7 @@ class SwaggerRequest implements RequestInterface {
 	 *     key MUST be a header name, and each value MUST be an array of strings
 	 *     for that header.
 	 */
-	public function getHeaders(){
+	public function getHeaders() :array{
 		return $this->headers;
 	}
 
@@ -89,7 +89,7 @@ class SwaggerRequest implements RequestInterface {
 	 *     name using a case-insensitive string comparison. Returns false if
 	 *     no matching header name is found in the message.
 	 */
-	public function hasHeader($name){
+	public function hasHeader($name) :bool{
 		return isset($this->headers[$name]);
 	}
 
@@ -107,7 +107,7 @@ class SwaggerRequest implements RequestInterface {
 	 *    header. If the header does not appear in the message, this method MUST
 	 *    return an empty array.
 	 */
-	public function getHeader($name){
+	public function getHeader($name) :array{
 		return $this->headers[$name] ?: [];
 	}
 
@@ -130,7 +130,7 @@ class SwaggerRequest implements RequestInterface {
 	 *    concatenated together using a comma. If the header does not appear in
 	 *    the message, this method MUST return an empty string.
 	 */
-	public function getHeaderLine($name){
+	public function getHeaderLine($name) :string{
 		return implode(',', $this->headers[$name] ?: []);
 	}
 
@@ -149,7 +149,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @return static
 	 * @throws \InvalidArgumentException for invalid header names or values.
 	 */
-	public function withHeader($name, $value){
+	public function withHeader($name, $value) :self{
 		$cloned = clone $this;
 		$cloned->setHeader($name, $value);
 
@@ -180,7 +180,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @return static
 	 * @throws \InvalidArgumentException for invalid header names or values.
 	 */
-	public function withAddedHeader($name, $value){
+	public function withAddedHeader($name, $value) :self{
 		$cloned = clone $this;
 		$cloned->addHeader($name, $value);
 
@@ -210,7 +210,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @param string $name Case-insensitive header field name to remove.
 	 * @return static
 	 */
-	public function withoutHeader($name){
+	public function withoutHeader($name) :self{
 		return clone $this;
 	}
 
@@ -219,7 +219,7 @@ class SwaggerRequest implements RequestInterface {
 	 *
 	 * @return StreamInterface Returns the body as a stream.
 	 */
-	public function getBody(){
+	public function getBody() :StreamInterface{
 		return $this->body;
 	}
 
@@ -236,7 +236,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @return static
 	 * @throws \InvalidArgumentException When the body is not valid.
 	 */
-	public function withBody(StreamInterface $body){
+	public function withBody(StreamInterface $body) :self{
 		return clone $this;
 	}
 
@@ -256,7 +256,7 @@ class SwaggerRequest implements RequestInterface {
 	 *
 	 * @return string
 	 */
-	public function getRequestTarget(){
+	public function getRequestTarget() :string{
 		return (string)$this->getUri();
 	}
 
@@ -277,7 +277,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @param mixed $requestTarget
 	 * @return static
 	 */
-	public function withRequestTarget($requestTarget){
+	public function withRequestTarget($requestTarget) :self{
 		return clone $this;
 	}
 
@@ -286,7 +286,7 @@ class SwaggerRequest implements RequestInterface {
 	 *
 	 * @return string Returns the request method.
 	 */
-	public function getMethod(){
+	public function getMethod() :string{
 		return static::METHOD;
 	}
 
@@ -305,7 +305,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @return static
 	 * @throws \InvalidArgumentException for invalid HTTP methods.
 	 */
-	public function withMethod($method){
+	public function withMethod($method) :self{
 		return clone $this;
 	}
 
@@ -318,7 +318,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @return UriInterface Returns a UriInterface instance
 	 *     representing the URI of the request.
 	 */
-	public function getUri(){
+	public function getUri() :UriInterface{
 		if (is_null($this->uri)){
 			$this->uri = $this->makeUri();
 		}
@@ -356,7 +356,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @param bool $preserveHost Preserve the original state of the Host header.
 	 * @return static
 	 */
-	public function withUri(UriInterface $uri, $preserveHost = false){
+	public function withUri(UriInterface $uri, $preserveHost = false) :self{
 		$request = clone $this;
 		$request->setUri($uri);
 
@@ -405,7 +405,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @see https://tools.ietf.org/html/rfc3986#section-3.1
 			 * @return string The URI scheme.
 			 */
-			public function getScheme(){
+			public function getScheme(): string{
 				return $this->scheme;
 			}
 
@@ -427,7 +427,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @see https://tools.ietf.org/html/rfc3986#section-3.2
 			 * @return string The URI authority, in "[user-info@]host[:port]" format.
 			 */
-			public function getAuthority(){
+			public function getAuthority() :string{
 				return '';
 			}
 
@@ -446,7 +446,7 @@ class SwaggerRequest implements RequestInterface {
 			 *
 			 * @return string The URI user information, in "username[:password]" format.
 			 */
-			public function getUserInfo(){
+			public function getUserInfo(): string{
 				return '';
 			}
 
@@ -461,7 +461,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @see http://tools.ietf.org/html/rfc3986#section-3.2.2
 			 * @return string The URI host.
 			 */
-			public function getHost(){
+			public function getHost(): string{
 				return explode('/', $this->uri)[0];
 			}
 
@@ -480,7 +480,7 @@ class SwaggerRequest implements RequestInterface {
 			 *
 			 * @return null|int The URI port.
 			 */
-			public function getPort(){
+			public function getPort(): ?int{
 				return null;
 			}
 
@@ -509,13 +509,13 @@ class SwaggerRequest implements RequestInterface {
 			 * @see https://tools.ietf.org/html/rfc3986#section-3.3
 			 * @return string The URI path.
 			 */
-			public function getPath(){
+			public function getPath(): string{
 				$no_host = $this->uriNoHost();
 
 				return explode('?', $no_host)[0];
 			}
 
-			private function uriNoHost(){
+			private function uriNoHost(): string{
 				$split = explode('/', $this->uri);
 				unset($split[0]);
 
@@ -542,7 +542,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @see https://tools.ietf.org/html/rfc3986#section-3.4
 			 * @return string The URI query string.
 			 */
-			public function getQuery(){
+			public function getQuery(): string{
 				$no_host = $this->uriNoHost();
 
 				return explode('?', $no_host)[1] ?? '';
@@ -564,7 +564,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @see https://tools.ietf.org/html/rfc3986#section-3.5
 			 * @return string The URI fragment.
 			 */
-			public function getFragment(){
+			public function getFragment(): string{
 				return '';
 			}
 
@@ -583,7 +583,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @return static A new instance with the specified scheme.
 			 * @throws \InvalidArgumentException for invalid or unsupported schemes.
 			 */
-			public function withScheme($scheme){
+			public function withScheme($scheme) :UriInterface{
 				return clone $this;
 			}
 
@@ -601,7 +601,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @param null|string $password The password associated with $user.
 			 * @return static A new instance with the specified user information.
 			 */
-			public function withUserInfo($user, $password = null){
+			public function withUserInfo($user, $password = null): UriInterface{
 				return clone $this;
 			}
 
@@ -617,7 +617,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @return static A new instance with the specified host.
 			 * @throws \InvalidArgumentException for invalid hostnames.
 			 */
-			public function withHost($host){
+			public function withHost($host): UriInterface{
 				$clone = clone $this;
 				$clone->setHost($host);
 
@@ -656,7 +656,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @return static A new instance with the specified port.
 			 * @throws \InvalidArgumentException for invalid ports.
 			 */
-			public function withPort($port){
+			public function withPort($port): UriInterface{
 				return clone $this;
 			}
 
@@ -682,7 +682,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @return static A new instance with the specified path.
 			 * @throws \InvalidArgumentException for invalid paths.
 			 */
-			public function withPath($path){
+			public function withPath($path): UriInterface{
 				return clone $this;
 			}
 
@@ -701,7 +701,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @return static A new instance with the specified query string.
 			 * @throws \InvalidArgumentException for invalid query strings.
 			 */
-			public function withQuery($query){
+			public function withQuery($query): UriInterface{
 				$uri = clone $this;
 				$uri->setQuery($query);
 
@@ -735,7 +735,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @param string $fragment The fragment to use with the new instance.
 			 * @return static A new instance with the specified fragment.
 			 */
-			public function withFragment($fragment){
+			public function withFragment($fragment): UriInterface{
 				return clone $this;
 			}
 
@@ -762,7 +762,7 @@ class SwaggerRequest implements RequestInterface {
 			 * @see http://tools.ietf.org/html/rfc3986#section-4.1
 			 * @return string
 			 */
-			public function __toString(){
+			public function __toString(): string{
 				return $this->getScheme().'://'.$this->uri;
 			}
 
