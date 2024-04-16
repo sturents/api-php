@@ -1,6 +1,7 @@
 <?php
 namespace SturentsLib\Api\Requests;
 
+use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
@@ -220,7 +221,7 @@ class SwaggerRequest implements RequestInterface {
 	 * @return StreamInterface Returns the body as a stream.
 	 */
 	public function getBody() :StreamInterface{
-		return $this->body;
+		return Utils::streamFor($this->body);
 	}
 
 	/**
