@@ -29,6 +29,15 @@ class PropertyOutbound extends Property
 	protected $contracts = [];
 
 	/**
+	 * One or more Contracts (only those contracts which have
+	 * been subject to a DELETE request and which show as "disabled"
+	 * in GET /contracts requests)
+	 *
+	 * @var ContractWithRooms[]
+	 */
+	protected $contracts_disabled = [];
+
+	/**
 	 * @var Media
 	 */
 	protected $media;
@@ -121,6 +130,41 @@ class PropertyOutbound extends Property
 	public function addContract(ContractWithRooms $contract)
 	{
 		$this->contracts[] = $contract;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return ContractWithRooms[]
+	 */
+	public function getContractsDisabled()
+	{
+		return $this->contracts_disabled;
+	}
+
+
+	/**
+	 * @param ContractWithRooms[] $contracts
+	 *
+	 * @return $this
+	 */
+	public function setContractsDisabled(array $contracts)
+	{
+		$this->contracts_disabled = $contracts;
+
+		return $this;
+	}
+
+
+	/**
+	 * @param ContractWithRooms $contract
+	 *
+	 * @return $this
+	 */
+	public function addDisabledContract(ContractWithRooms $contract)
+	{
+		$this->contracts_disabled[] = $contract;
 
 		return $this;
 	}
