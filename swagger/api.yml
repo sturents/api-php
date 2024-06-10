@@ -864,6 +864,14 @@ definitions:
               in GET /contracts requests)
             items:
               $ref: '#/definitions/ContractWithRooms'
+          contracts_disabled:
+            type: array
+            description: |
+              One or more Contracts (only those contracts which have
+              been subject to a DELETE request and which show as "disabled"
+              in GET /contracts requests)
+            items:
+              $ref: '#/definitions/ContractWithRooms'
           media:
             $ref: '#/definitions/Media'
   PropertyCreation:
