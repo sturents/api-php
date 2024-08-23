@@ -20,13 +20,13 @@ class ContractCreation extends ContractAbstract
 	 * might tie this to a similar internal status, but this should not be used to
 	 * permanently remove a Contract - use the DELETE method instead for that purpose.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $disabled = false;
 
 	/**
 	 * A unique identifier for a Tenancy Template fetched from
-	 * the /contract-templates endpoint. A tenancy template
+	 * the /tenancy-templates endpoint. A tenancy template
 	 * allows a tenancy to be created for tenants who are renting
 	 * the property and can sign for it on StuRents
 	 *
@@ -54,7 +54,7 @@ class ContractCreation extends ContractAbstract
 	 * then "book now" is definitely NOT available for this Contract
 	 * regardless of other settings
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $book_now_allowed = false;
 
@@ -76,7 +76,7 @@ class ContractCreation extends ContractAbstract
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getDisabled()
 	{
@@ -85,7 +85,7 @@ class ContractCreation extends ContractAbstract
 
 
 	/**
-	 * @param boolean $disabled
+	 * @param bool $disabled
 	 *
 	 * @return $this
 	 */
@@ -155,7 +155,7 @@ class ContractCreation extends ContractAbstract
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getBookNowAllowed()
 	{
@@ -164,7 +164,7 @@ class ContractCreation extends ContractAbstract
 
 
 	/**
-	 * @param boolean $book_now_allowed
+	 * @param bool $book_now_allowed
 	 *
 	 * @return $this
 	 */

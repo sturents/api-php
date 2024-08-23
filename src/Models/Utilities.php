@@ -10,48 +10,48 @@ namespace SturentsLib\Api\Models;
 class Utilities extends SwaggerModel
 {
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $water = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $gas = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $electricity = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $broadband = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $phone = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $contents_insurance = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $tv_license = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $council_tax = false;
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getWater()
 	{
@@ -60,7 +60,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @param boolean $water
+	 * @param bool $water
 	 *
 	 * @return $this
 	 */
@@ -73,7 +73,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getGas()
 	{
@@ -82,7 +82,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @param boolean $gas
+	 * @param bool $gas
 	 *
 	 * @return $this
 	 */
@@ -95,7 +95,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getElectricity()
 	{
@@ -104,7 +104,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @param boolean $electricity
+	 * @param bool $electricity
 	 *
 	 * @return $this
 	 */
@@ -117,7 +117,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getBroadband()
 	{
@@ -126,7 +126,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @param boolean $broadband
+	 * @param bool $broadband
 	 *
 	 * @return $this
 	 */
@@ -139,7 +139,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getPhone()
 	{
@@ -148,7 +148,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @param boolean $phone
+	 * @param bool $phone
 	 *
 	 * @return $this
 	 */
@@ -161,7 +161,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getContentsInsurance()
 	{
@@ -170,7 +170,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @param boolean $contents_insurance
+	 * @param bool $contents_insurance
 	 *
 	 * @return $this
 	 */
@@ -183,7 +183,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getTvLicense()
 	{
@@ -192,7 +192,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @param boolean $tv_license
+	 * @param bool $tv_license
 	 *
 	 * @return $this
 	 */
@@ -205,7 +205,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getCouncilTax()
 	{
@@ -214,7 +214,7 @@ class Utilities extends SwaggerModel
 
 
 	/**
-	 * @param boolean $council_tax
+	 * @param bool $council_tax
 	 *
 	 * @return $this
 	 */

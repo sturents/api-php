@@ -37,7 +37,7 @@ class ContractAbstract extends SwaggerModel
 	/**
 	 * The minimum time a tenant may rent the property for in days
 	 *
-	 * @var integer
+	 * @var int
 	 * @required
 	 */
 	protected $min_contract_days;
@@ -121,7 +121,7 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getMinContractDays()
 	{
@@ -130,7 +130,7 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @param integer $min_contract_days
+	 * @param int $min_contract_days
 	 *
 	 * @return $this
 	 */

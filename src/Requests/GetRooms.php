@@ -9,7 +9,7 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetRooms extends SwaggerRequest
 {
-	public const URI = '/api/rooms';
+	public const URI = '/api//rooms/{property_id}';
 	public const METHOD = 'GET';
 
 	/**
@@ -20,7 +20,6 @@ class GetRooms extends SwaggerRequest
 	 * @var string
 	 */
 	public $property_id;
-
 	protected static $path_params = ['property_id'];
 
 
@@ -32,15 +31,15 @@ class GetRooms extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => \SturentsLib\Api\Models\RoomOutbound::class,
-			'401' => \SturentsLib\Api\Models\AuthError::class,
-			'404' => \SturentsLib\Api\Models\GetError::class,
-			'default' => \SturentsLib\Api\Models\Error::class
+			'200' => '\SturentsLib\Api\Models\RoomOutbound::class',
+			'401' => '\SturentsLib\Api\Models\AuthError::class',
+			'404' => '\SturentsLib\Api\Models\GetError::class',
+			'default' => '\SturentsLib\Api\Models\Error::class'
 		]);
 	}
 }

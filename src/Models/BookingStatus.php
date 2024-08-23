@@ -58,6 +58,7 @@ class BookingStatus extends SwaggerModel
 	protected $tenants;
 
 	/**
+	 * Details of tenancy created from booking
 	 * @var ?BookingStatusTenancy
 	 * @required
 	 */

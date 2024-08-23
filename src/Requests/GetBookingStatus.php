@@ -7,21 +7,21 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetBookingStatus extends SwaggerRequest
 {
-	public const URI = '/api/booking-status';
+	public const URI = '/api//booking-status';
 	public const METHOD = 'GET';
 
 	/**
 	 * Unique booking identifier provided in the redirect URL
 	 *
-	 * @var string
+	 * @var null
 	 */
-	public $tenant_id;
-	protected static $query_params = ['tenant_id'];
+	public $booking_id;
+	protected static $query_params = ['booking_id'];
 
 
-	public function __construct($tenant_id)
+	public function __construct($booking_id)
 	{
-		$this->tenant_id = $tenant_id;
+		$this->booking_id = $booking_id;
 	}
 
 

@@ -7,7 +7,7 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class PutProperty extends SwaggerRequest
 {
-	public const URI = '/api/property';
+	public const URI = '/api//property';
 	public const METHOD = 'PUT';
 
 	/**
@@ -21,15 +21,15 @@ class PutProperty extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => \SturentsLib\Api\Models\PropertySaved::class,
-			'400' => \SturentsLib\Api\Models\SendDataError::class,
-			'401' => \SturentsLib\Api\Models\AuthError::class,
-			'default' => \SturentsLib\Api\Models\Error::class
+			'200' => '\SturentsLib\Api\Models\PropertySaved::class',
+			'400' => '\SturentsLib\Api\Models\SendDataError::class',
+			'401' => '\SturentsLib\Api\Models\AuthError::class',
+			'default' => '\SturentsLib\Api\Models\Error::class'
 		]);
 	}
 }

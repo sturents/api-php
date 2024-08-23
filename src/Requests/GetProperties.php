@@ -7,7 +7,7 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetProperties extends SwaggerRequest
 {
-	public const URI = '/api/properties';
+	public const URI = '/api//properties';
 	public const METHOD = 'GET';
 
 	/**
@@ -17,14 +17,13 @@ class GetProperties extends SwaggerRequest
 	 * be returned
 	 *
 	 *
-	 * @var integer
+	 * @var null
 	 */
 	public $page;
-
 	protected static $query_params = ['page'];
 
 
-	public function __construct($page = null)
+	public function setPage($page)
 	{
 		$this->page = $page;
 	}
@@ -32,16 +31,16 @@ class GetProperties extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => \SturentsLib\Api\Models\ListProperties::class,
-			'400' => \SturentsLib\Api\Models\Error::class,
-			'401' => \SturentsLib\Api\Models\AuthError::class,
-			'404' => \SturentsLib\Api\Models\GetError::class,
-			'default' => \SturentsLib\Api\Models\Error::class
+			'200' => '\SturentsLib\Api\Models\ListProperties::class',
+			'400' => '\SturentsLib\Api\Models\Error::class',
+			'401' => '\SturentsLib\Api\Models\AuthError::class',
+			'404' => '\SturentsLib\Api\Models\GetError::class',
+			'default' => '\SturentsLib\Api\Models\Error::class'
 		]);
 	}
 }

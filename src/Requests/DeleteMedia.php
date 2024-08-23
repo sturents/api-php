@@ -7,7 +7,7 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class DeleteMedia extends SwaggerRequest
 {
-	public const URI = '/api/media';
+	public const URI = '/api//media/{property_id}/{media_id}';
 	public const METHOD = 'DELETE';
 
 	/**
@@ -26,7 +26,6 @@ class DeleteMedia extends SwaggerRequest
 	 * @var string
 	 */
 	public $media_id;
-
 	protected static $path_params = ['property_id', 'media_id'];
 
 
@@ -39,15 +38,15 @@ class DeleteMedia extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'204' => '',
-			'401' => \SturentsLib\Api\Models\AuthError::class,
-			'404' => \SturentsLib\Api\Models\Error::class,
-			'default' => \SturentsLib\Api\Models\Error::class
+			'204' => '''',
+			'401' => '\SturentsLib\Api\Models\AuthError::class',
+			'404' => '\SturentsLib\Api\Models\Error::class',
+			'default' => '\SturentsLib\Api\Models\Error::class'
 		]);
 	}
 }

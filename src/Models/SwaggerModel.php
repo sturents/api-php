@@ -9,6 +9,9 @@ class SwaggerModel implements JsonSerializable {
 
 	private $_is_error = false;
 
+	/**
+	 * @return array
+	 */
 	public function toArray(): array{
 		$this->preOutput();
 
@@ -21,7 +24,9 @@ class SwaggerModel implements JsonSerializable {
 			$data[$key] = $val;
 		}
 
-		return $this->toArrayData($data);
+		$data = $this->toArrayData($data);
+
+		return $data;
 	}
 
 	/**
@@ -30,10 +35,18 @@ class SwaggerModel implements JsonSerializable {
 	protected function preOutput(): void{
 	}
 
-	public function jsonSerialize(): array{
+	/**
+	 * @return array
+	 */
+	public function jsonSerialize(){
 		return $this->toArray();
 	}
 
+	/**
+	 * @param array $data
+	 *
+	 * @return array
+	 */
 	private function toArrayData(array $data): array{
 		foreach ($data as &$val){
 
@@ -57,6 +70,9 @@ class SwaggerModel implements JsonSerializable {
 		return $data;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function isError(): bool{
 		return $this->_is_error;
 	}

@@ -11,7 +11,7 @@ class ScheduleOption extends SwaggerModel
 {
 	/**
 	 * A unique identifier for a Payment Schedule fetched from the
-	 * /payment-schedules endpoint. A payment schedule allows a rent
+	 * /payment-structures endpoint. A payment schedule allows a rent
 	 * collection to be created for tenants to pay their rent via
 	 * the StuRents platform, and may also impact tenancy generation
 	 * with the schedule shown in the signed contract
@@ -25,7 +25,7 @@ class ScheduleOption extends SwaggerModel
 	 * When a tenancy is created this states whether a guarantor
 	 * is required, if set to true, not required if set to false.
 	 *
-	 * @var boolean
+	 * @var bool
 	 * @required
 	 */
 	protected $require_guarantor;
@@ -37,7 +37,7 @@ class ScheduleOption extends SwaggerModel
 	 * states whether Housing Hand is permitted, if set to true,
 	 * not permitted if set to false.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $housing_hand = false;
 
@@ -65,7 +65,7 @@ class ScheduleOption extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getRequireGuarantor()
 	{
@@ -74,7 +74,7 @@ class ScheduleOption extends SwaggerModel
 
 
 	/**
-	 * @param boolean $require_guarantor
+	 * @param bool $require_guarantor
 	 *
 	 * @return $this
 	 */
@@ -87,7 +87,7 @@ class ScheduleOption extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getHousingHand()
 	{
@@ -96,7 +96,7 @@ class ScheduleOption extends SwaggerModel
 
 
 	/**
-	 * @param boolean $housing_hand
+	 * @param bool $housing_hand
 	 *
 	 * @return $this
 	 */

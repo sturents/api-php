@@ -11,56 +11,56 @@ namespace SturentsLib\Api\Models;
 class Eligibility extends SwaggerModel
 {
 	/**
-	 * @var boolean
+	 * @var bool
 	 * @required
 	 */
 	protected $undergraduate_student;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 * @required
 	 */
 	protected $postgraduate_student;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $professional = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $trainee = false;
 
 	/**
 	 * Allows a recipient of UK housing benefit
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $dss = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $pets_permitted = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $smoking_permitted = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $female_only = false;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $male_only = false;
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getUndergraduateStudent()
 	{
@@ -69,7 +69,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @param boolean $undergraduate_student
+	 * @param bool $undergraduate_student
 	 *
 	 * @return $this
 	 */
@@ -82,7 +82,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getPostgraduateStudent()
 	{
@@ -91,7 +91,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @param boolean $postgraduate_student
+	 * @param bool $postgraduate_student
 	 *
 	 * @return $this
 	 */
@@ -104,7 +104,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getProfessional()
 	{
@@ -113,7 +113,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @param boolean $professional
+	 * @param bool $professional
 	 *
 	 * @return $this
 	 */
@@ -126,7 +126,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getTrainee()
 	{
@@ -135,7 +135,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @param boolean $trainee
+	 * @param bool $trainee
 	 *
 	 * @return $this
 	 */
@@ -148,7 +148,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getDss()
 	{
@@ -157,7 +157,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @param boolean $dss
+	 * @param bool $dss
 	 *
 	 * @return $this
 	 */
@@ -170,7 +170,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getPetsPermitted()
 	{
@@ -179,7 +179,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @param boolean $pets_permitted
+	 * @param bool $pets_permitted
 	 *
 	 * @return $this
 	 */
@@ -192,7 +192,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getSmokingPermitted()
 	{
@@ -201,7 +201,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @param boolean $smoking_permitted
+	 * @param bool $smoking_permitted
 	 *
 	 * @return $this
 	 */
@@ -214,7 +214,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getFemaleOnly()
 	{
@@ -223,7 +223,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @param boolean $female_only
+	 * @param bool $female_only
 	 *
 	 * @return $this
 	 */
@@ -236,7 +236,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getMaleOnly()
 	{
@@ -245,7 +245,7 @@ class Eligibility extends SwaggerModel
 
 
 	/**
-	 * @param boolean $male_only
+	 * @param bool $male_only
 	 *
 	 * @return $this
 	 */

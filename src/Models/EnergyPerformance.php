@@ -21,22 +21,22 @@ class EnergyPerformance extends SwaggerModel
 	protected $epc_certificate = '';
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $eef_current = 0;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $eef_potential = 0;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $co2_current = 0;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $co2_potential = 0;
 
@@ -86,7 +86,7 @@ class EnergyPerformance extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getEefCurrent()
 	{
@@ -95,7 +95,7 @@ class EnergyPerformance extends SwaggerModel
 
 
 	/**
-	 * @param integer $eef_current
+	 * @param int $eef_current
 	 *
 	 * @return $this
 	 */
@@ -108,7 +108,7 @@ class EnergyPerformance extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getEefPotential()
 	{
@@ -117,7 +117,7 @@ class EnergyPerformance extends SwaggerModel
 
 
 	/**
-	 * @param integer $eef_potential
+	 * @param int $eef_potential
 	 *
 	 * @return $this
 	 */
@@ -130,7 +130,7 @@ class EnergyPerformance extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getCo2Current()
 	{
@@ -139,7 +139,7 @@ class EnergyPerformance extends SwaggerModel
 
 
 	/**
-	 * @param integer $co2_current
+	 * @param int $co2_current
 	 *
 	 * @return $this
 	 */
@@ -152,7 +152,7 @@ class EnergyPerformance extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getCo2Potential()
 	{
@@ -161,7 +161,7 @@ class EnergyPerformance extends SwaggerModel
 
 
 	/**
-	 * @param integer $co2_potential
+	 * @param int $co2_potential
 	 *
 	 * @return $this
 	 */

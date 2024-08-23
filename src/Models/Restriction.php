@@ -40,7 +40,7 @@ class Restriction extends SwaggerModel
 	 * Minimum days a student must be renting for
 	 * the prices in this contract to be valid
 	 *
-	 * @var integer
+	 * @var int
 	 * @required
 	 */
 	protected $min_contract_days;
@@ -113,7 +113,7 @@ class Restriction extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getMinContractDays()
 	{
@@ -122,7 +122,7 @@ class Restriction extends SwaggerModel
 
 
 	/**
-	 * @param integer $min_contract_days
+	 * @param int $min_contract_days
 	 *
 	 * @return $this
 	 */

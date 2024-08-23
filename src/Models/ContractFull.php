@@ -19,7 +19,7 @@ class ContractFull extends ContractWithRooms
 	 * might tie this to a similar internal status, but this should not be used to
 	 * permanently remove a Contract - use the DELETE method instead for that purpose.
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $disabled = false;
 
@@ -33,7 +33,7 @@ class ContractFull extends ContractWithRooms
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getDisabled()
 	{
@@ -42,7 +42,7 @@ class ContractFull extends ContractWithRooms
 
 
 	/**
-	 * @param boolean $disabled
+	 * @param bool $disabled
 	 *
 	 * @return $this
 	 */

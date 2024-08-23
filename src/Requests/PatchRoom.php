@@ -7,7 +7,7 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class PatchRoom extends SwaggerRequest
 {
-	public const URI = '/api/room';
+	public const URI = '/api//room/{property_id}/{room_id}';
 	public const METHOD = 'PATCH';
 
 	/**
@@ -27,7 +27,6 @@ class PatchRoom extends SwaggerRequest
 	 * @var string
 	 */
 	public $room_id;
-
 	protected static $path_params = ['property_id', 'room_id'];
 
 
@@ -49,16 +48,16 @@ class PatchRoom extends SwaggerRequest
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => \SturentsLib\Api\Models\RoomSaved::class,
-			'400' => \SturentsLib\Api\Models\SendDataError::class,
-			'401' => \SturentsLib\Api\Models\AuthError::class,
-			'404' => \SturentsLib\Api\Models\Error::class,
-			'default' => \SturentsLib\Api\Models\Error::class
+			'200' => '\SturentsLib\Api\Models\RoomSaved::class',
+			'400' => '\SturentsLib\Api\Models\SendDataError::class',
+			'401' => '\SturentsLib\Api\Models\AuthError::class',
+			'404' => '\SturentsLib\Api\Models\Error::class',
+			'default' => '\SturentsLib\Api\Models\Error::class'
 		]);
 	}
 }

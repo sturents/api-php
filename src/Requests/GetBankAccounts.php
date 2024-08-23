@@ -8,20 +8,20 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetBankAccounts extends SwaggerRequest
 {
-	public const URI = '/api/bank-accounts';
+	public const URI = '/api//bank-accounts';
 	public const METHOD = 'GET';
 
 	/**
 	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return SwaggerModel
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => \SturentsLib\Api\Models\BankAccount::class,
-			'401' => \SturentsLib\Api\Models\AuthError::class,
-			'404' => \SturentsLib\Api\Models\GetError::class,
-			'default' => \SturentsLib\Api\Models\Error::class
+			'200' => '\SturentsLib\Api\Models\BankAccount::class',
+			'401' => '\SturentsLib\Api\Models\AuthError::class',
+			'404' => '\SturentsLib\Api\Models\GetError::class',
+			'default' => '\SturentsLib\Api\Models\Error::class'
 		]);
 	}
 }
