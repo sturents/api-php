@@ -17,7 +17,7 @@
 	},
 	"require-dev": {
 		"roave/security-advisories": "dev-latest",
-		"sturents/swagger-php-model-generator": "^0.1",
+		"sturents/swagger-php-model-generator": "^0.2",
 		"vimeo/psalm": "^5.14"
 	},
 	"autoload": {

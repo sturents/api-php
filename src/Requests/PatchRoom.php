@@ -7,8 +7,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class PatchRoom extends SwaggerRequest
 {
-	public const URI = '/api//room/{property_id}/{room_id}';
 	public const METHOD = 'PATCH';
+	public const URI = '/api/room';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -27,7 +27,7 @@ class PatchRoom extends SwaggerRequest
 	 * @var string
 	 */
 	public $room_id;
-	protected static $path_params = ['property_id', 'room_id'];
+	protected static array $path_params = ['property_id', 'room_id'];
 
 
 	/**
@@ -47,17 +47,16 @@ class PatchRoom extends SwaggerRequest
 
 
 	/**
-	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return \SturentsLib\Api\Models\RoomSaved|\SturentsLib\Api\Models\SendDataError|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\RoomSaved>|list<\SturentsLib\Api\Models\SendDataError>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => '\SturentsLib\Api\Models\RoomSaved::class',
-			'400' => '\SturentsLib\Api\Models\SendDataError::class',
-			'401' => '\SturentsLib\Api\Models\AuthError::class',
-			'404' => '\SturentsLib\Api\Models\Error::class',
-			'default' => '\SturentsLib\Api\Models\Error::class'
+			'200' => \SturentsLib\Api\Models\RoomSaved::class,
+			'400' => \SturentsLib\Api\Models\SendDataError::class,
+			'401' => \SturentsLib\Api\Models\AuthError::class,
+			'404' => \SturentsLib\Api\Models\Error::class,
+			'default' => \SturentsLib\Api\Models\Error::class
 		]);
 	}
 }

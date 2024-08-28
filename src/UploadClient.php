@@ -1,30 +1,21 @@
 <?php
+
 namespace SturentsLib\Api;
 
-use SturentsLib\Api\Requests\SwaggerRequest;
+use Psr\Http\Message\RequestInterface;
 
 class UploadClient extends SturentsClient {
 
-	private $upload_key;
+	private string $upload_key;
 
-	/**
-	 * SendHouses constructor
-	 *
-	 * @param int $landlord_id
-	 * @param string $upload_key
-	 */
 	public function __construct(int $landlord_id, string $upload_key){
 		parent::__construct((string)$landlord_id);
 		$this->upload_key = $upload_key;
 	}
 
-	/**
-	 * @param SwaggerRequest $request
-	 * @return array
-	 */
-	protected function authQuery(SwaggerRequest $request) :array{
+	protected function authQuery(RequestInterface $request): array{
 		$timestamp = time();
-		$auth = $this->generateAuth((string) $request->getBody(), (string)$timestamp);
+		$auth = $this->generateAuth((string)$request->getBody(), (string)$timestamp);
 
 		return [
 			'auth' => $auth,
@@ -32,12 +23,7 @@ class UploadClient extends SturentsClient {
 		];
 	}
 
-	/**
-	 * @param string $json
-	 * @param string $timestamp
-	 * @return string
-	 */
-	protected function generateAuth(string $json, string $timestamp): string{
+	private function generateAuth(string $json, string $timestamp): string{
 		return hash_hmac('sha256', $json.$timestamp, $this->upload_key);
 	}
 }

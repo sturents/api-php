@@ -7,8 +7,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class PutProperty extends SwaggerRequest
 {
-	public const URI = '/api//property';
 	public const METHOD = 'PUT';
+	public const URI = '/api/property';
 
 	/**
 	 * @param \SturentsLib\Api\Models\PropertyCreation $property
@@ -20,16 +20,15 @@ class PutProperty extends SwaggerRequest
 
 
 	/**
-	 * @param SwaggerClient $client
-	 * @return SwaggerModel
+	 * @return \SturentsLib\Api\Models\PropertySaved|\SturentsLib\Api\Models\SendDataError|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\PropertySaved>|list<\SturentsLib\Api\Models\SendDataError>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => '\SturentsLib\Api\Models\PropertySaved::class',
-			'400' => '\SturentsLib\Api\Models\SendDataError::class',
-			'401' => '\SturentsLib\Api\Models\AuthError::class',
-			'default' => '\SturentsLib\Api\Models\Error::class'
+			'200' => \SturentsLib\Api\Models\PropertySaved::class,
+			'400' => \SturentsLib\Api\Models\SendDataError::class,
+			'401' => \SturentsLib\Api\Models\AuthError::class,
+			'default' => \SturentsLib\Api\Models\Error::class
 		]);
 	}
 }
