@@ -8,12 +8,11 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetBankAccounts extends SwaggerRequest
 {
-	public const URI = '/api/bank-accounts';
 	public const METHOD = 'GET';
+	public const URI = '/api/bank-accounts';
 
 	/**
-	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return \SturentsLib\Api\Models\BankAccount|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\GetError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\BankAccount>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\GetError>|list<\SturentsLib\Api\Models\Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

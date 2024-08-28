@@ -8,8 +8,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetContracts extends SwaggerRequest
 {
-	public const URI = '/api/contracts';
 	public const METHOD = 'GET';
+	public const URI = '/api/contracts';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -19,8 +19,7 @@ class GetContracts extends SwaggerRequest
 	 * @var string
 	 */
 	public $property_id;
-
-	protected static $path_params = ['property_id'];
+	protected static array $path_params = ['property_id'];
 
 
 	public function __construct($property_id)
@@ -30,8 +29,7 @@ class GetContracts extends SwaggerRequest
 
 
 	/**
-	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return \SturentsLib\Api\Models\ContractFull|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\GetError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\ContractFull>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\GetError>|list<\SturentsLib\Api\Models\Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

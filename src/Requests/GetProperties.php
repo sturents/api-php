@@ -7,8 +7,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetProperties extends SwaggerRequest
 {
-	public const URI = '/api/properties';
 	public const METHOD = 'GET';
+	public const URI = '/api/properties';
 
 	/**
 	 * When there are multiple pages of results, which one to return
@@ -17,22 +17,20 @@ class GetProperties extends SwaggerRequest
 	 * be returned
 	 *
 	 *
-	 * @var integer
+	 * @var null
 	 */
 	public $page;
+	protected static array $query_params = ['page'];
 
-	protected static $query_params = ['page'];
 
-
-	public function __construct($page = null)
+	public function setPage($page)
 	{
 		$this->page = $page;
 	}
 
 
 	/**
-	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return \SturentsLib\Api\Models\ListProperties|\SturentsLib\Api\Models\Error|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\GetError|list<\SturentsLib\Api\Models\ListProperties>|list<\SturentsLib\Api\Models\Error>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\GetError>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

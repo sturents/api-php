@@ -145,26 +145,26 @@ class PropertyOutbound extends Property
 
 
 	/**
-	 * @param ContractWithRooms[] $contracts
+	 * @param ContractWithRooms[] $contracts_disabled
 	 *
 	 * @return $this
 	 */
-	public function setContractsDisabled(array $contracts)
+	public function setContractsDisabled(array $contracts_disabled)
 	{
-		$this->contracts_disabled = $contracts;
+		$this->contracts_disabled = $contracts_disabled;
 
 		return $this;
 	}
 
 
 	/**
-	 * @param ContractWithRooms $contract
+	 * @param ContractWithRooms $contracts_disabled
 	 *
 	 * @return $this
 	 */
-	public function addDisabledContract(ContractWithRooms $contract)
+	public function addContractsDisabled(ContractWithRooms $contracts_disabled)
 	{
-		$this->contracts_disabled[] = $contract;
+		$this->contracts_disabled[] = $contracts_disabled;
 
 		return $this;
 	}

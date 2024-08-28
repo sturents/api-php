@@ -51,7 +51,7 @@ class Property extends SwaggerModel
 	 * When designation is set to "house" this indicates whether
 	 * rooms can be individually let or not
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $rooms_let_individually = false;
 
@@ -60,7 +60,7 @@ class Property extends SwaggerModel
 	 * number of identical rooms (including those currrently let).
 	 * If designation is "house" then this should be set to 0
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $quantity = 0;
 
@@ -69,7 +69,7 @@ class Property extends SwaggerModel
 	 * of identical rooms still available. If designation is "house"
 	 * then this should be set to 0
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $quantity_available = 0;
 
@@ -88,7 +88,7 @@ class Property extends SwaggerModel
 	 * in a single cluster. If designation is "house"
 	 * then this should be set to 0.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $cluster_size = 0;
 
@@ -104,7 +104,7 @@ class Property extends SwaggerModel
 
 	/**
 	 * Number of bathrooms
-	 * @var integer
+	 * @var int
 	 */
 	protected $bathrooms = 0;
 
@@ -136,7 +136,7 @@ class Property extends SwaggerModel
 	 * where true indicates that the property is not ready
 	 * to be made public to students or shown in search results
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $disabled = false;
 
@@ -287,7 +287,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getRoomsLetIndividually()
 	{
@@ -296,7 +296,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @param boolean $rooms_let_individually
+	 * @param bool $rooms_let_individually
 	 *
 	 * @return $this
 	 */
@@ -309,7 +309,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getQuantity()
 	{
@@ -318,7 +318,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @param integer $quantity
+	 * @param int $quantity
 	 *
 	 * @return $this
 	 */
@@ -331,7 +331,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getQuantityAvailable()
 	{
@@ -340,7 +340,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @param integer $quantity_available
+	 * @param int $quantity_available
 	 *
 	 * @return $this
 	 */
@@ -375,7 +375,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getClusterSize()
 	{
@@ -384,7 +384,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @param integer $cluster_size
+	 * @param int $cluster_size
 	 *
 	 * @return $this
 	 */
@@ -419,7 +419,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getBathrooms()
 	{
@@ -428,7 +428,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @param integer $bathrooms
+	 * @param int $bathrooms
 	 *
 	 * @return $this
 	 */
@@ -520,7 +520,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getDisabled()
 	{
@@ -529,7 +529,7 @@ class Property extends SwaggerModel
 
 
 	/**
-	 * @param boolean $disabled
+	 * @param bool $disabled
 	 *
 	 * @return $this
 	 */

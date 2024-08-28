@@ -6,8 +6,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Psr7\Request;
 use JsonMapper;
 use JsonMapper_Exception;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use SturentsLib\Api\Models\SwaggerModel;
 use SturentsLib\Api\Requests\SwaggerClient;
@@ -22,7 +24,7 @@ abstract class SturentsClient implements SwaggerClient {
 	/**
 	 * @var string - for some clients this arrives as an int
 	 */
-	private $landlord_id;
+	private string $landlord_id;
 	/**
 	 * @var ?JsonMapper
 	 */
@@ -31,23 +33,18 @@ abstract class SturentsClient implements SwaggerClient {
 	 * @var GuzzleException
 	 */
 	private $debug_request_exception;
-	/**
-	 * @var ClientInterface
-	 */
-	private $client;
+	private ?ClientInterface $client = null;
 
-	/**
-	 * @var bool
-	 */
-	private $debug = false;
+	private bool $debug = false;
 
 	public function __construct(string $landlord_id){
 		$this->landlord_id = $landlord_id;
 	}
 
-	/**
-	 * @return ClientInterface
-	 */
+	public function messageFromRequest(SwaggerRequest $swagger):RequestInterface{
+		return new Request($swagger->getMethod(), $swagger->getUri(), [], $swagger->getBody());
+	}
+
 	public function getClient(): ClientInterface{
 		if (is_null($this->client)){
 			$this->client = new Client([
@@ -58,10 +55,6 @@ abstract class SturentsClient implements SwaggerClient {
 		return $this->client;
 	}
 
-	/**
-	 * @param ClientInterface $client
-	 * @return $this
-	 */
 	public function setClient(ClientInterface $client): self{
 		$this->client = $client;
 
@@ -69,25 +62,23 @@ abstract class SturentsClient implements SwaggerClient {
 	}
 
 	/**
-	 * @param SwaggerRequest $request
-	 * @param string[] $response_models
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @template T of SwaggerModel
+	 *
+	 * @param array<array-key, class-string<T>|''> $response_models
+	 * @return T|list<T>
 	 * @throws SturentsException
 	 */
-	public function make(SwaggerRequest $request, array $response_models){
+	public function make(SwaggerRequest $swagger, array $response_models){
+		$request = $this->messageFromRequest($swagger);
+
 		try {
 			$query = [
 				'landlord' => $this->landlord_id,
 				'version' => self::VERSION,
 			];
-			$query = array_merge($query, $this->authQuery($request), $request->getQuery());
+			$query = array_merge($query, $this->authQuery($request), $swagger->getQuery());
 			$uri = $request->getUri()->withQuery(http_build_query($query));
 			$client = $this->getClient();
-
-			$host = $uri->getHost();
-			if (empty($host)){
-				$uri = $uri->withHost($client->getConfig()['base_uri']);
-			}
 
 			$request = $request->withUri($uri);
 			$this->debug("Requesting URL $uri");
@@ -121,16 +112,13 @@ abstract class SturentsClient implements SwaggerClient {
 		return $this->handleResponse($response, $response_models);
 	}
 
-	/**
-	 * @param SwaggerRequest $request
-	 * @return array
-	 */
-	abstract protected function authQuery(SwaggerRequest $request): array;
+	abstract protected function authQuery(RequestInterface $request): array;
 
 	/**
-	 * @param ResponseInterface $response
-	 * @param array $response_models
-	 * @return SwaggerModel|Models\SwaggerModel[]
+	 * @template T of SwaggerModel
+	 *
+	 * @param array<array-key, class-string<T>|''> $response_models
+	 * @return T|list<T>
 	 * @throws SturentsException
 	 */
 	protected function handleResponse(ResponseInterface $response, array $response_models){
@@ -192,9 +180,6 @@ abstract class SturentsClient implements SwaggerClient {
 		return $mapper->map($data, $model);
 	}
 
-	/**
-	 * @return JsonMapper
-	 */
 	private function getJsonMapper(): JsonMapper{
 		if (is_null($this->mapper)){
 			$this->mapper = new JsonMapper();
@@ -212,18 +197,12 @@ abstract class SturentsClient implements SwaggerClient {
 		echo $message;
 	}
 
-	/**
-	 * @return self
-	 */
 	public function useDebug(): self{
 		$this->debug = true;
 
 		return $this;
 	}
 
-	/**
-	 * @return GuzzleException
-	 */
 	public function getDebugRequestException(): GuzzleException{
 		return $this->debug_request_exception;
 	}

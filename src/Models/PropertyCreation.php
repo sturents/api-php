@@ -12,14 +12,14 @@ class PropertyCreation extends Property
 	 * If desired to add rooms manually as soon as the property
 	 * is created, set this to -1
 	 *
-	 * @var integer
+	 * @var int
 	 * @required
 	 */
 	protected $initial_rooms;
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getInitialRooms()
 	{
@@ -28,7 +28,7 @@ class PropertyCreation extends Property
 
 
 	/**
-	 * @param integer $initial_rooms
+	 * @param int $initial_rooms
 	 *
 	 * @return $this
 	 */

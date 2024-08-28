@@ -2,31 +2,21 @@
 
 namespace SturentsLib\Api;
 
-use SturentsLib\Api\Requests\SwaggerRequest;
+use Psr\Http\Message\RequestInterface;
 
 class ChannelClient extends SturentsClient {
 
-	private $display_key;
+	private string $display_key;
 
-	private $channel_id;
+	private string $channel_id;
 
-	/**
-	 * FetchHouses constructor.
-	 * @param string $landlord_id
-	 * @param string $channel_id
-	 * @param string $display_key
-	 */
 	public function __construct(string $landlord_id, string $channel_id, string $display_key){
 		parent::__construct($landlord_id);
 		$this->channel_id = $channel_id;
 		$this->display_key = $display_key;
 	}
 
-	/**
-	 * @param SwaggerRequest $request
-	 * @return array
-	 */
-	protected function authQuery(SwaggerRequest $request): array{
+	protected function authQuery(RequestInterface $request): array{
 		$timestamp = time();
 		$auth = $this->generateAuth((string)$timestamp);
 
@@ -37,11 +27,7 @@ class ChannelClient extends SturentsClient {
 		];
 	}
 
-	/**
-	 * @param string $timestamp
-	 * @return string
-	 */
-	protected function generateAuth(string $timestamp): string{
+	private function generateAuth(string $timestamp): string{
 		return hash_hmac('sha256', $timestamp, $this->display_key);
 	}
 }

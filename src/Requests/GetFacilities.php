@@ -8,12 +8,11 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetFacilities extends SwaggerRequest
 {
-	public const URI = '/api/facilities';
 	public const METHOD = 'GET';
+	public const URI = '/api/facilities';
 
 	/**
-	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return SwaggerModel|list<SwaggerModel>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

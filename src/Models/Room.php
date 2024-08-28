@@ -33,14 +33,14 @@ class Room extends SwaggerModel
 	/**
 	 * "True" if the room should be advertised as accessible
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $disabled_access = false;
 
 	/**
 	 * "True" if an en-suite bathroom is present for the room
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $ensuite = false;
 
@@ -112,7 +112,7 @@ class Room extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getDisabledAccess()
 	{
@@ -121,7 +121,7 @@ class Room extends SwaggerModel
 
 
 	/**
-	 * @param boolean $disabled_access
+	 * @param bool $disabled_access
 	 *
 	 * @return $this
 	 */
@@ -134,7 +134,7 @@ class Room extends SwaggerModel
 
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getEnsuite()
 	{
@@ -143,7 +143,7 @@ class Room extends SwaggerModel
 
 
 	/**
-	 * @param boolean $ensuite
+	 * @param bool $ensuite
 	 *
 	 * @return $this
 	 */

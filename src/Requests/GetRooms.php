@@ -9,8 +9,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class GetRooms extends SwaggerRequest
 {
-	public const URI = '/api/rooms';
 	public const METHOD = 'GET';
+	public const URI = '/api/rooms';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -20,8 +20,7 @@ class GetRooms extends SwaggerRequest
 	 * @var string
 	 */
 	public $property_id;
-
-	protected static $path_params = ['property_id'];
+	protected static array $path_params = ['property_id'];
 
 
 	public function __construct($property_id)
@@ -31,8 +30,7 @@ class GetRooms extends SwaggerRequest
 
 
 	/**
-	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return \SturentsLib\Api\Models\RoomOutbound|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\GetError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\RoomOutbound>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\GetError>|list<\SturentsLib\Api\Models\Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

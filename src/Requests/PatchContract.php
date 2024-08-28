@@ -7,8 +7,8 @@ use SturentsLib\Api\Models\SwaggerModel;
  */
 class PatchContract extends SwaggerRequest
 {
-	public const URI = '/api/contract';
 	public const METHOD = 'PATCH';
+	public const URI = '/api/contract';
 
 	/**
 	 * The property ID provided by the initial creation
@@ -27,8 +27,7 @@ class PatchContract extends SwaggerRequest
 	 * @var string
 	 */
 	public $contract_id;
-
-	protected static $path_params = ['property_id', 'contract_id'];
+	protected static array $path_params = ['property_id', 'contract_id'];
 
 
 	/**
@@ -48,8 +47,7 @@ class PatchContract extends SwaggerRequest
 
 
 	/**
-	 * @param SwaggerClient $client
-	 * @return SwaggerModel|SwaggerModel[]
+	 * @return \SturentsLib\Api\Models\ContractSaved|\SturentsLib\Api\Models\SendDataError|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\ContractSaved>|list<\SturentsLib\Api\Models\SendDataError>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{

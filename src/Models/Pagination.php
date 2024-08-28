@@ -8,7 +8,7 @@ class Pagination extends SwaggerModel
 {
 	/**
 	 * The number of pages total
-	 * @var integer
+	 * @var int
 	 * @required
 	 */
 	protected $pages;
@@ -16,27 +16,27 @@ class Pagination extends SwaggerModel
 	/**
 	 * For data integrity, the page that these results relate to
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $current = 0;
 
 	/**
 	 * If present this shows there is another page available after this one
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $next = 0;
 
 	/**
 	 * If present this shows there is another page available prior to this one
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $prev = 0;
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getPages()
 	{
@@ -45,7 +45,7 @@ class Pagination extends SwaggerModel
 
 
 	/**
-	 * @param integer $pages
+	 * @param int $pages
 	 *
 	 * @return $this
 	 */
@@ -58,7 +58,7 @@ class Pagination extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getCurrent()
 	{
@@ -67,7 +67,7 @@ class Pagination extends SwaggerModel
 
 
 	/**
-	 * @param integer $current
+	 * @param int $current
 	 *
 	 * @return $this
 	 */
@@ -80,7 +80,7 @@ class Pagination extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getNext()
 	{
@@ -89,7 +89,7 @@ class Pagination extends SwaggerModel
 
 
 	/**
-	 * @param integer $next
+	 * @param int $next
 	 *
 	 * @return $this
 	 */
@@ -102,7 +102,7 @@ class Pagination extends SwaggerModel
 
 
 	/**
-	 * @return integer
+	 * @return int
 	 */
 	public function getPrev()
 	{
@@ -111,7 +111,7 @@ class Pagination extends SwaggerModel
 
 
 	/**
-	 * @param integer $prev
+	 * @param int $prev
 	 *
 	 * @return $this
 	 */
