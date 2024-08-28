@@ -63,6 +63,12 @@ class BookingStatusTenancy extends SwaggerModel
 	protected $tenancy_size;
 
 	/**
+	 * Indicates whether two tenants (a 'lead' tenant and other tenant) will jointly sign for a booking
+	 * @var bool
+	 */
+	protected $is_dual_occupancy = false;
+
+	/**
 	 * Date and time that the booking will expire if not signed by the tenant
 	 * @var ?string
 	 * @required
@@ -241,6 +247,28 @@ class BookingStatusTenancy extends SwaggerModel
 	public function setTenancySize($tenancy_size)
 	{
 		$this->tenancy_size = $tenancy_size;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function getIsDualOccupancy()
+	{
+		return $this->is_dual_occupancy;
+	}
+
+
+	/**
+	 * @param bool $is_dual_occupancy
+	 *
+	 * @return $this
+	 */
+	public function setIsDualOccupancy($is_dual_occupancy)
+	{
+		$this->is_dual_occupancy = $is_dual_occupancy;
 
 		return $this;
 	}
