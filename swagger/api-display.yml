@@ -23,45 +23,20 @@ securityDefinitions:
     type: apiKey
     in: query
     name: timestamp
-    description: Unix epoch timestamp in seconds, used to prevent API replay
+    description: Unix epoch timestamp in seconds, used to prevent API replay. The timestamp can be a maximum of one hour in the past, and may not be in the future
   Auth:
     type: apiKey
     in: query
     name: auth
     description: |
-      There are three types of API key, but all function identically when
-      making a request. The key types are "upload key", "display key", and "channel key".
-      The "display key" is used ONLY for making GET /properties requests.
-      The "channel key" is used only when making a request with a channel value set.
-      The "upload key" is used for all other requests.
+      Find your "display" key at sturents.com/software/developer when signed in as a user with access to your property manager account.
 
-      The "auth" query parameter will be an HMAC SHA256 of the request
-      body (i.e. JSON or blank for GET) concatenated with the timestamp,
-      signed with the applicable API key as abve
+      The "auth" query parameter will be an HMAC SHA256 of the timestamp,
+      signed with your "channel" API key.
 
-      E.g. for a request with a JSON body like,
+      e.g. in PHP,
 
-         {
-           "field": [
-             "val1",
-             "val2"
-            ]
-         }
-
-      The JSON must be compressed first,
-
-      {"field":["val1","val2"]}
-
-      Then concatenated with a timestamp
-
-      {"field":["val1","val2"]}1529593410
-
-      Then an HMAC generated, e.g. in PHP,
-
-      $auth = hash_hmac('sha256', $json_compressed.$timestamp, $key)
-
-      For a GET request with an empty body the same code could
-      be used, but the JSON field would be blank (i.e. HMAC of a timestamp)
+      $auth = hash_hmac('sha256', $timestamp, $display_key)
 paths:
   /properties:
     get:

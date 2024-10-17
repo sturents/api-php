@@ -9,3 +9,5 @@ swagger/api.json
 swagger-json
 examples/_config.php
 composer.lock
+redoc/
+redoc-static.html
