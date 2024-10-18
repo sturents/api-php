@@ -1153,13 +1153,13 @@ definitions:
               A unique identifier for a Tenancy Template fetched from
               the /tenancy-templates endpoint. A tenancy template
               allows a tenancy to be created for tenants who are renting
-              the property and can sign for it on StuRents
+              the property and can sign for it on StuRents. For properties that are only listing for advertising, this field can be set to an empty string.
           schedules:
             type: array
             description: |
               An array of one or more ScheduleOption entities describing how
               the rent for this contract can be structured and what additional
-              conditions are applied.
+              conditions are applied. For the property to be bookable directly via the platform, at least one schedule must be provided.
             items:
               $ref: '#/definitions/ScheduleOption'
           book_now_allowed:
