@@ -1265,7 +1265,7 @@ definitions:
   ScheduleOption:
     description: |
       A schedule that can be used to pay rent for a contract, with specific
-      rules regarding whether it requires a guarantor or allows use of Housing Hand
+      rules regarding whether it requires a guarantor
     type: object
     required:
       - schedule_id
@@ -1284,14 +1284,6 @@ definitions:
         description: |
           When a tenancy is created this states whether a guarantor
           is required, if set to true, not required if set to false.
-      housing_hand:
-        type: boolean
-        description: |
-          The Housing Hand service is a partnership offered by StuRents
-          in order to provide guarantors for tenants who are otherwise
-          unable to acquire one. When a tenancy is created this field
-          states whether Housing Hand is permitted, if set to true,
-          not permitted if set to false.
   Price:
     description: |
       Defined pricing details for tenants renting the property.
