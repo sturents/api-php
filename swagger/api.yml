@@ -47,7 +47,7 @@ securityDefinitions:
       The "upload key" is used for all other requests.
 
       The "auth" query parameter will be an HMAC SHA256 of the request
-      body (i.e. JSON or blank for GET) concatenated with the timestamp,
+      body (i.e. JSON or in some cases an empty string) concatenated with the timestamp,
       signed with the applicable API key as abve
 
       E.g. for a request with a JSON body like,
@@ -71,8 +71,8 @@ securityDefinitions:
 
       $auth = hash_hmac('sha256', $json_compressed.$timestamp, $key)
 
-      For a GET request with an empty body the same code could
-      be used, but the JSON field would be blank (i.e. HMAC of a timestamp)
+      For GET or DELETE request with an empty body the same code could
+      be used, but the JSON field would be an empty string (i.e. thus the result is producing an HMAC of a timestamp)
 paths:
   /properties:
     get:
