@@ -50,7 +50,7 @@ securityDefinitions:
 paths:
   /summary:
     get:
-      summary: Fetch property managers
+      summary: 1. Fetch property managers
       description: |
         Returns all property managers that your channel has been provided with access to. You will need the "landlord" ID for each property manager to send /properties requests and fetch their properties.
         
@@ -62,7 +62,7 @@ paths:
           Timestamp: []
           Auth: []
       tags:
-        - Accessing channel properties
+        - Property listings
       responses:
         '200':
           description: |
@@ -81,7 +81,7 @@ paths:
           $ref: '#/definitions/Error'
   /properties:
     get:
-      summary: Fetch properties
+      summary: 2. Fetch properties
       description: |
         Using a "landlord" value from the /summary endpoint you can request all properties (paginated) for that property manager.
         
@@ -102,7 +102,7 @@ paths:
             returned. If the page number is too high no results (404) will
             be returned
       tags:
-        - Accessing channel properties
+        - Property listings
       responses:
         '200':
           description: |
@@ -125,7 +125,7 @@ paths:
         
         You do not need to fetch this if you are happy to accept any given facility strings from a property record, however it is here if you need to plan things like icons or handling in your own database/search schema.
       tags:
-        - Accessing channel properties
+        - System metadata
       responses:
         '200':
           description: List of facilities
@@ -137,7 +137,9 @@ paths:
     get:
       summary: Fetch booking
       description: |
-        Provides the booking status and basic contract information for a hosted booking
+        Provides the booking status and basic contract information for a hosted booking.
+        
+        You must be set up by our commercial team to access booking journeys. This requires you to submit extra data when redirecting tenants to our "book now" URLs that allow you to retrieve their booking status later. Talk to our commercial team to learn more.
       security:
         - Channel: []
           Timestamp: []
