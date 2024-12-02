@@ -61,7 +61,8 @@ securityDefinitions:
 paths:
   /properties:
     get:
-      summary: Check existing properties
+      summary: Current properties
+      description: Fetch a list of all current properties for the given property manager
       security:
         - PropertyManager: []
           Timestamp: []
@@ -81,7 +82,7 @@ paths:
             returned. If the page number is too high no results (404) will
             be returned
       tags:
-        - Checking existing data
+        - Manage properties
       responses:
         '200':
           description: |
@@ -98,11 +99,12 @@ paths:
           $ref: '#/definitions/Error'
   /facilities:
     get:
-      summary: |
+      summary: Facility strings
+      description: |
         Returns a list of all available facilities which can be
         submitted as strings when creating/updating a property
       tags:
-        - Property updates
+        - System metadata
       responses:
         '200':
           description: List of facilities
@@ -112,7 +114,8 @@ paths:
               type: string
   /bank-accounts:
     get:
-      summary: |
+      summary: Rent bank accounts
+      description: |
         Returns available bank accounts where rent can be paid
         for a specific property
       security:
@@ -120,7 +123,7 @@ paths:
           Timestamp: []
           Auth: []
       tags:
-        - Checking existing data
+        - Property manager metadata
       responses:
         '200':
           description: |
@@ -137,7 +140,13 @@ paths:
           $ref: '#/definitions/Error'
   /property:
     put:
-      summary: Create a new property
+      summary: Create property
+      description: |
+        Create a new property. When creating a property you must specify details intrinsic to the property such as address, eligibility, and energy performance. Some fields may be left blank but all fields should be sent in the payload.
+        
+        When creating a property you may specify an initial number of rooms to also create along with it - once a property is created, use the Rooms endpoints to add, modify or delete these.
+        
+        Once a property is created you will generally want to use the Contracts endpoints to set up availability and pricing. The Media endpoints can be used to add photos or videos.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -148,7 +157,7 @@ paths:
           schema:
             $ref: '#/definitions/PropertyCreation'
       tags:
-        - Property updates
+        - Manage properties
       responses:
         '200':
           description: |
@@ -163,7 +172,11 @@ paths:
           $ref: '#/definitions/Error'
   /property/{property_id}:
     patch:
-      summary: Update an existing property
+      summary: Edit property details
+      description: |
+        Update an existing property with fields such as address, energy performance and eligibility.
+        
+        Use the Rooms, Contracts and Media endpoints to manage individual rooms, pricing and photos/videos respectively.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -181,7 +194,7 @@ paths:
           schema:
             $ref: '#/definitions/Property'
       tags:
-        - Property updates
+        - Manage properties
       responses:
         '200':
           description: |
@@ -198,16 +211,17 @@ paths:
           $ref: '#/definitions/Error'
   /tenancy-templates:
     get:
-      summary: |
+      summary: Fetch tenancy templates
+      description: |
         Returns tenancy templates for the authenticated property manager.
-        The IDs of these templates will be required to set up Contract
-        entities using a specific tenancy template
+        
+        The IDs of these templates will be required to set up Contract entities using a specific tenancy template
       security:
         - PropertyManager: []
           Timestamp: []
           Auth: []
       tags:
-        - Checking existing data
+        - Property manager metadata
       responses:
         '200':
           description: List of tenancy templates
@@ -223,16 +237,15 @@ paths:
           $ref: '#/definitions/Error'
   /payment-structures:
     get:
-      summary: |
-        Returns payment schedules for the authenticated property manager.
-        The IDs of these schedules will be required to set up Contract
-        entities using a specific payment schedule
+      summary: Fetch payment schedule templates
+      description: |
+        Returns payment schedules for the authenticated property manager. The IDs of these schedules will be required to set up Contract entities using a specific payment schedule
       security:
         - PropertyManager: []
           Timestamp: []
           Auth: []
       tags:
-        - Checking existing data
+        - Property manager metadata
       responses:
         '200':
           description: List of payment schedules
@@ -248,10 +261,8 @@ paths:
           $ref: '#/definitions/Error'
   /rooms/{property_id}:
     get:
-      summary: |
-        Returns rooms for the specified property. Includes the room_id
-        field which is necessary in order to apply pricing specific to
-        a room, or to edit/delete an existing room
+      summary: List property rooms
+      description: Returns rooms for the specified property. Includes the room_id field which is necessary in order to apply pricing specific to a room, or to edit/delete an existing room
       security:
         - PropertyManager: []
           Timestamp: []
@@ -265,8 +276,7 @@ paths:
             The property ID provided by the initial creation
             or a GET /properties request
       tags:
-        - Checking existing data
-        - Property child entities
+        - Rooms
       responses:
         '200':
           description: List of property rooms
@@ -282,7 +292,9 @@ paths:
           $ref: '#/definitions/Error'
   /room/{property_id}:
     put:
-      summary: Add a room to a property
+      summary: Create room
+      description: |
+        Create a new room and link it to the property. When creating a new property you may specify a count of initial rooms which is simpler than repeated calls to this endpoint. This endpoint will generally be used to expand an existing property footprint.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -300,8 +312,7 @@ paths:
           schema:
             $ref: '#/definitions/Room'
       tags:
-        - Property updates
-        - Property child entities
+        - Rooms
       responses:
         '200':
           description: Indicates the saved room ID
@@ -317,7 +328,11 @@ paths:
           $ref: '#/definitions/Error'
   /room/{property_id}/{room_id}:
     patch:
-      summary: Update a room on a property
+      summary: Modify room
+      description: |
+        Update an existing room attached to the property. This endpoint will be rarely used except for correcting mistakes.
+        
+        If rooms are renumbered or reclassified it's generally more sensible to add new rooms and delete the old ones, as otherwise history of which tenants were in which room previously may be confused.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -342,7 +357,6 @@ paths:
           schema:
             $ref: '#/definitions/Room'
       tags:
-        - Changing data on StuRents
         - Rooms
       responses:
         '200':
@@ -358,7 +372,11 @@ paths:
         default:
           $ref: '#/definitions/Error'
     delete:
-      summary: Remove a room from a property
+      summary: Delete room
+      description: |
+        Remove a room from a property. This will generally be used to correct mistakes on property creation or for cases when a room has been removed or reclassified.
+        
+        It is not recommended for taking a room offline temporarily. The property manager can use the occupancy manager block booking feature for this - at present block bookings are not available via the API.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -379,7 +397,6 @@ paths:
             The room ID provided by the initial creation
             or a GET /rooms/{property_id} request
       tags:
-        - Changing data on StuRents
         - Rooms
       responses:
         '204':
@@ -392,9 +409,13 @@ paths:
           $ref: '#/definitions/Error'
   /contracts/{property_id}:
     get:
-      summary: |
-        Returns contracts for the specified property. Includes the contract_id
-        field which is necessary in order to edit/delete an existing contract.
+      summary: List contracts
+      description: |
+        Contracts represent blocks of time that the property may be booked for (either via a book now URL, or manual tenancy creation), along with the pricing applicable to this range.
+        
+        This endpoint returns contracts for the specified property. Contracts may be disabled/paused but will still be returned in this list; disabled contracts are not available for book now, advertised properties, or manual tenancy creation. Third party platforms such as agent websites will still receive disabled contracts and may choose to display their data.
+        
+        Includes the contract_id field which is necessary in order to edit/delete an existing contract.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -408,9 +429,7 @@ paths:
             The property ID provided by the initial creation
             or a GET /properties request
       tags:
-        - Fetching data to make changes
         - Contracts
-        - Property child entities
       responses:
         '200':
           description: List of property contracts
@@ -426,7 +445,8 @@ paths:
           $ref: '#/definitions/Error'
   /contract/{property_id}:
     put:
-      summary: Add a contract to a property
+      summary: Add contract
+      description: Contracts represent blocks of time that the property may be booked for (either via a book now URL, or manual tenancy creation), along with the pricing applicable to this range. Contract titles may be used to distinguish, e.g. summer lets, term lets and year lets.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -444,7 +464,6 @@ paths:
           schema:
             $ref: '#/definitions/ContractCreation'
       tags:
-        - Changing data on StuRents
         - Contracts
       responses:
         '200':
@@ -461,7 +480,11 @@ paths:
           $ref: '#/definitions/Error'
   /contract/{property_id}/{contract_id}:
     patch:
-      summary: Update a contract on a property
+      summary: Update contract
+      description: |
+        Modify an existing contract, changing its available date range or pricing. For year-to-year updates of availabilities it is recommended to instead add new contracts and pause (via update) or delete (via the delete endpoint) old ones.
+        
+        This endpoint is mainly intended for data changes caused by corrections, or for dynamic pricing.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -486,7 +509,6 @@ paths:
           schema:
             $ref: '#/definitions/ContractCreation'
       tags:
-        - Changing data on StuRents
         - Contracts
       responses:
         '200':
@@ -502,9 +524,11 @@ paths:
         default:
           $ref: '#/definitions/Error'
     delete:
-      summary: |
-        Deletes a contract on a property. It will no longer appear
-        in GET /properties or GET /contracts requests
+      summary: Delete contract
+      description: |
+        Deletes a contract on a property. It will no longer appear  in GET /properties or GET /contracts requests. Contracts can be deleted for cases of incorrect data, or for old contracts no longer needed.
+        
+        For temporary deletion consider using an update to pause/disable the contract instead.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -525,7 +549,6 @@ paths:
             The contract ID provided by the initial creation
             or a GET /contracts/{property_id} request
       tags:
-        - Changing data on StuRents
         - Contracts
       responses:
         '204':
@@ -538,7 +561,8 @@ paths:
           $ref: '#/definitions/Error'
   /media/{property_id}:
     put:
-      summary: Add a media item to a property
+      summary: Upload meda
+      description: Add a photo or video to a property. The media item must contain a URL where the system can fetch the intended item.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -556,7 +580,6 @@ paths:
           schema:
             $ref: '#/definitions/MediaUpload'
       tags:
-        - Changing data on StuRents
         - Media
       responses:
         '200':
@@ -573,7 +596,8 @@ paths:
           $ref: '#/definitions/Error'
   /media/{property_id}/{media_id}:
     delete:
-      summary: |
+      summary: Delete media
+      description: |
         Deletes a media item from a property
       security:
         - PropertyManager: []
@@ -594,8 +618,7 @@ paths:
           description: |
             The media ID provided by the initial upload
       tags:
-        - Changing data on StuRents
-        - Contracts
+        - Media
       responses:
         '204':
           description: Indicates media item was disabled
