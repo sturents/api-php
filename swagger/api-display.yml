@@ -40,7 +40,11 @@ securityDefinitions:
 paths:
   /properties:
     get:
-      summary: A paginated list of properties for your chosen authenticated property manager
+      summary: Fetch properties
+      description: |
+        Request all properties (paginated) for the property manager for whom you have a "landlord" ID and API display key.
+
+        This endpoint is rate limited and you may only request properties for one property manager once in 15 minute period. We generally recommend a refresh schedule of 1 hour is reasonable for up to date data - most property managers do not change the same data multiple times within an hour. If you have an integration capable of requesting for multiple combinations of "landlord" ID and API display key, the rate limit only applies for each pair.
       security:
         - PropertyManager: []
           Timestamp: []
@@ -73,10 +77,13 @@ paths:
           $ref: '#/definitions/Error'
   /facilities:
     get:
-      summary: |
-        A list of all possible facilities that may be included on a property
+      summary: Facilities strings
+      description: |
+        A list of all possible facilities that may be included on a property. This is system-level metadata and will rarely change.
+        
+        You do not need to fetch this if you are happy to accept any given facility strings from a property record, however it is here if you need to plan things like icons or handling in your own database/search schema.
       tags:
-        - Building your website
+        - System metadata
       responses:
         '200':
           description: List of facilities

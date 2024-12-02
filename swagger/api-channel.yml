@@ -50,13 +50,19 @@ securityDefinitions:
 paths:
   /summary:
     get:
-      summary: Returns all property managers in the channel
+      summary: Fetch property managers
+      description: |
+        Returns all property managers that your channel has been provided with access to. You will need the "landlord" ID for each property manager to send /properties requests and fetch their properties.
+        
+        Each record also has a property manager and organisation title that you can use within your platform to tag and manage different property managers.
+        
+        Property manager IDs should not change but you should still periodically request this endpoint to ensure you are only accessing property managers for whom your channel has access - records may be added or removed at any time based on property manager or admin actions in the StuRents platform.
       security:
         - Channel: []
           Timestamp: []
           Auth: []
       tags:
-        - Fetching property information
+        - Accessing channel properties
       responses:
         '200':
           description: |
@@ -75,7 +81,11 @@ paths:
           $ref: '#/definitions/Error'
   /properties:
     get:
-      summary: Returns properties for your chosen property manager
+      summary: Fetch properties
+      description: |
+        Using a "landlord" value from the /summary endpoint you can request all properties (paginated) for that property manager.
+        
+        This endpoint is rate limited and you may only request properties for a given property manager once in 15 minute period. We generally recommend a refresh schedule of 1 hour is reasonable for up to date data - most property managers do not change the same data multiple times within an hour.
       security:
         - Channel: []
           PropertyManager: []
@@ -92,7 +102,7 @@ paths:
             returned. If the page number is too high no results (404) will
             be returned
       tags:
-        - Fetching property information
+        - Accessing channel properties
       responses:
         '200':
           description: |
@@ -109,10 +119,13 @@ paths:
           $ref: '#/definitions/Error'
   /facilities:
     get:
-      summary: |
-        A list of all possible facilities that may be included on a property
+      summary: Facilities strings
+      description: |
+        A list of all possible facilities that may be included on a property. This is system-level metadata and will rarely change.
+        
+        You do not need to fetch this if you are happy to accept any given facility strings from a property record, however it is here if you need to plan things like icons or handling in your own database/search schema.
       tags:
-        - Fetching property information
+        - Accessing channel properties
       responses:
         '200':
           description: List of facilities
@@ -122,7 +135,8 @@ paths:
               type: string
   /booking-status:
     get:
-      summary: |
+      summary: Fetch booking
+      description: |
         Provides the booking status and basic contract information for a hosted booking
       security:
         - Channel: []
