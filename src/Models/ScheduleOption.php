@@ -5,7 +5,7 @@ namespace SturentsLib\Api\Models;
  * ** This file was generated automatically, you might want to avoid editing it **
  *
  * A schedule that can be used to pay rent for a contract, with specific
- * rules regarding whether it requires a guarantor or allows use of Housing Hand
+ * rules regarding whether it requires a guarantor
  */
 class ScheduleOption extends SwaggerModel
 {
@@ -29,17 +29,6 @@ class ScheduleOption extends SwaggerModel
 	 * @required
 	 */
 	protected $require_guarantor;
-
-	/**
-	 * The Housing Hand service is a partnership offered by StuRents
-	 * in order to provide guarantors for tenants who are otherwise
-	 * unable to acquire one. When a tenancy is created this field
-	 * states whether Housing Hand is permitted, if set to true,
-	 * not permitted if set to false.
-	 *
-	 * @var bool
-	 */
-	protected $housing_hand = false;
 
 
 	/**
@@ -81,28 +70,6 @@ class ScheduleOption extends SwaggerModel
 	public function setRequireGuarantor($require_guarantor)
 	{
 		$this->require_guarantor = $require_guarantor;
-
-		return $this;
-	}
-
-
-	/**
-	 * @return bool
-	 */
-	public function getHousingHand()
-	{
-		return $this->housing_hand;
-	}
-
-
-	/**
-	 * @param bool $housing_hand
-	 *
-	 * @return $this
-	 */
-	public function setHousingHand($housing_hand)
-	{
-		$this->housing_hand = $housing_hand;
 
 		return $this;
 	}

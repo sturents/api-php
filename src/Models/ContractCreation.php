@@ -28,7 +28,7 @@ class ContractCreation extends ContractAbstract
 	 * A unique identifier for a Tenancy Template fetched from
 	 * the /tenancy-templates endpoint. A tenancy template
 	 * allows a tenancy to be created for tenants who are renting
-	 * the property and can sign for it on StuRents
+	 * the property and can sign for it on StuRents. For properties that are only listing for advertising, this field can be set to an empty string.
 	 *
 	 * @var string
 	 * @required
@@ -36,9 +36,9 @@ class ContractCreation extends ContractAbstract
 	protected $template_id;
 
 	/**
-	 * An array of one or more ScheduleOption entities describing how
+	 * An array of zero or more ScheduleOption entities describing how
 	 * the rent for this contract can be structured and what additional
-	 * conditions are applied.
+	 * conditions are applied. For the property to be bookable directly via the platform, at least one schedule must be provided.
 	 *
 	 * @var ScheduleOption[]
 	 * @required
