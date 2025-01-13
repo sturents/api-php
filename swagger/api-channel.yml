@@ -115,6 +115,8 @@ paths:
           $ref: '#/definitions/AuthError'
         '404':
           $ref: '#/definitions/GetError'
+        '429':
+          $ref: '#/definitions/RateLimitError'
         default:
           $ref: '#/definitions/Error'
   /facilities:
@@ -172,7 +174,15 @@ definitions:
     properties:
       error:
         type: string
-        description: Another error message not related to authenticaiton
+        description: Another error message not related to authentication
+  RateLimitError:
+    description: |
+      This endpoint is rate limited. Please try again after the specified time
+    type: object
+    properties:
+      error:
+        type: string
+        description: Message indicating the rate limit has been exceeded and when to try again
   AuthError:
     description: |
       The key supplied did not match the property manager or channel

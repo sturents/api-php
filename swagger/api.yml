@@ -110,6 +110,8 @@ paths:
           $ref: '#/definitions/AuthError'
         '404':
           $ref: '#/definitions/GetError'
+        '429':
+          $ref: '#/definitions/RateLimitError'
         default:
           $ref: '#/definitions/Error'
   /summary:
@@ -718,6 +720,14 @@ definitions:
         description: Keyed by field name (collapsed using . characters)
         items:
           type: string
+  RateLimitError:
+    description: |
+      This endpoint is rate limited. Please try again after the specified time
+    type: object
+    properties:
+      error:
+        type: string
+        description: Message indicating the rate limit has been exceeded and when to try again
   ListProperties:
     type: object
     properties:
