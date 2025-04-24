@@ -35,6 +35,20 @@ class ContractAbstract extends SwaggerModel
 	protected $end_date;
 
 	/**
+	 * The discount value of the promotion for this contract
+	 *
+	 * @var float
+	 */
+	protected $promo_value = 0.0;
+
+	/**
+	 * Reporting code for tracking promotion usage. Will appear in the Tenants report in Report Builder on the StuRents platform
+	 *
+	 * @var string
+	 */
+	protected $restricted_code = '';
+
+	/**
 	 * The minimum time a tenant may rent the property for in days
 	 *
 	 * @var int
@@ -115,6 +129,50 @@ class ContractAbstract extends SwaggerModel
 	public function setEndDate($end_date)
 	{
 		$this->end_date = $end_date;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return float
+	 */
+	public function getPromoValue()
+	{
+		return $this->promo_value;
+	}
+
+
+	/**
+	 * @param float $promo_value
+	 *
+	 * @return $this
+	 */
+	public function setPromoValue($promo_value)
+	{
+		$this->promo_value = $promo_value;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getRestrictedCode()
+	{
+		return $this->restricted_code;
+	}
+
+
+	/**
+	 * @param string $restricted_code
+	 *
+	 * @return $this
+	 */
+	public function setRestrictedCode($restricted_code)
+	{
+		$this->restricted_code = $restricted_code;
 
 		return $this;
 	}

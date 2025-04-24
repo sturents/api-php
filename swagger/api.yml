@@ -1150,6 +1150,14 @@ definitions:
         description: |
           The latest date at which it is possible to vacate the property
           in yyyy-mm-dd format
+      promo_value:
+        type: number
+        description: |
+          The discount value of the promotion for this contract
+      restricted_code:
+        type: string
+        description: |
+          Reporting code for tracking promotion usage. Will appear in the Tenants report in Report Builder on the StuRents platform
       min_contract_days:
         type: integer
         description: |
