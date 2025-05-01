@@ -587,6 +587,9 @@ definitions:
         description: |
           The latest date at which it is possible to vacate the property
           in yyyy-mm-dd format
+      restricted:
+        type: boolean
+        description: Is true if the availability is restricted
       promo_value:
         type: number
         description: |

@@ -35,6 +35,12 @@ class ContractAbstract extends SwaggerModel
 	protected $end_date;
 
 	/**
+	 * Is true if the availability is restricted
+	 * @var bool
+	 */
+	protected $restricted = false;
+
+	/**
 	 * The discount value of the promotion for this contract
 	 *
 	 * @var float
@@ -129,6 +135,28 @@ class ContractAbstract extends SwaggerModel
 	public function setEndDate($end_date)
 	{
 		$this->end_date = $end_date;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function getRestricted()
+	{
+		return $this->restricted;
+	}
+
+
+	/**
+	 * @param bool $restricted
+	 *
+	 * @return $this
+	 */
+	public function setRestricted($restricted)
+	{
+		$this->restricted = $restricted;
 
 		return $this;
 	}
