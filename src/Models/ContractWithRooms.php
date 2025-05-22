@@ -19,13 +19,13 @@ class ContractWithRooms extends ContractAbstract
 	 */
 	protected $book_now_url = '';
 
-    /**
-     * A URL where the user can book a viewing for the property online.
-     * Will be blank if the property is not set up for this feature
-     *
-     * @var string
-     */
-    protected $viewing_url = '';
+	/**
+	 * A URL where you are able to book a viewing online.
+	 * Will be blank if the property is not set up for this feature
+	 *
+	 * @var string
+	 */
+	protected $viewing_url = '';
 
 	/**
 	 * A list of 1 or more prices with optional room name. It may
@@ -53,32 +53,34 @@ class ContractWithRooms extends ContractAbstract
 	 *
 	 * @return $this
 	 */
-
 	public function setBookNowUrl($book_now_url)
 	{
 		$this->book_now_url = $book_now_url;
 
 		return $this;
 	}
-    /**
-     * @return string
-     */
-    public function getViewingUrl()
-    {
-        return $this->viewing_url;
-    }
 
-    /**
-     * @param string $viewing_url
-     *
-     * @return $this
-     */
-    public function setViewingUrl(string $viewing_url)
-    {
-        $this->viewing_url = $viewing_url;
 
-        return $this;
-    }
+	/**
+	 * @return string
+	 */
+	public function getViewingUrl()
+	{
+		return $this->viewing_url;
+	}
+
+
+	/**
+	 * @param string $viewing_url
+	 *
+	 * @return $this
+	 */
+	public function setViewingUrl($viewing_url)
+	{
+		$this->viewing_url = $viewing_url;
+
+		return $this;
+	}
 
 
 	/**

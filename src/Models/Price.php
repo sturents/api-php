@@ -31,7 +31,7 @@ class Price extends SwaggerModel
 	 *
 	 * @var string
 	 */
-	protected $deposit_per_person = 0.0;
+	protected $deposit_per_person = '';
 
 	/**
 	 * A monetary value indicating the fee to the property manager which
@@ -40,7 +40,7 @@ class Price extends SwaggerModel
 	 *
 	 * @var float
 	 */
-	protected $fee_per_person = 0.0;
+	protected $fee_per_person;
 
 
 	/**
@@ -101,7 +101,7 @@ class Price extends SwaggerModel
 	 *
 	 * @return $this
 	 */
-	public function setFeePerPerson($fee_per_person)
+	public function setFeePerPerson(float $fee_per_person)
 	{
 		$this->fee_per_person = $fee_per_person;
 
