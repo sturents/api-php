@@ -1,6 +1,10 @@
 <?php
 namespace SturentsLib\Api\Requests;
-use SturentsLib\Api\Models\SwaggerModel;
+use SturentsLib\Api\Models\AuthError;
+use SturentsLib\Api\Models\Error;
+use SturentsLib\Api\Models\GetError;
+use SturentsLib\Api\Models\ListProperties;
+use SturentsLib\Api\Models\RateLimitError;
 
 /**
  * Returns properties for the authenticated property manager
@@ -30,17 +34,17 @@ class GetProperties extends SwaggerRequest
 
 
 	/**
-	 * @return \SturentsLib\Api\Models\ListProperties|\SturentsLib\Api\Models\Error|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\GetError|\SturentsLib\Api\Models\RateLimitError|list<\SturentsLib\Api\Models\ListProperties>|list<\SturentsLib\Api\Models\Error>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\GetError>|list<\SturentsLib\Api\Models\RateLimitError>
+	 * @return ListProperties|Error|AuthError|GetError|RateLimitError|list<ListProperties>|list<Error>|list<AuthError>|list<GetError>|list<RateLimitError>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => \SturentsLib\Api\Models\ListProperties::class,
-			'400' => \SturentsLib\Api\Models\Error::class,
-			'401' => \SturentsLib\Api\Models\AuthError::class,
-			'404' => \SturentsLib\Api\Models\GetError::class,
-			'429' => \SturentsLib\Api\Models\RateLimitError::class,
-			'default' => \SturentsLib\Api\Models\Error::class
+			'200' => ListProperties::class,
+			'400' => Error::class,
+			'401' => AuthError::class,
+			'404' => GetError::class,
+			'429' => RateLimitError::class,
+			'default' => Error::class
 		]);
 	}
 }

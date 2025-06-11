@@ -1,6 +1,10 @@
 <?php
 namespace SturentsLib\Api\Requests;
-use SturentsLib\Api\Models\SwaggerModel;
+use SturentsLib\Api\Models\AuthError;
+use SturentsLib\Api\Models\Error;
+use SturentsLib\Api\Models\Property;
+use SturentsLib\Api\Models\PropertySaved;
+use SturentsLib\Api\Models\SendDataError;
 
 /**
  * Update an existing property
@@ -20,13 +24,14 @@ class PatchProperty extends SwaggerRequest
 	public $property_id;
 	protected static array $path_params = ['property_id'];
 
-
 	/**
-	 * @param \SturentsLib\Api\Models\Property $property
+	 * @param Property $property
+	 *
+	 * @throws \JsonException
 	 */
-	public function setBody(\SturentsLib\Api\Models\Property $property)
+	public function setBody(Property $property)
 	{
-		$this->body = json_encode($property);
+		$this->body = json_encode($property, JSON_THROW_ON_ERROR);
 	}
 
 
@@ -37,16 +42,16 @@ class PatchProperty extends SwaggerRequest
 
 
 	/**
-	 * @return \SturentsLib\Api\Models\PropertySaved|\SturentsLib\Api\Models\SendDataError|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\PropertySaved>|list<\SturentsLib\Api\Models\SendDataError>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\Error>
+	 * @return PropertySaved|SendDataError|AuthError|Error|list<PropertySaved>|list<SendDataError>|list<AuthError>|list<Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => \SturentsLib\Api\Models\PropertySaved::class,
-			'400' => \SturentsLib\Api\Models\SendDataError::class,
-			'401' => \SturentsLib\Api\Models\AuthError::class,
-			'404' => \SturentsLib\Api\Models\Error::class,
-			'default' => \SturentsLib\Api\Models\Error::class
+			'200' => PropertySaved::class,
+			'400' => SendDataError::class,
+			'401' => AuthError::class,
+			'404' => Error::class,
+			'default' => Error::class
 		]);
 	}
 }

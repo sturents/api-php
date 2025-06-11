@@ -64,7 +64,7 @@ abstract class SturentsClient implements SwaggerClient {
 	/**
 	 * @template T of SwaggerModel
 	 *
-	 * @param array<array-key, class-string<T>|''> $response_models
+	 * @param array<array-key, class-string<T>|null> $response_models
 	 * @return T|list<T>
 	 * @throws SturentsException
 	 */
@@ -115,14 +115,13 @@ abstract class SturentsClient implements SwaggerClient {
 	abstract protected function authQuery(RequestInterface $request): array;
 
 	/**
-	 * @template T of SwaggerModel
+	 * @template T1 of SwaggerModel
 	 *
-	 * @param array<array-key, class-string<T>|''> $response_models
-	 * @return T|list<T>
+	 * @param array<array-key, class-string<T1>|null> $response_models
+	 * @return T1|list<T1>
 	 * @throws SturentsException
 	 */
 	protected function handleResponse(ResponseInterface $response, array $response_models){
-
 		$json = (string)$response->getBody();
 
 		$status = (string)$response->getStatusCode();
@@ -132,7 +131,9 @@ abstract class SturentsClient implements SwaggerClient {
 		}
 
 		if (empty($json) && empty($response_class)){
-			return new SwaggerModel();
+			/** @var T1 $empty_model */
+			$empty_model = new SwaggerModel();
+			return $empty_model;
 		}
 
 		if (empty($response_class)){
@@ -150,12 +151,13 @@ abstract class SturentsClient implements SwaggerClient {
 				return $this->map($data, $response_class);
 			}
 
-			$list = [];
-			foreach ($data as $key => $item){
-				$list[$key] = $this->map($item, $response_class);
-			}
+			// Decoding from json as an object will mean that this will be a list if not array as above
+			// array_map preserves keys but psalm implies it is array so the array_values will show a list
+			$list = array_map(function ($item) use ($response_class){
+				return $this->map($item, $response_class);
+			}, $data);
 
-			return $list;
+			return array_values($list);
 		}
 		catch (JsonMapper_Exception $e) {
 			throw new SturentsException('There was an error converting the returned JSON into the correct object format.');
