@@ -28,6 +28,6 @@ class ChannelClient extends SturentsClient {
 	}
 
 	private function generateAuth(string $timestamp): string{
-		return hash_hmac('sha256', $timestamp, $this->display_key);
+		return hash_hmac('sha256', $timestamp, $this->display_key) ?: '';
 	}
 }
