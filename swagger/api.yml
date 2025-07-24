@@ -1,9 +1,9 @@
 swagger: '2.0'
 info:
-  title: StuRents API
+  title: Concurrent/Sturents Property API
   description: |
-    Allow property manager websites and management tools to
-    send and receive data from the StuRents database
+    An amalgamation of our channel manager, import and website APIs in a single document
+    for easy generation of API middleware
   version: 2.0.0
 host: sturents.com
 schemes:

@@ -1,9 +1,9 @@
 swagger: '2.0'
 info:
-  title: StuRents API
+  title: Channel manager API
   description: |
-    Allow property manager websites and management tools to
-    send and receive data from the StuRents database
+    Allow channels to access connected property manager properties for advertising
+    and live bookings. Also allows hosted booking flow with additional access permissions
   version: 2.0.0
 host: sturents.com
 schemes:
