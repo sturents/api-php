@@ -1,9 +1,9 @@
 swagger: '2.0'
 info:
-  title: StuRents API
+  title: StuRents/Concurrent Import API
   description: |
-    Allow property manager websites and management tools to
-    send and receive data from the StuRents database
+    Allow third party property management platforms to manage property listings
+    on the Concurrent platform and for listing via sturents.com
   version: 2.0.0
 host: sturents.com
 schemes:

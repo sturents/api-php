@@ -24,6 +24,6 @@ class UploadClient extends SturentsClient {
 	}
 
 	private function generateAuth(string $json, string $timestamp): string{
-		return hash_hmac('sha256', $json.$timestamp, $this->upload_key);
+		return hash_hmac('sha256', $json.$timestamp, $this->upload_key) ?: '';
 	}
 }
