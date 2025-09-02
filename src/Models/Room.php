@@ -9,7 +9,7 @@ namespace SturentsLib\Api\Models;
 class Room extends SwaggerModel
 {
 	/**
-	 * Can be precise, e.g. 1a, or descrptive e.g. "downstairs front"
+	 * Can be precise, e.g. 1a, or descriptive e.g. "downstairs front"
 	 *
 	 * @var string
 	 */

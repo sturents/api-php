@@ -57,7 +57,7 @@ class Property extends SwaggerModel
 
 	/**
 	 * When designation is set to "pbsa" this describes the total
-	 * number of identical rooms (including those currrently let).
+	 * number of identical rooms (including those currently let).
 	 * If designation is "house" then this should be set to 0
 	 *
 	 * @var int
@@ -67,7 +67,8 @@ class Property extends SwaggerModel
 	/**
 	 * When designation is set to “pbsa” this describes the number
 	 * of identical rooms still available. If designation is "house"
-	 * then this should be set to 0
+	 * then this should be set to 0. Please note this field manually
+	 * updated by the property manager so is not live data.
 	 *
 	 * @var int
 	 */
@@ -118,7 +119,7 @@ class Property extends SwaggerModel
 	/**
 	 * The unique ID for a bank account where it is intended that
 	 * the rent for this property will be paid to. This ID can be
-	 * retrived from the /bank-accounts endpoint. Note that this ID
+	 * retrieved from the /bank-accounts endpoint. Note that this ID
 	 * will not contain sensitive information, e.g. account number
 	 * or sort code - that information cannot be retrieved
 	 *

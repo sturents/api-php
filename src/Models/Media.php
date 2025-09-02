@@ -26,7 +26,7 @@ class Media extends SwaggerModel
 	/**
 	 * Zero or more video embed URLs. Any video source can be
 	 * supplied but at present only videos from YouTube will
-	 * be rendered as embeded videos on the property profile pages
+	 * be rendered as embedded videos on the property profile pages
 	 *
 	 * @var string[]
 	 */
