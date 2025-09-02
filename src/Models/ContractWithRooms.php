@@ -28,6 +28,13 @@ class ContractWithRooms extends ContractAbstract
 	protected $viewing_url = '';
 
 	/**
+	 * Is true if the availability is restricted
+	 *
+	 * @var bool
+	 */
+	protected $restricted = false;
+
+	/**
 	 * A list of 1 or more prices with optional room name. It may
 	 * be the case that all the price values are equal but still
 	 * one entity per room in the property is returned. This allows
@@ -78,6 +85,28 @@ class ContractWithRooms extends ContractAbstract
 	public function setViewingUrl($viewing_url)
 	{
 		$this->viewing_url = $viewing_url;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function getRestricted()
+	{
+		return $this->restricted;
+	}
+
+
+	/**
+	 * @param bool $restricted
+	 *
+	 * @return $this
+	 */
+	public function setRestricted($restricted)
+	{
+		$this->restricted = $restricted;
 
 		return $this;
 	}
