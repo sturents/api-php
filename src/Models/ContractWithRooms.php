@@ -30,6 +30,26 @@ class ContractWithRooms extends ContractAbstract
 	 */
 	protected $prices = [];
 
+	/**
+	 * Is true if the availability is restricted
+	 * @var bool
+	 */
+	protected $restricted = false;
+
+	/**
+	 * The discount value of the promotion for this contract
+	 *
+	 * @var ?float
+	 */
+	protected $promo_value = 0.0;
+
+	/**
+	 * Reporting code for tracking promotion usage. Will appear in the Tenants report in Report Builder on the StuRents platform
+	 *
+	 * @var ?string
+	 */
+	protected $restricted_code = '';
+
 
 	/**
 	 * @return string
@@ -83,6 +103,72 @@ class ContractWithRooms extends ContractAbstract
 	public function addPrice(PriceOutbound $price)
 	{
 		$this->prices[] = $price;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function getRestricted()
+	{
+		return $this->restricted;
+	}
+
+
+	/**
+	 * @param bool $restricted
+	 *
+	 * @return $this
+	 */
+	public function setRestricted($restricted)
+	{
+		$this->restricted = $restricted;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return ?float
+	 */
+	public function getPromoValue()
+	{
+		return $this->promo_value;
+	}
+
+
+	/**
+	 * @param ?float $promo_value
+	 *
+	 * @return $this
+	 */
+	public function setPromoValue($promo_value)
+	{
+		$this->promo_value = $promo_value;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return ?string
+	 */
+	public function getRestrictedCode()
+	{
+		return $this->restricted_code;
+	}
+
+
+	/**
+	 * @param ?string $restricted_code
+	 *
+	 * @return $this
+	 */
+	public function setRestrictedCode($restricted_code)
+	{
+		$this->restricted_code = $restricted_code;
 
 		return $this;
 	}

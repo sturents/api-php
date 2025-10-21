@@ -130,7 +130,10 @@ abstract class SturentsClient implements SwaggerClient {
 			$response_class = $response_models['default'] ?? null;
 		}
 
-		if (empty($json) && empty($response_class)){
+		if (empty($json)){
+			if (!empty($response_class)) {
+				return new $response_class();
+			}
 			/** @var T1 $empty_model */
 			$empty_model = new SwaggerModel();
 			return $empty_model;

@@ -1,10 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
-use SturentsLib\Api\Models\AuthError;
-use SturentsLib\Api\Models\Error;
-use SturentsLib\Api\Models\MediaSaved;
-use SturentsLib\Api\Models\MediaUpload;
-use SturentsLib\Api\Models\SendDataError;
+use SturentsLib\Api\Models\SwaggerModel;
 
 /**
  * Add a media item to a property
@@ -24,12 +20,11 @@ class PutMedia extends SwaggerRequest
 	public $property_id;
 	protected static array $path_params = ['property_id'];
 
+
 	/**
-	 * @param MediaUpload $mediaupload
-	 *
-	 * @throws \JsonException
+	 * @param \SturentsLib\Api\Models\MediaUpload $mediaupload
 	 */
-	public function setBody(MediaUpload $mediaupload)
+	public function setBody(\SturentsLib\Api\Models\MediaUpload $mediaupload)
 	{
 		$this->body = json_encode($mediaupload, JSON_THROW_ON_ERROR);
 	}
@@ -42,16 +37,16 @@ class PutMedia extends SwaggerRequest
 
 
 	/**
-	 * @return MediaSaved|SendDataError|AuthError|Error|list<MediaSaved>|list<SendDataError>|list<AuthError>|list<Error>
+	 * @return \SturentsLib\Api\Models\MediaSaved|\SturentsLib\Api\Models\SendDataError|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\MediaSaved>|list<\SturentsLib\Api\Models\SendDataError>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => MediaSaved::class,
-			'400' => SendDataError::class,
-			'401' => AuthError::class,
-			'404' => Error::class,
-			'default' => Error::class
+			'200' => \SturentsLib\Api\Models\MediaSaved::class,
+			'400' => \SturentsLib\Api\Models\SendDataError::class,
+			'401' => \SturentsLib\Api\Models\AuthError::class,
+			'404' => \SturentsLib\Api\Models\Error::class,
+			'default' => \SturentsLib\Api\Models\Error::class
 		]);
 	}
 }

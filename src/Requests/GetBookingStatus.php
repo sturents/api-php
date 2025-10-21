@@ -1,9 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
-use SturentsLib\Api\Models\AuthError;
-use SturentsLib\Api\Models\BookingStatus;
-use SturentsLib\Api\Models\Error;
-use SturentsLib\Api\Models\GetError;
+use SturentsLib\Api\Models\SwaggerModel;
 
 /**
  * Provides the booking status and basic contract information for a hosted booking
@@ -29,15 +26,15 @@ class GetBookingStatus extends SwaggerRequest
 
 
 	/**
-	 * @return BookingStatus|AuthError|GetError|Error|list<BookingStatus>|list<AuthError>|list<GetError>|list<Error>
+	 * @return \SturentsLib\Api\Models\BookingStatus|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\GetError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\BookingStatus>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\GetError>|list<\SturentsLib\Api\Models\Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => BookingStatus::class,
-			'401' => AuthError::class,
-			'404' => GetError::class,
-			'default' => Error::class
+			'200' => \SturentsLib\Api\Models\BookingStatus::class,
+			'401' => \SturentsLib\Api\Models\AuthError::class,
+			'404' => \SturentsLib\Api\Models\GetError::class,
+			'default' => \SturentsLib\Api\Models\Error::class
 		]);
 	}
 }
