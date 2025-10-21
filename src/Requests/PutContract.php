@@ -1,10 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
-use SturentsLib\Api\Models\AuthError;
-use SturentsLib\Api\Models\ContractCreation;
-use SturentsLib\Api\Models\ContractSaved;
-use SturentsLib\Api\Models\Error;
-use SturentsLib\Api\Models\SendDataError;
+use SturentsLib\Api\Models\SwaggerModel;
 
 /**
  * Add a contract to a property
@@ -24,12 +20,11 @@ class PutContract extends SwaggerRequest
 	public $property_id;
 	protected static array $path_params = ['property_id'];
 
+
 	/**
-	 * @param ContractCreation $contract
-	 *
-	 * @throws \JsonException
+	 * @param \SturentsLib\Api\Models\ContractCreation $contract
 	 */
-	public function setBody(ContractCreation $contract)
+	public function setBody(\SturentsLib\Api\Models\ContractCreation $contract)
 	{
 		$this->body = json_encode($contract, JSON_THROW_ON_ERROR);
 	}
@@ -42,16 +37,16 @@ class PutContract extends SwaggerRequest
 
 
 	/**
-	 * @return ContractSaved|SendDataError|AuthError|Error|list<ContractSaved>|list<SendDataError>|list<AuthError>|list<Error>
+	 * @return \SturentsLib\Api\Models\ContractSaved|\SturentsLib\Api\Models\SendDataError|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\ContractSaved>|list<\SturentsLib\Api\Models\SendDataError>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => ContractSaved::class,
-			'400' => SendDataError::class,
-			'401' => AuthError::class,
-			'404' => Error::class,
-			'default' => Error::class
+			'200' => \SturentsLib\Api\Models\ContractSaved::class,
+			'400' => \SturentsLib\Api\Models\SendDataError::class,
+			'401' => \SturentsLib\Api\Models\AuthError::class,
+			'404' => \SturentsLib\Api\Models\Error::class,
+			'default' => \SturentsLib\Api\Models\Error::class
 		]);
 	}
 }

@@ -1,9 +1,6 @@
 <?php
 namespace SturentsLib\Api\Requests;
-use SturentsLib\Api\Models\AuthError;
-use SturentsLib\Api\Models\ContractFull;
-use SturentsLib\Api\Models\Error;
-use SturentsLib\Api\Models\GetError;
+use SturentsLib\Api\Models\SwaggerModel;
 
 /**
  * Returns contracts for the specified property. Includes the contract_id
@@ -32,15 +29,15 @@ class GetContracts extends SwaggerRequest
 
 
 	/**
-	 * @return ContractFull|AuthError|GetError|Error|list<ContractFull>|list<AuthError>|list<GetError>|list<Error>
+	 * @return \SturentsLib\Api\Models\ContractFull|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\GetError|\SturentsLib\Api\Models\Error|list<\SturentsLib\Api\Models\ContractFull>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\GetError>|list<\SturentsLib\Api\Models\Error>
 	 */
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => ContractFull::class,
-			'401' => AuthError::class,
-			'404' => GetError::class,
-			'default' => Error::class
+			'200' => \SturentsLib\Api\Models\ContractFull::class,
+			'401' => \SturentsLib\Api\Models\AuthError::class,
+			'404' => \SturentsLib\Api\Models\GetError::class,
+			'default' => \SturentsLib\Api\Models\Error::class
 		]);
 	}
 }
