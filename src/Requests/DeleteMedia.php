@@ -42,7 +42,7 @@ class DeleteMedia extends SwaggerRequest
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'204' => null,
+			'204' => '',
 			'401' => \SturentsLib\Api\Models\AuthError::class,
 			'404' => \SturentsLib\Api\Models\Error::class,
 			'default' => \SturentsLib\Api\Models\Error::class
