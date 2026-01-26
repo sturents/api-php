@@ -1,0 +1,919 @@
+swagger: '2.0'
+info:
+  title: StuRents API
+  description: |
+    Allow property manager websites and management tools to
+    send and receive data from the StuRents database
+  version: 3.0.0
+host: sturents.com
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+securityDefinitions:
+  Channel:
+    type: apiKey
+    in: query
+    name: channel
+    description: |
+      If you are implementing a system which manages data for multiple
+      property managers you will have been given a "Channel ID" to use
+      when sending requests. This channel identifies your system, and
+      it will then be checked that your channel on the website has been
+      granted access to the property manager ID you provide in each
+      request
+  PropertyManager:
+    type: apiKey
+    in: query
+    name: landlord
+    description: |
+      The ID of the property manager whose data you wish to fetch (as provided by a call to GET /summary)
+  Timestamp:
+    type: apiKey
+    in: query
+    name: timestamp
+    description: Unix epoch timestamp in seconds, used to prevent API replay. The timestamp can be a maximum of one hour in the past, and may not be in the future
+  Auth:
+    type: apiKey
+    in: query
+    name: auth
+    description: |
+      Find your "channel" key at sturents.com/software/developer when signed in as a user with access to your channel.
+
+      The "auth" query parameter will be an HMAC SHA256 of the timestamp,
+      signed with your "channel" API key.
+
+      e.g. in PHP,
+
+      $auth = hash_hmac('sha256', $timestamp, $channel_key)
+paths:
+  /summary:
+    get:
+      summary: 1. Fetch property managers
+      description: |
+        Returns all property managers that your channel has been provided with access to. You will need the "landlord" ID for each property manager to send /properties requests and fetch their properties.
+        
+        Each record also has a property manager and organisation title that you can use within your platform to tag and manage different property managers.
+        
+        Property manager IDs should not change but you should still periodically request this endpoint to ensure you are only accessing property managers for whom your channel has access - records may be added or removed at any time based on property manager or admin actions in the StuRents platform.
+      security:
+        - Channel: []
+          Timestamp: []
+          Auth: []
+      tags:
+        - Property listings
+      responses:
+        '200':
+          description: |
+            Fetch this first in order to have a list of property managers that can be queried via the GET /properties endpoint
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PropertyManager'
+        '400':
+          $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/definitions/AuthError'
+        '404':
+          $ref: '#/definitions/GetError'
+        default:
+          $ref: '#/definitions/Error'
+  /properties:
+    get:
+      summary: 2. Fetch properties
+      description: |
+        Using a "landlord" value from the /summary endpoint you can request all properties (paginated) for that property manager.
+        
+        This endpoint is rate limited and you may only request properties for a given property manager once in 15 minute period. We generally recommend a refresh schedule of 1 hour is reasonable for up to date data - most property managers do not change the same data multiple times within an hour.
+      security:
+        - Channel: []
+          PropertyManager: []
+          Timestamp: []
+          Auth: []
+      parameters:
+        - in: query
+          name: page
+          type: integer
+          required: false
+          description: |
+            When there are multiple pages of results, which one to return
+            If the page number is not provided then the first page will be
+            returned. If the page number is too high no results (404) will
+            be returned
+      tags:
+        - Property listings
+      responses:
+        '200':
+          description: |
+            A list of property objects
+          schema:
+            $ref: '#/definitions/ListProperties'
+        '400':
+          $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/definitions/AuthError'
+        '404':
+          $ref: '#/definitions/GetError'
+        '429':
+          $ref: '#/definitions/RateLimitError'
+        default:
+          $ref: '#/definitions/Error'
+  /facilities:
+    get:
+      summary: Facilities strings
+      description: |
+        A list of all possible facilities that may be included on a property. This is system-level metadata and will rarely change.
+        
+        You do not need to fetch this if you are happy to accept any given facility strings from a property record, however it is here if you need to plan things like icons or handling in your own database/search schema.
+      tags:
+        - System metadata
+      responses:
+        '200':
+          description: List of facilities
+          schema:
+            type: array
+            items:
+              type: string
+  /booking-status:
+    get:
+      summary: Fetch booking
+      description: |
+        Provides the booking status and basic contract information for a hosted booking.
+        
+        You must be set up by our commercial team to access booking journeys. This requires you to submit extra data when redirecting tenants to our "book now" URLs that allow you to retrieve their booking status later. Talk to our commercial team to learn more.
+        
+        Once set up, you should retrive the book_now_url fields from property contract objects, and append your own query string parameters. These must include "booking_id" as a custom unique ID from your platform, and "email" as the tenant's email address, which will be pre-filled in the booking form.
+        
+        You may optionally send "first_name" and "phone" fields to pre-populate these to help the tenant's journey and increase conversion rates.
+      security:
+        - Channel: []
+          Timestamp: []
+          Auth: []
+      parameters:
+        - in: query
+          name: booking_id
+          type: string
+          required: true
+          description: Unique booking identifier provided in the redirect URL
+      tags:
+        - Tracking booking journeys
+      responses:
+        '200':
+          description: Booking status and basic contract information
+          schema:
+            $ref: '#/definitions/BookingStatus'
+        '401':
+          $ref: '#/definitions/AuthError'
+        '404':
+          $ref: '#/definitions/GetError'
+        default:
+          $ref: '#/definitions/Error'
+definitions:
+  GetError:
+    description: |
+      The requested GET entities did not exist for the property manager
+      or sub-resource requested
+    type: object
+    properties:
+      error:
+        type: string
+        description: Another error message not related to authentication
+  RateLimitError:
+    description: |
+      This endpoint is rate limited. Please try again after the specified time
+    type: object
+    properties:
+      error:
+        type: string
+        description: Message indicating the rate limit has been exceeded and when to try again
+  AuthError:
+    description: |
+      The key supplied did not match the property manager or channel
+      specified, or the channel does not have access to the property manager
+    type: object
+    properties:
+      landlord:
+        type: string
+        description: Indicates an issue with the provided "landlord" parameter
+      auth:
+        type: string
+        description: Indicates an issue with the provided "auth" token
+      channel:
+        type: string
+        description: Indicates an issue with the provided "channel" token
+  ListProperties:
+    type: object
+    properties:
+      version:
+        type: string
+        description: The API version being returned
+      pagination:
+        $ref: '#/definitions/Pagination'
+      properties:
+        type: array
+        items:
+          $ref: '#/definitions/PropertyOutbound'
+  Pagination:
+    type: object
+    required:
+      - pages
+    properties:
+      pages:
+        type: integer
+        description: The number of pages total
+      current:
+        type: integer
+        description: |
+          For data integrity, the page that these results relate to
+      next:
+        type: integer
+        description: |
+          If present this shows there is another page available after this one
+      prev:
+        type: integer
+        description: |
+          If present this shows there is another page available prior to this one
+  Property:
+    type: object
+    required:
+      - designation
+      - address
+      - coordinates
+      - energy_performance
+      - eligibility
+    properties:
+      designation:
+        type: string
+        enum: [house, pbsa]
+        description: |
+          Describes the property where HMOs are generally houses or single flats,
+          and PBSA are purpose built accommodation
+      facilities:
+        type: array
+        description: |
+          Zero or more facility names. Allowed names can be found
+          by making a GET /facilities request
+        items:
+          type: string
+      address:
+        $ref: '#/definitions/Address'
+      coordinates:
+        $ref: '#/definitions/Coordinates'
+      energy_performance:
+        $ref: '#/definitions/EnergyPerformance'
+      eligibility:
+        $ref: '#/definitions/Eligibility'
+      rooms_let_individually:
+        type: boolean
+        description: |
+          When designation is set to "house" this indicates whether
+          rooms can be individually let or not
+      quantity:
+        type: integer
+        description: |
+          When designation is set to "pbsa" this describes the total
+          number of identical rooms (including those currrently let).
+          If designation is "house" then this should be set to 0
+      quantity_available:
+        type: integer
+        description: |
+          When designation is set to “pbsa” this describes the number
+          of identical rooms still available. If designation is "house"
+          then this should be set to 0
+      room_type:
+        type: string
+        description: |
+          When designation is set to "pbsa" each property record
+          describes a type of room. This field gives that type a
+          name e.g. "Deluxe En-suite". If designation is "house"
+          then this should be left blank.
+      cluster_size:
+        type: integer
+        description: |
+          When designation is set to "pbsa" this indicates number of rooms
+          in a single cluster. If designation is "house"
+          then this should be set to 0.
+      description:
+        type: string
+        description: |
+          A plain text or HTML description of the property.
+          Please note HTML will be stripped but the HTML
+          structure will be used to render line breaks where
+          necessary. It is recommended this is at least 150 characters.
+      bathrooms:
+        type: integer
+        description: Number of bathrooms
+      floor_space:
+        type: number
+        description: |
+          Floor space of the whole property in square metres
+      bank_id:
+        type: string
+        description: |
+          The unique ID for a bank account where it is intended that
+          the rent for this property will be paid to. This ID can be
+          retrived from the /bank-accounts endpoint. Note that this ID
+          will not contain sensitive information, e.g. account number
+          or sort code - that information cannot be retrieved
+      accreditations:
+        type: array
+        description: Zero or more accreditations
+        items:
+          $ref: '#/definitions/Accreditation'
+      disabled:
+        type: boolean
+        description: |
+          where true indicates that the property is not ready
+          to be made public to students or shown in search results
+  PropertyOutbound:
+    allOf:
+      - $ref: '#/definitions/Property'
+      - type: object
+        properties:
+          property_id:
+            type: string
+            description: |
+              a unique reference to the property which will not change
+          room_details:
+            type: array
+            description: One or more RoomOutbound objects
+            items:
+              $ref: '#/definitions/RoomOutbound'
+          contracts:
+            type: array
+            description: |
+              One or more Contracts (will not show contracts which have
+              been subject to a DELETE request and which show as "disabled"
+              in GET /contracts requests)
+            items:
+              $ref: '#/definitions/ContractWithRooms'
+          contracts_disabled:
+            type: array
+            description: |
+              One or more Contracts (only those contracts which have
+              been subject to a DELETE request and which show as "disabled"
+              in GET /contracts requests)
+            items:
+              $ref: '#/definitions/ContractWithRooms'
+          media:
+            $ref: '#/definitions/Media'
+  Address:
+    type: object
+    required:
+      - road_name
+      - city
+      - postcode
+    properties:
+      road_name:
+        type: string
+      city:
+        type: string
+      postcode:
+        type: string
+      property_name:
+        type: string
+        description: This is required if "property_number" is empty
+      property_number:
+        type: string
+        description: This is required if "property_name" is empty
+      country:
+        type: string
+        description: 2 character country code corresponding to the ISO 3166-1 alpha-2 list of country codes
+      uprn:
+        type: string
+        description: If available, the unique property reference
+  Coordinates:
+    type: object
+    properties:
+      lat:
+        type: number
+      lng:
+        type: number
+  Utilities:
+    type: object
+    description: |
+      All keys are boolean where true indicates that
+      this utility is included with the rent
+    properties:
+      water:
+        type: boolean
+      gas:
+        type: boolean
+      electricity:
+        type: boolean
+      broadband:
+        type: boolean
+      phone:
+        type: boolean
+      contents_insurance:
+        type: boolean
+      tv_license:
+        type: boolean
+      council_tax:
+        type: boolean
+  Restriction:
+    type: object
+    description: |
+      Allows for "special offers" or other conditions to be
+      applied to a contract. Not currently saved or output by StuRents
+      but specified for future integrations
+    required:
+      - start_date
+      - end_date
+      - min_contract_days
+    properties:
+      start_date:
+        type: string
+        description: |
+          The date that the contract this restriction
+          belongs to may be purchased from in yyyy-mm-dd
+      end_date:
+        type: string
+        description: |
+          The date that the contract this restriction
+          belongs to may be purchased until in yyyy-mm-dd
+      terms:
+        type: string
+        description: |
+          A text block describing this restriction
+          (e.g. "For home students only")
+      min_contract_days:
+        type: integer
+        description: |
+          Minimum days a student must be renting for
+          the prices in this contract to be valid
+  Media:
+    type: object
+    properties:
+      photos_360:
+        type: array
+        description: |
+          Zero or more 360 photos
+          The order of photos will be maintained in the gallery;
+        items:
+          $ref: '#/definitions/Photo'
+      photos:
+        type: array
+        description: |
+          Zero or more photos
+          The order of photos will be maintained in the gallery;
+          the 1st will be the profile photo
+        items:
+          $ref: '#/definitions/Photo'
+      videos:
+        type: array
+        description: |
+          Zero or more video embed URLs. Any video source can be
+          supplied but at present only videos from YouTube will
+          be rendered as embeded videos on the property profile pages
+        items:
+          type: string
+      floorplans:
+        type: array
+        description: |
+          Zero or more URLs which link to floorplan files (image or pdf)
+          These will be downloaded and stored on StuRents' system
+        items:
+          type: string
+      tours:
+        type: array
+        description: |
+          Zero or more 360 tour URLs to an external service. Any 360 tour source can be supplied
+          and used as a link
+        items:
+          type: string
+  Photo:
+    type: object
+    required:
+      - photo
+    properties:
+      photo:
+        type: string
+        description: A URL linking to a photo file
+      thumb:
+        type: string
+        description: A URL linking to a thumbnail photo file
+      caption:
+        type: string
+        description: |
+          Max 60 characters
+  EnergyPerformance:
+    type: object
+    properties:
+      epc_reference:
+        type: string
+        description: |
+          The reference on the property's energy performance certificate.
+          This is known as an RRN and is a 20 character alphanumeric code
+      epc_certificate:
+        type: string
+        description: A URL to download the energy performance certificate
+      eef_current:
+        type: integer
+      eef_potential:
+        type: integer
+      co2_current:
+        type: integer
+      co2_potential:
+        type: integer
+  Accreditation:
+    type: object
+    required:
+      - type
+    properties:
+      type:
+        type: string
+        description: Title of an accreditation on the property
+      reference:
+        type: string
+        description: |
+          The reference connecting the property to its accrediting agency
+      expiry:
+        type: string
+        description: |
+          Date when the accreditation will expire in yyyy-mm-dd format
+          (empty is assumed to not expire)
+  Eligibility:
+    type: object
+    description: |
+      Each key is a boolean indicating if the specified item is
+      eligible to rent the property. At least one of the first
+      four fields must be set to true
+    required:
+      - undergraduate_student
+      - postgraduate_student
+    properties:
+      undergraduate_student:
+        type: boolean
+      postgraduate_student:
+        type: boolean
+      professional:
+        type: boolean
+      trainee:
+        type: boolean
+      dss:
+        type: boolean
+        description: Allows a recipient of UK housing benefit
+      pets_permitted:
+        type: boolean
+      smoking_permitted:
+        type: boolean
+      female_only:
+        type: boolean
+      male_only:
+        type: boolean
+  ContractAbstract:
+    type: object
+    description: |
+      Basic contract details which are extended by both inbound and outbound
+      data with objects which extend ContractBasic
+    required:
+      - title
+      - start_date
+      - end_date
+      - min_contract_days
+    properties:
+      title:
+        type: string
+        description: The name given to this contract
+      start_date:
+        type: string
+        description: |
+          The earliest date at which it is possible to move in to the property
+          in yyyy-mm-dd format
+      end_date:
+        type: string
+        description: |
+          The latest date at which it is possible to vacate the property
+          in yyyy-mm-dd format
+      restricted:
+        type: boolean
+        description: Is true if the availability is restricted
+      promo_value:
+        type: number
+        description: |
+          The discount value of the promotion for this contract
+      restricted_code:
+        type: string
+        description: |
+          Reporting code for tracking promotion usage. Will appear in the Tenants report in Report Builder on the StuRents platform
+      min_contract_days:
+        type: integer
+        description: |
+          The minimum time a tenant may rent the property for in days
+      utilities:
+        $ref: '#/definitions/Utilities'
+      restrictions:
+        type: array
+        description: Zero or more restrictions
+        items:
+          $ref: '#/definitions/Restriction'
+  ContractWithRooms:
+    description: |
+      The contract object returned for fetching property data
+      to display externally - includes basic information plus
+      a list of room specific pricing. Only Contracts which are
+      not disabled will be returned as this type.
+    allOf:
+      - $ref: '#/definitions/ContractAbstract'
+      - type: object
+        properties:
+          book_now_url:
+            type: string
+            description: |
+              A URL where the property may be booked online using this contract.
+              Will be blank if the property is not set up for this feature
+          prices:
+            type: array
+            description: |
+              A list of 1 or more prices with optional room name. It may
+              be the case that all the price values are equal but still
+              one entity per room in the property is returned. This allows
+              for the situation where each room is priced individually to be
+              accommodated using the same data structure
+            items:
+              $ref: '#/definitions/PriceOutbound'
+  Price:
+    description: |
+      Defined pricing details for tenants renting the property.
+      When submitted as the "price" field of the Contract object
+      this will apply to all rooms. That field may be left null
+      if the "room_prices" array is used instead.
+    type: object
+    required:
+      - price_per_person_per_week
+    properties:
+      price_per_person_per_week:
+        type: number
+        description: |
+          A monetary value indicating the weekly rent each tenant will
+          be expected to pay during their tenancy in the property.
+
+          This does not mean the rent is paid weekly - the StuRents
+          search and profiles display all rents as a weekly amount and this
+          will be used to calculate total and scheduled payments when
+          creating a tenancy and/or rent collection for the property
+      deposit_per_person:
+        type: number
+        description: |
+          A monetary value indicating the deposit each tenant will be
+          expected to pay upon signing a contract to rent the property
+      fee_per_person:
+        type: number
+        description: |
+          A monetary value indicating the fee to the property manager which
+          each tenant will be expected to pay upon signing a contract to
+          rent the property
+  PriceOutbound:
+    description: |
+      When fetching property details this describes a Price attached
+      to the contract and may also list the name of the Room to which
+      it applies.
+    allOf:
+      - $ref: '#/definitions/Price'
+      - type: object
+        properties:
+          room_name:
+            type: string
+            description: |
+              Describes the room for users consuming outbound data
+  Room:
+    description: |
+      Basic room details for creating or updating a room
+    properties:
+      room_name:
+        type: string
+        description: |
+          Can be precise, e.g. 1a, or descrptive e.g. "downstairs front"
+      floor:
+        type: string
+        description: |
+          Intended for "pbsa" designation where floor number or classification
+          is relevant
+      floor_space:
+        type: number
+        description: |
+          Floor space of the room in metres squared
+      disabled_access:
+        type: boolean
+        description: |
+          "True" if the room should be advertised as accessible
+      ensuite:
+        type: boolean
+        description: |
+          "True" if an en-suite bathroom is present for the room
+  RoomOutbound:
+    description: |
+      A Room object fetched from the GET /rooms/{property_id} endpoint,
+      or as listed in a PropertyOutbound object,
+      which provides a room_id field to edit or delete the room
+    allOf:
+      - $ref: '#/definitions/Room'
+      - type: object
+        properties:
+          room_id:
+            type: string
+            description: |
+              A unique ID for this Room object which can be used to allow
+              edit/delete of this room and also to attach pricing to the
+              Room using the RoomPrice object when creating/updating a
+              Contract object
+  PropertyManager:
+    properties:
+      landlord:
+        type: string
+        description: |
+          Pass this as the "landlord" field when requesting data for this account
+      title:
+        type: string
+        description: |
+          Title of this account on the StuRents website
+      company_title:
+        type: string
+        description: |
+          Title of the organisation this account belongs to on the StuRents website
+      company:
+        type: string
+        description: |
+          ID for the organisation this account belongs to on the StuRents website
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+  BookingStatusPropertyManager:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+        description: ID of the property manager
+      name:
+        type: string
+        description: Name of the property manager
+  BookingStatusAddress:
+    type: object
+    required:
+      - name
+      - number
+      - street
+      - city
+      - postcode
+    properties:
+      name:
+        type: string
+        description: Name of the address
+      number:
+        type: string
+        description: Number of the address
+      street:
+        type: string
+        description: Street of the address
+      city:
+        type: string
+        description: City of the address
+      postcode:
+        type: string
+        description: Postcode of the address
+  BookingStatusTenant:
+    type: object
+    required:
+      - title
+      - first_name
+      - last_name
+      - email
+      - phone
+      - guarantor_required
+      - rent_pw
+      - total_rent
+      - rent_instalments
+      - signed_datetime
+    properties:
+      title:
+        type: string
+        description: Title of the user
+      first_name:
+        type: string
+        description: First name of the user
+      last_name:
+        type: string
+        description: Last name of the user
+      email:
+        type: string
+        description: Email address of the user
+      phone:
+        type: string
+        description: Phone number of the user
+      guarantor_required:
+        type: boolean
+        nullable: true
+        description: Indicates whether the user requires a guarantor
+      rent_pw:
+        type: number
+        format: double
+        nullable: true
+        description: Rent per week
+      total_rent:
+        type: number
+        format: double
+        nullable: true
+        description: Total rent
+      rent_instalments:
+        type: integer
+        nullable: true
+        description: Number of rent instalments due throughout the duration of the contract
+      signed_datetime:
+        type: string
+        nullable: true
+        description: Date and time that the tenant signed the tenancy
+  BookingStatusTenancy:
+    type: object
+    required:
+      - created_datetime
+      - booking_option
+      - contract_start_date
+      - contract_end_date
+      - contract_length
+      - rent_pppw
+      - total_contract_value
+      - tenancy_size
+      - booking_expiry_datetime
+    properties:
+      created_datetime:
+        type: string
+        description: Date and time that the contract was created
+      booking_option:
+        type: string
+        nullable: true
+        description: Title of the availability selected for the booking
+      contract_start_date:
+        type: string
+        description: Start date of the contract
+      contract_end_date:
+        type: string
+        nullable: true
+        description: End date of the contract
+      contract_length:
+        type: integer
+        nullable: true
+        description: Total contract duration in days
+      rent_pppw:
+        type: number
+        format: double
+        description: Total rent per person per week
+      total_contract_value:
+        type: number
+        format: double
+        description: Total monetary value of the contract
+      tenancy_size:
+        type: integer
+        description: Number of tenants included in the booking
+      booking_expiry_datetime:
+        type: string
+        nullable: true
+        description: Date and time that the booking will expire if not signed by the tenant
+  BookingStatus:
+    description: |
+      Basic contract information and booking status.
+    type: object
+    required:
+      - booking_id
+      - unique_booking_id
+      - booking_status
+      - property_manager
+      - property_address
+      - currency
+      - tenants
+      - tenancy
+    properties:
+      booking_id:
+        type: string
+        description: Identifier provided in the redirect URL when the user initiated the booking
+      unique_booking_id:
+        type: string
+        description: Generated unique identifier, this will be the same as the booking_id unless the same identifier has been provided for multiple bookings.
+      booking_status:
+        type: string
+        description: Status of the booking
+      property_manager:
+        description: Details of the booking's property manager
+        $ref: '#/definitions/BookingStatusPropertyManager'
+      property_address:
+        description: Address of the property used in the booking
+        $ref: '#/definitions/BookingStatusAddress'
+      currency:
+        type: string
+        description: Contract's currency code
+      tenants:
+        type: array
+        description: List of users involved in booking
+        items:
+          $ref: '#/definitions/BookingStatusTenant'
+      tenancy:
+        description: Details of tenancy created from booking
+        nullable: true
+        allOf:
+          - $ref: '#/definitions/BookingStatusTenancy'

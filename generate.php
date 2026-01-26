@@ -7,7 +7,7 @@ require __DIR__.'/vendor/autoload.php';
 
 $namespace = "SturentsLib\\Api";
 $dir = "src/";
-$yaml = __DIR__.'/swagger/api.yml';
+$yaml = __DIR__.'/swagger/2.0.0/api.yml';
 $uri = "/api";
 
 shell_exec("find ./{$dir}/Models -type f -delete");
