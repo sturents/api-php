@@ -1096,7 +1096,8 @@ definitions:
       min_contract_days:
         type: integer
         description: |
-          The minimum time a tenant may rent the property for in days for a fixed term contract. This is required if is_fixed_term is true.
+          The minimum time a tenant may rent the property for in days 
+          for a fixed term contract. This is required if is_fixed_term is true.
       monthly_payment_day:
         type: integer
         description: |
