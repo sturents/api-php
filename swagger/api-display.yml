@@ -485,26 +485,38 @@ definitions:
     required:
       - title
       - start_date
-      - end_date
-      - min_contract_days
+      - is_fixed_term
     properties:
       title:
         type: string
         description: The name given to this contract
+      is_fixed_term:
+        type: boolean
+        description: |
+          Describes whether this contract is fixed term or rolling
       start_date:
         type: string
         description: |
           The earliest date at which it is possible to move in to the property
           in yyyy-mm-dd format
+      latest_start_date:
+        type: string
+        description: |
+          The latest date at which it is possible to move in to the property for a rolling contract. This is required if is_fixed_term is false.
       end_date:
         type: string
         description: |
           The latest date at which it is possible to vacate the property
-          in yyyy-mm-dd format
+          in yyyy-mm-dd format for a fixed term contract. This is required if is_fixed_term is true.
       min_contract_days:
         type: integer
         description: |
-          The minimum time a tenant may rent the property for in days
+          The minimum time a tenant may rent the property for in days 
+          for a fixed term contract. This is required if is_fixed_term is true.
+      monthly_payment_day:
+        type: integer
+        description: |
+          The day of the month that rent is due for rolling contracts. Valid day values are 1 to 28. This is required if is_fixed_term is false.
       utilities:
         $ref: '#/definitions/Utilities'
       restrictions:
@@ -550,13 +562,20 @@ definitions:
       price_per_person_per_week:
         type: number
         description: |
-          A monetary value indicating the weekly rent each tenant will
-          be expected to pay during their tenancy in the property.
+          For fixed term contracts, this is the monetary value indicating 
+          the weekly rent each tenant will be expected to pay during their 
+          tenancy in the property.
+          
+          For rolling contracts, this is the monetary value indicating the 
+          daily rent each tenant will pay for the first payment period.
+          The first payment period covers the rent from the start date to 
+          the day before the first rolling monthly payment day. The first payment rent 
+          is calculated based on the number of days in the period multiplied by the per day rate.
 
-          This does not mean the rent is paid weekly - the StuRents
+          Whether fixed or rolling, this does not mean the rent is paid weekly or daily - the StuRents
           search and profiles display all rents as a weekly amount and this
           will be used to calculate total and scheduled payments when
-          creating a tenancy and/or rent collection for the property
+          creating a tenancy and/or rent collection for the property.
       deposit_per_person:
         type: number
         description: |
@@ -568,6 +587,16 @@ definitions:
           A monetary value indicating the fee to the property manager which
           each tenant will be expected to pay upon signing a contract to
           rent the property
+      rolling_price_per_person_per_month:
+        type: number
+        description: |
+          A monetary value indicating the monthly rent each tenant will
+          be expected to pay during their rolling tenancy in the property.
+          This is required if is_fixed_term is false
+
+          The StuRents search and profiles display all rents as a weekly amount and this
+          will be used to calculate total and scheduled payments when
+          creating a tenancy and/or rent collection for the property.
   PriceOutbound:
     description: |
       When fetching property details this describes a Price attached
