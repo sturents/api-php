@@ -56,7 +56,7 @@ class Price extends SwaggerModel
 	 *
 	 * The StuRents search and profiles display all rents as a weekly amount and this
 	 * will be used to calculate total and scheduled payments when
-	 * creating a tenancy and/or rent collection for the property
+	 * creating a tenancy and/or rent collection for the property.
 	 *
 	 * @var float
 	 */
