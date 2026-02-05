@@ -12,7 +12,7 @@ namespace SturentsLib\Api\Models;
 class Price extends SwaggerModel
 {
 	/**
-	 * For fixed term contracts, this is the monetary value indicating
+	 * For fixed-term contracts, this is the monetary value indicating
 	 * the weekly rent each tenant will be expected to pay during their
 	 * tenancy in the property.
 	 *

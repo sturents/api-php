@@ -17,7 +17,7 @@ class ContractAbstract extends SwaggerModel
 	protected $title;
 
 	/**
-	 * Describes whether this contract is fixed term or rolling
+	 * Describes whether this contract is fixed-term or rolling
 	 *
 	 * @var bool
 	 * @required
@@ -42,7 +42,7 @@ class ContractAbstract extends SwaggerModel
 
 	/**
 	 * The latest date at which it is possible to vacate the property
-	 * in yyyy-mm-dd format for a fixed term contract. This is required if is_fixed_term is true.
+	 * in yyyy-mm-dd format for a fixed-term contract. This is required if is_fixed_term is true.
 	 *
 	 * @var string
 	 */
@@ -50,7 +50,7 @@ class ContractAbstract extends SwaggerModel
 
 	/**
 	 * The minimum time a tenant may rent the property for in days
-	 * for a fixed term contract. This is required if is_fixed_term is true.
+	 * for a fixed-term contract. This is required if is_fixed_term is true.
 	 *
 	 * @var int
 	 */

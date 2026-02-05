@@ -150,7 +150,7 @@ paths:
         
         You must be set up by our commercial team to access booking journeys. This requires you to submit extra data when redirecting tenants to our "book now" URLs that allow you to retrieve their booking status later. Talk to our commercial team to learn more.
         
-        Once set up, you should retrive the book_now_url fields from property contract objects, and append your own query string parameters. These must include "booking_id" as a custom unique ID from your platform, and "email" as the tenant's email address, which will be pre-filled in the booking form.
+        Once set up, you should retrieve the book_now_url fields from property contract objects, and append your own query string parameters. These must include "booking_id" as a custom unique ID from your platform, and "email" as the tenant's email address, which will be pre-filled in the booking form.
         
         You may optionally send "first_name" and "phone" fields to pre-populate these to help the tenant's journey and increase conversion rates.
       security:
@@ -280,7 +280,7 @@ definitions:
         type: integer
         description: |
           When designation is set to "pbsa" this describes the total
-          number of identical rooms (including those currrently let).
+          number of identical rooms (including those currently let).
           If designation is "house" then this should be set to 0
       quantity_available:
         type: integer
@@ -320,7 +320,7 @@ definitions:
         description: |
           The unique ID for a bank account where it is intended that
           the rent for this property will be paid to. This ID can be
-          retrived from the /bank-accounts endpoint. Note that this ID
+          retrieved from the /bank-accounts endpoint. Note that this ID
           will not contain sensitive information, e.g. account number
           or sort code - that information cannot be retrieved
       accreditations:
@@ -586,7 +586,7 @@ definitions:
       is_fixed_term:
         type: boolean
         description: |
-          Describes whether this contract is fixed term or rolling
+          Describes whether this contract is fixed-term or rolling
       start_date:
         type: string
         description: |
@@ -600,7 +600,7 @@ definitions:
         type: string
         description: |
           The latest date at which it is possible to vacate the property
-          in yyyy-mm-dd format for a fixed term contract. This is required if is_fixed_term is true.
+          in yyyy-mm-dd format for a fixed-term contract. This is required if is_fixed_term is true.
       restricted:
         type: boolean
         description: Is true if the availability is restricted
@@ -616,7 +616,7 @@ definitions:
         type: integer
         description: |
           The minimum time a tenant may rent the property for in days 
-          for a fixed term contract. This is required if is_fixed_term is true.
+          for a fixed-term contract. This is required if is_fixed_term is true.
       monthly_payment_day:
         type: integer
         description: |
@@ -666,7 +666,7 @@ definitions:
       price_per_person_per_week:
         type: number
         description: |
-          For fixed term contracts, this is the monetary value indicating 
+          For fixed-term contracts, this is the monetary value indicating 
           the weekly rent each tenant will be expected to pay during their 
           tenancy in the property.
           
@@ -721,7 +721,7 @@ definitions:
       room_name:
         type: string
         description: |
-          Can be precise, e.g. 1a, or descrptive e.g. "downstairs front"
+          Can be precise, e.g. 1a, or descriptive e.g. "downstairs front"
       floor:
         type: string
         description: |
