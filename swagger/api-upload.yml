@@ -1078,7 +1078,7 @@ definitions:
       is_fixed_term:
         type: boolean
         description: |
-          Describes whether this contract is fixed-term or rolling
+          If true, the contract is fixed-term. If false, the contract is rolling (periodic)
       start_date:
         type: string
         description: |

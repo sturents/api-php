@@ -17,7 +17,7 @@ class ContractAbstract extends SwaggerModel
 	protected $title;
 
 	/**
-	 * Describes whether this contract is fixed-term or rolling
+	 * If true, the contract is fixed-term. If false, the contract is rolling (periodic)
 	 *
 	 * @var bool
 	 * @required
