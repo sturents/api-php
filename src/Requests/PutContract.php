@@ -26,7 +26,7 @@ class PutContract extends SwaggerRequest
 	 */
 	public function setBody(\SturentsLib\Api\Models\ContractCreation $contract)
 	{
-		$this->body = json_encode($contract, JSON_THROW_ON_ERROR);
+		$this->body = json_encode($contract);
 	}
 
 

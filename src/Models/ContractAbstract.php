@@ -17,6 +17,14 @@ class ContractAbstract extends SwaggerModel
 	protected $title;
 
 	/**
+	 * If true, the contract is fixed-term. If false, the contract is rolling (periodic)
+	 *
+	 * @var bool
+	 * @required
+	 */
+	protected $is_fixed_term;
+
+	/**
 	 * The earliest date at which it is possible to move in to the property
 	 * in yyyy-mm-dd format
 	 *
@@ -26,21 +34,34 @@ class ContractAbstract extends SwaggerModel
 	protected $start_date;
 
 	/**
-	 * The latest date at which it is possible to vacate the property
-	 * in yyyy-mm-dd format
+	 * The latest date at which it is possible to move in to the property for a rolling contract. This is required if is_fixed_term is false.
 	 *
 	 * @var string
-	 * @required
 	 */
-	protected $end_date;
+	protected $latest_start_date = '';
+
+	/**
+	 * The latest date at which it is possible to vacate the property
+	 * in yyyy-mm-dd format for a fixed-term contract. This is required if is_fixed_term is true.
+	 *
+	 * @var string
+	 */
+	protected $end_date = '';
 
 	/**
 	 * The minimum time a tenant may rent the property for in days
+	 * for a fixed-term contract. This is required if is_fixed_term is true.
 	 *
 	 * @var int
-	 * @required
 	 */
-	protected $min_contract_days;
+	protected $min_contract_days = 0;
+
+	/**
+	 * The day of the month that rent is due for rolling contracts. Valid day values are 1 to 28. This is required if is_fixed_term is false.
+	 *
+	 * @var int
+	 */
+	protected $monthly_payment_day = 0;
 
 	/**
 	 * @var Utilities
@@ -77,6 +98,28 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
+	 * @return bool
+	 */
+	public function getIsFixedTerm()
+	{
+		return $this->is_fixed_term;
+	}
+
+
+	/**
+	 * @param bool $is_fixed_term
+	 *
+	 * @return $this
+	 */
+	public function setIsFixedTerm($is_fixed_term)
+	{
+		$this->is_fixed_term = $is_fixed_term;
+
+		return $this;
+	}
+
+
+	/**
 	 * @return string
 	 */
 	public function getStartDate()
@@ -93,6 +136,28 @@ class ContractAbstract extends SwaggerModel
 	public function setStartDate($start_date)
 	{
 		$this->start_date = $start_date;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getLatestStartDate()
+	{
+		return $this->latest_start_date;
+	}
+
+
+	/**
+	 * @param string $latest_start_date
+	 *
+	 * @return $this
+	 */
+	public function setLatestStartDate($latest_start_date)
+	{
+		$this->latest_start_date = $latest_start_date;
 
 		return $this;
 	}
@@ -137,6 +202,28 @@ class ContractAbstract extends SwaggerModel
 	public function setMinContractDays($min_contract_days)
 	{
 		$this->min_contract_days = $min_contract_days;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getMonthlyPaymentDay()
+	{
+		return $this->monthly_payment_day;
+	}
+
+
+	/**
+	 * @param int $monthly_payment_day
+	 *
+	 * @return $this
+	 */
+	public function setMonthlyPaymentDay($monthly_payment_day)
+	{
+		$this->monthly_payment_day = $monthly_payment_day;
 
 		return $this;
 	}

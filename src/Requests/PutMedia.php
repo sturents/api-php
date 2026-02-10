@@ -26,7 +26,7 @@ class PutMedia extends SwaggerRequest
 	 */
 	public function setBody(\SturentsLib\Api\Models\MediaUpload $mediaupload)
 	{
-		$this->body = json_encode($mediaupload, JSON_THROW_ON_ERROR);
+		$this->body = json_encode($mediaupload);
 	}
 
 

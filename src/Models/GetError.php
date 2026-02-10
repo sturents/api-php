@@ -10,7 +10,7 @@ namespace SturentsLib\Api\Models;
 class GetError extends SwaggerModel
 {
 	/**
-	 * Another error message not related to authenticaiton
+	 * Another error message not related to authentication
 	 * @var string
 	 */
 	protected $error = '';

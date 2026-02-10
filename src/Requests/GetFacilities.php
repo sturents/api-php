@@ -17,7 +17,7 @@ class GetFacilities extends SwaggerRequest
 	public function sendWith(SwaggerClient $client)
 	{
 		return $client->make($this, [
-			'200' => null
+			'200' => ''
 		]);
 	}
 }

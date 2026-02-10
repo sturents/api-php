@@ -26,7 +26,7 @@ class PatchProperty extends SwaggerRequest
 	 */
 	public function setBody(\SturentsLib\Api\Models\Property $property)
 	{
-		$this->body = json_encode($property, JSON_THROW_ON_ERROR);
+		$this->body = json_encode($property);
 	}
 
 

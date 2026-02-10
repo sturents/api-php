@@ -35,7 +35,7 @@ class PatchRoom extends SwaggerRequest
 	 */
 	public function setBody(\SturentsLib\Api\Models\Room $room)
 	{
-		$this->body = json_encode($room, JSON_THROW_ON_ERROR);
+		$this->body = json_encode($room);
 	}
 
 
