@@ -16,7 +16,7 @@ use SturentsLib\Api\Requests\SwaggerClient;
 use SturentsLib\Api\Requests\SwaggerRequest;
 
 abstract class SturentsClient implements SwaggerClient {
-	public const VERSION = 2.0;
+	public const VERSION = 3.0;
 
 	private const EX_CODE_RESPONSE = 11;
 	public const URI_BASE = 'https://sturents.com';
