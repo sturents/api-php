@@ -1150,20 +1150,24 @@ definitions:
           in yyyy-mm-dd format
       latest_start_date:
         type: string
+        nullable: true
         description: |
           The latest date at which it is possible to move in to the property for a rolling contract. This is required if is_fixed_term is false.
       end_date:
         type: string
+        nullable: true
         description: |
           The latest date at which it is possible to vacate the property
           in yyyy-mm-dd format for a fixed-term contract. This is required if is_fixed_term is true.
       min_contract_days:
         type: integer
+        nullable: true
         description: |
           The minimum time a tenant may rent the property for in days 
           for a fixed-term contract. This is required if is_fixed_term is true.
       monthly_payment_day:
         type: integer
+        nullable: true
         description: |
           The day of the month that rent is due for rolling contracts. Valid day values are 1 to 28. This is required if is_fixed_term is false.
       utilities:
@@ -1359,6 +1363,7 @@ definitions:
           rent the property
       rolling_price_per_person_per_month:
         type: number
+        nullable: true
         description: |
           A monetary value indicating the monthly rent each tenant will
           be expected to pay during their rolling tenancy in the property.
