@@ -36,7 +36,7 @@ class ContractAbstract extends SwaggerModel
 	/**
 	 * The latest date at which it is possible to move in to the property for a rolling contract. This is required if is_fixed_term is false.
 	 *
-	 * @var string
+	 * @var ?string
 	 */
 	protected $latest_start_date = '';
 
@@ -44,7 +44,7 @@ class ContractAbstract extends SwaggerModel
 	 * The latest date at which it is possible to vacate the property
 	 * in yyyy-mm-dd format for a fixed-term contract. This is required if is_fixed_term is true.
 	 *
-	 * @var string
+	 * @var ?string
 	 */
 	protected $end_date = '';
 
@@ -52,14 +52,14 @@ class ContractAbstract extends SwaggerModel
 	 * The minimum time a tenant may rent the property for in days
 	 * for a fixed-term contract. This is required if is_fixed_term is true.
 	 *
-	 * @var int
+	 * @var ?int
 	 */
 	protected $min_contract_days = 0;
 
 	/**
 	 * The day of the month that rent is due for rolling contracts. Valid day values are 1 to 28. This is required if is_fixed_term is false.
 	 *
-	 * @var int
+	 * @var ?int
 	 */
 	protected $monthly_payment_day = 0;
 
@@ -142,7 +142,7 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @return string
+	 * @return ?string
 	 */
 	public function getLatestStartDate()
 	{
@@ -151,7 +151,7 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @param string $latest_start_date
+	 * @param ?string $latest_start_date
 	 *
 	 * @return $this
 	 */
@@ -164,7 +164,7 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @return string
+	 * @return ?string
 	 */
 	public function getEndDate()
 	{
@@ -173,7 +173,7 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @param string $end_date
+	 * @param ?string $end_date
 	 *
 	 * @return $this
 	 */
@@ -186,7 +186,7 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @return int
+	 * @return ?int
 	 */
 	public function getMinContractDays()
 	{
@@ -195,7 +195,7 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @param int $min_contract_days
+	 * @param ?int $min_contract_days
 	 *
 	 * @return $this
 	 */
@@ -208,7 +208,7 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @return int
+	 * @return ?int
 	 */
 	public function getMonthlyPaymentDay()
 	{
@@ -217,7 +217,7 @@ class ContractAbstract extends SwaggerModel
 
 
 	/**
-	 * @param int $monthly_payment_day
+	 * @param ?int $monthly_payment_day
 	 *
 	 * @return $this
 	 */

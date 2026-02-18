@@ -58,7 +58,7 @@ class Price extends SwaggerModel
 	 * will be used to calculate total and scheduled payments when
 	 * creating a tenancy and/or rent collection for the property.
 	 *
-	 * @var float
+	 * @var ?float
 	 */
 	protected $rolling_price_per_person_per_month = 0.0;
 
@@ -130,7 +130,7 @@ class Price extends SwaggerModel
 
 
 	/**
-	 * @return float
+	 * @return ?float
 	 */
 	public function getRollingPricePerPersonPerMonth()
 	{
@@ -139,7 +139,7 @@ class Price extends SwaggerModel
 
 
 	/**
-	 * @param float $rolling_price_per_person_per_month
+	 * @param ?float $rolling_price_per_person_per_month
 	 *
 	 * @return $this
 	 */
