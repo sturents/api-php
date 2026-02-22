@@ -806,7 +806,8 @@ definitions:
         description: |
           When designation is set to “pbsa” this describes the number
           of identical rooms still available. If designation is "house"
-          then this should be set to 0
+          then this should be set to 0. Please note this field manually 
+          updated by the property manager so is not live data.
       room_type:
         type: string
         description: |
@@ -1006,7 +1007,7 @@ definitions:
         description: |
           Zero or more video embed URLs. Any video source can be
           supplied but at present only videos from YouTube will
-          be rendered as embeded videos on the property profile pages
+          be rendered as embedded videos on the property profile pages
         items:
           type: string
       floorplans:
@@ -1192,6 +1193,15 @@ definitions:
             description: |
               A URL where the property may be booked online using this contract.
               Will be blank if the property is not set up for this feature
+          viewing_url:
+            type: string
+            description: |
+              A URL where you are able to book a viewing online.
+              Will be blank if the property is not set up for this feature
+          restricted:
+            type: boolean
+            description: |
+              Is true if the availability is restricted
           prices:
             type: array
             description: |
@@ -1334,7 +1344,7 @@ definitions:
       - price_per_person_per_week
     properties:
       price_per_person_per_week:
-        type: number
+        type: string
         description: |
           For fixed-term contracts, this is the monetary value indicating 
           the weekly rent each tenant will be expected to pay during their 
@@ -1351,12 +1361,12 @@ definitions:
           will be used to calculate total and scheduled payments when
           creating a tenancy and/or rent collection for the property
       deposit_per_person:
-        type: number
+        type: string
         description: |
           A monetary value indicating the deposit each tenant will be
           expected to pay upon signing a contract to rent the property
       fee_per_person:
-        type: number
+        type: float
         description: |
           A monetary value indicating the fee to the property manager which
           each tenant will be expected to pay upon signing a contract to

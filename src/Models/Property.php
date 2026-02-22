@@ -67,7 +67,8 @@ class Property extends SwaggerModel
 	/**
 	 * When designation is set to “pbsa” this describes the number
 	 * of identical rooms still available. If designation is "house"
-	 * then this should be set to 0
+	 * then this should be set to 0. Please note this field manually
+	 * updated by the property manager so is not live data.
 	 *
 	 * @var int
 	 */

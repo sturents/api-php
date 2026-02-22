@@ -27,7 +27,7 @@ class Price extends SwaggerModel
 	 * will be used to calculate total and scheduled payments when
 	 * creating a tenancy and/or rent collection for the property
 	 *
-	 * @var float
+	 * @var string
 	 * @required
 	 */
 	protected $price_per_person_per_week;
@@ -36,9 +36,9 @@ class Price extends SwaggerModel
 	 * A monetary value indicating the deposit each tenant will be
 	 * expected to pay upon signing a contract to rent the property
 	 *
-	 * @var float
+	 * @var string
 	 */
-	protected $deposit_per_person = 0.0;
+	protected $deposit_per_person = '';
 
 	/**
 	 * A monetary value indicating the fee to the property manager which
@@ -47,7 +47,7 @@ class Price extends SwaggerModel
 	 *
 	 * @var float
 	 */
-	protected $fee_per_person = 0.0;
+	protected $fee_per_person;
 
 	/**
 	 * A monetary value indicating the monthly rent each tenant will
@@ -64,7 +64,7 @@ class Price extends SwaggerModel
 
 
 	/**
-	 * @return float
+	 * @return string
 	 */
 	public function getPricePerPersonPerWeek()
 	{
@@ -73,7 +73,7 @@ class Price extends SwaggerModel
 
 
 	/**
-	 * @param float $price_per_person_per_week
+	 * @param string $price_per_person_per_week
 	 *
 	 * @return $this
 	 */
@@ -86,7 +86,7 @@ class Price extends SwaggerModel
 
 
 	/**
-	 * @return float
+	 * @return string
 	 */
 	public function getDepositPerPerson()
 	{
@@ -95,7 +95,7 @@ class Price extends SwaggerModel
 
 
 	/**
-	 * @param float $deposit_per_person
+	 * @param string $deposit_per_person
 	 *
 	 * @return $this
 	 */
@@ -121,7 +121,7 @@ class Price extends SwaggerModel
 	 *
 	 * @return $this
 	 */
-	public function setFeePerPerson($fee_per_person)
+	public function setFeePerPerson(float $fee_per_person)
 	{
 		$this->fee_per_person = $fee_per_person;
 
