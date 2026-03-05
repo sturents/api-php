@@ -1,6 +1,6 @@
 # StuRents API Helper
 
-_Master branch is for v2.0 which is not available yet; please check releases for previous versions. For outbound data check 1.3.*, for inbound use 1.2.*_
+_Master branch is for v3 of the StuRents API. Please check releases for previous versions.
 
 Install using composer:
 
