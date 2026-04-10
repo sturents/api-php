@@ -653,6 +653,9 @@ definitions:
               accommodated using the same data structure
             items:
               $ref: '#/definitions/PriceOutbound'
+          room_summary:
+            nullable: true
+            $ref: '#/definitions/RoomSummary'
   Price:
     description: |
       Defined pricing details for tenants renting the property.
@@ -958,3 +961,16 @@ definitions:
         nullable: true
         allOf:
           - $ref: '#/definitions/BookingStatusTenancy'
+  RoomSummary:
+    description: |
+      An estimate of rooms available for the duration of this contract, updated nightly
+    type: object
+    properties:
+      room_count:
+        type: integer
+        description: |
+          The number of rooms available for the duration of this contract
+      last_updated:
+        type: string
+        description: |
+          Date and time that the room summary was last updated

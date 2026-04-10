@@ -50,6 +50,11 @@ class ContractWithRooms extends ContractAbstract
 	 */
 	protected $restricted_code = '';
 
+	/**
+	 * @var ?RoomSummary
+	 */
+	protected $room_summary;
+
 
 	/**
 	 * @return string
@@ -169,6 +174,28 @@ class ContractWithRooms extends ContractAbstract
 	public function setRestrictedCode($restricted_code)
 	{
 		$this->restricted_code = $restricted_code;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return ?RoomSummary
+	 */
+	public function getRoomSummary()
+	{
+		return $this->room_summary;
+	}
+
+
+	/**
+	 * @param ?RoomSummary $room_summary
+	 *
+	 * @return $this
+	 */
+	public function setRoomSummary(?RoomSummary $room_summary)
+	{
+		$this->room_summary = $room_summary;
 
 		return $this;
 	}
