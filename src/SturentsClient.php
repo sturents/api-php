@@ -216,6 +216,10 @@ abstract class SturentsClient implements SwaggerClient {
 		return $this->debug_request_exception;
 	}
 
+	/**
+	 * By default, the API will not return room details.
+	 * To include a full list of room details, set this to true.
+	 */
 	public function setQueryRoomDetails(bool $query_room_details): self{
 		$this->query_room_details = $query_room_details;
 
