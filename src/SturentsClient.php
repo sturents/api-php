@@ -36,6 +36,7 @@ abstract class SturentsClient implements SwaggerClient {
 	private ?ClientInterface $client = null;
 
 	private bool $debug = false;
+	private bool $query_room_details = false;
 
 	public function __construct(string $landlord_id){
 		$this->landlord_id = $landlord_id;
@@ -76,6 +77,9 @@ abstract class SturentsClient implements SwaggerClient {
 				'landlord' => $this->landlord_id,
 				'version' => self::VERSION,
 			];
+			if ($this->query_room_details) {
+				$query['include_room_details'] = '1';
+			}
 			$query = array_merge($query, $this->authQuery($request), $swagger->getQuery());
 			$uri = $request->getUri()->withQuery(http_build_query($query));
 			$client = $this->getClient();
@@ -210,5 +214,15 @@ abstract class SturentsClient implements SwaggerClient {
 
 	public function getDebugRequestException(): GuzzleException{
 		return $this->debug_request_exception;
+	}
+
+	/**
+	 * By default, the API will not return room details.
+	 * To include a full list of room details, set this to true.
+	 */
+	public function setQueryRoomDetails(bool $query_room_details): self{
+		$this->query_room_details = $query_room_details;
+
+		return $this;
 	}
 }
