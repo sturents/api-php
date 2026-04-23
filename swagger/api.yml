@@ -4,7 +4,7 @@ info:
   description: |
     An amalgamation of our channel manager, import and website APIs in a single document
     for easy generation of API middleware
-  version: 2.0.0
+  version: 3.0.0
 host: sturents.com
 schemes:
   - https

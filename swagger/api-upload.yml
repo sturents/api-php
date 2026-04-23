@@ -4,7 +4,7 @@ info:
   description: |
     Allow third party property management platforms to manage property listings
     on the Concurrent platform and for listing via sturents.com
-  version: 2.0.0
+  version: 3.0.0
 host: sturents.com
 schemes:
   - https

@@ -4,7 +4,7 @@ info:
   description: |
     Allow channels to access connected property manager properties for advertising
     and live bookings. Also allows hosted booking flow with additional access permissions
-  version: 2.0.0
+  version: 3.0.0
 host: sturents.com
 schemes:
   - https

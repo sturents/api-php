@@ -4,7 +4,7 @@ info:
   description: |
     Allow property manager websites to fetch content from the Concurrent
     property management system
-  version: 2.0.0
+  version: 3.0.0
 host: sturents.com
 schemes:
   - https
