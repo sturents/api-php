@@ -333,6 +333,10 @@ definitions:
         description: |
           where true indicates that the property is not ready
           to be made public to students or shown in search results
+      studio:
+        type: boolean
+        description: |
+          Where true indicates that the property is a studio
   PropertyOutbound:
     allOf:
       - $ref: '#/definitions/Property'

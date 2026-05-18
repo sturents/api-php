@@ -133,12 +133,19 @@ class Property extends SwaggerModel
 	protected $accreditations = [];
 
 	/**
-	 * where true indicates that the property is not ready
+	 * Where true indicates that the property is not ready
 	 * to be made public to students or shown in search results
 	 *
 	 * @var bool
 	 */
 	protected $disabled = false;
+
+	/**
+	 * Where true indicates that the property is a studio
+	 *
+	 * @var bool
+	 */
+	protected $studio = false;
 
 
 	/**
@@ -536,6 +543,28 @@ class Property extends SwaggerModel
 	public function setDisabled($disabled)
 	{
 		$this->disabled = $disabled;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function getStudio()
+	{
+		return $this->studio;
+	}
+
+
+	/**
+	 * @param bool $studio
+	 *
+	 * @return $this
+	 */
+	public function setStudio($studio)
+	{
+		$this->studio = $studio;
 
 		return $this;
 	}
