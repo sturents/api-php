@@ -91,7 +91,8 @@ abstract class SturentsClient implements SwaggerClient {
 		}
 		catch (ClientException $e) {
 			$this->debug_request_exception = $e;
-			if (!$e->hasResponse()){
+            // In Guzzle 8 ClientException always has a ResponseInterface
+			if (method_exists($e, 'hasResponse') && !$e->hasResponse()){
 				throw new SturentsException("The StuRents API could not be reached. The client reported: {$e->getMessage()}", self::EX_CODE_RESPONSE);
 			}
 
