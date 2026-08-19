@@ -1393,9 +1393,16 @@ definitions:
           daily rent each tenant will pay for the first payment period for a rolling tenancy.
           This is required if is_fixed_term is false.
           
-          The first payment period covers the rent from the start date to 
-          the day before the first rolling monthly payment day. The first payment rent 
+          The first payment period covers the rent from the start date to
+          the day before the first rolling monthly payment day. The first payment rent
           is calculated based on the number of days in the period multiplied by the per day rate.
+      price_per_person_per_week_4dp:
+        type: number
+        nullable: true
+        description: |
+          The weekly rent per person expressed to 4 decimal places of precision.
+          This mirrors price_per_person_per_week but with greater precision
+          to avoid rounding errors in downstream payment calculations.
   PriceOutbound:
     description: |
       When fetching property details this describes a Price attached
