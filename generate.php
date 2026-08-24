@@ -3,6 +3,8 @@
 use SwaggerGen\GenerateModels;
 use SwaggerGen\GenerateRequests;
 
+// Ensure packages such as sturents/swagger-php-model-generator are upto date when generating
+shell_exec('composer update');
 require __DIR__.'/vendor/autoload.php';
 
 $namespace = "SturentsLib\\Api";

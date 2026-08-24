@@ -15,7 +15,7 @@ class PutProperty extends SwaggerRequest
 	 */
 	public function setBody(\SturentsLib\Api\Models\PropertyCreation $property)
 	{
-		$this->body = json_encode($property);
+		$this->body = json_encode($property, JSON_THROW_ON_ERROR);
 	}
 
 
