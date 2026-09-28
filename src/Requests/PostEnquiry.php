@@ -29,7 +29,7 @@ class PostEnquiry extends SwaggerRequest
 	}
 
 
-	public function setVersion($version)
+	public function __construct($version)
 	{
 		$this->version = $version;
 	}

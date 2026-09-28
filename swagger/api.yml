@@ -135,7 +135,7 @@ paths:
         - in: query
           name: version
           type: string
-          required: false
+          required: true
           description: |
             Should be set to "3" (defaults to "1.3" if not set and the 1.3 version is deprecated)'
       responses:
@@ -720,7 +720,7 @@ paths:
         - in: query
           name: version
           type: string
-          required: false
+          required: true
           description: |
             Should be set to "3" (defaults to "1.3" if not set and the 1.3 version is deprecated)'
         - in: body
