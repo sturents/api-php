@@ -13,7 +13,7 @@ class GetBookingStatus extends SwaggerRequest
 	/**
 	 * Unique booking identifier provided in the redirect URL
 	 *
-	 * @var null
+	 * @var string
 	 */
 	public $booking_id;
 	protected static array $query_params = ['booking_id'];

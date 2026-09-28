@@ -17,7 +17,7 @@ class GetProperties extends SwaggerRequest
 	 * be returned
 	 *
 	 *
-	 * @var null
+	 * @var integer
 	 */
 	public $page;
 
@@ -25,7 +25,7 @@ class GetProperties extends SwaggerRequest
 	 * Should be set to "3" (defaults to "1.3" if not set and the 1.3 version is deprecated)'
 	 *
 	 *
-	 * @var null
+	 * @var string
 	 */
 	public $version;
 	protected static array $query_params = ['page', 'version'];
@@ -37,7 +37,7 @@ class GetProperties extends SwaggerRequest
 	}
 
 
-	public function __construct($version)
+	public function __construct($version = '3')
 	{
 		$this->version = $version;
 	}
