@@ -34,6 +34,14 @@ class PropertyManager extends SwaggerModel
 	 */
 	protected $company = '';
 
+	/**
+	 * True if the landlord has given the channel permission to send
+	 * enquiries for their listings (e.g. via POST /enquiry)
+	 *
+	 * @var bool
+	 */
+	protected $can_send_enquiries = false;
+
 
 	/**
 	 * @return string
@@ -118,6 +126,28 @@ class PropertyManager extends SwaggerModel
 	public function setCompany($company)
 	{
 		$this->company = $company;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function getCanSendEnquiries()
+	{
+		return $this->can_send_enquiries;
+	}
+
+
+	/**
+	 * @param bool $can_send_enquiries
+	 *
+	 * @return $this
+	 */
+	public function setCanSendEnquiries($can_send_enquiries)
+	{
+		$this->can_send_enquiries = $can_send_enquiries;
 
 		return $this;
 	}

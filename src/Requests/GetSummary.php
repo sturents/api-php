@@ -11,6 +11,22 @@ class GetSummary extends SwaggerRequest
 	public const URI = '/api/summary';
 
 	/**
+	 * Should be set to "3" (defaults to "1.3" if not set and the 1.3 version is deprecated)'
+	 *
+	 *
+	 * @var string
+	 */
+	public $version;
+	protected static array $query_params = ['version'];
+
+
+	public function __construct($version = '3')
+	{
+		$this->version = $version;
+	}
+
+
+	/**
 	 * @return \SturentsLib\Api\Models\PropertyManager|\SturentsLib\Api\Models\Error|\SturentsLib\Api\Models\AuthError|\SturentsLib\Api\Models\GetError|list<\SturentsLib\Api\Models\PropertyManager>|list<\SturentsLib\Api\Models\Error>|list<\SturentsLib\Api\Models\AuthError>|list<\SturentsLib\Api\Models\GetError>
 	 */
 	public function sendWith(SwaggerClient $client)

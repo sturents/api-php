@@ -66,6 +66,7 @@ paths:
           name: version
           type: string
           required: true
+          default: '3'
           description: |
             Should be set to "3" (defaults to "1.3" if not set and the 1.3 version is deprecated)'
       tags:
@@ -112,6 +113,7 @@ paths:
           name: version
           type: string
           required: true
+          default: '3'
           description: |
             Should be set to "3" (defaults to "1.3" if not set and the 1.3 version is deprecated)'
       tags:
@@ -182,6 +184,54 @@ paths:
           $ref: '#/definitions/GetError'
         default:
           $ref: '#/definitions/Error'
+  /enquiry:
+    post:
+      summary: Submit a tenant enquiry
+      description: |
+        Channel-facing endpoint for submitting a tenant enquiry against a specific
+        property/contract term. Auth follows the same channel HMAC pattern as
+        other v3 API endpoints (timestamp + SHA256 HMAC of body+timestamp using
+        the channel's public key).
+
+        The landlord must have explicitly enabled your channel to send them
+        enquiries before this endpoint will accept requests for their properties.
+        Check the "can_send_enquiries" field returned by GET /summary for each
+        property manager to see whether this has been enabled - if it is false,
+        requests to this endpoint for that landlord will be rejected with a 403.
+      security:
+        - Channel: []
+          PropertyManager: []
+          Timestamp: []
+          Auth: []
+      parameters:
+        - in: query
+          name: version
+          type: string
+          required: true
+          default: '3'
+          description: |
+            Should be set to "3" (defaults to "1.3" if not set and the 1.3 version is deprecated)'
+        - in: body
+          name: Enquiry
+          schema:
+            $ref: '#/definitions/EnquiryCreation'
+      tags:
+        - Property listings
+      responses:
+        '200':
+          description: Indicates the created enquiry ID
+          schema:
+            $ref: '#/definitions/EnquirySaved'
+        '400':
+          $ref: '#/definitions/SendDataError'
+        '401':
+          $ref: '#/definitions/AuthError'
+        '403':
+          $ref: '#/definitions/AuthError'
+        '404':
+          $ref: '#/definitions/Error'
+        default:
+          $ref: '#/definitions/Error'
 definitions:
   GetError:
     description: |
@@ -200,6 +250,17 @@ definitions:
       error:
         type: string
         description: Message indicating the rate limit has been exceeded and when to try again
+  SendDataError:
+    description: |
+      There were problems with the input data in the request body.
+      These will be described in the "messages" field of the response
+    type: object
+    properties:
+      messages:
+        type: array
+        description: Keyed by field name (collapsed using . characters)
+        items:
+          type: string
   AuthError:
     description: |
       The key supplied did not match the property manager or channel
@@ -791,6 +852,11 @@ definitions:
         type: string
         description: |
           ID for the organisation this account belongs to on the StuRents website
+      can_send_enquiries:
+        type: boolean
+        description: |
+          True if the landlord has given the channel permission to send
+          enquiries for their listings (e.g. via POST /enquiry)
   Error:
     type: object
     properties:
@@ -984,3 +1050,51 @@ definitions:
         type: string
         description: |
           Date and time that the room summary was last updated
+  EnquiryCreation:
+    type: object
+    required:
+      - property_id
+      - contract_id
+      - first_name
+      - last_name
+      - email
+      - phone
+      - tenant_type
+      - enquiry_method
+      - enquiry_type
+    properties:
+      property_id:
+        type: integer
+        description: Plain (non-hashed) house id
+      contract_id:
+        type: string
+        description: Hashed availability id
+      first_name:
+        type: string
+      last_name:
+        type: string
+      email:
+        type: string
+        format: email
+      phone:
+        type: string
+      tenant_type:
+        type: string
+        enum: [student, professional, guardian]
+      enquiry_method:
+        type: string
+        enum: [phone, message]
+      enquiry_type:
+        type: string
+        enum: [enquire, book, viewing]
+      message:
+        type: string
+        description: |
+          Optional free-text message; used as the enquiry subject if provided,
+          otherwise a label derived from enquiry_type is used
+  EnquirySaved:
+    type: object
+    properties:
+      enquiry_id:
+        type: string
+        description: Hashed id of the created enquiry
