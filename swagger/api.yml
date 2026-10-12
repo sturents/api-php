@@ -1639,10 +1639,10 @@ definitions:
         enum: [student, professional, guardian]
       enquiry_method:
         type: string
-        enum: [phone, message]
+        enum: [arrange_viewing, request_details, book_now]
       enquiry_type:
         type: string
-        enum: [enquire, book, viewing]
+        enum: [message, in_branch, phone, website, portal]
       message:
         type: string
         description: |
