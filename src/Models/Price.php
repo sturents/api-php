@@ -68,6 +68,15 @@ class Price extends SwaggerModel
 	 */
 	protected $rolling_price_initial_period_per_person_per_day = 0.0;
 
+	/**
+	 * The weekly rent per person expressed to 4 decimal places of precision.
+	 * This mirrors price_per_person_per_week but with greater precision
+	 * to avoid rounding errors in downstream payment calculations.
+	 *
+	 * @var ?float
+	 */
+	protected $price_per_person_per_week_4dp = 0.0;
+
 
 	/**
 	 * @return ?float
@@ -174,6 +183,28 @@ class Price extends SwaggerModel
 	public function setRollingPriceInitialPeriodPerPersonPerDay($rolling_price_initial_period_per_person_per_day)
 	{
 		$this->rolling_price_initial_period_per_person_per_day = $rolling_price_initial_period_per_person_per_day;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return ?float
+	 */
+	public function getPricePerPersonPerWeek4dp()
+	{
+		return $this->price_per_person_per_week_4dp;
+	}
+
+
+	/**
+	 * @param ?float $price_per_person_per_week_4dp
+	 *
+	 * @return $this
+	 */
+	public function setPricePerPersonPerWeek4dp($price_per_person_per_week_4dp)
+	{
+		$this->price_per_person_per_week_4dp = $price_per_person_per_week_4dp;
 
 		return $this;
 	}
